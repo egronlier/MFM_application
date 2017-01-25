@@ -13,5 +13,6 @@ public class ouverture_appli extends AppCompatActivity {
 
         //COUCOU J'AI MIS DES COMMENTAIRES
         //Nouveau test ordi Ambre
+        // Éloïse va faire un conflit
     }
 }
