@@ -10,7 +10,7 @@ public class ouverture_appli extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ouverture_appli);
 
-
+// 189189
         //COUCOU J'AI MIS DES COMMENTAIRES
         //Nouveau test ordi Ambre
     }
