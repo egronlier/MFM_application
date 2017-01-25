@@ -18,7 +18,8 @@
         android:textColor="#0d8dc9"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:id="@+id/textView" />
 
     <Space
         android:layout_width="match_parent"
@@ -94,7 +95,7 @@
             android:textColor="#0d8dc9"
             android:gravity="center"/>
         <EditText
-            android:id="@+id/taille"
+            android:id="@+id/birthdate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dateformat"
@@ -107,12 +108,24 @@
         android:layout_width="match_parent"
         android:layout_height="60sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fd0000"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:id="@+id/infoErreur" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="60sp" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/quitter"
+            android:id="@+id/boutonquitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/quit"
@@ -121,7 +134,7 @@
             android:layout_marginRight="25dip"
             android:background="#9bc3f1"/>
         <Button
-            android:id="@+id/valider"
+            android:id="@+id/boutonvalider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/valid"
