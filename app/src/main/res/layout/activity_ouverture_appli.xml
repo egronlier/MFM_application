@@ -28,19 +28,21 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nom :"
+            android:text="@string/name"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:gravity="center"/>
+
         <EditText
             android:id="@+id/nom"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom"
+            android:hint="@string/name2"
             android:inputType="textPersonName"
             android:lines="2"
             android:layout_weight="1"/>
@@ -59,16 +61,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prénom :"
+            android:text="@string/surname"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:gravity="center"/>
+
         <EditText
             android:id="@+id/prenom"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Prénom"
+            android:hint="@string/surname2"
             android:inputType="textPersonName"
             android:lines="2"
             android:layout_weight="1"/>
@@ -85,7 +88,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date de naissance :"
+            android:text="@string/birthdate"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
@@ -94,7 +97,7 @@
             android:id="@+id/taille"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="DD/MM/YYYY"
+            android:hint="@string/dateformat"
             android:inputType="date"
             android:lines="2"
             android:layout_weight="1"/>
@@ -112,7 +115,7 @@
             android:id="@+id/quitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quitter"
+            android:text="@string/quit"
             android:layout_weight="1"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
@@ -121,7 +124,7 @@
             android:id="@+id/valider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Valider"
+            android:text="@string/valid"
             android:layout_weight="1"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
