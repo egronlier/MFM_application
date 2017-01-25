@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MFM_application</string>
+    <string name="veuillez">Veuillez entrer les données du patient :</string>
+
+</resources>
