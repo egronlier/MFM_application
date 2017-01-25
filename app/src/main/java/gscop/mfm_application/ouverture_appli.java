@@ -7,10 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ouverture_appli extends Activity implements View.OnClickListener {
+public class ouverture_appli extends Activity {
 
     Button boutonValider;
     Button boutonQuitter;
+    Button boutonEffacer;
     TextView myTextViewErreur;
     EditText nomEntre;
     EditText prenomEntre;
@@ -28,50 +29,51 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         // R est la classe qui contient les ressources
         boutonValider = (Button) findViewById(R.id.boutonvalider);
         boutonQuitter = (Button) findViewById(R.id.boutonquitter);
+        boutonEffacer = (Button) findViewById(R.id.buttonerase);
         myTextViewErreur = (TextView) findViewById(R.id.infoErreur);
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
         dateNaissanceEntre = (EditText) findViewById(R.id.birthdate);
 
         // on implémente l'évènement, on met un listener qui regarde quand on clique sur le bouton
-        boutonValider.setOnClickListener(this);
-        boutonQuitter.setOnClickListener(this);
+        boutonValider.setOnClickListener(validerListener);
+        boutonQuitter.setOnClickListener(quitterListener);
+        boutonEffacer.setOnClickListener(effacerListener);
     }
 
-//    // Pour le bouton valider
-//    private View.OnClickListener validerListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//                // On récupère le nom, le prénom et la date de naissance
-//                String nom = nomEntre.getText().toString();
-//                String prenom = prenomEntre.getText().toString();
-//                String dateNaissance = dateNaissanceEntre.getText().toString();
-//            // ----------- rajouter une étape qui vérifie le bon format de la date !
-//                myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
-//                 nom.toUpperCase() + " " + prenom.toLowerCase() +
-//                "\n né le : " + dateNaissance);
-//                }
-//    };
+    // Pour le bouton valider
+    private View.OnClickListener validerListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
+                // On récupère le nom, le prénom et la date de naissance
+                String nom = nomEntre.getText().toString();
+                String prenom = prenomEntre.getText().toString();
+                String dateNaissance = dateNaissanceEntre.getText().toString();
+                // ----------- rajouter une étape qui vérifie le bon format de la date !
+                myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
+                nom.toUpperCase() + " " + prenom.toLowerCase() + "\n né le : " + dateNaissance);
+        }
+    };
 
-//    // Listener du bouton de remise à zéro
-//    private View.OnClickListener razListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            nomEntre.getText().clear();
-//            prenomEntre.getText().clear();
-//            dateNaissanceEntre.setText(defaut);
-//        }
-//    };
+    // Pour le bouton quitter
+    private View.OnClickListener quitterListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // On quitte l'application
+            finish();
+        }
+    };
 
-    @Override
-    public void onClick(View v) {
-        // On récupère le nom, le prénom et la date de naissance
-        String nom = nomEntre.getText().toString();
-        String prenom = prenomEntre.getText().toString();
-        String dateNaissance = dateNaissanceEntre.getText().toString();
-        // ----------- rajouter une étape qui vérifie le bon format de la date !
-        myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
-                nom.toUpperCase() + " " + prenom.toLowerCase() +
-                "\n né le : " + dateNaissance);
-    }
+    // Listener du bouton effacer
+    private View.OnClickListener effacerListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            nomEntre.getText().clear();
+            prenomEntre.getText().clear();
+            dateNaissanceEntre.getText().clear();
+            myTextViewErreur.setText("");
+        }
+    };
+
 }

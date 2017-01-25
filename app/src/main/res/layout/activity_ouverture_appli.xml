@@ -9,7 +9,8 @@
     android:paddingRight="16dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="gscop.mfm_application.ouverture_appli"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="RtlHardcoded">
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,7 +47,8 @@
             android:hint="@string/name2"
             android:inputType="textPersonName"
             android:lines="2"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            tools:ignore="InefficientWeight" />
 
     </LinearLayout>
 
@@ -70,7 +72,7 @@
 
         <EditText
             android:id="@+id/prenom"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/surname2"
             android:inputType="textPersonName"
@@ -96,7 +98,7 @@
             android:gravity="center"/>
         <EditText
             android:id="@+id/birthdate"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/dateformat"
             android:inputType="date"
@@ -106,7 +108,29 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="60sp" />
+        android:layout_height="40sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="@string/erase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/buttonerase"
+            android:layout_weight="1"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:background="#9bc3f1"
+            tools:ignore="InefficientWeight" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -114,7 +138,8 @@
         android:textColor="#fd0000"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:id="@+id/infoErreur" />
+        android:id="@+id/infoErreur"
+        android:textAlignment="center" />
 
     <Space
         android:layout_width="match_parent"
@@ -132,7 +157,8 @@
             android:layout_weight="1"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
-            android:background="#9bc3f1"/>
+            android:background="#9bc3f1"
+            tools:ignore="ButtonStyle" />
         <Button
             android:id="@+id/boutonvalider"
             android:layout_width="wrap_content"
@@ -141,7 +167,8 @@
             android:layout_weight="1"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
-            android:background="#9bc3f1"/>
+            android:background="#9bc3f1"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>

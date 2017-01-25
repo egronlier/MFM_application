@@ -9,6 +9,6 @@
     <string name="name2">Nom</string>
     <string name="surname2">Prénom</string>
     <string name="dateformat">DD/MM/YYYY</string>
-
+    <string name="erase">Effacer</string>
 
 </resources>
