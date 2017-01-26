@@ -1,5 +1,17 @@
 <resources>
-    <string name="app_name">MFM_application</string>
+    <string name="app_name">MFM Application</string>
     <string name="veuillez">Veuillez entrer les données du patient :</string>
-
+    <string name="quit">QUITTER</string>
+    <string name="valid">VALIDER</string>
+    <string name="name">Nom :</string>
+    <string name="surname">Prénom :</string>
+    <string name="birthdate">Date de naissance :</string>
+    <string name="name2">Nom</string>
+    <string name="surname2">Prénom</string>
+    <string name="dateformat">DD/MM/YYYY</string>
+    <string name="erase">Effacer</string>
+    <string name="retour">Retour</string>
+    <string name="choiceExercise">Veuillez sélectionner l'item choisi :</string>
+    <string name="item18">Item 18</string>
+    <string name="item22">Item 22</string>
 </resources>
