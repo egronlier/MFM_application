@@ -21,16 +21,14 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:id="@+id/textView" />
-
     <Space
         android:layout_width="match_parent"
-        android:layout_height="60sp" />
+        android:layout_height="30sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +37,6 @@
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:gravity="center"/>
-
         <EditText
             android:id="@+id/nom"
             android:layout_width="fill_parent"
@@ -49,7 +46,6 @@
             android:lines="2"
             android:layout_weight="1"
             tools:ignore="InefficientWeight" />
-
     </LinearLayout>
 
     <Space
@@ -108,7 +104,36 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="40sp" />
+        android:layout_height="20sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:text="@string/droitier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/boutonDroitier"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#0d8dc9"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="@string/gaucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/boutonGaucher"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#0d8dc9"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20sp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -130,7 +155,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="40sp" />
+        android:layout_height="20sp" />
 
     <TextView
         android:layout_width="wrap_content"

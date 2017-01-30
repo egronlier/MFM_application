@@ -6,12 +6,17 @@
     <string name="name">Nom :</string>
     <string name="surname">Prénom :</string>
     <string name="birthdate">Date de naissance :</string>
+    <string name="droitier">Droitier</string>
+    <string name="gaucher">Gaucher</string>
     <string name="name2">Nom</string>
     <string name="surname2">Prénom</string>
     <string name="dateformat">DD/MM/YYYY</string>
     <string name="erase">Effacer</string>
     <string name="retour">Retour</string>
-    <string name="choiceExercise">Veuillez sélectionner l'item choisi :</string>
+    <string name="choiceExercise">Veuillez sélectionner l\'item choisi :</string>
     <string name="item18">Item 18</string>
     <string name="item22">Item 22</string>
+    <string name="consignesItem18">Faire le tour du CD avec un doigt</string>
+    <string name="begin">Démarrer</string>
+
 </resources>

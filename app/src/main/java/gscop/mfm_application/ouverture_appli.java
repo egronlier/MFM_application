@@ -23,7 +23,7 @@ public class ouverture_appli extends Activity {
     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ouverture_appli);
+        setContentView(R.layout.ouverture_appli);
 
         // on utilise la méthode findViewById pour récupérer le bouton quand on clique dessus
         // R est la classe qui contient les ressources
