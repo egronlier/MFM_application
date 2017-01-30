@@ -36,7 +36,7 @@
 
     <ImageView
         android:id="@+id/cd"
-        android:contentDescription="image du CD"
+        android:contentDescription="@string/CDimage"
         android:layout_width="725dp"
         android:layout_height="725dp"
         android:layout_centerInParent="true"
