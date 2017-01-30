@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="20sp" />
 
         <TextView
+            android:id="@+id/champNumeroItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/item18"
+            android:textAlignment="center"
             android:textColor="#0d8dc9"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/champNumeroItem" />
+            android:textStyle="bold" />
 
         <TextView
-            android:text="@string/consignesItem18"
-            android:textAlignment="center"
-            android:textSize="18sp"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3" />
+            android:text="@string/consignesItem18"
+            android:textAlignment="center"
+            android:textSize="18sp" />
     </LinearLayout>
 
-        <Button
-            android:text="@string/begin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="#9bc3f1"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20sp"
-            android:id="@+id/boutonDemarrer"/>
+
+    <ImageView
+        android:id="@+id/cd"
+        android:layout_width="725dp"
+        android:layout_height="725dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-2000dp"
+        android:layout_marginLeft="-2000dp"
+        android:layout_marginRight="-2000dp"
+        android:layout_marginTop="-2000dp"
+        android:src="@drawable/cd" />
+
+    <Button
+        android:id="@+id/boutonDemarrer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20sp"
+        android:background="#9bc3f1"
+        android:text="@string/begin" />
 
 </RelativeLayout>
