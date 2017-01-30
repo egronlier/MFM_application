@@ -4,16 +4,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/boutonretour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/retour"
-        android:background="#9bc3f1"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -51,5 +41,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="86dp"
         android:id="@+id/button2" />
+
+    <Button
+        android:id="@+id/boutonretour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/retour"
+        android:background="#9bc3f1"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/button2"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp" />
 
 </RelativeLayout>

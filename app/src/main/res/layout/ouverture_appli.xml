@@ -21,7 +21,6 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:id="@+id/textView" />
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="30sp" />
@@ -30,7 +29,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +37,6 @@
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:gravity="center"/>
-
         <EditText
             android:id="@+id/nom"
             android:layout_width="fill_parent"
@@ -49,7 +46,6 @@
             android:lines="2"
             android:layout_weight="1"
             tools:ignore="InefficientWeight" />
-
     </LinearLayout>
 
     <Space
