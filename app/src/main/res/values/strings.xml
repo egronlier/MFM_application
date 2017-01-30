@@ -20,4 +20,6 @@
     <string name="begin">Démarrer</string>
     <string name="finish">Terminer</string>
     <string name="CDimage">Image du CD</string>
+    <string name="consignesItem22">Pointer 8 dessins dans un quadrillage</string>
+    <string name="item22image">Image de l\'item 22</string>
 </resources>
