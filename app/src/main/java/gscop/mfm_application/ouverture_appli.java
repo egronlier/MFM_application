@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.util.regex.Pattern;
+
 public class ouverture_appli extends Activity {
 
     Button boutonValider;
@@ -21,7 +23,7 @@ public class ouverture_appli extends Activity {
     EditText dateNaissanceEntre;
     RadioButton boutonDroitier;
     RadioButton boutonGaucher;
-   // TextView textNomPrenomPatient;
+    // TextView textNomPrenomPatient;
 
     @Override
     /*
@@ -56,19 +58,45 @@ public class ouverture_appli extends Activity {
     private View.OnClickListener validerListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-                // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
-                // On récupère le nom, le prénom et la date de naissance
-                String nom = nomEntre.getText().toString();
-                String prenom = prenomEntre.getText().toString();
-                String dateNaissance = dateNaissanceEntre.getText().toString();
-                // ----------- rajouter une étape qui vérifie le bon format de la date !
-//                myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
-//                nom.toUpperCase() + " " + prenom.toLowerCase() + "\n né le : " + dateNaissance);
+            // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
+            // On récupère le nom, le prénom et la date de naissance
+            String name = nomEntre.getText().toString();
+            int length_name = name.length();
+            String surname = prenomEntre.getText().toString();
+            int length_surname = surname.length();
+            String birthdate = dateNaissanceEntre.getText().toString();
+            int length_birthdate = birthdate.length();
+            // On vérifie que tous les champs ont été remplis
+            if (length_name > 0 && length_surname > 0 && length_birthdate > 0){
+                // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
+                if (Pattern.matches("[a-zA-Z -]*",name) && Pattern.matches("[a-zA-Z -]*",surname)) {
+                    // on vérifie que la date entrée contient que des chiffres
+                    if (Pattern.matches("[0-9 /]*",birthdate)) {
+                        // ----------- rajouter une étape qui vérifie le bon format de la date !
 
-           // textNomPrenomPatient.setText(nom.toUpperCase()+" "+prenom+" "+dateNaissance);
+                        // -----------ouvrir une Pop-up permettant de valider les infos entrées
 
-            Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
-            startActivity(myIntent);
+                        // // on lance l'activité de choix d'item
+                        Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
+                        myIntent.putExtra(name,name);
+                        myIntent.putExtra(surname,name);
+                        myIntent.putExtra(birthdate,birthdate);
+                        startActivity(myIntent);
+                    }
+                    else{
+                        myTextViewErreur.setText(R.string.errorDate);
+                    }
+                }
+                else{
+                    myTextViewErreur.setText(R.string.errorNames);
+                }
+            }
+            else{
+                // onCreateDialog("Error", "Veuillez remplir tous les champs");
+                // myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
+                // nom.toUpperCase() + " " + prenom.toLowerCase() + "\n né le : " + dateNaissance);
+                myTextViewErreur.setText(R.string.errorVoid);
+            }
         }
     };
 
@@ -78,6 +106,7 @@ public class ouverture_appli extends Activity {
         public void onClick(View v) {
             // On quitte l'application
             finish();
+            System.exit(0);
         }
     };
 
@@ -109,5 +138,4 @@ public class ouverture_appli extends Activity {
             Log.i("OC_RSS", "Ca marche !!!");
         }
     };
-
 }

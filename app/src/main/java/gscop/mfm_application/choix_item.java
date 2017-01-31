@@ -14,6 +14,9 @@ public class choix_item extends Activity {
     Button buttonChgtPatient;
     Button buttonItem18;
     Button buttonItem22;
+    String name = "";
+    String surname = "";
+    String birthdate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +24,12 @@ public class choix_item extends Activity {
         setContentView(R.layout.choice_exercise);
 
         textNomPrenomPatient = (TextView) findViewById(R.id.PatientName);
-        //textNomPrenomPatient.setText(nom.toUpperCase()+" "+prenom+" "+dateNaissance);
 
         buttonChgtPatient = (Button) findViewById(R.id.boutonchgmtpatient);
         buttonChgtPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // on revient à l'écran d'accueil d'entrée des infos patient
                 Intent myIntent = new Intent(choix_item.this, ouverture_appli.class);
                 startActivity(myIntent);
             }
@@ -36,6 +39,7 @@ public class choix_item extends Activity {
         buttonItem18.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // on lance les consignes de l'item 18
                 Intent myIntent = new Intent(choix_item.this, consignes_item18.class);
                 startActivity(myIntent);
             }
@@ -45,11 +49,19 @@ public class choix_item extends Activity {
         buttonItem22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // on lance les consignes de l'item 22
                 Intent myIntent = new Intent(choix_item.this, consignes_item22.class);
                 startActivity(myIntent);
             }
         });
 
-
+//        // on récupère les données de l'activité précédente
+//        Intent intent = getIntent();
+//        if(intent != null){
+//            name = intent.getStringExtra(name);
+//            surname = intent.getStringExtra(surname);
+//            birthdate = intent.getStringExtra(birthdate);
+//            textNomPrenomPatient.setText("Patient : "+name.toUpperCase()+" "+surname.toLowerCase()+" "+birthdate);
+//        }
     }
 }
