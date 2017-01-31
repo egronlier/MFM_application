@@ -1,10 +1,13 @@
 package gscop.mfm_application;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class ouverture_appli extends Activity {
@@ -16,8 +19,9 @@ public class ouverture_appli extends Activity {
     EditText nomEntre;
     EditText prenomEntre;
     EditText dateNaissanceEntre;
-    Button boutonDroitier;
-    Button boutonGaucher;
+    RadioButton boutonDroitier;
+    RadioButton boutonGaucher;
+   // TextView textNomPrenomPatient;
 
     @Override
     /*
@@ -36,8 +40,9 @@ public class ouverture_appli extends Activity {
         prenomEntre = (EditText) findViewById(R.id.prenom);
         dateNaissanceEntre = (EditText) findViewById(R.id.birthdate);
         myTextViewErreur = (TextView) findViewById(R.id.infoErreur);
-        boutonDroitier = (Button) findViewById(R.id.boutonDroitier);
-        boutonGaucher = (Button) findViewById(R.id.boutonGaucher);
+        boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
+        boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
+        //textNomPrenomPatient = (TextView) findViewById(R.id.PatientName);
 
         // on implémente l'évènement, on met un listener qui regarde quand on clique sur le bouton
         boutonValider.setOnClickListener(validerListener);
@@ -51,16 +56,19 @@ public class ouverture_appli extends Activity {
     private View.OnClickListener validerListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
-//                // On récupère le nom, le prénom et la date de naissance
-//                String nom = nomEntre.getText().toString();
-//                String prenom = prenomEntre.getText().toString();
-//                String dateNaissance = dateNaissanceEntre.getText().toString();
-//                // ----------- rajouter une étape qui vérifie le bon format de la date !
+                // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
+                // On récupère le nom, le prénom et la date de naissance
+                String nom = nomEntre.getText().toString();
+                String prenom = prenomEntre.getText().toString();
+                String dateNaissance = dateNaissanceEntre.getText().toString();
+                // ----------- rajouter une étape qui vérifie le bon format de la date !
 //                myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
 //                nom.toUpperCase() + " " + prenom.toLowerCase() + "\n né le : " + dateNaissance);
 
-            setContentView(R.layout.choice_exercise);
+           // textNomPrenomPatient.setText(nom.toUpperCase()+" "+prenom+" "+dateNaissance);
+
+            Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
+            startActivity(myIntent);
         }
     };
 
@@ -81,6 +89,8 @@ public class ouverture_appli extends Activity {
             prenomEntre.getText().clear();
             dateNaissanceEntre.getText().clear();
             myTextViewErreur.setText("");
+            boutonDroitier.setChecked(false);
+            boutonGaucher.setChecked(false);
         }
     };
 
@@ -88,7 +98,7 @@ public class ouverture_appli extends Activity {
     private View.OnClickListener droitierListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Log.i("OC_RSS", "Ca marche !!!");
         }
     };
 
@@ -96,7 +106,7 @@ public class ouverture_appli extends Activity {
     private View.OnClickListener gaucherListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Log.i("OC_RSS", "Ca marche !!!");
         }
     };
 
