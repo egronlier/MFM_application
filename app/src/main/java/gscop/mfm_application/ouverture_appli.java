@@ -16,6 +16,8 @@ public class ouverture_appli extends Activity {
     EditText nomEntre;
     EditText prenomEntre;
     EditText dateNaissanceEntre;
+    Button boutonDroitier;
+    Button boutonGaucher;
 
     @Override
     /*
@@ -30,15 +32,19 @@ public class ouverture_appli extends Activity {
         boutonValider = (Button) findViewById(R.id.boutonvalider);
         boutonQuitter = (Button) findViewById(R.id.boutonquitter);
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
-        myTextViewErreur = (TextView) findViewById(R.id.infoErreur);
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
         dateNaissanceEntre = (EditText) findViewById(R.id.birthdate);
+        myTextViewErreur = (TextView) findViewById(R.id.infoErreur);
+        boutonDroitier = (Button) findViewById(R.id.boutonDroitier);
+        boutonGaucher = (Button) findViewById(R.id.boutonGaucher);
 
         // on implémente l'évènement, on met un listener qui regarde quand on clique sur le bouton
         boutonValider.setOnClickListener(validerListener);
         boutonQuitter.setOnClickListener(quitterListener);
         boutonEffacer.setOnClickListener(effacerListener);
+        boutonDroitier.setOnClickListener(droitierListener);
+        boutonGaucher.setOnClickListener(gaucherListener);
     }
 
     // Pour le bouton valider
@@ -46,13 +52,15 @@ public class ouverture_appli extends Activity {
         @Override
         public void onClick(View v) {
             // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
-                // On récupère le nom, le prénom et la date de naissance
-                String nom = nomEntre.getText().toString();
-                String prenom = prenomEntre.getText().toString();
-                String dateNaissance = dateNaissanceEntre.getText().toString();
-                // ----------- rajouter une étape qui vérifie le bon format de la date !
-                myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
-                nom.toUpperCase() + " " + prenom.toLowerCase() + "\n né le : " + dateNaissance);
+//                // On récupère le nom, le prénom et la date de naissance
+//                String nom = nomEntre.getText().toString();
+//                String prenom = prenomEntre.getText().toString();
+//                String dateNaissance = dateNaissanceEntre.getText().toString();
+//                // ----------- rajouter une étape qui vérifie le bon format de la date !
+//                myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
+//                nom.toUpperCase() + " " + prenom.toLowerCase() + "\n né le : " + dateNaissance);
+
+            setContentView(R.layout.choice_exercise);
         }
     };
 
@@ -73,6 +81,22 @@ public class ouverture_appli extends Activity {
             prenomEntre.getText().clear();
             dateNaissanceEntre.getText().clear();
             myTextViewErreur.setText("");
+        }
+    };
+
+    // Pour le bouton droitier
+    private View.OnClickListener droitierListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
+    // Pour le bouton gaucher
+    private View.OnClickListener gaucherListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
         }
     };
 

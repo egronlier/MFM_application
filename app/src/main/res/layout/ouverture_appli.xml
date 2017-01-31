@@ -20,7 +20,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:id="@+id/textView" />
+        android:id="@+id/texteAccueil" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="30sp" />
