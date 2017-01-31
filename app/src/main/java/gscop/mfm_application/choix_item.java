@@ -55,6 +55,7 @@ public class choix_item extends Activity {
             }
         });
 
+        // ------------------ à débugger : fait planter l'application
 //        // on récupère les données de l'activité précédente
 //        Intent intent = getIntent();
 //        if(intent != null){

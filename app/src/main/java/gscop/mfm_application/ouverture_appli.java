@@ -1,6 +1,9 @@
 package gscop.mfm_application;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +13,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class ouverture_appli extends Activity {
@@ -23,7 +28,7 @@ public class ouverture_appli extends Activity {
     EditText dateNaissanceEntre;
     RadioButton boutonDroitier;
     RadioButton boutonGaucher;
-    // TextView textNomPrenomPatient;
+    final Context context = this;
 
     @Override
     /*
@@ -60,28 +65,64 @@ public class ouverture_appli extends Activity {
         public void onClick(View v) {
             // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
             // On récupère le nom, le prénom et la date de naissance
-            String name = nomEntre.getText().toString();
+            final String name = nomEntre.getText().toString();
             int length_name = name.length();
-            String surname = prenomEntre.getText().toString();
+            final String surname = prenomEntre.getText().toString();
             int length_surname = surname.length();
-            String birthdate = dateNaissanceEntre.getText().toString();
+            final String birthdate = dateNaissanceEntre.getText().toString();
             int length_birthdate = birthdate.length();
             // On vérifie que tous les champs ont été remplis
             if (length_name > 0 && length_surname > 0 && length_birthdate > 0){
                 // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
                 if (Pattern.matches("[a-zA-Z -]*",name) && Pattern.matches("[a-zA-Z -]*",surname)) {
-                    // on vérifie que la date entrée contient que des chiffres
+                    // on vérifie que la date entrée contient que des chiffres et des /
                     if (Pattern.matches("[0-9 /]*",birthdate)) {
-                        // ----------- rajouter une étape qui vérifie le bon format de la date !
-
-                        // -----------ouvrir une Pop-up permettant de valider les infos entrées
-
-                        // // on lance l'activité de choix d'item
-                        Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
-                        myIntent.putExtra(name,name);
-                        myIntent.putExtra(surname,name);
-                        myIntent.putExtra(birthdate,birthdate);
-                        startActivity(myIntent);
+                        // ----------------------------- rajouter une étape qui vérifie le bon format de la date !
+                        SimpleDateFormat myFormat = new SimpleDateFormat("dd/mm/yyyy");
+                        try{
+                            Date d = myFormat.parse(birthdate);
+                            String t = myFormat.format(d);
+                            if(t.compareTo(birthdate) != 0) { // ------------------------- > ajouter un test qui vérifie que la date existe bien !!!
+                                System.out.println("NON VALIDE");
+                                myTextViewErreur.setText(R.string.errorDateFormat);
+                            }
+                            else {
+                                System.out.println("VALIDE");
+                                // ouvrir une boite de dialogue permettant de valider les infos entrées
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                                // set titre
+                                alertDialogBuilder.setTitle("Confirmation des données");
+                                // set dialog message
+                                alertDialogBuilder
+                                        .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n" + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdate)
+                                        .setCancelable(false)
+                                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // if this button is clicked, go to next activity
+                                                dialog.cancel();
+                                                // on lance l'activité de choix d'item
+                                                Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
+                                                myIntent.putExtra(name, name);
+                                                myIntent.putExtra(surname, name);
+                                                myIntent.putExtra(birthdate, birthdate);
+                                                startActivity(myIntent);
+                                            }
+                                        })
+                                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // if this button is clicked, close the dialog box
+                                                dialog.cancel();
+                                            }
+                                        });
+                                // create alert dialog
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                // show it
+                                alertDialog.show();
+                            }
+                        } catch (Exception e){
+                            System.out.println("EXCEPTION");
+                            myTextViewErreur.setText(R.string.internalError);
+                        }
                     }
                     else{
                         myTextViewErreur.setText(R.string.errorDate);
@@ -92,9 +133,6 @@ public class ouverture_appli extends Activity {
                 }
             }
             else{
-                // onCreateDialog("Error", "Veuillez remplir tous les champs");
-                // myTextViewErreur.setText("Vous voulez créer un fichier pour le patient : \n" +
-                // nom.toUpperCase() + " " + prenom.toLowerCase() + "\n né le : " + dateNaissance);
                 myTextViewErreur.setText(R.string.errorVoid);
             }
         }

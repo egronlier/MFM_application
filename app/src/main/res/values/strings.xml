@@ -26,4 +26,7 @@
     <string name="errorDate">Le champ date ne doit contenir que des chiffres et des /.</string>
     <string name="errorNames">"Les champs nom et prénom ne doivent contenir que des lettres.</string>
     <string name="errorVoid">"Veuillez remplir tous les champs."</string>
+    <string name="errorDateFormat">"Le format de la date entrée n\'est pas bon."</string>
+    <string name="internalError">"Une erreur interne en rapport avec le format de la date est survenue."</string>
+
 </resources>
