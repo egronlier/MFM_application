@@ -78,6 +78,7 @@ public class ouverture_appli extends Activity {
         public void onClick(View v) {
             // On quitte l'application
             finish();
+            System.exit(0);
         }
     };
 
