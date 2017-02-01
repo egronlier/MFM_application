@@ -23,10 +23,10 @@
     <string name="CDimage">Image du CD</string>
     <string name="consignesItem22">Pointer 8 dessins dans un quadrillage</string>
     <string name="item22image">Image de l\'item 22</string>
-    <string name="errorDate">Le champ date ne doit contenir que des chiffres et des /.</string>
+    <string name="errorDate">Veuillez choisir une date.</string>
     <string name="errorNames">"Les champs nom et prénom ne doivent contenir que des lettres.</string>
     <string name="errorVoid">"Veuillez remplir tous les champs."</string>
-    <string name="errorDateFormat">"Le format de la date entrée n\'est pas bon."</string>
+    <string name="errorDateAfter">"La date choisie doit être antérieure à la date d'aujourd'hui."</string>
     <string name="internalError">"Une erreur interne en rapport avec le format de la date est survenue."</string>
     <string name="errorRadioButton">"Veuillez sélectionner Droitier ou Gaucher."</string>
 

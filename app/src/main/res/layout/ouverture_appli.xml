@@ -17,10 +17,11 @@
         android:layout_height="wrap_content"
         android:text="@string/veuillez"
         android:textColor="#0d8dc9"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:id="@+id/texteAccueil" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="30sp" />
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:gravity="center"/>
@@ -61,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/surname"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:gravity="center"/>
@@ -88,18 +89,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/birthdate"
-            android:textSize="18sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:gravity="center"/>
-        <EditText
-            android:id="@+id/birthdate"
-            android:layout_width="0dp"
+
+        <DatePicker
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/dateformat"
-            android:inputType="date"
-            android:lines="2"
-            android:layout_weight="1"/>
+            android:id="@+id/datePicker"
+            android:endYear="2010"
+            android:firstDayOfWeek="2"
+            android:layout_marginLeft="40sp"
+            android:layout_gravity="center"
+            android:calendarTextColor="#0d8dc9"/>
     </LinearLayout>
 
     <Space
@@ -111,20 +114,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RadioButton
-            android:text="@string/droitier"
+            android:text="@string/gaucher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/boutonDroitier"
-            android:textSize="18sp"
+            android:layout_marginLeft="30sp"
+            android:id="@+id/boutonGaucher"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:layout_weight="1" />
         <RadioButton
-            android:text="@string/gaucher"
+            android:text="@string/droitier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/boutonGaucher"
-            android:textSize="18sp"
+            android:id="@+id/boutonDroitier"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:layout_weight="1" />
@@ -132,7 +136,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20sp" />
+        android:layout_height="40sp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -146,6 +150,7 @@
             android:layout_gravity="center"
             android:id="@+id/buttonerase"
             android:layout_weight="1"
+            android:textSize="30sp"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
             android:background="#9bc3f1"
@@ -179,6 +184,7 @@
             android:layout_height="wrap_content"
             android:text="@string/quit"
             android:layout_weight="1"
+            android:textSize="30sp"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
             android:background="#9bc3f1"
@@ -189,6 +195,7 @@
             android:layout_height="wrap_content"
             android:text="@string/valid"
             android:layout_weight="1"
+            android:textSize="30sp"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
             android:background="#9bc3f1"

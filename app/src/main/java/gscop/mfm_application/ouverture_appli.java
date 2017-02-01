@@ -8,13 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class ouverture_appli extends Activity {
@@ -25,11 +26,14 @@ public class ouverture_appli extends Activity {
     TextView myTextViewErreur;
     EditText nomEntre;
     EditText prenomEntre;
-    EditText dateNaissanceEntre;
+    DatePicker datePicker;
+    java.util.Date birthdate = null;
     RadioButton boutonDroitier;
     RadioButton boutonGaucher;
     String varDG;
     final Context context = this;
+    Calendar dateTodayCal = Calendar.getInstance();
+    Date dateTodayDa ;
 
     @Override
     /*
@@ -46,17 +50,35 @@ public class ouverture_appli extends Activity {
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
-        dateNaissanceEntre = (EditText) findViewById(R.id.birthdate);
+        datePicker = (DatePicker) findViewById(R.id.datePicker);
         myTextViewErreur = (TextView) findViewById(R.id.infoErreur);
         boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
         boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
+
+        int yearToday = dateTodayCal.get(Calendar.YEAR);
+        int monthToday = dateTodayCal.get(Calendar.MONTH);
+        int dayToday = dateTodayCal.get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+        dateTodayDa = dateTodayCal.getTime();
+        try {
+            dateTodayDa = sdf.parse(dateTodayDa.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("problème de cast de date today");
+        }
+        // attention les mois commencent à 0
+        dateTodayCal.set(yearToday,monthToday+1,dayToday);
+        datePicker.init(yearToday, monthToday, dayToday, new DatePicker.OnDateChangedListener(){
+            @Override
+            public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                birthdate = getDateFromDatePicker(datePicker);
+            }
+        });
 
         // on met un listener qui regarde quand on clique sur le bouton
         boutonValider.setOnClickListener(validerListener);
         boutonQuitter.setOnClickListener(quitterListener);
         boutonEffacer.setOnClickListener(effacerListener);
-        boutonDroitier.setOnClickListener(droitierListener);
-        boutonGaucher.setOnClickListener(gaucherListener);
     }
 
     // Pour le bouton valider
@@ -68,37 +90,22 @@ public class ouverture_appli extends Activity {
             int length_name = name.length();
             final String surname = prenomEntre.getText().toString();
             int length_surname = surname.length();
-            final String birthdate = dateNaissanceEntre.getText().toString();
-            int length_birthdate = birthdate.length();
+
             // On vérifie que tous les champs ont été remplis
+            // on vérifie qu'au moins un radioButton a été sélectionné
             if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
-                // on vérifie qu'au moins un radioButton a été sélectionné
-                if (length_name > 0 && length_surname > 0 && length_birthdate > 0) {
+                // on vérifie que le nom et le prénom ont été sélectionnés
+                if (length_name > 0 && length_surname > 0) {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
                     if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name) && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
-                        // on vérifie que la date entrée contient que des chiffres et des /
-                        if (Pattern.matches("[0-9 /]*", birthdate)) {
-                            // étape qui vérifie le bon format de la date
-                            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+                        // on vérifie qu'une date a bien été sélectionnée
+                        if(birthdate != null) {
                             try {
-                                Date d = myFormat.parse(birthdate);
-
-                                //Date today = new Date();
-                                //today = myFormat.parse(String.valueOf(today));
-                                //System.out.println(today);
-
-                                String t = myFormat.format(d);
-                                // on vérifie que la date est au bon format et qu'elle est antérieure à la date du jour
-                                if (t.compareTo(birthdate) != 0 ) { //&& birthdate.compareTo(String.valueOf(today))<0) {
-                                   // System.out.println("NON VALIDE");
-                                    myTextViewErreur.setText(R.string.errorDateFormat);
-                                } else {
-
-                                    if(boutonDroitier.isChecked())
-                                        varDG = "Droitier" ;
+                                // on vérifie que la date choisie est antérieure à la date du jour
+                                if (birthdate.before(dateTodayDa)) {
+                                    if (boutonDroitier.isChecked())
+                                        varDG = "Droitier";
                                     else varDG = "Gaucher";
-
-                                   // System.out.println("VALIDE");
                                     // ouvrir une boite de dialogue permettant de valider les infos entrées
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                                     // set titre
@@ -113,9 +120,9 @@ public class ouverture_appli extends Activity {
                                                     dialog.cancel();
                                                     // On lance une nouvelle activité : l'interface du choix d'item
                                                     Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
-                                                    myIntent.putExtra(name, name);
-                                                    myIntent.putExtra(surname, name);
-                                                    myIntent.putExtra(birthdate, birthdate);
+                                                    myIntent.putExtra("name", name);
+                                                    myIntent.putExtra("surname", surname);
+                                                    myIntent.putExtra("birthdate", birthdate.toString());
                                                     startActivity(myIntent);
                                                 }
                                             })
@@ -129,12 +136,15 @@ public class ouverture_appli extends Activity {
                                     AlertDialog alertDialog = alertDialogBuilder.create();
                                     // show it
                                     alertDialog.show();
+                                } else {
+                                    //System.out.println("NON VALIDE");
+                                    myTextViewErreur.setText(R.string.errorDateAfter);
                                 }
                             } catch (Exception e) {
-                               // System.out.println("EXCEPTION");
+                                // System.out.println("EXCEPTION");
                                 myTextViewErreur.setText(R.string.internalError);
                             }
-                        } else {
+                        }else{ // aucune date n'a été choisie
                             myTextViewErreur.setText(R.string.errorDate);
                         }
                     } else {
@@ -143,8 +153,7 @@ public class ouverture_appli extends Activity {
                 } else {
                     myTextViewErreur.setText(R.string.errorVoid);
                 }
-            }
-            else{
+            } else {
                 myTextViewErreur.setText(R.string.errorRadioButton);
             }
         }
@@ -166,26 +175,22 @@ public class ouverture_appli extends Activity {
         public void onClick(View v) {
             nomEntre.getText().clear();
             prenomEntre.getText().clear();
-            dateNaissanceEntre.getText().clear();
+            datePicker.setSelected(false);
             myTextViewErreur.setText("");
             boutonDroitier.setChecked(false);
             boutonGaucher.setChecked(false);
         }
     };
 
-    // Pour le bouton droitier
-    private View.OnClickListener droitierListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          //  Log.i("OC_RSS", "Ca marche !!!");
-        }
-    };
+    public static java.util.Date getDateFromDatePicker(DatePicker datePicker) {
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
 
-    // Pour le bouton gaucher
-    private View.OnClickListener gaucherListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-         //   Log.i("OC_RSS", "Ca marche !!!");
-        }
-    };
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+        return calendar.getTime();
+    }
+
 }
