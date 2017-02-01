@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,7 +22,6 @@ import java.util.regex.Pattern;
 public class ouverture_appli extends Activity {
 
     Button boutonValider;
-    Button boutonQuitter;
     Button boutonEffacer;
     EditText nomEntre;
     EditText prenomEntre;
@@ -45,7 +45,6 @@ public class ouverture_appli extends Activity {
         // on utilise la méthode findViewById pour récupérer le bouton quand on clique dessus
         // R est la classe qui contient les ressources
         boutonValider = (Button) findViewById(R.id.boutonvalider);
-        boutonQuitter = (Button) findViewById(R.id.boutonquitter);
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
@@ -68,7 +67,6 @@ public class ouverture_appli extends Activity {
 
         // on met un listener qui regarde quand on clique sur le bouton
         boutonValider.setOnClickListener(validerListener);
-        boutonQuitter.setOnClickListener(quitterListener);
         boutonEffacer.setOnClickListener(effacerListener);
     }
 
@@ -153,16 +151,6 @@ public class ouverture_appli extends Activity {
         }
     };
 
-    // Pour le bouton quitter
-    private View.OnClickListener quitterListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // On quitte l'application
-            ouverture_appli.this.finish();
-            System.exit(0);
-        }
-    };
-
     // Listener du bouton effacer
     private View.OnClickListener effacerListener = new View.OnClickListener() {
         @Override
@@ -182,5 +170,32 @@ public class ouverture_appli extends Activity {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         return calendar.getTime();
+    }
+
+    private boolean back_answer = false;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Êtes-vous certain de vouloir quitter l'application ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            back_answer = true;
+                            // on quitte l'application courante
+                            ouverture_appli.this.finish();
+                            System.exit(0);
+                        }
+                    })
+                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            back_answer = false;
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        return back_answer;
     }
 }
