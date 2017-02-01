@@ -55,6 +55,9 @@ public class consignes_item18 extends Activity {
                             back_answer = true;
                             // on revient à l'écran de choix d'item
                             Intent myIntent = new Intent(consignes_item18.this, choix_item.class);
+                            myIntent.putExtra("name", name);
+                            myIntent.putExtra("surname", surname);
+                            myIntent.putExtra("birthdate", birthdate);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();

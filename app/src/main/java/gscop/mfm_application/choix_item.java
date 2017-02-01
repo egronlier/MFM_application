@@ -36,6 +36,8 @@ public class choix_item extends Activity {
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
                 startActivity(myIntent);
+                // on ferme l'activité en cours
+                finish();
             }
         });
 
@@ -49,6 +51,8 @@ public class choix_item extends Activity {
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
                 startActivity(myIntent);
+                // on ferme l'activité en cours
+                finish();
             }
         });
 
@@ -58,7 +62,7 @@ public class choix_item extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
-            textNomPrenomPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né le : " + birthdate);
+            textNomPrenomPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né(e) le : " + birthdate);
         }
     }
 
