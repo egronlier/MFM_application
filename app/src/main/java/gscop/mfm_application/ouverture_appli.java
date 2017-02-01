@@ -76,12 +76,12 @@ public class ouverture_appli extends Activity {
                     if (Pattern.matches("[a-zA-Z -]*", name) && Pattern.matches("[a-zA-Z -]*", surname)) {
                         // on vérifie que la date entrée contient que des chiffres et des /
                         if (Pattern.matches("[0-9 /]*", birthdate)) {
-                            // ----------------------------- rajouter une étape qui vérifie le bon format de la date !
-                            SimpleDateFormat myFormat = new SimpleDateFormat("dd/mm/yyyy");
+                            // étape qui vérifie le bon format de la date
+                            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
                             try {
                                 Date d = myFormat.parse(birthdate);
                                 String t = myFormat.format(d);
-                                if (t.compareTo(birthdate) != 0) { // ------------------------- > ajouter un test qui vérifie que la date existe bien !!!
+                                if (t.compareTo(birthdate) != 0) {
                                    // System.out.println("NON VALIDE");
                                     myTextViewErreur.setText(R.string.errorDateFormat);
                                 } else {
