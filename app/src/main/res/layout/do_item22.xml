@@ -46,38 +46,24 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
             android:background="#FFFFFFFF" />
-
-
     </LinearLayout>
 
-
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25sp">
-
-        <Button
-            android:id="@+id/boutonRetour"
-            android:text="@string/retour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#9bc3f1"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"/>
+        android:layout_marginBottom="25sp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/boutonTerminer"
-            android:text="@string/finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#9bc3f1"
-            android:layout_weight="1"
             android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"/>
-
+            android:layout_marginRight="25dip"
+            android:layout_weight="1"
+            android:background="#9bc3f1"
+            android:text="@string/finish" />
     </LinearLayout>
 
 </RelativeLayout>

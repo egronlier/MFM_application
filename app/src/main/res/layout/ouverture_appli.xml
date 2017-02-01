@@ -136,7 +136,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="40sp" />
+        android:layout_height="60sp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -159,20 +159,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#fd0000"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:id="@+id/infoErreur"
-        android:textAlignment="center" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="60sp" />
+        android:layout_height="100sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"

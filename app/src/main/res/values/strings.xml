@@ -29,6 +29,7 @@
     <string name="errorDateAfter">"La date choisie doit être antérieure à la date d'aujourd'hui."</string>
     <string name="internalError">"Une erreur interne en rapport avec le format de la date est survenue."</string>
     <string name="errorRadioButton">"Veuillez sélectionner Droitier ou Gaucher."</string>
+    <string name="confirmBack">"Voulez-vous revenir à l'écran précédent ? \n (Attention vos données peuvent être effacées)</string>
 
 
 </resources>

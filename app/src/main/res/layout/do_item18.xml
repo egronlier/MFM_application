@@ -33,21 +33,19 @@
             android:textSize="25sp" />
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="1">
 
         <!--Espace pour le dessin-->
         <gscop.mfm_application.Dessin_item18
-            android:id="@+id/drawing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:background="#FFFFFFFF" />
-
+        android:id="@+id/drawing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFFFF" />
 
     </LinearLayout>
 
@@ -57,17 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25sp">
-
-        <Button
-            android:id="@+id/boutonRetour"
-            android:text="@string/retour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#9bc3f1"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"/>
-
         <Button
             android:id="@+id/boutonTerminer"
             android:text="@string/finish"
@@ -77,7 +64,6 @@
             android:layout_weight="1"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"/>
-
     </LinearLayout>
 
 </RelativeLayout>

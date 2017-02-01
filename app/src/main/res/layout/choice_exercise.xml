@@ -5,18 +5,6 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/boutonchgmtpatient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/changePatient"
-        android:textSize="30sp"
-        android:textColor="#0d8dc9"
-        android:background="#9bc3f1"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/buttonitem22"
-        android:layout_marginBottom="60dp" />
-
-    <Button
         android:text="@string/item18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

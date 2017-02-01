@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +23,6 @@ public class ouverture_appli extends Activity {
     Button boutonValider;
     Button boutonQuitter;
     Button boutonEffacer;
-    TextView myTextViewErreur;
     EditText nomEntre;
     EditText prenomEntre;
     DatePicker datePicker;
@@ -52,7 +50,6 @@ public class ouverture_appli extends Activity {
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
         datePicker = (DatePicker) findViewById(R.id.datePicker);
-        myTextViewErreur = (TextView) findViewById(R.id.infoErreur);
         boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
         boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
 
@@ -66,7 +63,6 @@ public class ouverture_appli extends Activity {
             @Override
             public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 birthdate = getDateFromDatePicker(datePicker);
-                myTextViewErreur.setText("");
             }
         });
 
@@ -92,7 +88,8 @@ public class ouverture_appli extends Activity {
                 // on vérifie que le nom et le prénom ont été sélectionnés
                 if (length_name > 0 && length_surname > 0) {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
-                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name) && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
+                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)
+                            && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
                         // on vérifie qu'une date a bien été sélectionnée
                         if(birthdate != null) {
                             try {
@@ -110,7 +107,7 @@ public class ouverture_appli extends Activity {
                                     final String birthdateFormated = sdf.format(birthdate);
                                             // set dialog message
                                     alertDialogBuilder
-                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n"
+                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
                                                     + name.toUpperCase() + " " + surname.toLowerCase() + "\n né(e) le : " + birthdateFormated + "\n " + varDG)
                                             .setCancelable(false)
                                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
@@ -135,26 +132,23 @@ public class ouverture_appli extends Activity {
                                     AlertDialog alertDialog = alertDialogBuilder.create();
                                     // show it
                                     alertDialog.show();
-                                } else {
-                                    //System.out.println("NON VALIDE");
-                                    myTextViewErreur.setText(R.string.errorDateAfter);
+                                } else { // Date entrée non antérieure à la date du jour
                                     Toast.makeText(getApplicationContext(),R.string.errorDateAfter,Toast.LENGTH_LONG).show();
                                 }
-                            } catch (Exception e) {
-                                // System.out.println("EXCEPTION");
-                                myTextViewErreur.setText(R.string.internalError);
+                            } catch (Exception e) { // Problème inconnu avec la date choisie
+                                Toast.makeText(getApplicationContext(),R.string.internalError,Toast.LENGTH_LONG).show();
                             }
                         }else{ // aucune date n'a été choisie
-                            myTextViewErreur.setText(R.string.errorDate);
+                            Toast.makeText(getApplicationContext(),R.string.errorDate,Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        myTextViewErreur.setText(R.string.errorNames);
+                    } else { // Un des champs de nom ou prénom n'est pas au bon format
+                        Toast.makeText(getApplicationContext(),R.string.errorNames,Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    myTextViewErreur.setText(R.string.errorVoid);
+                } else { // Un des champs de nom ou prénom n'est pas rempli
+                    Toast.makeText(getApplicationContext(),R.string.errorVoid,Toast.LENGTH_LONG).show();
                 }
-            } else {
-                myTextViewErreur.setText(R.string.errorRadioButton);
+            } else { // Droitier ou gaucher n'a pas été choisi
+                Toast.makeText(getApplicationContext(),R.string.errorRadioButton,Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -176,7 +170,6 @@ public class ouverture_appli extends Activity {
             nomEntre.getText().clear();
             prenomEntre.getText().clear();
             datePicker.setSelected(false);
-            myTextViewErreur.setText("");
             boutonDroitier.setChecked(false);
             boutonGaucher.setChecked(false);
         }
@@ -186,11 +179,8 @@ public class ouverture_appli extends Activity {
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year = datePicker.getYear();
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
-
         return calendar.getTime();
     }
-
 }

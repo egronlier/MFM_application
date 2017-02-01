@@ -42,20 +42,6 @@
         android:layout_centerInParent="true"
         android:src="@drawable/item22" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25sp">
-        <Button
-            android:id="@+id/boutonRetour"
-            android:text="@string/retour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#9bc3f1"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"/>
         <Button
             android:id="@+id/boutonDemarrer"
             android:text="@string/begin"
@@ -64,7 +50,9 @@
             android:background="#9bc3f1"
             android:layout_weight="1"
             android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"/>
-    </LinearLayout>
+            android:layout_marginRight="25dip"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="53dp"/>
 
 </RelativeLayout>

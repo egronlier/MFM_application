@@ -18,59 +18,17 @@
         android:layout_marginTop="-2000dp"
         android:src="@drawable/cd" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/boutonDemarrer"
+        android:text="@string/begin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#9bc3f1"
+        android:layout_weight="1"
+        android:layout_marginLeft="25dip"
+        android:layout_marginRight="25dip"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25sp">
-        <Button
-            android:id="@+id/boutonRetour"
-            android:text="@string/retour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#9bc3f1"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"            />
-        <Button
-            android:id="@+id/boutonDemarrer"
-            android:text="@string/begin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#9bc3f1"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-
-        <TextView
-            android:id="@+id/champNumeroItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/item18"
-            android:textAlignment="center"
-            android:textColor="#0d8dc9"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/consignesItem18"
-            android:textAlignment="center"
-            android:textSize="25sp" />
-    </LinearLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp" />
 
 </RelativeLayout>
