@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class ouverture_appli extends Activity {
@@ -27,6 +28,7 @@ public class ouverture_appli extends Activity {
     EditText dateNaissanceEntre;
     RadioButton boutonDroitier;
     RadioButton boutonGaucher;
+    String varDG;
     final Context context = this;
 
     @Override
@@ -73,18 +75,29 @@ public class ouverture_appli extends Activity {
                 // on vérifie qu'au moins un radioButton a été sélectionné
                 if (length_name > 0 && length_surname > 0 && length_birthdate > 0) {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
-                    if (Pattern.matches("[a-zA-Z -]*", name) && Pattern.matches("[a-zA-Z -]*", surname)) {
+                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name) && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
                         // on vérifie que la date entrée contient que des chiffres et des /
                         if (Pattern.matches("[0-9 /]*", birthdate)) {
                             // étape qui vérifie le bon format de la date
-                            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
                             try {
                                 Date d = myFormat.parse(birthdate);
+
+                                //Date today = new Date();
+                                //today = myFormat.parse(String.valueOf(today));
+                                //System.out.println(today);
+
                                 String t = myFormat.format(d);
-                                if (t.compareTo(birthdate) != 0) {
+                                // on vérifie que la date est au bon format et qu'elle est antérieure à la date du jour
+                                if (t.compareTo(birthdate) != 0 ) { //&& birthdate.compareTo(String.valueOf(today))<0) {
                                    // System.out.println("NON VALIDE");
                                     myTextViewErreur.setText(R.string.errorDateFormat);
                                 } else {
+
+                                    if(boutonDroitier.isChecked())
+                                        varDG = "Droitier" ;
+                                    else varDG = "Gaucher";
+
                                    // System.out.println("VALIDE");
                                     // ouvrir une boite de dialogue permettant de valider les infos entrées
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -92,7 +105,7 @@ public class ouverture_appli extends Activity {
                                     alertDialogBuilder.setTitle("Confirmation des données");
                                     // set dialog message
                                     alertDialogBuilder
-                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n" + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdate)
+                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n" + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdate + "\n " + varDG)
                                             .setCancelable(false)
                                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
