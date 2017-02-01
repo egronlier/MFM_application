@@ -33,13 +33,23 @@
             android:textSize="25sp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/item22"
-        android:contentDescription="@string/item22image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/item22" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <!--Espace pour le dessin-->
+        <gscop.mfm_application.Dessin_item22
+            android:id="@+id/drawing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="#FFFFFFFF" />
+
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
