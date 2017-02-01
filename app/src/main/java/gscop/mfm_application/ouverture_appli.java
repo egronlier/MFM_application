@@ -58,7 +58,7 @@ public class ouverture_appli extends Activity {
         int monthToday = dateTodayCal.get(Calendar.MONTH);
         int dayToday = dateTodayCal.get(Calendar.DAY_OF_MONTH);
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-//        dateTodayDa = dateTodayCal.getTime();
+        dateTodayDa = dateTodayCal.getTime();
 //        try {
 //            dateTodayDa = sdf.parse(dateTodayDa.toString());
 //        } catch (ParseException e) {
