@@ -12,8 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -58,14 +57,14 @@ public class ouverture_appli extends Activity {
         int yearToday = dateTodayCal.get(Calendar.YEAR);
         int monthToday = dateTodayCal.get(Calendar.MONTH);
         int dayToday = dateTodayCal.get(Calendar.DAY_OF_MONTH);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        dateTodayDa = dateTodayCal.getTime();
-        try {
-            dateTodayDa = sdf.parse(dateTodayDa.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            System.out.println("problème de cast de date today");
-        }
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+//        dateTodayDa = dateTodayCal.getTime();
+//        try {
+//            dateTodayDa = sdf.parse(dateTodayDa.toString());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            System.out.println("problème de cast de date today");
+//        }
         // attention les mois commencent à 0
         dateTodayCal.set(yearToday,monthToday+1,dayToday);
         datePicker.init(yearToday, monthToday, dayToday, new DatePicker.OnDateChangedListener(){
