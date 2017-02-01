@@ -28,5 +28,7 @@
     <string name="errorVoid">"Veuillez remplir tous les champs."</string>
     <string name="errorDateFormat">"Le format de la date entrée n\'est pas bon."</string>
     <string name="internalError">"Une erreur interne en rapport avec le format de la date est survenue."</string>
+    <string name="errorRadioButton">"Veuillez sélectionner Droitier ou Gaucher."</string>
+
 
 </resources>
