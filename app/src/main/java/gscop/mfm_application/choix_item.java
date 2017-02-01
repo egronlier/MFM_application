@@ -70,6 +70,8 @@ public class choix_item extends Activity {
                             // on revient à l'écran d'accueil d'entrée des infos patient
                             Intent myIntent = new Intent(choix_item.this, ouverture_appli.class);
                             startActivity(myIntent);
+                            // on ferme l'activité en cours
+                            finish();
                         }
                     })
                     .setNegativeButton("Non", new DialogInterface.OnClickListener() {

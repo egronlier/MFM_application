@@ -25,6 +25,8 @@ public class consignes_item18 extends Activity {
             public void onClick(View v) {
                 Intent myIntent2 = new Intent(consignes_item18.this, do_item18.class);
                 startActivity(myIntent2);
+                // on ferme l'activité en cours
+                finish();
             }
         });
     }
@@ -42,6 +44,8 @@ public class consignes_item18 extends Activity {
                             // on revient à l'écran de choix d'item
                             Intent myIntent = new Intent(consignes_item18.this, choix_item.class);
                             startActivity(myIntent);
+                            // on ferme l'activité en cours
+                            finish();
                         }
                     })
                     .setNegativeButton("Non", new DialogInterface.OnClickListener() {

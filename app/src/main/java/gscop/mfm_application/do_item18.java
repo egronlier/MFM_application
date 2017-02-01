@@ -40,6 +40,8 @@ public class do_item18 extends Activity {
                             // on revient à l'écran des consignes de l'item 18
                             Intent myIntent = new Intent(do_item18.this, consignes_item18.class);
                             startActivity(myIntent);
+                            // on ferme l'activité en cours
+                            finish();
                         }
                     })
                     .setNegativeButton("Non", new DialogInterface.OnClickListener() {

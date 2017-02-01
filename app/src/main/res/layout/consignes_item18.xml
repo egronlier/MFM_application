@@ -5,6 +5,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20sp" />
+
+        <TextView
+            android:id="@+id/champNumeroItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/item18"
+            android:textAlignment="center"
+            android:textColor="#0d8dc9"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/consignesItem18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/consignesItem18"
+            android:textAlignment="center"
+            android:textSize="25sp" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/cd"
@@ -24,7 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#9bc3f1"
-        android:layout_weight="1"
         android:layout_marginLeft="25dip"
         android:layout_marginRight="25dip"
         android:layout_alignParentBottom="true"

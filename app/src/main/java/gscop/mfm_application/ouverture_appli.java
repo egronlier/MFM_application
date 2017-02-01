@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class ouverture_appli extends Activity {
@@ -101,7 +102,7 @@ public class ouverture_appli extends Activity {
                                     // set titre
                                     alertDialogBuilder.setTitle("Confirmation des données");
                                     // on met la date choisie au bon format : DD/MM/AAAA
-                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
                                     final String birthdateFormated = sdf.format(birthdate);
                                             // set dialog message
                                     alertDialogBuilder
@@ -118,6 +119,8 @@ public class ouverture_appli extends Activity {
                                                     myIntent.putExtra("surname", surname);
                                                     myIntent.putExtra("birthdate", birthdateFormated);
                                                     startActivity(myIntent);
+                                                    // on ferme l'activité en cours
+                                                    finish();
                                                 }
                                             })
                                             .setNegativeButton("Non", new DialogInterface.OnClickListener() {
