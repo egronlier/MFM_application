@@ -105,11 +105,11 @@ public class ouverture_appli extends Activity {
                                     alertDialogBuilder.setTitle("Confirmation des données");
                                     // on met la date choisie au bon format : DD/MM/AAAA
                                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                                    String birthdateFormated = sdf.format(birthdate);
+                                    final String birthdateFormated = sdf.format(birthdate);
                                             // set dialog message
                                     alertDialogBuilder
                                             .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n"
-                                                    + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdateFormated + "\n " + varDG)
+                                                    + name.toUpperCase() + " " + surname.toLowerCase() + "\n né(e) le : " + birthdateFormated + "\n " + varDG)
                                             .setCancelable(false)
                                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
@@ -119,7 +119,7 @@ public class ouverture_appli extends Activity {
                                                     Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
                                                     myIntent.putExtra("name", name);
                                                     myIntent.putExtra("surname", surname);
-                                                    myIntent.putExtra("birthdate", birthdate.toString());
+                                                    myIntent.putExtra("birthdate", birthdateFormated);
                                                     startActivity(myIntent);
                                                 }
                                             })

@@ -56,13 +56,13 @@ public class choix_item extends Activity {
         });
 
         // ------------------ à débugger : fait planter l'application
-//        // on récupère les données de l'activité précédente
-//        Intent intent = getIntent();
-//        if(intent != null){
-//            name = intent.getStringExtra(name);
-//            surname = intent.getStringExtra(surname);
-//            birthdate = intent.getStringExtra(birthdate);
-//            textNomPrenomPatient.setText("Patient : "+name.toUpperCase()+" "+surname.toLowerCase()+" "+birthdate);
-//        }
+        // on récupère les données de l'activité précédente
+        Intent intent = getIntent();
+        if(intent != null){
+            name = intent.getStringExtra("name");
+            surname = intent.getStringExtra("surname");
+            birthdate = intent.getStringExtra("birthdate");
+            textNomPrenomPatient.setText("Patient : "+name.toUpperCase()+" "+surname.toLowerCase()+" "+birthdate);
+        }
     }
 }
