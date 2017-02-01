@@ -12,11 +12,15 @@ import android.widget.Button;
 public class do_item18 extends Activity {
 
     Button boutonTerminer;
+    String name = "";
+    String surname = "";
+    String birthdate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.do_item18);
+
         boutonTerminer = (Button) findViewById(R.id.boutonTerminer);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,6 +28,13 @@ public class do_item18 extends Activity {
                 // action quand on appuie sur terminer
             }
         });
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            name = intent.getStringExtra("name");
+            surname = intent.getStringExtra("surname");
+            birthdate = intent.getStringExtra("birthdate");
+        }
     }
 
     private boolean back_answer = false;
@@ -39,6 +50,9 @@ public class do_item18 extends Activity {
                             back_answer = true;
                             // on revient à l'écran des consignes de l'item 18
                             Intent myIntent = new Intent(do_item18.this, consignes_item18.class);
+                            myIntent.putExtra("name", name);
+                            myIntent.putExtra("surname", surname);
+                            myIntent.putExtra("birthdate", birthdate);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();

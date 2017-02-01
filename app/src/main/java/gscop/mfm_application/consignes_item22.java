@@ -12,18 +12,30 @@ import android.widget.Button;
 public class consignes_item22 extends Activity {
 
     Button boutonDemarrer;
+    String name = "";
+    String surname = "";
+    String birthdate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.consignes_item22);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            name = intent.getStringExtra("name");
+            surname = intent.getStringExtra("surname");
+            birthdate = intent.getStringExtra("birthdate");
+        }
 
         boutonDemarrer = (Button) findViewById(R.id.boutonDemarrer);
         boutonDemarrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent2 = new Intent(consignes_item22.this, do_item22.class);
+                myIntent2.putExtra("name", name);
+                myIntent2.putExtra("surname", surname);
+                myIntent2.putExtra("birthdate", birthdate);
                 startActivity(myIntent2);
                 // on ferme l'activité en cours
                 finish();

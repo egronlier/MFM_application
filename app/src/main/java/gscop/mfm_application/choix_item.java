@@ -32,6 +32,9 @@ public class choix_item extends Activity {
             public void onClick(View v) {
                 // on lance les consignes de l'item 18
                 Intent myIntent = new Intent(choix_item.this, consignes_item18.class);
+                myIntent.putExtra("name", name);
+                myIntent.putExtra("surname", surname);
+                myIntent.putExtra("birthdate", birthdate);
                 startActivity(myIntent);
             }
         });
@@ -42,6 +45,9 @@ public class choix_item extends Activity {
             public void onClick(View v) {
                 // on lance les consignes de l'item 22
                 Intent myIntent = new Intent(choix_item.this, consignes_item22.class);
+                myIntent.putExtra("name", name);
+                myIntent.putExtra("surname", surname);
+                myIntent.putExtra("birthdate", birthdate);
                 startActivity(myIntent);
             }
         });
