@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,9 +48,8 @@ public class ouverture_appli extends Activity {
         myTextViewErreur = (TextView) findViewById(R.id.infoErreur);
         boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
         boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
-        //textNomPrenomPatient = (TextView) findViewById(R.id.PatientName);
 
-        // on implémente l'évènement, on met un listener qui regarde quand on clique sur le bouton
+        // on met un listener qui regarde quand on clique sur le bouton
         boutonValider.setOnClickListener(validerListener);
         boutonQuitter.setOnClickListener(quitterListener);
         boutonEffacer.setOnClickListener(effacerListener);
@@ -63,7 +61,6 @@ public class ouverture_appli extends Activity {
     private View.OnClickListener validerListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // ----------- On lance une nouvelle activité : l'interface du choix d'exercice
             // On récupère le nom, le prénom et la date de naissance
             final String name = nomEntre.getText().toString();
             int length_name = name.length();
@@ -72,68 +69,70 @@ public class ouverture_appli extends Activity {
             final String birthdate = dateNaissanceEntre.getText().toString();
             int length_birthdate = birthdate.length();
             // On vérifie que tous les champs ont été remplis
-            if (length_name > 0 && length_surname > 0 && length_birthdate > 0){
-                // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
-                if (Pattern.matches("[a-zA-Z -]*",name) && Pattern.matches("[a-zA-Z -]*",surname)) {
-                    // on vérifie que la date entrée contient que des chiffres et des /
-                    if (Pattern.matches("[0-9 /]*",birthdate)) {
-                        // ----------------------------- rajouter une étape qui vérifie le bon format de la date !
-                        SimpleDateFormat myFormat = new SimpleDateFormat("dd/mm/yyyy");
-                        try{
-                            Date d = myFormat.parse(birthdate);
-                            String t = myFormat.format(d);
-                            if(t.compareTo(birthdate) != 0) { // ------------------------- > ajouter un test qui vérifie que la date existe bien !!!
-                                System.out.println("NON VALIDE");
-                                myTextViewErreur.setText(R.string.errorDateFormat);
+            if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
+                // on vérifie qu'au moins un radioButton a été sélectionné
+                if (length_name > 0 && length_surname > 0 && length_birthdate > 0) {
+                    // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
+                    if (Pattern.matches("[a-zA-Z -]*", name) && Pattern.matches("[a-zA-Z -]*", surname)) {
+                        // on vérifie que la date entrée contient que des chiffres et des /
+                        if (Pattern.matches("[0-9 /]*", birthdate)) {
+                            // étape qui vérifie le bon format de la date
+                            SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            try {
+                                Date d = myFormat.parse(birthdate);
+                                String t = myFormat.format(d);
+                                if (t.compareTo(birthdate) != 0) {
+                                   // System.out.println("NON VALIDE");
+                                    myTextViewErreur.setText(R.string.errorDateFormat);
+                                } else {
+                                   // System.out.println("VALIDE");
+                                    // ouvrir une boite de dialogue permettant de valider les infos entrées
+                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                                    // set titre
+                                    alertDialogBuilder.setTitle("Confirmation des données");
+                                    // set dialog message
+                                    alertDialogBuilder
+                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n" + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdate)
+                                            .setCancelable(false)
+                                            .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    // if this button is clicked, go to next activity
+                                                    dialog.cancel();
+                                                    // On lance une nouvelle activité : l'interface du choix d'item
+                                                    Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
+                                                    myIntent.putExtra(name, name);
+                                                    myIntent.putExtra(surname, name);
+                                                    myIntent.putExtra(birthdate, birthdate);
+                                                    startActivity(myIntent);
+                                                }
+                                            })
+                                            .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    // if this button is clicked, close the dialog box
+                                                    dialog.cancel();
+                                                }
+                                            });
+                                    // create alert dialog
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+                                    // show it
+                                    alertDialog.show();
+                                }
+                            } catch (Exception e) {
+                               // System.out.println("EXCEPTION");
+                                myTextViewErreur.setText(R.string.internalError);
                             }
-                            else {
-                                System.out.println("VALIDE");
-                                // ouvrir une boite de dialogue permettant de valider les infos entrées
-                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                                // set titre
-                                alertDialogBuilder.setTitle("Confirmation des données");
-                                // set dialog message
-                                alertDialogBuilder
-                                        .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n" + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdate)
-                                        .setCancelable(false)
-                                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                // if this button is clicked, go to next activity
-                                                dialog.cancel();
-                                                // on lance l'activité de choix d'item
-                                                Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
-                                                myIntent.putExtra(name, name);
-                                                myIntent.putExtra(surname, name);
-                                                myIntent.putExtra(birthdate, birthdate);
-                                                startActivity(myIntent);
-                                            }
-                                        })
-                                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                // if this button is clicked, close the dialog box
-                                                dialog.cancel();
-                                            }
-                                        });
-                                // create alert dialog
-                                AlertDialog alertDialog = alertDialogBuilder.create();
-                                // show it
-                                alertDialog.show();
-                            }
-                        } catch (Exception e){
-                            System.out.println("EXCEPTION");
-                            myTextViewErreur.setText(R.string.internalError);
+                        } else {
+                            myTextViewErreur.setText(R.string.errorDate);
                         }
+                    } else {
+                        myTextViewErreur.setText(R.string.errorNames);
                     }
-                    else{
-                        myTextViewErreur.setText(R.string.errorDate);
-                    }
-                }
-                else{
-                    myTextViewErreur.setText(R.string.errorNames);
+                } else {
+                    myTextViewErreur.setText(R.string.errorVoid);
                 }
             }
             else{
-                myTextViewErreur.setText(R.string.errorVoid);
+                myTextViewErreur.setText(R.string.errorRadioButton);
             }
         }
     };
@@ -143,7 +142,7 @@ public class ouverture_appli extends Activity {
         @Override
         public void onClick(View v) {
             // On quitte l'application
-            finish();
+            ouverture_appli.this.finish();
             System.exit(0);
         }
     };
@@ -165,7 +164,7 @@ public class ouverture_appli extends Activity {
     private View.OnClickListener droitierListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.i("OC_RSS", "Ca marche !!!");
+          //  Log.i("OC_RSS", "Ca marche !!!");
         }
     };
 
@@ -173,7 +172,7 @@ public class ouverture_appli extends Activity {
     private View.OnClickListener gaucherListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.i("OC_RSS", "Ca marche !!!");
+         //   Log.i("OC_RSS", "Ca marche !!!");
         }
     };
 }
