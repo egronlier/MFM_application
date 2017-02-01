@@ -20,6 +20,7 @@
         <activity android:name=".consignes_item18"/>
         <activity android:name=".consignes_item22"/>
         <activity android:name="do_item18"/>
+        <activity android:name="do_item22"/>
 
     </application>
 

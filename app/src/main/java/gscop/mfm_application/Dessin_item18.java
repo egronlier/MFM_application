@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 
 //Cette classe permet de dessiner
-public class Dessin extends View {
+public class Dessin_item18 extends View {
 
     public static final int MAX_FINGERS = 100;
     private Path[] mFingerPaths = new Path[MAX_FINGERS];
@@ -27,15 +27,15 @@ public class Dessin extends View {
     private ArrayList<Path> mCompletedPaths;
     private RectF mPathBounds = new RectF();
 
-    public Dessin(Context context) {
+    public Dessin_item18(Context context) {
         super(context);
     }
 
-    public Dessin(Context context, AttributeSet attrs) {
+    public Dessin_item18(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public Dessin(Context context, AttributeSet attrs, int defStyle) {
+    public Dessin_item18(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
