@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,6 +66,7 @@ public class ouverture_appli extends Activity {
             @Override
             public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 birthdate = getDateFromDatePicker(datePicker);
+                myTextViewErreur.setText("");
             }
         });
 
@@ -136,6 +138,7 @@ public class ouverture_appli extends Activity {
                                 } else {
                                     //System.out.println("NON VALIDE");
                                     myTextViewErreur.setText(R.string.errorDateAfter);
+                                    Toast.makeText(getApplicationContext(),R.string.errorDateAfter,Toast.LENGTH_LONG).show();
                                 }
                             } catch (Exception e) {
                                 // System.out.println("EXCEPTION");
