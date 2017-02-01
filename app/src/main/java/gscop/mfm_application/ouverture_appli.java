@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -102,8 +103,10 @@ public class ouverture_appli extends Activity {
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                                     // set titre
                                     alertDialogBuilder.setTitle("Confirmation des données");
-                                    String birthdateFormated = birthdate.getDay()+"/"+birthdate.getMonth()+1+"/"+birthdate.getYear();
-                                    // set dialog message
+                                    // on met la date choisie au bon format : DD/MM/AAAA
+                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                    String birthdateFormated = sdf.format(birthdate);
+                                            // set dialog message
                                     alertDialogBuilder
                                             .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n"
                                                     + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdateFormated + "\n " + varDG)
