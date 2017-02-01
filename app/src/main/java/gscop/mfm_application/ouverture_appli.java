@@ -57,14 +57,7 @@ public class ouverture_appli extends Activity {
         int yearToday = dateTodayCal.get(Calendar.YEAR);
         int monthToday = dateTodayCal.get(Calendar.MONTH);
         int dayToday = dateTodayCal.get(Calendar.DAY_OF_MONTH);
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         dateTodayDa = dateTodayCal.getTime();
-//        try {
-//            dateTodayDa = sdf.parse(dateTodayDa.toString());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//            System.out.println("problème de cast de date today");
-//        }
         // attention les mois commencent à 0
         dateTodayCal.set(yearToday,monthToday+1,dayToday);
         datePicker.init(yearToday, monthToday, dayToday, new DatePicker.OnDateChangedListener(){
@@ -109,9 +102,11 @@ public class ouverture_appli extends Activity {
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                                     // set titre
                                     alertDialogBuilder.setTitle("Confirmation des données");
+                                    String birthdateFormated = birthdate.getDay()+"/"+birthdate.getMonth()+1+"/"+birthdate.getYear();
                                     // set dialog message
                                     alertDialogBuilder
-                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n" + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdate + "\n " + varDG)
+                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n"
+                                                    + name.toUpperCase() + " " + surname.toLowerCase() + "\n né le : " + birthdateFormated + "\n " + varDG)
                                             .setCancelable(false)
                                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
