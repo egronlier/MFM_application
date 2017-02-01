@@ -9,6 +9,7 @@ import android.widget.Button;
 public class consignes_item18 extends Activity {
 
     Button boutonRetour;
+    Button boutonDemarrer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,15 @@ public class consignes_item18 extends Activity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(consignes_item18.this, choix_item.class);
                 startActivity(myIntent);
+            }
+        });
+
+        boutonDemarrer = (Button) findViewById(R.id.boutonDemarrer);
+        boutonDemarrer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent2 = new Intent(consignes_item18.this, do_item18.class);
+                startActivity(myIntent2);
             }
         });
     }
