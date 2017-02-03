@@ -31,5 +31,22 @@
     <string name="errorRadioButton">"Veuillez sélectionner Droitier ou Gaucher."</string>
     <string name="confirmBack">"Voulez-vous revenir à l'écran précédent ? \n (Attention vos données peuvent être effacées)</string>
     <string name="enCours">"En cours"</string>
-
+    <string name="cotation">"Cotation : "</string>
+    <string name="zero">" 0 "</string>
+    <string name="one">" 1 "</string>
+    <string name="two">" 2 "</string>
+    <string name="three">" 3 "</string>
+    <string name="donotknow">" Ne sait pas "</string>
+    <string name="compensation">"Compensation : "</string>
+    <string name="yes">" Oui "</string>
+    <string name="no">" Non "</string>
+    <string name="circle">"Cercle : "</string>
+    <string name="small">" petit "</string>
+    <string name="big">" grand "</string>
+    <string name="comments">"Commentaires : "</string>
+    <string name="save">"Enregistrer"</string>
+    <string name="info">Infos : </string>
+    <string name="errorCotation">"Veuillez choisir une cotation."</string>
+    <string name="errorCompensation">"Veuillez choisir une compensation."</string>
+    <string name="errorCircle">"Veuillez sélectionner une taille de cercle."</string>
 </resources>

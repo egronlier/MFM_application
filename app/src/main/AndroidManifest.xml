@@ -20,6 +20,19 @@
         <activity android:name=".consignes_item22"/>
         <activity android:name="do_item18"/>
         <activity android:name="do_item22"/>
+        <activity android:name=".comments_item18">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".comments_item22">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 
