@@ -1,8 +1,6 @@
 package gscop.mfm_application;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -42,35 +40,34 @@ public class consignes_item22 extends Activity {
             }
         });
     }
-
     private boolean back_answer = false;
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.confirmBack)
-                    .setCancelable(false)
-                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            back_answer = true;
-                            // on revient à l'écran de choix d'item
-                            Intent myIntent = new Intent(consignes_item22.this, choix_item.class);
-                            myIntent.putExtra("name", name);
-                            myIntent.putExtra("surname", surname);
-                            myIntent.putExtra("birthdate", birthdate);
-                            startActivity(myIntent);
-                            // on ferme l'activité en cours
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            back_answer = false;
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setMessage(R.string.confirmBack)
+//                    .setCancelable(false)
+//                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+            back_answer = true;
+            // on revient à l'écran de choix d'item
+            Intent myIntent = new Intent(consignes_item22.this, choix_item.class);
+            myIntent.putExtra("name", name);
+            myIntent.putExtra("surname", surname);
+            myIntent.putExtra("birthdate", birthdate);
+            startActivity(myIntent);
+            // on ferme l'activité en cours
+            finish();
         }
+//                    })
+//                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            back_answer = false;
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
+//        }
         return back_answer;
     }
 }

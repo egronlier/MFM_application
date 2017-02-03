@@ -72,7 +72,8 @@ public class choix_item extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.confirmBack)
+            builder.setMessage(R.string.confirmBackAccueil)
+                    .setTitle("Changement patient")
                     .setCancelable(false)
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {

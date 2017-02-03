@@ -1,8 +1,6 @@
 package gscop.mfm_application;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -47,11 +45,11 @@ public class consignes_item18 extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.confirmBack)
-                    .setCancelable(false)
-                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setMessage(R.string.confirmBack)
+//                    .setCancelable(false)
+//                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
                             back_answer = true;
                             // on revient à l'écran de choix d'item
                             Intent myIntent = new Intent(consignes_item18.this, choix_item.class);
@@ -62,15 +60,15 @@ public class consignes_item18 extends Activity {
                             // on ferme l'activité en cours
                             finish();
                         }
-                    })
-                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            back_answer = false;
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
+//                    })
+//                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            back_answer = false;
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
+//        }
         return back_answer;
     }
 }
