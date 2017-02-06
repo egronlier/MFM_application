@@ -51,4 +51,6 @@
     <string name="errorCompensation">"Veuillez choisir une compensation."</string>
     <string name="errorCircle">"Veuillez sélectionner une taille de cercle."</string>
     <string name="errorDG">"Une erreur est survenue concernant la lecture de la condition : gaucher/droitier."</string>
+    <string name="restart">"RECOMMENCER"</string>
+    <string name="item18carto">Item 18 : Cartographie</string>
 </resources>

@@ -37,7 +37,15 @@ public class do_item18 extends Activity {
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // action quand on appuie sur terminer -> affiche la cartographie ou la fenêtre de commentaires du kiné ?
+                // action quand on appuie sur terminer -> affiche la cartographie
+                Intent myIntent = new Intent(do_item18.this, carto_item18.class);
+                myIntent.putExtra("name", name);
+                myIntent.putExtra("surname", surname);
+                myIntent.putExtra("birthdate", birthdate);
+                myIntent.putExtra("main", main);
+                startActivity(myIntent);
+                // on ferme l'activité en cours
+                finish();
             }
         });
 
@@ -81,7 +89,6 @@ public class do_item18 extends Activity {
     }
 
     private boolean back_answer = false;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

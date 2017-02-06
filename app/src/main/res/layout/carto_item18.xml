@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20sp" />
+
+        <TextView
+            android:id="@+id/infosPatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            tools:text="Infos patient"
+            android:textColor="#868786"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/champNumeroItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/item18carto"
+            android:textAlignment="center"
+            android:textColor="#0d8dc9"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cd_test_tour" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/boutonRecommencer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#9bc3f1"
+            android:text="@string/restart" />
+
+        <Space
+            android:layout_width="400dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/boutonValider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#9bc3f1"
+            android:text="@string/valid" />
+    </LinearLayout>
+
+</RelativeLayout>

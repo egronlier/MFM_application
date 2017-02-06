@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,10 @@ import android.widget.Toast;
 
 public class comments_item18 extends Activity {
 
+    String name = "";
+    String surname = "";
+    String birthdate = "";
+    String main = "";
     Button boutonEnregistrer;
     final Context context = this;
     RadioButton boutonCotation0;
@@ -29,6 +34,15 @@ public class comments_item18 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comments_item18);
+
+        // on récupère les infos de l'intent
+        Intent intent = getIntent();
+        if (intent != null) {
+            name = intent.getStringExtra("name");
+            surname = intent.getStringExtra("surname");
+            birthdate = intent.getStringExtra("birthdate");
+            main = intent.getStringExtra("main");
+        }
 
         boutonCotation0 = (RadioButton) findViewById(R.id.radioButton0);
         boutonCotation1 = (RadioButton) findViewById(R.id.radioButton1);
