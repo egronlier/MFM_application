@@ -14,10 +14,6 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-/**
- * Created by Éloïse on 31/01/2017.
- */
-
 //Cette classe permet de dessiner
 public class Dessin_item22 extends View {
 
@@ -42,7 +38,7 @@ public class Dessin_item22 extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mCompletedPaths = new ArrayList<Path>();
+        mCompletedPaths = new ArrayList<>();
         mFingerPaint = new Paint();
         // initialise les caractéristiques du trait (forme, couleur...)
         mFingerPaint.setAntiAlias(true);
@@ -52,14 +48,11 @@ public class Dessin_item22 extends View {
         mFingerPaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
-
-
-
     @Override
     protected void onDraw(Canvas canvas) {
         // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
-        Bitmap grille = Bitmap.createScaledBitmap(image, 460,460, true);
+        Bitmap grille = Bitmap.createScaledBitmap(image, 460, 460, true);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner l'image dans le canvas
         // A CHANGER PLUS TARD (selon droitier/gaucher)
         canvas.drawBitmap(grille, 375, 600, null);
@@ -73,8 +66,6 @@ public class Dessin_item22 extends View {
                 canvas.drawPath(fingerPath, mFingerPaint);
             }
         }
-
-
     }
 
     //
@@ -98,8 +89,8 @@ public class Dessin_item22 extends View {
             mFingerPaths[id] = null;
         }
 
-        for(int i = 0; i < cappedPointerCount; i++) {
-            if(mFingerPaths[i] != null) {
+        for (int i = 0; i < cappedPointerCount; i++) {
+            if (mFingerPaths[i] != null) {
                 int index = event.findPointerIndex(i);
                 mFingerPaths[i].lineTo(event.getX(index), event.getY(index));
                 mFingerPaths[i].computeBounds(mPathBounds, true);
@@ -107,12 +98,6 @@ public class Dessin_item22 extends View {
                         (int) mPathBounds.right, (int) mPathBounds.bottom);
             }
         }
-
         return true;
     }
-
-
-
-
-
 }

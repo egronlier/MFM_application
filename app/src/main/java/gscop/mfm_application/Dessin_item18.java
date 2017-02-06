@@ -14,10 +14,6 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-/**
- * Created by Éloïse on 31/01/2017.
- */
-
 //Cette classe permet de dessiner
 public class Dessin_item18 extends View {
 
@@ -42,7 +38,7 @@ public class Dessin_item18 extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mCompletedPaths = new ArrayList<Path>();
+        mCompletedPaths = new ArrayList<>();
         mFingerPaint = new Paint();
         // initialise les caractéristiques du trait (forme, couleur...)
         mFingerPaint.setAntiAlias(true);
@@ -52,31 +48,24 @@ public class Dessin_item18 extends View {
         mFingerPaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
-
-
-
     @Override
     protected void onDraw(Canvas canvas) {
         // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.cd);
-        Bitmap cd = Bitmap.createScaledBitmap(image, 1080,1080, true);
+        Bitmap cd = Bitmap.createScaledBitmap(image, 1080, 1080, true);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner le CD dans le canvas
         canvas.drawBitmap(cd, 60, 60, null);
         super.onDraw(canvas);
         for (Path completedPath : mCompletedPaths) {
             canvas.drawPath(completedPath, mFingerPaint);
         }
-
         for (Path fingerPath : mFingerPaths) {
             if (fingerPath != null) {
                 canvas.drawPath(fingerPath, mFingerPaint);
             }
         }
-
-
     }
 
-    //
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int pointerCount = event.getPointerCount();
@@ -97,8 +86,8 @@ public class Dessin_item18 extends View {
             mFingerPaths[id] = null;
         }
 
-        for(int i = 0; i < cappedPointerCount; i++) {
-            if(mFingerPaths[i] != null) {
+        for (int i = 0; i < cappedPointerCount; i++) {
+            if (mFingerPaths[i] != null) {
                 int index = event.findPointerIndex(i);
                 mFingerPaths[i].lineTo(event.getX(index), event.getY(index));
                 mFingerPaths[i].computeBounds(mPathBounds, true);
@@ -106,12 +95,6 @@ public class Dessin_item18 extends View {
                         (int) mPathBounds.right, (int) mPathBounds.bottom);
             }
         }
-
         return true;
     }
-
-
-
-
-
 }
