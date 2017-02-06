@@ -50,4 +50,5 @@
     <string name="errorCotation">"Veuillez choisir une cotation."</string>
     <string name="errorCompensation">"Veuillez choisir une compensation."</string>
     <string name="errorCircle">"Veuillez sélectionner une taille de cercle."</string>
+    <string name="errorDG">"Une erreur est survenue concernant la lecture de la condition : gaucher/droitier."</string>
 </resources>

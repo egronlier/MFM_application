@@ -30,7 +30,7 @@ public class ouverture_appli extends Activity {
     java.util.Date birthdate = null;
     RadioButton boutonDroitier;
     RadioButton boutonGaucher;
-    String varDG;
+    String varDG = "";
     final Context context = this;
     Calendar dateTodayCal = Calendar.getInstance();
     Date dateTodayDa ;
@@ -104,7 +104,7 @@ public class ouverture_appli extends Activity {
                                     // on met la date choisie au bon format : DD/MM/AAAA
                                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
                                     final String birthdateFormated = sdf.format(birthdate);
-                                            // set dialog message
+                                    // set dialog message
                                     alertDialogBuilder
                                             .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
                                                     + name.toUpperCase() + " " + surname.toLowerCase() + "\n né(e) le : " + birthdateFormated + "\n " + varDG)
@@ -118,6 +118,7 @@ public class ouverture_appli extends Activity {
                                                     myIntent.putExtra("name", name);
                                                     myIntent.putExtra("surname", surname);
                                                     myIntent.putExtra("birthdate", birthdateFormated);
+                                                    myIntent.putExtra("main",varDG);
                                                     startActivity(myIntent);
                                                     // on ferme l'activité en cours
                                                     finish();

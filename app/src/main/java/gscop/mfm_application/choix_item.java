@@ -18,13 +18,23 @@ public class choix_item extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
+    String main = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choice_exercise);
-
         textNomPrenomPatient = (TextView) findViewById(R.id.PatientName);
+
+        // on récupère les données de l'activité précédente pour afficher les données du patient
+        Intent intent = getIntent();
+        if (intent != null) {
+            name = intent.getStringExtra("name");
+            surname = intent.getStringExtra("surname");
+            birthdate = intent.getStringExtra("birthdate");
+            main = intent.getStringExtra("main");
+            textNomPrenomPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né(e) le : " + birthdate +"\n"+ main );
+        }
 
         buttonItem18 = (Button) findViewById(R.id.buttonitem18);
         buttonItem18.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +45,7 @@ public class choix_item extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
+                myIntent.putExtra("main",main);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
@@ -50,20 +61,13 @@ public class choix_item extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
+                myIntent.putExtra("main",main);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
             }
         });
 
-        // on récupère les données de l'activité précédente pour afficher les données du patient
-        Intent intent = getIntent();
-        if (intent != null) {
-            name = intent.getStringExtra("name");
-            surname = intent.getStringExtra("surname");
-            birthdate = intent.getStringExtra("birthdate");
-            textNomPrenomPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né(e) le : " + birthdate);
-        }
     }
 
     private boolean back_answer = false;
@@ -80,6 +84,7 @@ public class choix_item extends Activity {
                             back_answer = true;
                             // on revient à l'écran d'accueil d'entrée des infos patient
                             Intent myIntent = new Intent(choix_item.this, ouverture_appli.class);
+                            // pas besoin des extra car pas d'infos à faire transiter
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();

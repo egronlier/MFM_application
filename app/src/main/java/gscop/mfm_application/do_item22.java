@@ -15,6 +15,7 @@ public class do_item22 extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
+    String main = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class do_item22 extends Activity {
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // action quand on appuie sur terminer
+                // action quand on appuie sur terminer -> affiche la cartographie ou la fenêtre de commentaires du kiné ?
             }
         });
 
@@ -34,6 +35,7 @@ public class do_item22 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
+            main = intent.getStringExtra("main");
         }
     }
 
@@ -53,6 +55,7 @@ public class do_item22 extends Activity {
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
+                            myIntent.putExtra("main",main);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();

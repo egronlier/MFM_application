@@ -40,32 +40,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="1">
-
         <!--Espace pour le dessin-->
         <gscop.mfm_application.Dessin_item18
-        android:id="@+id/drawing"
+            android:id="@+id/drawing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="#FFFFFFFF" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/boutonTerminer"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerInParent="true"
+        android:text="@string/finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:background="#FFFFFFFF" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25sp">
-        <Button
-            android:id="@+id/boutonTerminer"
-            android:text="@string/finish"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="#9bc3f1"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dip"
-            android:layout_marginRight="25dip"/>
-    </LinearLayout>
+        android:background="#9bc3f1"/>
 
 </RelativeLayout>

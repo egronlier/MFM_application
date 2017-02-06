@@ -13,6 +13,7 @@ public class consignes_item22 extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
+    String main = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class consignes_item22 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
+            main = intent.getStringExtra("main");
         }
 
         boutonDemarrer = (Button) findViewById(R.id.boutonDemarrer);
@@ -34,6 +36,7 @@ public class consignes_item22 extends Activity {
                 myIntent2.putExtra("name", name);
                 myIntent2.putExtra("surname", surname);
                 myIntent2.putExtra("birthdate", birthdate);
+                myIntent2.putExtra("main",main);
                 startActivity(myIntent2);
                 // on ferme l'activité en cours
                 finish();
@@ -55,6 +58,7 @@ public class consignes_item22 extends Activity {
             myIntent.putExtra("name", name);
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
+            myIntent.putExtra("main",main);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();

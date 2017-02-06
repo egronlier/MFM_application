@@ -13,6 +13,7 @@ public class consignes_item18 extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
+    String main = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class consignes_item18 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
+            main = intent.getStringExtra("main");
         }
 
         boutonDemarrer = (Button) findViewById(R.id.boutonDemarrer);
@@ -34,6 +36,7 @@ public class consignes_item18 extends Activity {
                 myIntent2.putExtra("name", name);
                 myIntent2.putExtra("surname", surname);
                 myIntent2.putExtra("birthdate", birthdate);
+                myIntent2.putExtra("main",main);
                 startActivity(myIntent2);
                 // on ferme l'activité en cours
                 finish();
@@ -50,16 +53,17 @@ public class consignes_item18 extends Activity {
 //                    .setCancelable(false)
 //                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
 //                        public void onClick(DialogInterface dialog, int id) {
-                            back_answer = true;
-                            // on revient à l'écran de choix d'item
-                            Intent myIntent = new Intent(consignes_item18.this, choix_item.class);
-                            myIntent.putExtra("name", name);
-                            myIntent.putExtra("surname", surname);
-                            myIntent.putExtra("birthdate", birthdate);
-                            startActivity(myIntent);
-                            // on ferme l'activité en cours
-                            finish();
-                        }
+            back_answer = true;
+            // on revient à l'écran de choix d'item
+            Intent myIntent = new Intent(consignes_item18.this, choix_item.class);
+            myIntent.putExtra("name", name);
+            myIntent.putExtra("surname", surname);
+            myIntent.putExtra("birthdate", birthdate);
+            myIntent.putExtra("main",main);
+            startActivity(myIntent);
+            // on ferme l'activité en cours
+            finish();
+        }
 //                    })
 //                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
 //                        public void onClick(DialogInterface dialog, int id) {
