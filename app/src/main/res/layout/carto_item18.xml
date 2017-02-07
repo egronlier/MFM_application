@@ -35,10 +35,11 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
+            android:id="@+id/cartographie"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/cd_test_tour" />
+            android:layout_marginBottom="3dp"
+            android:background="#FFFFFFFF" />
 
     </LinearLayout>
 
