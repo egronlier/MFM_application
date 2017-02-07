@@ -17,7 +17,7 @@ import java.util.ArrayList;
 //Cette classe permet de dessiner
 public class Dessin_item18 extends View {
 
-    public static final int MAX_FINGERS = 100;
+    public static final int MAX_FINGERS = 50;
     private Path[] mFingerPaths = new Path[MAX_FINGERS];
     private Paint mFingerPaint;
     private ArrayList<Path> mCompletedPaths;

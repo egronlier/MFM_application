@@ -17,7 +17,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class carto_item18 extends Activity {
+/**
+ * Created by Éloïse on 07/02/2017.
+ */
+
+public class carto_item22 extends Activity {
 
     String name = "";
     String surname = "";
@@ -31,9 +35,9 @@ public class carto_item18 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.carto_item18);
+        setContentView(R.layout.carto_item22);
 
-        ImageView carto = (ImageView) findViewById(R.id.cartographieItem18);
+        ImageView carto = (ImageView) findViewById(R.id.cartographieItem22);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -71,7 +75,7 @@ public class carto_item18 extends Activity {
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // on revient à l'écran de réalisation de l'item 18
-                                Intent myIntent = new Intent(carto_item18.this, do_item18.class);
+                                Intent myIntent = new Intent(carto_item22.this, do_item22.class);
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
@@ -97,7 +101,7 @@ public class carto_item18 extends Activity {
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // on revient à l'écran de réalisation de l'item 18
-                                Intent myIntent = new Intent(carto_item18.this, comments_item18.class);
+                                Intent myIntent = new Intent(carto_item22.this, comments_item22.class);
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
@@ -126,7 +130,7 @@ public class carto_item18 extends Activity {
                         public void onClick(DialogInterface dialog, int id) {
                             back_answer = true;
                             // on revient à l'écran de réalisation de l'item 18
-                            Intent myIntent = new Intent(carto_item18.this, do_item18.class);
+                            Intent myIntent = new Intent(carto_item22.this, do_item22.class);
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);

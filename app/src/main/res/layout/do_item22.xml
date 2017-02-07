@@ -43,7 +43,7 @@
 
         <!--Espace pour le dessin-->
         <gscop.mfm_application.Dessin_item22
-            android:id="@+id/drawing"
+            android:id="@+id/drawingItem22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"

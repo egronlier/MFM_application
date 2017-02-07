@@ -40,9 +40,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="1">
+
         <!--Espace pour le dessin-->
         <gscop.mfm_application.Dessin_item18
-            android:id="@+id/drawing"
+            android:id="@+id/drawingItem18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"

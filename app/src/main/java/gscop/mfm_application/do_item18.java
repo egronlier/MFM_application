@@ -31,7 +31,7 @@ public class do_item18 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.do_item18);
-        dessin = (Dessin_item18) findViewById(R.id.drawing);
+        dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();

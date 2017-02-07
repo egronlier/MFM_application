@@ -28,14 +28,14 @@
             android:id="@+id/champNumeroItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/item18carto"
+            android:text="@string/item22carto"
             android:textAlignment="center"
             android:textColor="#0d8dc9"
             android:textSize="30sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/cartographieItem18"
+            android:id="@+id/cartographieItem22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"

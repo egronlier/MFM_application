@@ -17,11 +17,12 @@ import java.util.ArrayList;
 //Cette classe permet de dessiner
 public class Dessin_item22 extends View {
 
-    public static final int MAX_FINGERS = 100;
+    public static final int MAX_FINGERS = 50;
     private Path[] mFingerPaths = new Path[MAX_FINGERS];
     private Paint mFingerPaint;
     private ArrayList<Path> mCompletedPaths;
     private RectF mPathBounds = new RectF();
+    private Bitmap cartographie;
 
     public Dessin_item22(Context context) {
         super(context);
@@ -52,10 +53,13 @@ public class Dessin_item22 extends View {
     protected void onDraw(Canvas canvas) {
         // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
-        Bitmap grille = Bitmap.createScaledBitmap(image, 460, 460, true);
+        image = resize(image, 1250,1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner l'image dans le canvas
+        canvas.drawBitmap(image, 0, 0, null);
+        canvas = new Canvas(image);
+
+
         // A CHANGER PLUS TARD (selon droitier/gaucher)
-        canvas.drawBitmap(grille, 375, 600, null);
         super.onDraw(canvas);
         for (Path completedPath : mCompletedPaths) {
             canvas.drawPath(completedPath, mFingerPaint);
@@ -66,6 +70,7 @@ public class Dessin_item22 extends View {
                 canvas.drawPath(fingerPath, mFingerPaint);
             }
         }
+        this.cartographie = image;
     }
 
     //
@@ -100,4 +105,35 @@ public class Dessin_item22 extends View {
         }
         return true;
     }
+
+
+
+
+
+    // Cette méthode permet de redimensionner un bitmap
+    private static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
+        if (maxHeight > 0 && maxWidth > 0) {
+            int width = image.getWidth();
+            int height = image.getHeight();
+            float ratioBitmap = (float) width / (float) height;
+            float ratioMax = (float) maxWidth / (float) maxHeight;
+
+            int finalWidth = maxWidth;
+            int finalHeight = maxHeight;
+            if (ratioMax > 1) {
+                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+            } else {
+                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+            }
+            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+            return image;
+        } else {
+            return image;
+        }
+    }
+
+
+
+    public Bitmap getCartographie(){return cartographie;}
+
 }
