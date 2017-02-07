@@ -177,7 +177,6 @@ public class ouverture_appli extends Activity {
     }
 
     private boolean back_answer = false;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

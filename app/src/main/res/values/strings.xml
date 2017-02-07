@@ -53,5 +53,4 @@
     <string name="errorDG">"Une erreur est survenue concernant la lecture de la condition : gaucher/droitier."</string>
     <string name="restart">"RECOMMENCER"</string>
     <string name="item18carto">Item 18 : Cartographie</string>
-    <string name="item22carto">Item 22 : Cartographie</string>
 </resources>
