@@ -104,7 +104,6 @@ public class carto_item18 extends Activity {
                                 myIntent.putExtra("main", main);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
-                                finish();
                             }
                         });
                 AlertDialog alert = builder.create();
