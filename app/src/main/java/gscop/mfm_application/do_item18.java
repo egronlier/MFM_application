@@ -2,14 +2,21 @@ package gscop.mfm_application;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class do_item18 extends Activity {
 
@@ -18,11 +25,13 @@ public class do_item18 extends Activity {
     String surname = "";
     String birthdate = "";
     String main = "";
+    Dessin_item18 dessin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.do_item18);
+        dessin = (Dessin_item18) findViewById(R.id.drawing);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -43,6 +52,8 @@ public class do_item18 extends Activity {
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
                 myIntent.putExtra("main", main);
+                Bitmap cartoBitmap = dessin.getCartographie();
+                myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
@@ -119,4 +130,32 @@ public class do_item18 extends Activity {
         }
         return back_answer;
     }
+
+
+    // Cette méthode enregistre un bitmap dans la mémoire interne de l'appareil
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"cartographie.png");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
+
 }

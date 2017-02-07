@@ -4,11 +4,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class carto_item18 extends Activity {
 
@@ -19,11 +26,14 @@ public class carto_item18 extends Activity {
     Button boutonRecommencer;
     Button boutonValider;
     TextView infosPatient;
+    String path = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.carto_item18);
+
+        ImageView carto = (ImageView) findViewById(R.id.cartographie);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -32,6 +42,17 @@ public class carto_item18 extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
+
+            path = intent.getStringExtra("path");
+            try {
+                File f=new File(path, "cartographie.png");
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                carto.setImageBitmap(b);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
         }
 
         infosPatient = (TextView) findViewById(R.id.infosPatient);
