@@ -45,19 +45,17 @@ public class carto_item18 extends Activity {
 
             path = intent.getStringExtra("path");
             try {
-                File f=new File(path, "cartographie.png");
+                File f = new File(path, "cartographie.png");
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
                 carto.setImageBitmap(b);
                 f.delete();
-            }
-            catch (FileNotFoundException e)
-            {
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
         infosPatient = (TextView) findViewById(R.id.infosPatient);
-        infosPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né(e) le : " + birthdate +"\n"+ main );
+        infosPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né(e) le : " + birthdate + "\n" + main);
 
         // pour le bouton Recommencer
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -68,6 +66,12 @@ public class carto_item18 extends Activity {
                 // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item18
                 builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? (le tracé sera perdu)")
                         .setCancelable(true)
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close the dialog box
+                                dialog.cancel();
+                            }
+                        })
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // on revient à l'écran de réalisation de l'item 18
@@ -94,6 +98,12 @@ public class carto_item18 extends Activity {
                 // quand on clique sur le bouton valider, ça ouvre l'interface des commentaires du kiné
                 builder.setMessage("Êtes-vous certain de vouloir valider cette cartographie ?")
                         .setCancelable(true)
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close the dialog box
+                                dialog.cancel();
+                            }
+                        })
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // on revient à l'écran de réalisation de l'item 18
@@ -115,6 +125,7 @@ public class carto_item18 extends Activity {
 
     // quand on appuie sur la touche retour de la tablette -> comme pour le bouton recommencer
     private boolean back_answer = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -146,3 +157,4 @@ public class carto_item18 extends Activity {
         return back_answer;
     }
 }
+
