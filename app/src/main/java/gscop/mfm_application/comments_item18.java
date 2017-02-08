@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.cete.dynamicpdf.Align;
 import com.cete.dynamicpdf.Document;
 import com.cete.dynamicpdf.Font;
 import com.cete.dynamicpdf.Page;
@@ -98,28 +99,34 @@ public class comments_item18 extends Activity {
                                         public void onClick(DialogInterface dialog, int id) {
                                             // if this button is clicked, on fait l'enregistrement et on affiche le résultat
                                             dialog.cancel();
+
                                             // -----------CREATION et ENREGISTREMENT du PDF---------
                                             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
-                                            String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ "/"+ name.toLowerCase()+"_"+surname.toLowerCase()+"_"+timeStamp + ".pdf";
+                                            String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf";
                                             // Create a document and set it's properties
                                             Document objDocument = new Document();
-                                            objDocument.setCreator("DynamicPDFHelloWorld.java");
-                                            objDocument.setAuthor("Your Name");
-                                            objDocument.setTitle("Hello World");
+                                            objDocument.setCreator("MFM_application");
+                                            objDocument.setAuthor("MFM_application");
+                                            objDocument.setTitle(name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf");
 
                                             // Create a page to add to the document
-                                            Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT,54.0f);
-                                            Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT,54.0f);
+                                            Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
+                                            Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
 
                                             // Create a Label to add to the page
-                                            String strText = "Patient : " + name + " " + surname + "\nDate de naissance : "+ birthdate + "\n" + main + "\n Item réalisé le : " + timeStamp ;
+                                            String strText = "Patient : " + name + " " + surname +
+                                                    "\nDate de naissance : " + birthdate +
+                                                    "\n" + main +
+                                                    "\n Item réalisé le : " + timeStamp;
                                             Label objLabel = new Label(strText, 0, 0, 504, 100, Font.getHelvetica(), 18, TextAlign.CENTER);
 
-                                            Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.cd_test_tour);
+                                            // on ajoute l'image au pdf
+                                            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.cd_test_tour);
                                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                            bmp.compress(Bitmap.CompressFormat.PNG,100,stream);
+                                            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                                             byte[] bitMapData = stream.toByteArray();
-                                            Image monImage = new Image(bitMapData,0,0);
+                                            Image monImage = new Image(bitMapData, 0, 0);
+                                            monImage.setAlign(Align.CENTER);
 
                                             // Add label to page
                                             page1.getElements().add(objLabel);
@@ -132,13 +139,15 @@ public class comments_item18 extends Activity {
                                             try {
                                                 // Outputs the document to file
                                                 objDocument.draw(FILE);
-                                                Toast.makeText(getApplicationContext(), "File has been written to :" + FILE,Toast.LENGTH_LONG).show();
+                                                String message = R.string.savedOK + FILE;
+                                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                             } catch (Exception e) {
-                                                Toast.makeText(getApplicationContext(),"Error, unable to write to file\n" + e.getMessage(),Toast.LENGTH_LONG).show();
+                                                String message = R.string.savedPB + e.getMessage();
+                                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                             }
                                             // -----------------------------------------------------
 
-                                         }
+                                        }
                                     })
                                     .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
@@ -165,6 +174,7 @@ public class comments_item18 extends Activity {
 
     // quand on appuie sur la touche retour de la tablette
     private boolean back_answer = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

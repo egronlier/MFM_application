@@ -54,4 +54,6 @@
     <string name="restart">"RECOMMENCER"</string>
     <string name="item18carto">Item 18 : Cartographie</string>
     <string name="item22carto">Item 22 : Cartographie</string>
+    <string name="savedOK">Le fichier a bien été enregistré dans le dossier suivant : </string>
+    <string name="savedPB">ERREUR : Le fichier n\'a pas pu être enregistré ! </string>
 </resources>
