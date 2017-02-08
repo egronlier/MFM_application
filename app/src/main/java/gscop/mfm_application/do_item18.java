@@ -7,10 +7,12 @@ import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class do_item18 extends Activity {
     String birthdate = "";
     String main = "";
     Dessin_item18 dessin;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +45,29 @@ public class do_item18 extends Activity {
             main = intent.getStringExtra("main");
         }
 
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
+
         boutonTerminer = (Button) findViewById(R.id.boutonTerminer);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 // action quand on appuie sur terminer -> affiche la cartographie
-                Intent myIntent = new Intent(do_item18.this, carto_item18.class);
-                myIntent.putExtra("name", name);
-                myIntent.putExtra("surname", surname);
-                myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("main", main);
-                Bitmap cartoBitmap = dessin.getCartographie();
-                myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
-                startActivity(myIntent);
-                // on ferme l'activité en cours
-                finish();
+                // comme l'action est longue, on informe l'utilisateur que l'action est en cours
+                //Toast.makeText(getApplicationContext(), "Sauvegarde de la cartographie....", Toast.LENGTH_SHORT).show(); -> pas assez rapide
+//                Intent myIntent = new Intent(do_item18.this, carto_item18.class);
+//                myIntent.putExtra("name", name);
+//                myIntent.putExtra("surname", surname);
+//                myIntent.putExtra("birthdate", birthdate);
+//                myIntent.putExtra("main", main);
+//                Bitmap cartoBitmap = dessin.getCartographie();
+//                myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
+//                startActivity(myIntent);
+//                // on ferme l'activité en cours
+//                finish();
+                BigCalcul calcul = new BigCalcul();
+                calcul.execute();
             }
         });
 
@@ -157,5 +168,42 @@ public class do_item18 extends Activity {
         return directory.getAbsolutePath();
     }
 
-
+    // ---------------- TEST CODE ------------------
+    private class BigCalcul extends AsyncTask<Void, Integer, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            mProgressBar.setProgress(values[0]);
+        }
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            int progress;
+            for (progress = 0; progress <= 100; progress++) {
+                for (int i = 0; i < 10000; i++) {
+                }
+                publishProgress(progress);
+                progress++;
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            Intent myIntent = new Intent(do_item18.this, carto_item18.class);
+            myIntent.putExtra("name", name);
+            myIntent.putExtra("surname", surname);
+            myIntent.putExtra("birthdate", birthdate);
+            myIntent.putExtra("main", main);
+            Bitmap cartoBitmap = dessin.getCartographie();
+            myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
+//            mProgressBar.setVisibility(View.GONE);
+            startActivity(myIntent);
+            // on ferme l'activité en cours
+            finish();
+        }
+    }
+    // ---------------------------------------------
 }

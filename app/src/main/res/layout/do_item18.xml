@@ -15,11 +15,11 @@
             android:layout_height="20sp" />
 
         <TextView
+            android:id="@+id/enCours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/enCours"
-            android:text="@string/enCours"
             android:layout_gravity="end"
+            android:text="@string/enCours"
             android:textColor="#868786"
             android:textSize="25sp" />
 
@@ -51,14 +51,22 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/boutonTerminer"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:layout_centerInParent="true"
-        android:text="@string/finish"
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#9bc3f1"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp" />
+
+    <Button
+        android:id="@+id/boutonTerminer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:background="#9bc3f1"
+        android:text="@string/finish" />
 
 </RelativeLayout>
