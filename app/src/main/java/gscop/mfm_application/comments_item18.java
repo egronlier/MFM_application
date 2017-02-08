@@ -54,7 +54,6 @@ public class comments_item18 extends Activity {
     RadioButton boutonCerclePetit;
     RadioButton boutonCercleGrand;
     EditText comments;
-    final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
     String cotation = "cotation inconnue";
     String compensation = "compensation inconnue";
     String cercle = "cercle inconnu";
@@ -135,6 +134,7 @@ public class comments_item18 extends Activity {
                                             // if this button is clicked, on fait l'enregistrement
                                             dialog.cancel();
                                             // ------------------ CREATION et ENREGISTREMENT du PDF ------------------
+                                            final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
                                             String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf";
                                             // Create a document and set it's properties
                                             Document objDocument = new Document();
@@ -150,7 +150,8 @@ public class comments_item18 extends Activity {
                                             String strText = " Patient : " + name + " " + surname +
                                                     "\n Date de naissance : " + birthdate +
                                                     "\n " + main +
-                                                    "\n\n Item réalisé le : " + timeStamp +
+                                                    "\n\n Item 18" +
+                                                    "\n réalisé le : " + timeStamp +
                                                     "\n\n INFORMATIONS COMPLEMENTAIRES : " +
                                                     "\n Cotation : " + cotation +
                                                     "\n Compensation : " + compensation +
@@ -181,6 +182,15 @@ public class comments_item18 extends Activity {
                                                 // Outputs the document to file
                                                 objDocument.draw(FILE);
                                                 Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
+                                                // on renvoie alors vers l'interface de choix d'item
+                                                Intent myIntent = new Intent(comments_item18.this, choix_item.class);
+                                                myIntent.putExtra("name", name);
+                                                myIntent.putExtra("surname", surname);
+                                                myIntent.putExtra("birthdate", birthdate);
+                                                myIntent.putExtra("main", main);
+                                                startActivity(myIntent);
+                                                // on ferme l'activité en cours
+                                                finish();
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                                 Toast.makeText(getApplicationContext(), R.string.savedPB, Toast.LENGTH_LONG).show();
