@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.cete.dynamicpdf.Align;
@@ -38,6 +39,7 @@ public class comments_item18 extends Activity {
     String main = "";
     Button boutonEnregistrer;
     final Context context = this;
+    RadioGroup radioGroupCotation;
     RadioButton boutonCotation0;
     RadioButton boutonCotation1;
     RadioButton boutonCotation2;
@@ -48,9 +50,7 @@ public class comments_item18 extends Activity {
     RadioButton boutonCompensNSP;
     RadioButton boutonCerclePetit;
     RadioButton boutonCercleGrand;
-//    FileInputStream fileInput = null;
-//    FileOutputStream fileOutput = null;
-//    private String PRENOM = "prenom.txt";
+    String cotation = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,17 @@ public class comments_item18 extends Activity {
             main = intent.getStringExtra("main");
         }
 
+        radioGroupCotation = (RadioGroup) findViewById(R.id.radioGroupCotation);
+        radioGroupCotation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
+                View radioButtonSelected = radioGroupCotation.findViewById(radioButtonSelectedID);
+                int index = radioGroupCotation.indexOfChild(radioButtonSelected);
+                RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
+                cotation = r.getText().toString();
+            }
+        });
         boutonCotation0 = (RadioButton) findViewById(R.id.radioButton0);
         boutonCotation1 = (RadioButton) findViewById(R.id.radioButton1);
         boutonCotation2 = (RadioButton) findViewById(R.id.radioButton2);
@@ -88,6 +99,13 @@ public class comments_item18 extends Activity {
                     if (boutonCompensOui.isChecked() || boutonCompensNon.isChecked() || boutonCompensNSP.isChecked()) {
                         // radioGroup : cercle
                         if (boutonCercleGrand.isChecked() || boutonCerclePetit.isChecked()) {
+
+                            // --------------------- on récupère les commentaires du kiné -------------------
+//                            Integer cotation = radioGroupCotation.getCheckedRadioButtonId();
+//                            System.out.println(cotation);
+//                            Log.d("COTATION : \n",cotation.toString());
+                            // ------------------------------------------------------------------------------
+
                             // ouvrir une boite de dialogue permettant de valider
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                             // set titre
@@ -97,7 +115,7 @@ public class comments_item18 extends Activity {
                                     .setCancelable(false)
                                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            // if this button is clicked, on fait l'enregistrement et on affiche le résultat
+                                            // if this button is clicked, on fait l'enregistrement
                                             dialog.cancel();
 
                                             // -----------CREATION et ENREGISTREMENT du PDF---------
@@ -117,7 +135,11 @@ public class comments_item18 extends Activity {
                                             String strText = "Patient : " + name + " " + surname +
                                                     "\nDate de naissance : " + birthdate +
                                                     "\n" + main +
-                                                    "\n Item réalisé le : " + timeStamp;
+                                                    "\n Item réalisé le : " + timeStamp +
+                                                    "\n" +
+                                                    "\n Commentaires :" +
+                                                    "" +
+                                                    "Cotation : " + cotation;
                                             Label objLabel = new Label(strText, 0, 0, 504, 100, Font.getHelvetica(), 18, TextAlign.CENTER);
 
                                             // on ajoute l'image au pdf
@@ -139,11 +161,10 @@ public class comments_item18 extends Activity {
                                             try {
                                                 // Outputs the document to file
                                                 objDocument.draw(FILE);
-                                                String message = R.string.savedOK + FILE;
-                                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
                                             } catch (Exception e) {
-                                                String message = R.string.savedPB + e.getMessage();
-                                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                                e.printStackTrace();
+                                                Toast.makeText(getApplicationContext(), R.string.savedPB, Toast.LENGTH_LONG).show();
                                             }
                                             // -----------------------------------------------------
 
@@ -174,7 +195,6 @@ public class comments_item18 extends Activity {
 
     // quand on appuie sur la touche retour de la tablette
     private boolean back_answer = false;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
