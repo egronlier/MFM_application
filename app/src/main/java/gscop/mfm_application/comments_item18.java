@@ -84,7 +84,7 @@ public class comments_item18 extends Activity {
         boutonCompensOui = (RadioButton) findViewById(R.id.radioButtonYes);
         boutonCompensNon = (RadioButton) findViewById(R.id.radioButtonNo);
         boutonCompensNSP = (RadioButton) findViewById(R.id.radioButtonNSP2);
-        radioGroupCercle = (RadioGroup) findViewById(R.id.radioGroupCercle) ;
+        radioGroupCercle = (RadioGroup) findViewById(R.id.radioGroupCercle);
         boutonCerclePetit = (RadioButton) findViewById(R.id.radioButtonSmall);
         boutonCercleGrand = (RadioButton) findViewById(R.id.radioButtonBig);
         comments = (EditText) findViewById(R.id.editTextComments);
@@ -124,9 +124,8 @@ public class comments_item18 extends Activity {
                             commentaire = comments.getText().toString();
                             // ------------------------------------------------------------------------------
 
-                            // ouvrir une boite de dialogue permettant de valider
+                            // ouvrir une boite de dialogue permettant de valider la création du pdf
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                            // set titre
                             alertDialogBuilder
                                     .setTitle("Confirmation de validation")
                                     .setMessage("Etes-vous certain de vouloir créer un fichier pour ce patient ?")
@@ -135,8 +134,7 @@ public class comments_item18 extends Activity {
                                         public void onClick(DialogInterface dialog, int id) {
                                             // if this button is clicked, on fait l'enregistrement
                                             dialog.cancel();
-
-                                            // -----------CREATION et ENREGISTREMENT du PDF---------
+                                            // ------------------ CREATION et ENREGISTREMENT du PDF ------------------
                                             String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf";
                                             // Create a document and set it's properties
                                             Document objDocument = new Document();
@@ -157,10 +155,10 @@ public class comments_item18 extends Activity {
                                                     "\n Cotation : " + cotation +
                                                     "\n Compensation : " + compensation +
                                                     "\n Cercle : " + cercle +
-                                                    "\n Commentaires : " + commentaire ;
+                                                    "\n Commentaires : " + commentaire;
                                             Font font = Font.getHelvetica();
                                             int fontSize = 18;
-                                            float textWidth = font.getTextWidth(strText,fontSize);
+                                            float textWidth = font.getTextWidth(strText, fontSize);
                                             Label objLabel = new Label(strText, 0, 0, 504, textWidth, font, fontSize, TextAlign.LEFT);
 
                                             // on ajoute l'image au pdf
@@ -187,8 +185,7 @@ public class comments_item18 extends Activity {
                                                 e.printStackTrace();
                                                 Toast.makeText(getApplicationContext(), R.string.savedPB, Toast.LENGTH_LONG).show();
                                             }
-                                            // -----------------------------------------------------
-
+                                            // --------------------------------------------------------------------
                                         }
                                     })
                                     .setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -216,6 +213,7 @@ public class comments_item18 extends Activity {
 
     // quand on appuie sur la touche retour de la tablette
     private boolean back_answer = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
