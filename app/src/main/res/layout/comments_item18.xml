@@ -129,6 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/radioGroupCompensation"
             android:orientation="horizontal">
 
             <RadioButton
@@ -186,6 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/radioGroupCercle"
             android:orientation="horizontal">
 
             <RadioButton

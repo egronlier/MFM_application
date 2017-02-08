@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -45,12 +46,19 @@ public class comments_item18 extends Activity {
     RadioButton boutonCotation2;
     RadioButton boutonCotation3;
     RadioButton boutonCotationNSP;
+    RadioGroup radioGroupCompensation;
     RadioButton boutonCompensOui;
     RadioButton boutonCompensNon;
     RadioButton boutonCompensNSP;
+    RadioGroup radioGroupCercle;
     RadioButton boutonCerclePetit;
     RadioButton boutonCercleGrand;
-    String cotation = "";
+    EditText comments;
+    final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
+    String cotation = "cotation inconnue";
+    String compensation = "compensation inconnue";
+    String cercle = "cercle inconnu";
+    String commentaire = "aucun commentaire";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,26 +75,19 @@ public class comments_item18 extends Activity {
         }
 
         radioGroupCotation = (RadioGroup) findViewById(R.id.radioGroupCotation);
-        radioGroupCotation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
-                View radioButtonSelected = radioGroupCotation.findViewById(radioButtonSelectedID);
-                int index = radioGroupCotation.indexOfChild(radioButtonSelected);
-                RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
-                cotation = r.getText().toString();
-            }
-        });
         boutonCotation0 = (RadioButton) findViewById(R.id.radioButton0);
         boutonCotation1 = (RadioButton) findViewById(R.id.radioButton1);
         boutonCotation2 = (RadioButton) findViewById(R.id.radioButton2);
         boutonCotation3 = (RadioButton) findViewById(R.id.radioButton3);
         boutonCotationNSP = (RadioButton) findViewById(R.id.radioButtonNSP);
+        radioGroupCompensation = (RadioGroup) findViewById(R.id.radioGroupCompensation);
         boutonCompensOui = (RadioButton) findViewById(R.id.radioButtonYes);
         boutonCompensNon = (RadioButton) findViewById(R.id.radioButtonNo);
         boutonCompensNSP = (RadioButton) findViewById(R.id.radioButtonNSP2);
+        radioGroupCercle = (RadioGroup) findViewById(R.id.radioGroupCercle) ;
         boutonCerclePetit = (RadioButton) findViewById(R.id.radioButtonSmall);
         boutonCercleGrand = (RadioButton) findViewById(R.id.radioButtonBig);
+        comments = (EditText) findViewById(R.id.editTextComments);
 
         boutonEnregistrer = (Button) findViewById(R.id.buttonSave);
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
@@ -101,9 +102,26 @@ public class comments_item18 extends Activity {
                         if (boutonCercleGrand.isChecked() || boutonCerclePetit.isChecked()) {
 
                             // --------------------- on récupère les commentaires du kiné -------------------
-//                            Integer cotation = radioGroupCotation.getCheckedRadioButtonId();
-//                            System.out.println(cotation);
-//                            Log.d("COTATION : \n",cotation.toString());
+                            // ------- COTATION
+                            int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
+                            View radioButtonSelected = radioGroupCotation.findViewById(radioButtonSelectedID);
+                            int index = radioGroupCotation.indexOfChild(radioButtonSelected);
+                            RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
+                            cotation = r.getText().toString();
+                            // ------- COMPENSATION
+                            radioButtonSelectedID = radioGroupCompensation.getCheckedRadioButtonId();
+                            radioButtonSelected = radioGroupCompensation.findViewById(radioButtonSelectedID);
+                            index = radioGroupCompensation.indexOfChild(radioButtonSelected);
+                            r = (RadioButton) radioGroupCompensation.getChildAt(index);
+                            compensation = r.getText().toString();
+                            // ------- CERCLE
+                            radioButtonSelectedID = radioGroupCercle.getCheckedRadioButtonId();
+                            radioButtonSelected = radioGroupCercle.findViewById(radioButtonSelectedID);
+                            index = radioGroupCercle.indexOfChild(radioButtonSelected);
+                            r = (RadioButton) radioGroupCercle.getChildAt(index);
+                            cercle = r.getText().toString();
+                            // ------- COMMENTAIRES
+                            commentaire = comments.getText().toString();
                             // ------------------------------------------------------------------------------
 
                             // ouvrir une boite de dialogue permettant de valider
@@ -119,7 +137,6 @@ public class comments_item18 extends Activity {
                                             dialog.cancel();
 
                                             // -----------CREATION et ENREGISTREMENT du PDF---------
-                                            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
                                             String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf";
                                             // Create a document and set it's properties
                                             Document objDocument = new Document();
@@ -132,15 +149,19 @@ public class comments_item18 extends Activity {
                                             Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
 
                                             // Create a Label to add to the page
-                                            String strText = "Patient : " + name + " " + surname +
-                                                    "\nDate de naissance : " + birthdate +
-                                                    "\n" + main +
-                                                    "\n Item réalisé le : " + timeStamp +
-                                                    "\n" +
-                                                    "\n Commentaires :" +
-                                                    "" +
-                                                    "Cotation : " + cotation;
-                                            Label objLabel = new Label(strText, 0, 0, 504, 100, Font.getHelvetica(), 18, TextAlign.CENTER);
+                                            String strText = " Patient : " + name + " " + surname +
+                                                    "\n Date de naissance : " + birthdate +
+                                                    "\n " + main +
+                                                    "\n\n Item réalisé le : " + timeStamp +
+                                                    "\n\n INFORMATIONS COMPLEMENTAIRES : " +
+                                                    "\n Cotation : " + cotation +
+                                                    "\n Compensation : " + compensation +
+                                                    "\n Cercle : " + cercle +
+                                                    "\n Commentaires : " + commentaire ;
+                                            Font font = Font.getHelvetica();
+                                            int fontSize = 18;
+                                            float textWidth = font.getTextWidth(strText,fontSize);
+                                            Label objLabel = new Label(strText, 0, 0, 504, textWidth, font, fontSize, TextAlign.LEFT);
 
                                             // on ajoute l'image au pdf
                                             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.cd_test_tour);
