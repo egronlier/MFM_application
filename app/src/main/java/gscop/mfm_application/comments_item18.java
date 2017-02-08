@@ -5,12 +5,29 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.cete.dynamicpdf.Document;
+import com.cete.dynamicpdf.Font;
+import com.cete.dynamicpdf.Page;
+import com.cete.dynamicpdf.PageOrientation;
+import com.cete.dynamicpdf.PageSize;
+import com.cete.dynamicpdf.TextAlign;
+import com.cete.dynamicpdf.pageelements.Image;
+import com.cete.dynamicpdf.pageelements.Label;
+
+import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class comments_item18 extends Activity {
 
@@ -81,66 +98,47 @@ public class comments_item18 extends Activity {
                                         public void onClick(DialogInterface dialog, int id) {
                                             // if this button is clicked, on fait l'enregistrement et on affiche le résultat
                                             dialog.cancel();
+                                            // -----------CREATION et ENREGISTREMENT du PDF---------
+                                            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
+                                            String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ "/"+ name.toLowerCase()+"_"+surname.toLowerCase()+"_"+timeStamp + ".pdf";
+                                            // Create a document and set it's properties
+                                            Document objDocument = new Document();
+                                            objDocument.setCreator("DynamicPDFHelloWorld.java");
+                                            objDocument.setAuthor("Your Name");
+                                            objDocument.setTitle("Hello World");
 
-                                            // ------------------------- A FAIRE -----------------------------
+                                            // Create a page to add to the document
+                                            Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT,54.0f);
+                                            Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT,54.0f);
 
-//                                            // --------------- VERSION TEST SANS PDF -----------------
-//                                            // on crée un nouveau fichier. S'il existe déjà, il ne sera pas créé
-//                                            try {
-//                                                //fileInput = new FileInputStream("entree.txt"); // on ouvre le fichier à lire
-//                                                String test = "fichier test lecture";
-//                                                //fileOutput = new FileOutputStream("sortie.txt");
-//                                                fileOutput = openFileOutput(PRENOM, MODE_PRIVATE);
-//                                                // MODE_PRIVATE : crée un fichier utilisé que par cette appli
-//                                                // MODE_WORLD_READABLE : fichier lu par d'autres appli
-//                                                // MODE_WORLD_WRITABLE : fichier modifiable par d'autres appli
-//                                                // MODE_APPEND : on peut écrire à la fin du fichier préexistant
-////                                               int octet;
-////                                                // on utilise un StringBuffer pour construire la chaine au fur et à mesure
-////                                            StringBuffer lu = new StringBuffer();
-////                                            try{
-////                                                // on lit les caractères un par un
-////                                               // la méthode renvoie -1 dès qu'il n'y a plus rien à lire
-////                                                while ((octet = fileInput.read()) != -1) {
-////                                                    fileOutput.write(octet);
-////                                                }
-//                                                fileOutput.write(test.getBytes());
-//                                                System.out.println("test affichage output : \n \n" + fileOutput.toString());
-//                                                Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
-////                                                if (fileInput != null)
-////                                                    fileInput.close();
-//                                                if (fileOutput != null)
-//                                                    fileOutput.close();
-//                                            } catch (FileNotFoundException e) {
-//                                                e.printStackTrace();
-//                                            } catch (IOException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                            // -------------------------------------------------------
+                                            // Create a Label to add to the page
+                                            String strText = "Patient : " + name + " " + surname + "\nDate de naissance : "+ birthdate + "\n" + main + "\n Item réalisé le : " + timeStamp ;
+                                            Label objLabel = new Label(strText, 0, 0, 504, 100, Font.getHelvetica(), 18, TextAlign.CENTER);
 
-//                                            // -------------------- VERSION TEST AVEC PDF ------------
-//                                                // on crée un nouveau doc
-//                                                PdfDocument document = new PdfDocument();
-//                                                // on crée une description de page
-//                                                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(new Rect(0,0,100,100),1).create();
-//                                                // on commence la page
-//                                                PdfDocument.Page page = document.startPage(pageInfo);
-//                                                // on met quelquechose sur la page
-//                                                View content = getContentView();
-//                                                content.draw(page.getCanvas());
-//                                                // on finit la page
-//                                                document.finishPage(page);
-//                                                // on ajoute des pages
-//                                                // ...
-//                                                // on écrit le contenu du document
-//                                                document.writeTo(getOutputStream());
-//                                                // on ferme le document
-//                                                document.close();
-//
-//                                            // -------------------------------------------------------A CONTINUER :)
+                                            Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.cd_test_tour);
+                                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                            bmp.compress(Bitmap.CompressFormat.PNG,100,stream);
+                                            byte[] bitMapData = stream.toByteArray();
+                                            Image monImage = new Image(bitMapData,0,0);
 
-                                            // ---------------------------------------------------------------
-                                        }
+                                            // Add label to page
+                                            page1.getElements().add(objLabel);
+                                            page2.getElements().add(monImage);
+
+                                            // Add page to document
+                                            objDocument.getPages().add(page1);
+                                            objDocument.getPages().add(page2);
+
+                                            try {
+                                                // Outputs the document to file
+                                                objDocument.draw(FILE);
+                                                Toast.makeText(getApplicationContext(), "File has been written to :" + FILE,Toast.LENGTH_LONG).show();
+                                            } catch (Exception e) {
+                                                Toast.makeText(getApplicationContext(),"Error, unable to write to file\n" + e.getMessage(),Toast.LENGTH_LONG).show();
+                                            }
+                                            // -----------------------------------------------------
+
+                                         }
                                     })
                                     .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
