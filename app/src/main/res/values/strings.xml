@@ -42,8 +42,8 @@
     <string name="yes">" Oui "</string>
     <string name="no">" Non "</string>
     <string name="circle">"Cercle : "</string>
-    <string name="small">" petit "</string>
-    <string name="big">" grand "</string>
+    <string name="small">" Petit "</string>
+    <string name="big">" Grand "</string>
     <string name="comments">"Commentaires : "</string>
     <string name="save">"Enregistrer"</string>
     <string name="info">Infos : </string>
@@ -56,4 +56,5 @@
     <string name="item22carto">Item 22 : Cartographie</string>
     <string name="savedOK">Le fichier a bien été enregistré dans le dossier "Download" </string>
     <string name="savedPB">ERREUR : Le fichier n\'a pas pu être enregistré ! </string>
+    <string name="select">Veuillez sélectionner : </string>
 </resources>

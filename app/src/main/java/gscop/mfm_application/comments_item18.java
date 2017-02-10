@@ -30,9 +30,12 @@ import com.cete.dynamicpdf.pageelements.Label;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class comments_item18 extends Activity {
+import tutoandroid.libmultispinner.MultiSelectionSpinner;
+
+public class comments_item18 extends Activity implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
 
     String name = "";
     String surname = "";
@@ -46,10 +49,10 @@ public class comments_item18 extends Activity {
     RadioButton boutonCotation2;
     RadioButton boutonCotation3;
     RadioButton boutonCotationNSP;
-    RadioGroup radioGroupCompensation;
-    RadioButton boutonCompensOui;
-    RadioButton boutonCompensNon;
-    RadioButton boutonCompensNSP;
+//    RadioGroup radioGroupCompensation;
+//    RadioButton boutonCompensOui;
+//    RadioButton boutonCompensNon;
+//    RadioButton boutonCompensNSP;
     RadioGroup radioGroupCercle;
     RadioButton boutonCerclePetit;
     RadioButton boutonCercleGrand;
@@ -71,6 +74,12 @@ public class comments_item18 extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
+
+        // on remplit la liste déroulante
+        String[] array = {"difficulté", "sans appui de la main", "avec appui de la main", "arrêt", "change de doigt", "avec compensation"};
+        MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
+        multiSelectionSpinner.setItems(array);
+        multiSelectionSpinner.setListener(this);
         }
 
         radioGroupCotation = (RadioGroup) findViewById(R.id.radioGroupCotation);
@@ -79,10 +88,10 @@ public class comments_item18 extends Activity {
         boutonCotation2 = (RadioButton) findViewById(R.id.radioButton2);
         boutonCotation3 = (RadioButton) findViewById(R.id.radioButton3);
         boutonCotationNSP = (RadioButton) findViewById(R.id.radioButtonNSP);
-        radioGroupCompensation = (RadioGroup) findViewById(R.id.radioGroupCompensation);
-        boutonCompensOui = (RadioButton) findViewById(R.id.radioButtonYes);
-        boutonCompensNon = (RadioButton) findViewById(R.id.radioButtonNo);
-        boutonCompensNSP = (RadioButton) findViewById(R.id.radioButtonNSP2);
+//        radioGroupCompensation = (RadioGroup) findViewById(R.id.radioGroupCompensation);
+//        boutonCompensOui = (RadioButton) findViewById(R.id.radioButtonYes);
+//        boutonCompensNon = (RadioButton) findViewById(R.id.radioButtonNo);
+//        boutonCompensNSP = (RadioButton) findViewById(R.id.radioButtonNSP2);
         radioGroupCercle = (RadioGroup) findViewById(R.id.radioGroupCercle);
         boutonCerclePetit = (RadioButton) findViewById(R.id.radioButtonSmall);
         boutonCercleGrand = (RadioButton) findViewById(R.id.radioButtonBig);
@@ -96,7 +105,7 @@ public class comments_item18 extends Activity {
                 // radioGroup : cotation
                 if (boutonCotation0.isChecked() || boutonCotation1.isChecked() || boutonCotation2.isChecked() || boutonCotation3.isChecked() || boutonCotationNSP.isChecked()) {
                     // radioGroup : compensation
-                    if (boutonCompensOui.isChecked() || boutonCompensNon.isChecked() || boutonCompensNSP.isChecked()) {
+//                    if (boutonCompensOui.isChecked() || boutonCompensNon.isChecked() || boutonCompensNSP.isChecked()) {
                         // radioGroup : cercle
                         if (boutonCercleGrand.isChecked() || boutonCerclePetit.isChecked()) {
 
@@ -108,11 +117,11 @@ public class comments_item18 extends Activity {
                             RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
                             cotation = r.getText().toString();
                             // ------- COMPENSATION
-                            radioButtonSelectedID = radioGroupCompensation.getCheckedRadioButtonId();
-                            radioButtonSelected = radioGroupCompensation.findViewById(radioButtonSelectedID);
-                            index = radioGroupCompensation.indexOfChild(radioButtonSelected);
-                            r = (RadioButton) radioGroupCompensation.getChildAt(index);
-                            compensation = r.getText().toString();
+//                            radioButtonSelectedID = radioGroupCompensation.getCheckedRadioButtonId();
+//                            radioButtonSelected = radioGroupCompensation.findViewById(radioButtonSelectedID);
+//                            index = radioGroupCompensation.indexOfChild(radioButtonSelected);
+//                            r = (RadioButton) radioGroupCompensation.getChildAt(index);
+//                            compensation = r.getText().toString();
                             // ------- CERCLE
                             radioButtonSelectedID = radioGroupCercle.getCheckedRadioButtonId();
                             radioButtonSelected = radioGroupCercle.findViewById(radioButtonSelectedID);
@@ -154,7 +163,7 @@ public class comments_item18 extends Activity {
                                                     "\n réalisé le : " + timeStamp +
                                                     "\n\n INFORMATIONS COMPLEMENTAIRES : " +
                                                     "\n Cotation : " + cotation +
-                                                    "\n Compensation : " + compensation +
+                                                   // "\n Compensation : " + compensation +
                                                     "\n Cercle : " + cercle +
                                                     "\n Commentaires : " + commentaire;
                                             Font font = Font.getHelvetica();
@@ -211,9 +220,9 @@ public class comments_item18 extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), R.string.errorCircle, Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Toast.makeText(getApplicationContext(), R.string.errorCompensation, Toast.LENGTH_LONG).show();
-                    }
+                  //  } else {
+                      //  Toast.makeText(getApplicationContext(), R.string.errorCompensation, Toast.LENGTH_LONG).show();
+                   // }
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.errorCotation, Toast.LENGTH_LONG).show();
                 }
@@ -253,5 +262,15 @@ public class comments_item18 extends Activity {
 //            alert.show();
 //        }
         return back_answer;
+    }
+
+    @Override
+    public void selectedIndices(List<Integer> indices) {
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> strings) {
+//   Toast.makeText(this, strings.toString(), Toast.LENGTH_LONG).show();
     }
 }
