@@ -34,8 +34,8 @@ public class carto_item18 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.carto_item18);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.carto_item18);
 
         carto = (ImageView) findViewById(R.id.cartographieItem18);
 
