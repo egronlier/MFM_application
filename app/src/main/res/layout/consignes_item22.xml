@@ -44,11 +44,9 @@
 
         <Button
             android:id="@+id/boutonDemarrer"
-            android:text="@string/begin"
-            android:textSize="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#9bc3f1"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:background="@drawable/play"
             android:layout_marginLeft="25dip"
             android:layout_marginRight="25dip"
             android:layout_alignParentBottom="true"
