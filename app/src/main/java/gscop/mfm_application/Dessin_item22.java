@@ -45,7 +45,7 @@ public class Dessin_item22 extends View {
         mFingerPaint.setAntiAlias(true);
         mFingerPaint.setColor(Color.RED);
         mFingerPaint.setStyle(Paint.Style.STROKE);
-        mFingerPaint.setStrokeWidth(20);
+        mFingerPaint.setStrokeWidth(10);
         mFingerPaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
