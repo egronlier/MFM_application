@@ -17,6 +17,8 @@
     <string name="retour">Retour</string>
     <string name="choiceExercise">Veuillez sélectionner l\'item choisi :</string>
     <string name="item18">Item 18</string>
+    <string name="instructionsItem18">CONSIGNES : Item 18</string>
+    <string name="instructionsItem22">CONSIGNES : Item 22</string>
     <string name="item22">Item 22</string>
     <string name="changePatient">Changer de patient</string>
     <string name="consignesItem18">Faire le tour du CD avec un doigt</string>
