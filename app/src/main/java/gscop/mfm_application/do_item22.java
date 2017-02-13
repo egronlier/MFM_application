@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +25,7 @@ public class do_item22 extends Activity {
     String birthdate = "";
     String main = "";
     Dessin_item22 dessin;
+    TextView state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,14 @@ public class do_item22 extends Activity {
             main = intent.getStringExtra("main");
         }
 
+        state = (TextView) findViewById(R.id.enCours);
+
         boutonTerminer = (Button) findViewById(R.id.boutonTerminer);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // action quand on appuie sur terminer -> affiche la cartographie ou la fenêtre de commentaires du kiné ?
+                state.setText(R.string.saving);
                 Intent myIntent = new Intent(do_item22.this, carto_item22.class);
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
@@ -55,7 +60,6 @@ public class do_item22 extends Activity {
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
-
             }
         });
 
@@ -100,7 +104,6 @@ public class do_item22 extends Activity {
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
         File mypath=new File(directory,"cartographie.png");
-
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);

@@ -6,47 +6,27 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/enCours"
             android:text="@string/enCours"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_gravity="end"
             android:textColor="#868786"
             android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/champNumeroItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/item22"
-            android:textAlignment="center"
-            android:textColor="#0d8dc9"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
 
         <!--Espace pour le dessin-->
         <gscop.mfm_application.Dessin_item22
             android:id="@+id/drawingItem22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
             android:background="#FFFFFFFF" />
     </LinearLayout>
 

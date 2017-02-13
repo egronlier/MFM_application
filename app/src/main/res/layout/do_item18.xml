@@ -6,40 +6,21 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/enCours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/enCours"
             android:textColor="#868786"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/champNumeroItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/item18"
-            android:textAlignment="center"
-            android:textColor="#0d8dc9"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
+            android:textSize="30sp" />
 
         <!--Espace pour le dessin-->
         <gscop.mfm_application.Dessin_item18
@@ -51,13 +32,13 @@
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp" />
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progressBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="80dp" />-->
 
     <Button
         android:id="@+id/boutonTerminer"
