@@ -142,7 +142,6 @@ public class do_item18 extends Activity {
         return back_answer;
     }
 
-
     // Cette méthode enregistre un bitmap dans la mémoire interne de l'appareil
     private String saveToInternalStorage(Bitmap bitmapImage){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -168,7 +167,7 @@ public class do_item18 extends Activity {
         return directory.getAbsolutePath();
     }
 
-    // ---------------- TEST CODE ------------------
+    // ------------ barre de progression pendant chargement -------------
     private class BigCalcul extends AsyncTask<Void, Integer, Void> {
         @Override
         protected void onPreExecute() {
@@ -205,5 +204,5 @@ public class do_item18 extends Activity {
             finish();
         }
     }
-    // ---------------------------------------------
+    // ------------------------------------------------------------------
 }

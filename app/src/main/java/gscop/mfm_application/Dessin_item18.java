@@ -43,7 +43,7 @@ public class Dessin_item18 extends View {
         mFingerPaint = new Paint();
         // initialise les caractéristiques du trait (forme, couleur...)
         mFingerPaint.setAntiAlias(true);
-        mFingerPaint.setColor(Color.BLACK);
+        mFingerPaint.setColor(Color.RED);
         mFingerPaint.setStyle(Paint.Style.STROKE);
         mFingerPaint.setStrokeWidth(20);
         mFingerPaint.setStrokeCap(Paint.Cap.ROUND);

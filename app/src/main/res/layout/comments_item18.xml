@@ -26,6 +26,10 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
     <TextView
         android:text="@string/textMandatory"
         android:layout_width="match_parent"
@@ -237,7 +241,8 @@
         android:inputType="textMultiLine"
         android:background="@color/common_google_signin_btn_text_light_disabled"
         android:lines="5"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        tools:ignore="LabelFor" />
 
     <Space
         android:layout_width="match_parent"

@@ -62,7 +62,6 @@ public class do_item22 extends Activity {
     }
 
     private boolean back_answer = false;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

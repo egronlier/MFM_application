@@ -42,7 +42,6 @@ public class carto_item18 extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
-
             path = intent.getStringExtra("path");
             try {
                 File f = new File(path, "cartographie.png");
@@ -114,6 +113,7 @@ public class carto_item18 extends Activity {
                                 myIntent.putExtra("main", main);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
+                                finish();
                             }
                         });
                 AlertDialog alert = builder.create();
@@ -125,7 +125,6 @@ public class carto_item18 extends Activity {
 
     // quand on appuie sur la touche retour de la tablette -> comme pour le bouton recommencer
     private boolean back_answer = false;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

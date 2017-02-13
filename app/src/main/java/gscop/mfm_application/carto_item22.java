@@ -17,10 +17,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-/**
- * Created by Éloïse on 07/02/2017.
- */
-
 public class carto_item22 extends Activity {
 
     String name = "";
@@ -46,7 +42,6 @@ public class carto_item22 extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
-
             path = intent.getStringExtra("path");
             try {
                 File f=new File(path, "cartographie.png");
@@ -54,8 +49,7 @@ public class carto_item22 extends Activity {
                 carto.setImageBitmap(b);
                 f.delete();
             }
-            catch (FileNotFoundException e)
-            {
+            catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
@@ -72,6 +66,12 @@ public class carto_item22 extends Activity {
                 // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item18
                 builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? (le tracé sera perdu)")
                         .setCancelable(true)
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close the dialog box
+                                dialog.cancel();
+                            }
+                        })
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // on revient à l'écran de réalisation de l'item 18
@@ -98,6 +98,12 @@ public class carto_item22 extends Activity {
                 // quand on clique sur le bouton valider, ça ouvre l'interface des commentaires du kiné
                 builder.setMessage("Êtes-vous certain de vouloir valider cette cartographie ?")
                         .setCancelable(true)
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close the dialog box
+                                dialog.cancel();
+                            }
+                        })
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // on revient à l'écran de réalisation de l'item 18
@@ -129,7 +135,7 @@ public class carto_item22 extends Activity {
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             back_answer = true;
-                            // on revient à l'écran de réalisation de l'item 18
+                            // on revient à l'écran de réalisation de l'item 22
                             Intent myIntent = new Intent(carto_item22.this, do_item22.class);
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
