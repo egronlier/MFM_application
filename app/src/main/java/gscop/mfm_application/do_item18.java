@@ -12,9 +12,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,8 +36,6 @@ public class do_item18 extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.do_item18);
 
-        dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
-
         // on récupère les infos de l'intent
         Intent intent = getIntent();
         if (intent != null) {
@@ -52,6 +48,7 @@ public class do_item18 extends Activity {
 //        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 //        mProgressBar.setVisibility(View.GONE);
 
+        dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
         state = (TextView) findViewById(R.id.enCours);
 
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
@@ -79,42 +76,42 @@ public class do_item18 extends Activity {
             }
         });
 
-        // -----------on affiche le bouton à gauche pour les droitiers et à droite pour les gauchers
-        // on vérifie si la tablette est en paysage (ORIENTATION_LANDSCAPE = 2),
-        // sinon (en portrait) on ne change rien, le bouton terminer reste centré
-        if (getResources().getConfiguration().orientation == 2) {
-            // on vérifie ensuite si la personne est droitière ou gauchère
-            // si elle est droitière, on met le bouton serré à gauche
-            if (main.equals("Droitier")) {
-                RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                rel_btn.width = 120;
-                rel_btn.height = 60;
-                rel_btn.setMarginStart(50);
-                rel_btn.setMarginEnd(50);
-                rel_btn.topMargin = 60;
-                boutonTerminer.setLayoutParams(rel_btn);
-                Toast.makeText(getApplicationContext(), "Position droitier activée", Toast.LENGTH_LONG).show();
-            }
-            // si elle est gauchère, on met le bouton serré à droite
-            else {
-                if (main.equals("Gaucher")) {
-                    RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    rel_btn.width = 120;
-                    rel_btn.height = 60;
-                    rel_btn.setMarginStart(50);
-                    rel_btn.topMargin = 60;
-                    boutonTerminer.setLayoutParams(rel_btn);
-                    Toast.makeText(getApplicationContext(), "Position gaucher activée", Toast.LENGTH_LONG).show();
-                }
-                // sinon on affiche un message d'erreur
-                else {
-                    Toast.makeText(getApplicationContext(), R.string.errorDG, Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-        // --------------------------
+//        // -----------on affiche le bouton à gauche pour les droitiers et à droite pour les gauchers
+//        // on vérifie si la tablette est en paysage (ORIENTATION_LANDSCAPE = 2),
+//        // sinon (en portrait) on ne change rien, le bouton terminer reste centré
+//        if (getResources().getConfiguration().orientation == 2) {
+//            // on vérifie ensuite si la personne est droitière ou gauchère
+//            // si elle est droitière, on met le bouton serré à gauche
+//            if (main.equals("Droitier")) {
+//                RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
+//                        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                rel_btn.width = 120;
+//                rel_btn.height = 60;
+//                rel_btn.setMarginStart(50);
+//                rel_btn.setMarginEnd(50);
+//                rel_btn.topMargin = 60;
+//                boutonTerminer.setLayoutParams(rel_btn);
+//                Toast.makeText(getApplicationContext(), "Position droitier activée", Toast.LENGTH_LONG).show();
+//            }
+//            // si elle est gauchère, on met le bouton serré à droite
+//            else {
+//                if (main.equals("Gaucher")) {
+//                    RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
+//                            RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                    rel_btn.width = 120;
+//                    rel_btn.height = 60;
+//                    rel_btn.setMarginStart(50);
+//                    rel_btn.topMargin = 60;
+//                    boutonTerminer.setLayoutParams(rel_btn);
+//                    Toast.makeText(getApplicationContext(), "Position gaucher activée", Toast.LENGTH_LONG).show();
+//                }
+//                // sinon on affiche un message d'erreur
+//                else {
+//                    Toast.makeText(getApplicationContext(), R.string.errorDG, Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        }
+//        // --------------------------
     }
 
     private boolean back_answer = false;
