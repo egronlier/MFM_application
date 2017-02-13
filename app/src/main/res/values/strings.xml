@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">MFM Application</string>
     <string name="veuillez">Veuillez entrer les données du patient :</string>
+    <string name="textMandatory">Tous les champs munis d\'une astérisque rouge doivent être remplis.</string>
     <string name="quit">QUITTER</string>
     <string name="valid">VALIDER</string>
+    <string name="mandatory"> *  </string>
     <string name="name">Nom :</string>
     <string name="surname">Prénom :</string>
     <string name="birthdate">Date de naissance :</string>

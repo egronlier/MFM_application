@@ -55,7 +55,7 @@ public class carto_item18 extends Activity {
         }
 
         infosPatient = (TextView) findViewById(R.id.infosPatient);
-        infosPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né(e) le : " + birthdate + "\n" + main);
+        infosPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \nné(e) le : " + birthdate + "\n" + main);
 
         // pour le bouton Recommencer
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);

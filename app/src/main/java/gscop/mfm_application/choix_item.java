@@ -33,7 +33,7 @@ public class choix_item extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
-            textNomPrenomPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \n né(e) le : " + birthdate +"\n"+ main );
+            textNomPrenomPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \nné(e) le : " + birthdate +"\n"+ main );
         }
 
         buttonItem18 = (Button) findViewById(R.id.buttonitem18);

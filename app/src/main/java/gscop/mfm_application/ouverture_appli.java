@@ -86,7 +86,7 @@ public class ouverture_appli extends Activity {
             if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
                 // on vérifie que le nom et le prénom ont été sélectionnés
                 if (length_name > 0 && length_surname > 0) {
-                    // On vérifie que le nom et le prénom entrés contiennent bien que des lettres
+                    // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
                     if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)
                             && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
                         // on vérifie qu'une date a bien été sélectionnée

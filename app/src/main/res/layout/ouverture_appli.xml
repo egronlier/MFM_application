@@ -22,14 +22,32 @@
         android:layout_gravity="center"
         android:id="@+id/texteAccueil" />
 
+    <TextView
+        android:text="@string/textMandatory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:id="@+id/textMandatory" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30sp" />
+        android:layout_height="40sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/mandatory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mandatoryName"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#f2053c" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,6 +77,15 @@
         android:orientation="horizontal">
 
         <TextView
+            android:text="@string/mandatory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mandatorySurname"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#f2053c" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/surname"
@@ -85,6 +112,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/mandatory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mandatoryDate"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#f2053c" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -123,6 +160,17 @@
             android:textStyle="bold"
             android:textColor="#0d8dc9"
             android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/mandatory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mandatoryLeft"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#f2053c"
+            android:layout_weight="1" />
+
         <RadioButton
             android:text="@string/droitier"
             android:layout_width="wrap_content"
@@ -131,6 +179,16 @@
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#0d8dc9"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="@string/mandatory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/madatoryRight"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#f2053c"
             android:layout_weight="1" />
     </RadioGroup>
 
