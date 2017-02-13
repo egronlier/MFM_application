@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -27,13 +28,16 @@ public class do_item18 extends Activity {
     String birthdate = "";
     String main = "";
     Dessin_item18 dessin;
+    Bitmap cartoBitmap;
 //    private ProgressBar mProgressBar;
     TextView state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.do_item18);
+
         dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
 
         // on récupère les infos de l'intent
@@ -50,7 +54,7 @@ public class do_item18 extends Activity {
 
         state = (TextView) findViewById(R.id.enCours);
 
-        boutonTerminer = (Button) findViewById(R.id.boutonTerminer);
+        boutonTerminer = (Button) findViewById(R.id.buttonStop);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +68,7 @@ public class do_item18 extends Activity {
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
                 myIntent.putExtra("main", main);
-                Bitmap cartoBitmap = dessin.getCartographie();
+                cartoBitmap = dessin.getCartographie();
                 myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
                 startActivity(myIntent);
                 // on ferme l'activité en cours

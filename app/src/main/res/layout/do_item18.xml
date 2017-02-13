@@ -40,13 +40,20 @@
         <!--android:layout_centerHorizontal="true"-->
         <!--android:layout_marginBottom="80dp" />-->
 
+    <!--<Button-->
+        <!--android:id="@+id/boutonTerminer"-->
+        <!--android:layout_width="80dip"-->
+        <!--android:layout_height="80dip"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:background="@drawable/stop" />-->
     <Button
-        android:id="@+id/boutonTerminer"
-        android:layout_width="80dip"
-        android:layout_height="80dip"
-        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stop"
+        android:id="@+id/buttonStop"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/stop" />
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>
