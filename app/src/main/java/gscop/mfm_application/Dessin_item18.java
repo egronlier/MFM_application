@@ -13,21 +13,22 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //Cette classe permet de dessiner
 public class Dessin_item18 extends View {
 
-    public static final int MAX_FINGERS = 50;
-    private Path[] mFingerPaths = new Path[MAX_FINGERS];
-    private Paint mFingerPaint;
-    private ArrayList<Path> mCompletedPaths;
-    private RectF mPathBounds = new RectF();
     private Bitmap cartographie;
+    private final Paint paint = new Paint();
 
-
+    private HashMap<Integer, Float> mX = new HashMap<Integer, Float>();
+    private HashMap<Integer, Float> mY = new HashMap<Integer, Float>();
+    private HashMap<Integer, Path> paths = new HashMap<Integer, Path>();
+    private ArrayList<Path> completedPaths = new ArrayList<>();
     public Dessin_item18(Context context) {
         super(context);
     }
+
 
     public Dessin_item18(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,68 +41,89 @@ public class Dessin_item18 extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mCompletedPaths = new ArrayList<>();
-        mFingerPaint = new Paint();
         // initialise les caractéristiques du trait (forme, couleur...)
-        mFingerPaint.setStrokeCap(Paint.Cap.ROUND);
-        mFingerPaint.setStrokeJoin(Paint.Join.ROUND);
-        mFingerPaint.setAntiAlias(true);
-        mFingerPaint.setColor(Color.BLUE);
-        mFingerPaint.setStyle(Paint.Style.STROKE);
-        mFingerPaint.setStrokeWidth(10);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLUE);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
         }
 
     @Override
     protected void onDraw(Canvas canvas) {
         // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item18_2);
-        image = resize(image, 1250,1250);
+        //Bitmap cd = Bitmap.createScaledBitmap(image, 1080,1080, true);
+        image = resize(image, 1250, 1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner le CD dans le canvas
+
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
 
 
         super.onDraw(canvas);
-        for (Path completedPath : mCompletedPaths) {
-            canvas.drawPath(completedPath, mFingerPaint);
+        for (Path completedPath : completedPaths) {
+            canvas.drawPath(completedPath, paint);
         }
-        for (Path fingerPath : mFingerPaths) {
+        for (Path fingerPath : paths.values()) {
             if (fingerPath != null) {
-                canvas.drawPath(fingerPath, mFingerPaint);
+                canvas.drawPath(fingerPath, paint);
             }
         }
+
         this.cartographie = image;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int pointerCount = event.getPointerCount();
-        int cappedPointerCount = pointerCount > MAX_FINGERS ? MAX_FINGERS : pointerCount;
-        int actionIndex = event.getActionIndex();
-        int action = event.getActionMasked();
-        int id = event.getPointerId(actionIndex);
+        int maskedAction = event.getActionMasked();
 
-        if ((action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN) && id < MAX_FINGERS) {
-            mFingerPaths[id] = new Path();
-            mFingerPaths[id].moveTo(event.getX(actionIndex), event.getY(actionIndex));
-        } else if ((action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP) && id < MAX_FINGERS) {
-            mFingerPaths[id].setLastPoint(event.getX(actionIndex), event.getY(actionIndex));
-            mCompletedPaths.add(mFingerPaths[id]);
-            mFingerPaths[id].computeBounds(mPathBounds, true);
-            invalidate((int) mPathBounds.left, (int) mPathBounds.top,
-                    (int) mPathBounds.right, (int) mPathBounds.bottom);
-            mFingerPaths[id] = null;
-        }
-
-        for (int i = 0; i < cappedPointerCount; i++) {
-            if (mFingerPaths[i] != null) {
-                int index = event.findPointerIndex(i);
-                mFingerPaths[i].lineTo(event.getX(index), event.getY(index));
-                mFingerPaths[i].computeBounds(mPathBounds, true);
-                invalidate((int) mPathBounds.left, (int) mPathBounds.top,
-                        (int) mPathBounds.right, (int) mPathBounds.bottom);
+        switch (maskedAction) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN: {
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
+                    Path p = new Path();
+                    p.moveTo(event.getX(i), event.getY(i));
+                    paths.put(event.getPointerId(i), p);
+                    mX.put(event.getPointerId(i), event.getX(i));
+                    mY.put(event.getPointerId(i), event.getY(i));
+                }
+                break;
+            }
+            case MotionEvent.ACTION_MOVE: {
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
+                    Path p = paths.get(event.getPointerId(i));
+                    if (p != null) {
+                        float x = event.getX(i);
+                        float y = event.getY(i);
+                        p.quadTo(mX.get(event.getPointerId(i)), mY.get(event.getPointerId(i)), (x + mX.get(event.getPointerId(i))) / 2,
+                                (y + mY.get(event.getPointerId(i))) / 2);
+                        mX.put(event.getPointerId(i), event.getX(i));
+                        mY.put(event.getPointerId(i), event.getY(i));
+                    }
+                }
+                invalidate();
+                break;
+            }
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP: {
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
+                    Path p = paths.get(event.getPointerId(i));
+                    if (p != null) {
+                        completedPaths.add(p);
+                        p.lineTo(event.getX(i), event.getY(i));
+                        invalidate();
+                        paths.remove(event.getPointerId(i));
+                        mX.remove(event.getPointerId(i));
+                        mY.remove(event.getPointerId(i));
+                    }
+                }
+                break;
             }
         }
+
+
         return true;
     }
 
