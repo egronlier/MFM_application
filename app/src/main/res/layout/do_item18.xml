@@ -6,12 +6,6 @@
     android:orientation="vertical"
     android:background="#FFFFFFFF">
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--android:weightSum="1">-->
-
     <TextView
         android:id="@+id/enCours"
         android:layout_width="wrap_content"
@@ -43,8 +37,6 @@
         android:layout_centerInParent="true"
         android:background="#FFFFFFFF" />
 
-    <!--</LinearLayout>-->
-
     <!--<ProgressBar-->
     <!--android:id="@+id/progressBar"-->
     <!--android:layout_width="wrap_content"-->
@@ -52,14 +44,5 @@
     <!--android:layout_alignParentBottom="true"-->
     <!--android:layout_centerHorizontal="true"-->
     <!--android:layout_marginBottom="80dp" />-->
-
-    <!--<Button-->
-    <!--android:id="@+id/boutonTerminer"-->
-    <!--android:layout_width="80dip"-->
-    <!--android:layout_height="80dip"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:layout_marginBottom="20dp"-->
-    <!--android:background="@drawable/stop" />-->
 
 </RelativeLayout>

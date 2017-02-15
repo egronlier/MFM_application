@@ -31,10 +31,8 @@ public class do_item22 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.do_item22);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-        dessin = (Dessin_item22) findViewById(R.id.drawingItem22);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -45,9 +43,10 @@ public class do_item22 extends Activity {
             main = intent.getStringExtra("main");
         }
 
+        dessin = (Dessin_item22) findViewById(R.id.drawingItem22);
         state = (TextView) findViewById(R.id.enCours);
 
-        boutonTerminer = (Button) findViewById(R.id.boutonTerminer);
+        boutonTerminer = (Button) findViewById(R.id.buttonStop);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
