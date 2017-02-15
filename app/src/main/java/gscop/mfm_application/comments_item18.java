@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -104,7 +105,16 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         radioGroupCercle = (RadioGroup) findViewById(R.id.radioGroupCercle);
         boutonCerclePetit = (RadioButton) findViewById(R.id.radioButtonSmall);
         boutonCercleGrand = (RadioButton) findViewById(R.id.radioButtonBig);
+
         comments = (EditText) findViewById(R.id.editTextComments);
+        comments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
 
         infosPatient = (TextView) findViewById(R.id.PatientName);
         infosPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \nné(e) le : " + birthdate + "\n" + main);
@@ -283,5 +293,10 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     @Override
     public void selectedStrings(List<String> strings) {
 //   Toast.makeText(this, strings.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
