@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -100,7 +101,16 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         boutonCotation2 = (RadioButton) findViewById(R.id.radioButton2);
         boutonCotation3 = (RadioButton) findViewById(R.id.radioButton3);
         boutonCotationNSP = (RadioButton) findViewById(R.id.radioButtonNSP);
+
         comments = (EditText) findViewById(R.id.editTextComments);
+        comments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
 
         infosPatient = (TextView) findViewById(R.id.PatientName);
         infosPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \nné(e) le : " + birthdate + "\n" + main);
@@ -243,6 +253,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
             myIntent.putExtra("main", main);
+            myIntent.putExtra("path",path);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();
@@ -267,5 +278,10 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     @Override
     public void selectedStrings(List<String> strings) {
 
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
