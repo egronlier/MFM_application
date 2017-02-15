@@ -134,12 +134,14 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                                      Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
                                      Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
 
+                                     String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
+
                                      // Create a Label to add to the page
                                      String strText = " Patient : " + name + " " + surname +
                                              "\n Date de naissance : " + birthdate +
                                              "\n " + main +
                                              "\n\n Item 22" +
-                                             "\n réalisé le : " + timeStamp +
+                                             "\n réalisé le : " + timeStampSimple +
                                              "\n\n INFORMATIONS COMPLEMENTAIRES : " +
                                              "\n Cotation : " + cotation +
                                              "\n Commentaires : " + listeComm +
