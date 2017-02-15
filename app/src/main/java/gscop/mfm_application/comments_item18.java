@@ -183,7 +183,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                                 "\n\n INFORMATIONS COMPLEMENTAIRES : " +
                                                 "\n Cotation : " + cotation +
                                                 "\n Cercle : " + cercle +
-                                                "\n Commentaires : " + listeComm +
+                                                "\n Commentaires : " + listeComm.toString() +
                                                 "\n " + commentaire;
                                         Font font = Font.getHelvetica();
                                         int fontSize = 18;

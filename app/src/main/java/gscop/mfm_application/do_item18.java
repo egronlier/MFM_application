@@ -51,6 +51,7 @@ public class do_item18 extends Activity {
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonTerminer.setClickable(false);
                 state.setText(R.string.saving);
                 Intent myIntent = new Intent(do_item18.this, carto_item18.class);
                 myIntent.putExtra("name", name);

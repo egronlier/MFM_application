@@ -51,6 +51,7 @@ public class do_item22 extends Activity {
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonTerminer.setClickable(false);
                 // action quand on appuie sur terminer -> affiche la cartographie ou la fenêtre de commentaires du kiné ?
                 state.setText(R.string.saving);
                 Intent myIntent = new Intent(do_item22.this, carto_item22.class);
