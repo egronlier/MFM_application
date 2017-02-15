@@ -252,12 +252,13 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
 //                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
 //                        public void onClick(DialogInterface dialog, int id) {
             back_answer = true;
-            // on revient à l'écran de réalisation de l'item 18
+            // on revient à l'écran d'affichage de cartographie de l'item 18
             Intent myIntent = new Intent(comments_item18.this, carto_item18.class);
             myIntent.putExtra("name", name);
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
             myIntent.putExtra("main", main);
+            myIntent.putExtra("path",path);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();

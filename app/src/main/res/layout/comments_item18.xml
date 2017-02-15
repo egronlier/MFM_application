@@ -31,12 +31,12 @@
         android:layout_height="20dp" />
 
     <TextView
-        android:text="@string/textMandatory"
+        android:id="@+id/textMandatory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/textMandatory"
         android:textAlignment="center"
-        android:textSize="25sp"
-        android:id="@+id/textMandatory" />
+        android:textSize="25sp" />
 
     <Space
         android:layout_width="match_parent"
@@ -48,13 +48,13 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/mandatory"
+            android:id="@+id/mandatoryCotation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mandatoryCotation"
+            android:text="@string/mandatory"
+            android:textColor="#f2053c"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#f2053c"  />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textCotation"
@@ -64,15 +64,15 @@
             android:layout_weight="1"
             android:ems="13"
             android:text="@string/cotation"
+            android:textColor="#0d8dc9"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#0d8dc9" />
+            android:textStyle="bold" />
 
         <RadioGroup
+            android:id="@+id/radioGroupCotation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/radioGroupCotation"
             android:orientation="horizontal">
 
             <RadioButton
@@ -138,13 +138,13 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/mandatory"
+            android:id="@+id/mandatoryCircle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mandatoryCircle"
+            android:text="@string/mandatory"
+            android:textColor="#f2053c"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#f2053c" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textCircle"
@@ -154,9 +154,9 @@
             android:layout_weight="1"
             android:ems="13"
             android:text="@string/circle"
+            android:textColor="#0d8dc9"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#0d8dc9" />
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/radioGroupCercle"
@@ -200,9 +200,9 @@
         android:ems="13"
         android:text="@string/comments"
         android:textAlignment="center"
+        android:textColor="#0d8dc9"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#0d8dc9" />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -210,21 +210,21 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/select"
-            android:layout_marginStart="10dp"
+            android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
+            android:text="@string/select"
+            android:textColor="#0d8dc9"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#0d8dc9" />
+            android:textStyle="bold" />
 
         <tutoandroid.libmultispinner.MultiSelectionSpinner
             android:id="@+id/mySpinner"
-            android:layout_gravity="center"
             android:layout_width="500dp"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <Space
@@ -237,9 +237,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
-        android:gravity="start"
-        android:inputType="textMultiLine"
         android:background="@color/common_google_signin_btn_text_light_disabled"
+        android:gravity="start"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
         android:lines="5"
         android:scrollbars="vertical"
         tools:ignore="LabelFor" />

@@ -243,6 +243,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
             myIntent.putExtra("main", main);
+            myIntent.putExtra("path",path);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();
