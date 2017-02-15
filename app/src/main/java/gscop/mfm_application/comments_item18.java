@@ -26,6 +26,7 @@ import com.cete.dynamicpdf.Page;
 import com.cete.dynamicpdf.PageOrientation;
 import com.cete.dynamicpdf.PageSize;
 import com.cete.dynamicpdf.TextAlign;
+import com.cete.dynamicpdf.VAlign;
 import com.cete.dynamicpdf.pageelements.Image;
 import com.cete.dynamicpdf.pageelements.Label;
 
@@ -180,12 +181,17 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                         cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                                         byte[] trueImageByte = stream.toByteArray();
-                                        Image trueImage = new Image(trueImageByte,0,0);
-                                        trueImage.setAlign(Align.CENTER);
+//                                        Image trueImage = new Image(trueImageByte,0,0);
+                                        // on place l'image au centre
+                                        float centerX = (page2.getDimensions().getWidth() - page2.getDimensions().getLeftMargin() - page2.getDimensions().getRightMargin()) / 2;
+                                        float centerY = (page2.getDimensions().getHeight() - page2.getDimensions().getTopMargin() - page2.getDimensions().getBottomMargin()) / 2;
+                                        Image trueImageCentred = new Image(trueImageByte,centerX,centerY);
+                                        trueImageCentred.setAlign(Align.CENTER);
+                                        trueImageCentred.setVAlign(VAlign.CENTER);
 
                                         // Add label to page
                                         page1.getElements().add(objLabel);
-                                        page2.getElements().add(trueImage);
+                                        page2.getElements().add(trueImageCentred);
 
                                         // Add page to document
                                         objDocument.getPages().add(page1);
