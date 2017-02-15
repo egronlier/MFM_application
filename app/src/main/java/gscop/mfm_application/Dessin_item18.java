@@ -24,6 +24,7 @@ public class Dessin_item18 extends View {
     private RectF mPathBounds = new RectF();
     private Bitmap cartographie;
 
+
     public Dessin_item18(Context context) {
         super(context);
     }
@@ -42,12 +43,13 @@ public class Dessin_item18 extends View {
         mCompletedPaths = new ArrayList<>();
         mFingerPaint = new Paint();
         // initialise les caractéristiques du trait (forme, couleur...)
+        mFingerPaint.setStrokeCap(Paint.Cap.ROUND);
+        mFingerPaint.setStrokeJoin(Paint.Join.ROUND);
         mFingerPaint.setAntiAlias(true);
         mFingerPaint.setColor(Color.RED);
         mFingerPaint.setStyle(Paint.Style.STROKE);
         mFingerPaint.setStrokeWidth(10);
-        mFingerPaint.setStrokeCap(Paint.Cap.ROUND);
-    }
+        }
 
     @Override
     protected void onDraw(Canvas canvas) {
