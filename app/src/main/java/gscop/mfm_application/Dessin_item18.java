@@ -55,7 +55,6 @@ public class Dessin_item18 extends View {
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item18);
         image = resize(image, 1250,1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner le CD dans le canvas
-
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
 
