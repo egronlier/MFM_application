@@ -154,7 +154,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                         Document objDocument = new Document();
                                         objDocument.setCreator("MFM_application");
                                         objDocument.setAuthor("MFM_application");
-                                        objDocument.setTitle(name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf");
+                                        objDocument.setTitle(name.toLowerCase() + "_" + surname.toLowerCase() + "_item18_" + timeStamp + ".pdf");
 
                                         // Create a page to add to the document
                                         Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
