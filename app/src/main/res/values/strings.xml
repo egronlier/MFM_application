@@ -15,7 +15,7 @@
     <string name="dateformat">DD/MM/YYYY</string>
     <string name="erase">Effacer</string>
     <string name="retour">Retour</string>
-    <string name="choiceExercise">Veuillez sélectionner l\'item choisi :</string>
+    <string name="choiceExercise">Veuillez sélectionner un item :</string>
     <string name="item18">Item 18</string>
     <string name="instructionsItem18">CONSIGNES : Item 18</string>
     <string name="instructionsItem22">CONSIGNES : Item 22</string>
