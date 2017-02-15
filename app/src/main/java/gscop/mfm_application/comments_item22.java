@@ -109,6 +109,9 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
+                 // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
+                 boutonEnregistrer.setClickable(false);
+
                  // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
                  if (boutonCotation0.isChecked() || boutonCotation1.isChecked() || boutonCotation2.isChecked() || boutonCotation3.isChecked() || boutonCotationNSP.isChecked()) {
                      // --------------------- on récupère les commentaires du kiné -------------------
