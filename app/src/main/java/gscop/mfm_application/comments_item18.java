@@ -26,10 +26,14 @@ import com.cete.dynamicpdf.Page;
 import com.cete.dynamicpdf.PageOrientation;
 import com.cete.dynamicpdf.PageSize;
 import com.cete.dynamicpdf.TextAlign;
+import com.cete.dynamicpdf.VAlign;
 import com.cete.dynamicpdf.pageelements.Image;
 import com.cete.dynamicpdf.pageelements.Label;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +64,8 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     String cercle = "cercle inconnu";
     String commentaire = "aucun commentaire";
     TextView infosPatient;
+    String path = "";
+    Bitmap cartoBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +80,14 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
-
+            path = intent.getStringExtra("path");
+            try {
+                File f = new File(path, "cartographie.png");
+                cartoBitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), R.string.errorCarto, Toast.LENGTH_LONG).show();
+            }
             // on remplit la liste déroulante
             String[] array = {"rien", "difficulté", "sans appui de la main", "avec appui de la main", "arrêt", "change de doigt", "avec compensation"};
             listeComment = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
@@ -141,18 +154,19 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                         Document objDocument = new Document();
                                         objDocument.setCreator("MFM_application");
                                         objDocument.setAuthor("MFM_application");
-                                        objDocument.setTitle(name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf");
+                                        objDocument.setTitle(name.toLowerCase() + "_" + surname.toLowerCase() + "_item18_" + timeStamp + ".pdf");
 
                                         // Create a page to add to the document
                                         Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
                                         Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
 
                                         // Create a Label to add to the page
+                                        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
                                         String strText = " Patient : " + name + " " + surname +
                                                 "\n Date de naissance : " + birthdate +
                                                 "\n " + main +
                                                 "\n\n Item 18" +
-                                                "\n réalisé le : " + timeStamp +
+                                                "\n réalisé le : " + timeStampSimple +
                                                 "\n\n INFORMATIONS COMPLEMENTAIRES : " +
                                                 "\n Cotation : " + cotation +
                                                 "\n Cercle : " + cercle +
@@ -164,16 +178,20 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                         Label objLabel = new Label(strText, 0, 0, 504, textWidth, font, fontSize, TextAlign.LEFT);
 
                                         // on ajoute l'image au pdf
-                                        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.cd_test_tour);
                                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                                        byte[] bitMapData = stream.toByteArray();
-                                        Image monImage = new Image(bitMapData, 0, 0);
-                                        monImage.setAlign(Align.CENTER);
+                                        cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                                        byte[] trueImageByte = stream.toByteArray();
+//                                        Image trueImage = new Image(trueImageByte,0,0);
+                                        // on place l'image au centre
+                                        float centerX = (page2.getDimensions().getWidth() - page2.getDimensions().getLeftMargin() - page2.getDimensions().getRightMargin()) / 2;
+                                        float centerY = (page2.getDimensions().getHeight() - page2.getDimensions().getTopMargin() - page2.getDimensions().getBottomMargin()) / 2;
+                                        Image trueImageCentred = new Image(trueImageByte,centerX,centerY);
+                                        trueImageCentred.setAlign(Align.CENTER);
+                                        trueImageCentred.setVAlign(VAlign.CENTER);
 
                                         // Add label to page
                                         page1.getElements().add(objLabel);
-                                        page2.getElements().add(monImage);
+                                        page2.getElements().add(trueImageCentred);
 
                                         // Add page to document
                                         objDocument.getPages().add(page1);
@@ -212,9 +230,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.errorCircle, Toast.LENGTH_LONG).show();
                     }
-                    //  } else {
-                    //  Toast.makeText(getApplicationContext(), R.string.errorCompensation, Toast.LENGTH_LONG).show();
-                    // }
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.errorCotation, Toast.LENGTH_LONG).show();
                 }

@@ -26,6 +26,7 @@ public class do_item22 extends Activity {
     String birthdate = "";
     String main = "";
     Dessin_item22 dessin;
+    Bitmap cartoBitmap;
     TextView state;
 
     @Override
@@ -57,7 +58,7 @@ public class do_item22 extends Activity {
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
                 myIntent.putExtra("main", main);
-                Bitmap cartoBitmap = dessin.getCartographie();
+                cartoBitmap = dessin.getCartographie();
                 myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
                 startActivity(myIntent);
                 // on ferme l'activité en cours

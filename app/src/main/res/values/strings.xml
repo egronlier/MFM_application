@@ -15,7 +15,7 @@
     <string name="dateformat">DD/MM/YYYY</string>
     <string name="erase">Effacer</string>
     <string name="retour">Retour</string>
-    <string name="choiceExercise">Veuillez sélectionner l\'item choisi :</string>
+    <string name="choiceExercise">Veuillez sélectionner un item :</string>
     <string name="item18">Item 18</string>
     <string name="instructionsItem18">CONSIGNES : Item 18</string>
     <string name="instructionsItem22">CONSIGNES : Item 22</string>
@@ -35,8 +35,8 @@
     <string name="errorRadioButton">"Veuillez sélectionner Droitier ou Gaucher."</string>
     <string name="confirmBack">"Voulez-vous revenir à l'écran précédent ? \n (Attention vos données peuvent être effacées)</string>
     <string name="confirmBackAccueil">"Voulez-vous vraiment changer de patient ? \n </string>
-    <string name="enCours">"En cours..."</string>
-    <string name="saving">"ENREGISTREMENT EN COURS..."</string>
+    <string name="enCours"> En cours... </string>
+    <string name="saving"> ENREGISTREMENT EN COURS... </string>
     <string name="cotation">"Cotation : "</string>
     <string name="zero">" 0 "</string>
     <string name="one">" 1 "</string>
@@ -61,5 +61,5 @@
     <string name="item22carto">Item 22 : Cartographie</string>
     <string name="savedOK">Le fichier a bien été enregistré dans le dossier "Download" </string>
     <string name="savedPB">ERREUR : Le fichier n\'a pas pu être enregistré ! </string>
-    <string name="select">Veuillez sélectionner : </string>
+    <string name="select">Veuillez sélectionner : </string> <string name="errorCarto">ERREUR : problème d\'enregistrement de la cartographie</string>
 </resources>

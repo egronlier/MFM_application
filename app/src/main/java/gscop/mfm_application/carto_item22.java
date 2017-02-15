@@ -28,14 +28,16 @@ public class carto_item22 extends Activity {
     Button boutonValider;
     TextView infosPatient;
     String path = "";
+    Bitmap cartoBitmap;
+    ImageView carto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.carto_item22);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.carto_item22);
 
-        ImageView carto = (ImageView) findViewById(R.id.cartographieItem22);
+        carto = (ImageView) findViewById(R.id.cartographieItem22);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -49,7 +51,6 @@ public class carto_item22 extends Activity {
                 File f=new File(path, "cartographie.png");
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
                 carto.setImageBitmap(b);
-                f.delete();
             }
             catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -114,6 +115,7 @@ public class carto_item22 extends Activity {
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
                                 myIntent.putExtra("main", main);
+                                myIntent.putExtra("path", path);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
                                 finish();

@@ -34,7 +34,7 @@ public class ouverture_appli extends Activity {
     String varDG = "";
     final Context context = this;
     Calendar dateTodayCal = Calendar.getInstance();
-    Date dateTodayDa ;
+    Date dateTodayDa;
 
     @Override
     /*
@@ -60,8 +60,8 @@ public class ouverture_appli extends Activity {
         int dayToday = dateTodayCal.get(Calendar.DAY_OF_MONTH);
         dateTodayDa = dateTodayCal.getTime();
         // attention les mois commencent à 0
-        dateTodayCal.set(yearToday,monthToday+1,dayToday);
-        datePicker.init(yearToday, monthToday, dayToday, new DatePicker.OnDateChangedListener(){
+        dateTodayCal.set(yearToday, monthToday + 1, dayToday);
+        datePicker.init(yearToday, monthToday, dayToday, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 birthdate = getDateFromDatePicker(datePicker);
@@ -84,15 +84,15 @@ public class ouverture_appli extends Activity {
             int length_surname = surname.length();
 
             // On vérifie que tous les champs ont été remplis
-            // on vérifie qu'au moins un radioButton a été sélectionné
-            if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
-                // on vérifie que le nom et le prénom ont été sélectionnés
-                if (length_name > 0 && length_surname > 0) {
+            // on vérifie que le nom et le prénom ont été remplis
+            if (length_name > 0 && length_surname > 0) {
+                // on vérifie qu'au moins un radioButton a été sélectionné
+                if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
                     if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)
                             && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
                         // on vérifie qu'une date a bien été sélectionnée
-                        if(birthdate != null) {
+                        if (birthdate != null) {
                             try {
                                 // on vérifie que la date choisie est antérieure à la date du jour
                                 if (birthdate.before(dateTodayDa)) {
@@ -120,7 +120,7 @@ public class ouverture_appli extends Activity {
                                                     myIntent.putExtra("name", name);
                                                     myIntent.putExtra("surname", surname);
                                                     myIntent.putExtra("birthdate", birthdateFormated);
-                                                    myIntent.putExtra("main",varDG);
+                                                    myIntent.putExtra("main", varDG);
                                                     startActivity(myIntent);
                                                     // on ferme l'activité en cours
                                                     finish();
@@ -137,23 +137,24 @@ public class ouverture_appli extends Activity {
                                     // show it
                                     alertDialog.show();
                                 } else { // Date entrée non antérieure à la date du jour
-                                    Toast.makeText(getApplicationContext(),R.string.errorDateAfter,Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), R.string.errorDateAfter, Toast.LENGTH_LONG).show();
                                 }
                             } catch (Exception e) { // Problème inconnu avec la date choisie
-                                Toast.makeText(getApplicationContext(),R.string.internalError,Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), R.string.internalError, Toast.LENGTH_LONG).show();
                             }
-                        }else{ // aucune date n'a été choisie
-                            Toast.makeText(getApplicationContext(),R.string.errorDate,Toast.LENGTH_LONG).show();
+                        } else { // aucune date n'a été choisie
+                            Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
                         }
                     } else { // Un des champs de nom ou prénom n'est pas au bon format
-                        Toast.makeText(getApplicationContext(),R.string.errorNames,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.errorNames, Toast.LENGTH_LONG).show();
                     }
-                } else { // Un des champs de nom ou prénom n'est pas rempli
-                    Toast.makeText(getApplicationContext(),R.string.errorVoid,Toast.LENGTH_LONG).show();
+                } else { // Droitier ou gaucher n'a pas été choisi
+                    Toast.makeText(getApplicationContext(), R.string.errorRadioButton, Toast.LENGTH_LONG).show();
                 }
-            } else { // Droitier ou gaucher n'a pas été choisi
-                Toast.makeText(getApplicationContext(),R.string.errorRadioButton,Toast.LENGTH_LONG).show();
+            } else { // Un des champs de nom ou prénom n'est pas rempli
+                Toast.makeText(getApplicationContext(), R.string.errorVoid, Toast.LENGTH_LONG).show();
             }
+
         }
     };
 
@@ -179,6 +180,7 @@ public class ouverture_appli extends Activity {
     }
 
     private boolean back_answer = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

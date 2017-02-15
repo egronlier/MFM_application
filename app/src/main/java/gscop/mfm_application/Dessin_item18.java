@@ -46,7 +46,7 @@ public class Dessin_item18 extends View {
         mFingerPaint.setStrokeCap(Paint.Cap.ROUND);
         mFingerPaint.setStrokeJoin(Paint.Join.ROUND);
         mFingerPaint.setAntiAlias(true);
-        mFingerPaint.setColor(Color.RED);
+        mFingerPaint.setColor(Color.BLUE);
         mFingerPaint.setStyle(Paint.Style.STROKE);
         mFingerPaint.setStrokeWidth(10);
         }
@@ -54,7 +54,7 @@ public class Dessin_item18 extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         // On transforme le drawable du CD en bitmap
-        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item18);
+        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item18_2);
         image = resize(image, 1250,1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner le CD dans le canvas
         canvas.drawBitmap(image, 0, 0, null);
