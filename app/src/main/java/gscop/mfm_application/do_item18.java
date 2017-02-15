@@ -27,7 +27,6 @@ public class do_item18 extends Activity {
     String main = "";
     Dessin_item18 dessin;
     Bitmap cartoBitmap;
-//    private ProgressBar mProgressBar;
     TextView state;
 
     @Override
@@ -45,9 +44,6 @@ public class do_item18 extends Activity {
             main = intent.getStringExtra("main");
         }
 
-//        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-//        mProgressBar.setVisibility(View.GONE);
-
         dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
         state = (TextView) findViewById(R.id.enCours);
 
@@ -56,10 +52,6 @@ public class do_item18 extends Activity {
             @Override
             public void onClick(View v) {
                 state.setText(R.string.saving);
-//                mProgressBar.setVisibility(View.VISIBLE);
-                // action quand on appuie sur terminer -> affiche la cartographie
-                // comme l'action est longue, on informe l'utilisateur que l'action est en cours
-                //Toast.makeText(getApplicationContext(), "Sauvegarde de la cartographie....", Toast.LENGTH_SHORT).show(); -> pas assez rapide
                 Intent myIntent = new Intent(do_item18.this, carto_item18.class);
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
@@ -70,48 +62,8 @@ public class do_item18 extends Activity {
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
-//                BigCalcul calcul = new BigCalcul();
-//                calcul.execute();
-
             }
         });
-
-//        // -----------on affiche le bouton à gauche pour les droitiers et à droite pour les gauchers
-//        // on vérifie si la tablette est en paysage (ORIENTATION_LANDSCAPE = 2),
-//        // sinon (en portrait) on ne change rien, le bouton terminer reste centré
-//        if (getResources().getConfiguration().orientation == 2) {
-//            // on vérifie ensuite si la personne est droitière ou gauchère
-//            // si elle est droitière, on met le bouton serré à gauche
-//            if (main.equals("Droitier")) {
-//                RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
-//                        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//                rel_btn.width = 120;
-//                rel_btn.height = 60;
-//                rel_btn.setMarginStart(50);
-//                rel_btn.setMarginEnd(50);
-//                rel_btn.topMargin = 60;
-//                boutonTerminer.setLayoutParams(rel_btn);
-//                Toast.makeText(getApplicationContext(), "Position droitier activée", Toast.LENGTH_LONG).show();
-//            }
-//            // si elle est gauchère, on met le bouton serré à droite
-//            else {
-//                if (main.equals("Gaucher")) {
-//                    RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
-//                            RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//                    rel_btn.width = 120;
-//                    rel_btn.height = 60;
-//                    rel_btn.setMarginStart(50);
-//                    rel_btn.topMargin = 60;
-//                    boutonTerminer.setLayoutParams(rel_btn);
-//                    Toast.makeText(getApplicationContext(), "Position gaucher activée", Toast.LENGTH_LONG).show();
-//                }
-//                // sinon on affiche un message d'erreur
-//                else {
-//                    Toast.makeText(getApplicationContext(), R.string.errorDG, Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }
-//        // --------------------------
     }
 
     private boolean back_answer = false;
@@ -171,42 +123,4 @@ public class do_item18 extends Activity {
         return directory.getAbsolutePath();
     }
 
-//    // ------------ barre de progression pendant chargement -------------
-//    private class BigCalcul extends AsyncTask<Void, Integer, Void> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            super.onProgressUpdate(values);
-//            mProgressBar.setProgress(values[0]);
-//        }
-//        @Override
-//        protected Void doInBackground(Void... arg0) {
-//            int progress;
-//            for (progress = 0; progress <= 100; progress++) {
-//                for (int i = 0; i < 10000; i++) {
-//                }
-//                publishProgress(progress);
-//                progress++;
-//            }
-//            return null;
-//        }
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            Intent myIntent = new Intent(do_item18.this, carto_item18.class);
-//            myIntent.putExtra("name", name);
-//            myIntent.putExtra("surname", surname);
-//            myIntent.putExtra("birthdate", birthdate);
-//            myIntent.putExtra("main", main);
-//            Bitmap cartoBitmap = dessin.getCartographie();
-//            myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
-////            mProgressBar.setVisibility(View.GONE);
-//            startActivity(myIntent);
-//            // on ferme l'activité en cours
-//            finish();
-//        }
-//    }
-//    // ------------------------------------------------------------------
 }

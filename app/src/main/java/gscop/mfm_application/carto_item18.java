@@ -51,7 +51,6 @@ public class carto_item18 extends Activity {
                 File f = new File(path, "cartographie.png");
                 cartoBitmap = BitmapFactory.decodeStream(new FileInputStream(f));
                 carto.setImageBitmap(cartoBitmap);
-                f.delete();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -115,6 +114,7 @@ public class carto_item18 extends Activity {
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
                                 myIntent.putExtra("main", main);
+                                myIntent.putExtra("path", path);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
                                 finish();
