@@ -78,17 +78,21 @@ public class Dessin_item18 extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int maskedAction = event.getActionMasked();
+        int S = event.getHistorySize();
+        int actionIndex = event.getActionIndex();
+        int id = event.getPointerId(actionIndex);
 
         switch (maskedAction) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
-                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
-                    Path p = new Path();
-                    p.moveTo(event.getX(i), event.getY(i));
-                    paths.put(event.getPointerId(i), p);
-                    mX.put(event.getPointerId(i), event.getX(i));
-                    mY.put(event.getPointerId(i), event.getY(i));
-                }
+                Path p = new Path();
+                p.moveTo(event.getX(id), event.getY(id));
+                paths.put(id, p);
+                mX.put(id, event.getX(id));
+                mY.put(id, event.getY(id));
+
+                invalidate();
+
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -97,10 +101,12 @@ public class Dessin_item18 extends View {
                     if (p != null) {
                         float x = event.getX(i);
                         float y = event.getY(i);
+                        System.out.println("\n \n \n \n \n" + x);
                         p.quadTo(mX.get(event.getPointerId(i)), mY.get(event.getPointerId(i)), (x + mX.get(event.getPointerId(i))) / 2,
                                 (y + mY.get(event.getPointerId(i))) / 2);
                         mX.put(event.getPointerId(i), event.getX(i));
                         mY.put(event.getPointerId(i), event.getY(i));
+                        invalidate();
                     }
                 }
                 invalidate();
@@ -108,22 +114,19 @@ public class Dessin_item18 extends View {
             }
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP: {
-                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
-                    Path p = paths.get(event.getPointerId(i));
-                    if (p != null) {
-                        completedPaths.add(p);
-                        p.lineTo(event.getX(i), event.getY(i));
-                        invalidate();
-                        paths.remove(event.getPointerId(i));
-                        mX.remove(event.getPointerId(i));
-                        mY.remove(event.getPointerId(i));
-                    }
+                Path p = paths.get(id);
+                if (p != null) {
+                    completedPaths.add(p);
+                    invalidate();
+                    paths.remove(id);
+                    mX.remove(id);
+                    mY.remove(id);
                 }
+                invalidate();
+
                 break;
             }
         }
-
-
         return true;
     }
 
