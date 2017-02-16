@@ -90,7 +90,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                 Toast.makeText(getApplicationContext(), R.string.errorCarto, Toast.LENGTH_LONG).show();
             }
             // on remplit la liste déroulante
-            String[] array = {"rien", "difficulté", "sans appui de la main", "avec appui de la main", "arrêt", "change de doigt", "avec compensation"};
+            String[] array = {"-", "difficulté", "sans appui de la main", "avec appui de la main", "arrêt", "change de doigt", "avec compensation"};
             listeComment = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
             listeComment.setItems(array);
             listeComment.setListener(this);
