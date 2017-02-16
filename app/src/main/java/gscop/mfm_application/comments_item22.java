@@ -86,7 +86,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                 Toast.makeText(getApplicationContext(), R.string.errorCarto, Toast.LENGTH_LONG).show();
             }
             // on remplit la liste déroulante
-            String[] array = {"rien", "difficulté", "arrêt", "change de doigt",
+            String[] array = {"-", "difficulté", "arrêt", "change de doigt",
                     "soulève le doigt", "ne soulève pas le doigt", "glisse le doigt", "ne glisse pas le doigt",
                     "touche le quadrillage", "ne touche pas le quadrillage", "pose le doigt sans précision",
                     "avec compensation", "sans appui de la main", "avec appui de la main"};
