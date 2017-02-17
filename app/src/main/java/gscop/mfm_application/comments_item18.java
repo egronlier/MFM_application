@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,21 +21,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cete.dynamicpdf.Align;
-import com.cete.dynamicpdf.Document;
-import com.cete.dynamicpdf.Font;
-import com.cete.dynamicpdf.Page;
-import com.cete.dynamicpdf.PageOrientation;
-import com.cete.dynamicpdf.PageSize;
-import com.cete.dynamicpdf.TextAlign;
-import com.cete.dynamicpdf.VAlign;
-import com.cete.dynamicpdf.pageelements.Image;
-import com.cete.dynamicpdf.pageelements.Label;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -67,6 +66,8 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     TextView infosPatient;
     String path = "";
     Bitmap cartoBitmap;
+    File myFile;
+    List<String> listeComm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,59 +161,8 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                     public void onClick(DialogInterface dialog, int id) {
                                         // if this button is clicked, on fait l'enregistrement
                                         dialog.cancel();
-                                        // ------------------ CREATION et ENREGISTREMENT du PDF ------------------
-                                        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
-                                        String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf";
-                                        // Create a document and set it's properties
-                                        Document objDocument = new Document();
-                                        objDocument.setCreator("MFM_application");
-                                        objDocument.setAuthor("MFM_application");
-                                        objDocument.setTitle(name.toLowerCase() + "_" + surname.toLowerCase() + "_item18_" + timeStamp + ".pdf");
-
-                                        // Create a page to add to the document
-                                        Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
-                                        Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
-
-                                        // Create a Label to add to the page
-                                        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
-                                        String strText = " Patient : " + name + " " + surname +
-                                                "\n Date de naissance : " + birthdate +
-                                                "\n " + main +
-                                                "\n\n Item 18" +
-                                                "\n réalisé le : " + timeStampSimple +
-                                                "\n\n INFORMATIONS COMPLEMENTAIRES : " +
-                                                "\n Cotation : " + cotation +
-                                                "\n Cercle : " + cercle +
-                                                "\n Commentaires : " + listeComm.toString() +
-                                                "\n " + commentaire;
-                                        Font font = Font.getHelvetica();
-                                        int fontSize = 18;
-                                        float textWidth = font.getTextWidth(strText, fontSize);
-                                        Label objLabel = new Label(strText, 0, 0, 504, textWidth, font, fontSize, TextAlign.LEFT);
-
-                                        // on ajoute l'image au pdf
-                                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                        cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                                        byte[] trueImageByte = stream.toByteArray();
-//                                        Image trueImage = new Image(trueImageByte,0,0);
-                                        // on place l'image au centre
-                                        float centerX = (page2.getDimensions().getWidth() - page2.getDimensions().getLeftMargin() - page2.getDimensions().getRightMargin()) / 2;
-                                        float centerY = (page2.getDimensions().getHeight() - page2.getDimensions().getTopMargin() - page2.getDimensions().getBottomMargin()) / 2;
-                                        Image trueImageCentred = new Image(trueImageByte,centerX,centerY);
-                                        trueImageCentred.setAlign(Align.CENTER);
-                                        trueImageCentred.setVAlign(VAlign.CENTER);
-
-                                        // Add label to page
-                                        page1.getElements().add(objLabel);
-                                        page2.getElements().add(trueImageCentred);
-
-                                        // Add page to document
-                                        objDocument.getPages().add(page1);
-                                        objDocument.getPages().add(page2);
-
                                         try {
-                                            // Outputs the document to file
-                                            objDocument.draw(FILE);
+                                            createPdf();
                                             Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
                                             // on renvoie alors vers l'interface de choix d'item
                                             Intent myIntent = new Intent(comments_item18.this, choix_item.class);
@@ -223,12 +173,11 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                             startActivity(myIntent);
                                             // on ferme l'activité en cours
                                             finish();
-                                        } catch (Exception e) {
+                                        } catch (FileNotFoundException | DocumentException e) {
                                             e.printStackTrace();
-                                            Toast.makeText(getApplicationContext(), R.string.savedPB, Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
                                         }
-                                        // --------------------------------------------------------------------
-                                    }
+                                   }
                                 })
                                 .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -299,4 +248,89 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    private void createPdf() throws FileNotFoundException, DocumentException {
+
+        // on crée un dossier NOM_prenom du patient s'il n'existe pas déjà
+        File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                , "patient_" + name.toUpperCase() + "_" + surname.toLowerCase());
+        if (!pdfFolder.exists()) {
+            pdfFolder.mkdir();
+            Log.i("TAG", "Pdf Directory created");
+        }
+
+        //Create time stamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
+
+        // on crée le nom du fichier pdf à enregistrer
+        String filePath = pdfFolder.toString() + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + "_" + "item18.pdf";
+        myFile = new File(filePath);
+        OutputStream output = new FileOutputStream(myFile);
+
+        //Step 1 : on crée le document
+        Document document = new Document();
+        System.out.println("step1 : \n ");
+
+        //Step 2 : on instantie le PdfWriter
+        PdfWriter.getInstance(document, output);
+        System.out.println("step 2 : \n ");
+
+        //Step 3 : ouverture du document
+        document.open();
+        System.out.println("step 3 : \n ");
+
+        // on crée les textes à ajouter dans le pdf
+        // INFOS PATIENT
+        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
+        String strText = " Patient : " + name + " " + surname +
+                "\n Date de naissance : " + birthdate +
+                "\n " + main +
+                "\n\n Item 18" +
+                "\n réalisé le : " + timeStampSimple +
+                "\n\n INFORMATIONS COMPLEMENTAIRES : " +
+                "\n Cotation : " + cotation +
+                "\n Cercle : " + cercle +
+                "\n Commentaires : " + listeComm +
+                "\n " + commentaire;
+//        Font font = Font.getHelvetica();
+//        int fontSize = 18;
+//        float textWidth = font.getTextWidth(strText, fontSize);
+//        Label objLabel = new Label(strText, 0, 0, 504, textWidth, font, fontSize, TextAlign.LEFT);
+
+        // CARTOGRAPHIE
+//        Drawable ImageDraw = getResources().getDrawable(R.drawable.cd_2);
+//        Bitmap ImageBitmap = ((BitmapDrawable) ImageDraw).getBitmap();
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//        ImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//        Image monImage = null;
+//        try {
+//            monImage = Image.getInstance(stream.toByteArray());
+//            System.out.println("try image \n");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        Image trueImage = null;
+        try {
+            trueImage = Image.getInstance(stream.toByteArray());
+            System.out.println("try image \n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        Image trueImage = new Image(trueImageByte, 0, 0);
+//        trueImage.setAlign(Align.CENTER);
+
+        //Step 4 : Add content
+        document.add(new Paragraph("TITRE"));
+        document.add(new Paragraph(strText));
+        document.add(new Paragraph("Voici la cartographie : \n"));
+        document.add(trueImage);
+
+        //Step 5: Close the document
+        document.close();
+
+//        promptForNextAction();
+    }
 }
+
