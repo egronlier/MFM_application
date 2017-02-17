@@ -150,7 +150,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         r = (RadioButton) radioGroupCercle.getChildAt(index);
                         cercle = r.getText().toString();
                         // ------- COMMENTAIRES
-                        final List<String> listeComm = listeComment.getSelectedStrings();
+                        listeComm = listeComment.getSelectedStrings();
                         commentaire = comments.getText().toString();
                         // ------------------------------------------------------------------------------
 
