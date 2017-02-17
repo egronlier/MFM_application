@@ -113,7 +113,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         });
 
         infosPatient = (TextView) findViewById(R.id.PatientName);
-        infosPatient.setText("Patient : " + name + " " + surname + " \nné(e) le : " + birthdate + "\n" + main);
+        infosPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate + "\n" + main);
 
         boutonEnregistrer = (Button) findViewById(R.id.buttonSave);
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {

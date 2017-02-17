@@ -113,8 +113,8 @@ public class ouverture_appli extends Activity {
                                     final String birthdateFormated = sdf.format(birthdate);
                                     // set dialog message
                                     alertDialogBuilder
-                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n \n"
-                                                    + name + " " + surname + "\n né(e) le : " + birthdateFormated + "\n " + varDG)
+                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
+                                                    + " " + name + " " + surname + "\n Né(e) le : " + birthdateFormated + "\n " + varDG)
                                             .setCancelable(false)
                                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
