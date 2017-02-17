@@ -23,7 +23,10 @@ import android.widget.Toast;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -67,7 +70,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     String path = "";
     Bitmap cartoBitmap;
     File myFile;
-    List<String> listeComm;
+    List<String> listeComm ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +165,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                         // if this button is clicked, on fait l'enregistrement
                                         dialog.cancel();
                                         try {
+                                            // ----------- CREATION DU PDF -------------
                                             createPdf();
                                             Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
                                             // on renvoie alors vers l'interface de choix d'item
@@ -183,6 +187,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                     public void onClick(DialogInterface dialog, int id) {
                                         // if this button is clicked, close the dialog box
                                         dialog.cancel();
+                                        boutonEnregistrer.setClickable(true);
                                     }
                                 });
                         // create alert dialog
@@ -268,63 +273,88 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         OutputStream output = new FileOutputStream(myFile);
 
         //Step 1 : on crée le document
-        Document document = new Document();
-        System.out.println("step1 : \n ");
+        Document document = new Document(PageSize.LETTER);
+        document.setMarginMirroring(true);
+        document.setMarginMirroringTopBottom(true);
 
         //Step 2 : on instantie le PdfWriter
         PdfWriter.getInstance(document, output);
-        System.out.println("step 2 : \n ");
 
         //Step 3 : ouverture du document
         document.open();
-        System.out.println("step 3 : \n ");
 
-        // on crée les textes à ajouter dans le pdf
+        //Step 4 : Add content
+        // choix des polices
+        Font myFontTitre = new Font(Font.FontFamily.HELVETICA,24,Font.BOLD);
+        // TITRE
+        Paragraph paragraphTitre = new Paragraph();
+        paragraphTitre.setAlignment(Element.ALIGN_CENTER);
+        paragraphTitre.setFont(myFontTitre);
+        paragraphTitre.add("Fiche récapitulative \n \n \n");
+        document.add(paragraphTitre);
+
         // INFOS PATIENT
-        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
+        Paragraph paragraphInfosTitre = new Paragraph();
+        paragraphInfosTitre.setFont(myFontTitre);
+        paragraphInfosTitre.add("\n\n INFORMATIONS PATIENT : \n");
+        document.add(paragraphInfosTitre);
+
         String strText = " Patient : " + name + " " + surname +
                 "\n Date de naissance : " + birthdate +
-                "\n " + main +
-                "\n\n Item 18" +
-                "\n réalisé le : " + timeStampSimple +
-                "\n\n INFORMATIONS COMPLEMENTAIRES : " +
-                "\n Cotation : " + cotation +
-                "\n Cercle : " + cercle +
-                "\n Commentaires : " + listeComm +
-                "\n " + commentaire;
-//        Font font = Font.getHelvetica();
-//        int fontSize = 18;
-//        float textWidth = font.getTextWidth(strText, fontSize);
-//        Label objLabel = new Label(strText, 0, 0, 504, textWidth, font, fontSize, TextAlign.LEFT);
+                "\n " + main + "\n \n";
+        Paragraph paragraphInfos = new Paragraph();
+        paragraphInfos.add(strText);
+        document.add(paragraphInfos);
+
+        // INFOS ITEM
+        Paragraph paragraphInfosItemTitre = new Paragraph();
+        paragraphInfosItemTitre.setFont(myFontTitre);
+        paragraphInfosItemTitre.add("\n ITEM 18 :");
+        document.add(paragraphInfosItemTitre);
+
+        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
+        strText = "réalisé le : " + timeStampSimple + "\n \n";
+        Paragraph paragraphInfosItem = new Paragraph();
+        paragraphInfosItem.add(strText);
+        document.add(paragraphInfosItem);
+
+        // INFOS COMPLEMENTAIRES
+        Paragraph paragraphInfosCompTitre = new Paragraph();
+        paragraphInfosCompTitre.setFont(myFontTitre);
+        paragraphInfosCompTitre.add("\n INFORMATIONS COMPLEMENTAIRES : \n");
+        document.add(paragraphInfosCompTitre);
+
+        strText = "Cotation : " + cotation + "\nCercle : " + cercle + "\n \n";
+        Paragraph paragraphInfosComp = new Paragraph();
+        paragraphInfosComp.add(strText);
+        document.add(paragraphInfosComp);
+
+        // COMMENTAIRES KINE
+        Paragraph paragraphCommKineTitre = new Paragraph();
+        paragraphCommKineTitre.setFont(myFontTitre);
+        paragraphCommKineTitre.add("\n COMMENTAIRES : \n");
+        document.add(paragraphCommKineTitre);
+
+        strText = listeComm + "\n" + commentaire + "\n \n";
+        Paragraph paragraphCommKine = new Paragraph();
+        paragraphCommKine.add(strText);
+        document.add(paragraphCommKine);
 
         // CARTOGRAPHIE
-//        Drawable ImageDraw = getResources().getDrawable(R.drawable.cd_2);
-//        Bitmap ImageBitmap = ((BitmapDrawable) ImageDraw).getBitmap();
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        ImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//        Image monImage = null;
-//        try {
-//            monImage = Image.getInstance(stream.toByteArray());
-//            System.out.println("try image \n");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         Image trueImage = null;
         try {
             trueImage = Image.getInstance(stream.toByteArray());
-            System.out.println("try image \n");
+            Log.i("TAG", "Try image succeeded");
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        Image trueImage = new Image(trueImageByte, 0, 0);
-//        trueImage.setAlign(Align.CENTER);
-
-        //Step 4 : Add content
-        document.add(new Paragraph("TITRE"));
-        document.add(new Paragraph(strText));
-        document.add(new Paragraph("Voici la cartographie : \n"));
+        Paragraph paragraphCarto = new Paragraph();
+        paragraphCarto.setFont(myFontTitre);
+        paragraphCarto.setAlignment(Element.ALIGN_CENTER);
+        paragraphCarto.add("Cartographie : \n");
+        document.add(paragraphCarto);
         document.add(trueImage);
 
         //Step 5: Close the document
