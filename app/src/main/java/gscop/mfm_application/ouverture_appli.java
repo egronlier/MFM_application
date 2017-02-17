@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +28,7 @@ public class ouverture_appli extends Activity {
     Button boutonEffacer;
     EditText nomEntre;
     EditText prenomEntre;
+    TextView texteDate;
     DatePicker monDatePicker;
     java.util.Date birthdate = null;
     RadioButton boutonDroitier;
@@ -53,6 +55,7 @@ public class ouverture_appli extends Activity {
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
+        texteDate = (TextView) findViewById(R.id.texteBirthdate);
         monDatePicker = (DatePicker) findViewById(R.id.datePicker);
         boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
         boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
@@ -149,6 +152,7 @@ public class ouverture_appli extends Activity {
                             }
                         } else { // aucune date n'a été choisie
                             Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
+                            texteDate.setError("Veuillez sélectionner une date !");
                             monDatePicker.requestFocus();
                         }
                     } else { // Un des champs de nom ou prénom n'est pas au bon format

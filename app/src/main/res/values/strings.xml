@@ -5,6 +5,7 @@
     <string name="quit">QUITTER</string>
     <string name="valid">VALIDER</string>
     <string name="mandatory"> *  </string>
+    <string name="mandatoryError"> *    </string>
     <string name="name">Nom :</string>
     <string name="surname">Prénom :</string>
     <string name="birthdate">Date de naissance :</string>
