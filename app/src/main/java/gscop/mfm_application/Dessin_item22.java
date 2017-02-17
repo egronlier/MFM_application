@@ -26,6 +26,8 @@ public class Dessin_item22 extends View {
     private HashMap<Integer, Path> paths = new HashMap<Integer, Path>();
     private ArrayList<Path> completedPaths = new ArrayList<>();
 
+    private final RectF dirtyRect = new RectF();
+
     public Dessin_item22(Context context) {
         super(context);
     }
@@ -77,46 +79,43 @@ public class Dessin_item22 extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int maskedAction = event.getActionMasked();
-        int S = event.getHistorySize();
         int actionIndex = event.getActionIndex();
         int id = event.getPointerId(actionIndex);
+        int historySize = event.getHistorySize();
 
         switch (maskedAction) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
                 Path p = new Path();
-
                 try {
                     p.moveTo(event.getX(id), event.getY(id));
-                    System.out.println("\n \n \n \n \n" + id);
                     paths.put(id, p);
                     mX.put(id, event.getX(id));
                     mY.put(id, event.getY(id));
-
                     invalidate();
-
-
-                } catch (IllegalArgumentException ex) {
+                }catch (IllegalArgumentException ex){
                     ex.printStackTrace();
                 }
-
-                invalidate();
-
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {  //pour chaque doigt qui touche l'écran
                     Path p = paths.get(event.getPointerId(i));
                     if (p != null) {
-                        float x = event.getX(i);
-                        float y = event.getY(i);
-                        p.quadTo(mX.get(event.getPointerId(i)), mY.get(event.getPointerId(i)), (x + mX.get(event.getPointerId(i))) / 2,
-                                (y + mY.get(event.getPointerId(i))) / 2);
+                        for (int j = 0; j < historySize; j++) {                       //pour chaque point de l'historique (qui contient les points non pris en compte de ba)
+                            float historicalX = event.getHistoricalX(i,j);
+                            float historicalY = event.getHistoricalY(i,j);
+                            expandDirtyRect(historicalX, historicalY);
+                            p.lineTo(historicalX, historicalY);
+                        }
                         mX.put(event.getPointerId(i), event.getX(i));
                         mY.put(event.getPointerId(i), event.getY(i));
                         invalidate();
                     }
                 }
+
+
+
                 invalidate();
                 break;
             }
@@ -135,6 +134,7 @@ public class Dessin_item22 extends View {
                 break;
             }
         }
+
         return true;
     }
 
@@ -167,5 +167,26 @@ public class Dessin_item22 extends View {
 
 
     public Bitmap getCartographie(){return cartographie;}
+
+
+
+    /**
+     * Called when replaying history to ensure the dirty region includes all
+     * points.
+     */
+    private void expandDirtyRect(float historicalX, float historicalY) {
+        if (historicalX < dirtyRect.left) {
+            dirtyRect.left = historicalX;
+        } else if (historicalX > dirtyRect.right) {
+            dirtyRect.right = historicalX;
+        }
+        if (historicalY < dirtyRect.top) {
+            dirtyRect.top = historicalY;
+        } else if (historicalY > dirtyRect.bottom) {
+            dirtyRect.bottom = historicalY;
+        }
+    }
+
+
 
 }
