@@ -35,6 +35,8 @@ public class ouverture_appli extends Activity {
     final Context context = this;
     Calendar dateTodayCal = Calendar.getInstance();
     Date dateTodayDa;
+    String name;
+    String surname;
 
     @Override
     /*
@@ -78,10 +80,12 @@ public class ouverture_appli extends Activity {
         @Override
         public void onClick(View v) {
             // On récupère le nom, le prénom et la date de naissance
-            final String name = nomEntre.getText().toString();
+            name = nomEntre.getText().toString();
             int length_name = name.length();
-            final String surname = prenomEntre.getText().toString();
+            name = name.toUpperCase();
+            surname = prenomEntre.getText().toString();
             int length_surname = surname.length();
+            surname = surname.replaceFirst(".",(surname.charAt(0)+"").toUpperCase());
 
             // On vérifie que tous les champs ont été remplis
             // on vérifie que le nom et le prénom ont été remplis
@@ -96,6 +100,7 @@ public class ouverture_appli extends Activity {
                             try {
                                 // on vérifie que la date choisie est antérieure à la date du jour
                                 if (birthdate.before(dateTodayDa)) {
+                                    // on récupère la main du patient
                                     if (boutonDroitier.isChecked())
                                         varDG = "Droitier";
                                     else varDG = "Gaucher";
@@ -108,8 +113,8 @@ public class ouverture_appli extends Activity {
                                     final String birthdateFormated = sdf.format(birthdate);
                                     // set dialog message
                                     alertDialogBuilder
-                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
-                                                    + name.toUpperCase() + " " + surname.toLowerCase() + "\n né(e) le : " + birthdateFormated + "\n " + varDG)
+                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n \n"
+                                                    + name + " " + surname + "\n né(e) le : " + birthdateFormated + "\n " + varDG)
                                             .setCancelable(false)
                                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
