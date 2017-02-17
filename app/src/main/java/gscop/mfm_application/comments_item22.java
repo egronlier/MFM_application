@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,21 +21,22 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cete.dynamicpdf.Align;
-import com.cete.dynamicpdf.Document;
-import com.cete.dynamicpdf.Font;
-import com.cete.dynamicpdf.Page;
-import com.cete.dynamicpdf.PageOrientation;
-import com.cete.dynamicpdf.PageSize;
-import com.cete.dynamicpdf.TextAlign;
-import com.cete.dynamicpdf.VAlign;
-import com.cete.dynamicpdf.pageelements.Image;
-import com.cete.dynamicpdf.pageelements.Label;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -63,6 +65,8 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     TextView infosPatient;
     String path = "";
     Bitmap cartoBitmap;
+    File myFile;
+    List<String> listeComm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,13 +136,12 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                      RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
                      cotation = r.getText().toString();
                      // ------- COMMENTAIRES
-                     final List<String> listeComm = listeComment.getSelectedStrings();
+                     listeComm = listeComment.getSelectedStrings();
                      commentaire = comments.getText().toString();
                      // ------------------------------------------------------------------------------
 
                      // ouvrir une boite de dialogue permettant de valider
                      AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                     // set titre
                      alertDialogBuilder
                              .setTitle("Confirmation de validation")
                              .setMessage("Etes-vous certain de vouloir créer un fichier pour ce patient ?")
@@ -147,59 +150,9 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                                  public void onClick(DialogInterface dialog, int id) {
                                      // if this button is clicked, on fait l'enregistrement et on affiche le résultat
                                      dialog.cancel();
-                                     // ------------------ CREATION et ENREGISTREMENT du PDF ------------------
-                                     final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
-                                     String FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + ".pdf";
-                                     // Create a document and set it's properties
-                                     Document objDocument = new Document();
-                                     objDocument.setCreator("MFM_application");
-                                     objDocument.setAuthor("MFM_application");
-                                     objDocument.setTitle(name + "_" + surname + "_item22_" + timeStamp + ".pdf");
-
-                                     // Create a page to add to the document
-                                     Page page1 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
-                                     Page page2 = new Page(PageSize.LETTER, PageOrientation.PORTRAIT, 54.0f);
-
-                                     String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
-
-                                     // Create a Label to add to the page
-                                     String strText = " Patient : " + name + " " + surname +
-                                             "\n Date de naissance : " + birthdate +
-                                             "\n " + main +
-                                             "\n\n Item 22" +
-                                             "\n réalisé le : " + timeStampSimple +
-                                             "\n\n INFORMATIONS COMPLEMENTAIRES : " +
-                                             "\n Cotation : " + cotation +
-                                             "\n Commentaires : " + listeComm +
-                                             "\n " + commentaire;
-                                     Font font = Font.getHelvetica();
-                                     int fontSize = 18;
-                                     float textWidth = font.getTextWidth(strText, fontSize);
-                                     Label objLabel = new Label(strText, 0, 0, 504, textWidth, font, fontSize, TextAlign.LEFT);
-
-                                     // on ajoute l'image au pdf
-                                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                     cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                                     byte[] trueImageByte = stream.toByteArray();
-//                                        Image trueImage = new Image(trueImageByte,0,0);
-                                     // on place l'image au centre
-                                     float centerX = (page2.getDimensions().getWidth() - page2.getDimensions().getLeftMargin() - page2.getDimensions().getRightMargin()) / 2;
-                                     float centerY = (page2.getDimensions().getHeight() - page2.getDimensions().getTopMargin() - page2.getDimensions().getBottomMargin()) / 2;
-                                     Image trueImageCentred = new Image(trueImageByte,centerX,centerY);
-                                     trueImageCentred.setAlign(Align.CENTER);
-                                     trueImageCentred.setVAlign(VAlign.CENTER);
-
-                                     // Add label to page
-                                     page1.getElements().add(objLabel);
-                                     page2.getElements().add(trueImageCentred);
-
-                                     // Add page to document
-                                     objDocument.getPages().add(page1);
-                                     objDocument.getPages().add(page2);
-
                                      try {
-                                         // Outputs the document to file
-                                         objDocument.draw(FILE);
+                                         // ----------- CREATION DU PDF -------------
+                                         createPdf();
                                          Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
                                          // on renvoie alors vers l'interface de choix d'item
                                          Intent myIntent = new Intent(comments_item22.this, choix_item.class);
@@ -210,17 +163,17 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                                          startActivity(myIntent);
                                          // on ferme l'activité en cours
                                          finish();
-                                     } catch (Exception e) {
+                                     } catch (FileNotFoundException | DocumentException e) {
                                          e.printStackTrace();
-                                         Toast.makeText(getApplicationContext(), R.string.savedPB, Toast.LENGTH_LONG).show();
+                                         Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
                                      }
-                                     // --------------------------------------------------------------------
                                  }
                              })
                              .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                                  public void onClick(DialogInterface dialog, int id) {
                                      // if this button is clicked, close the dialog box
                                      dialog.cancel();
+                                     boutonEnregistrer.setClickable(true);
                                  }
                              });
                      // create alert dialog
@@ -284,4 +237,128 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    private void createPdf() throws FileNotFoundException, DocumentException {
+
+        // on crée un dossier NOM_prenom du patient s'il n'existe pas déjà
+        File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                , "patient_" + name + "_" + surname);
+        if (!pdfFolder.exists()) {
+            pdfFolder.mkdir();
+            Log.i("TAG", "Pdf Directory created");
+        }
+
+        //Create time stamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
+
+        // on crée le nom du fichier pdf à enregistrer
+        String filePath = pdfFolder.toString() + "/" + name + "_" + surname + "_" + timeStamp + "_" + "item22.pdf";
+        myFile = new File(filePath);
+        OutputStream output = new FileOutputStream(myFile);
+
+        //Step 1 : on crée le document
+        Document document = new Document(PageSize.LETTER);
+        document.setMarginMirroring(true);
+        document.setMarginMirroringTopBottom(true);
+
+        //Step 2 : on instantie le PdfWriter
+        PdfWriter.getInstance(document, output);
+
+        //Step 3 : ouverture du document
+        document.open();
+
+        //Step 4 : Add content
+        // choix des polices
+        Font myFontTitre = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD);
+        // TITRE
+        Paragraph paragraphTitre = new Paragraph();
+        paragraphTitre.setAlignment(Element.ALIGN_CENTER);
+        paragraphTitre.setFont(myFontTitre);
+        paragraphTitre.add("Fiche récapitulative \n \n \n");
+        document.add(paragraphTitre);
+
+        // INFOS PATIENT
+        Paragraph paragraphInfosTitre = new Paragraph();
+        paragraphInfosTitre.setFont(myFontTitre);
+        paragraphInfosTitre.add("\n\n INFORMATIONS PATIENT : \n");
+        document.add(paragraphInfosTitre);
+
+        String strText = " Patient : " + name + " " + surname +
+                "\n Date de naissance : " + birthdate +
+                "\n " + main + "\n \n";
+        Paragraph paragraphInfos = new Paragraph();
+        paragraphInfos.add(strText);
+        document.add(paragraphInfos);
+
+        // INFOS ITEM
+        Paragraph paragraphInfosItemTitre = new Paragraph();
+        paragraphInfosItemTitre.setFont(myFontTitre);
+        paragraphInfosItemTitre.add("\n ITEM 22 :");
+        document.add(paragraphInfosItemTitre);
+
+        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
+        strText = "réalisé le : " + timeStampSimple + "\n \n";
+        Paragraph paragraphInfosItem = new Paragraph();
+        paragraphInfosItem.add(strText);
+        document.add(paragraphInfosItem);
+
+        // INFOS COMPLEMENTAIRES
+        Paragraph paragraphInfosCompTitre = new Paragraph();
+        paragraphInfosCompTitre.setFont(myFontTitre);
+        paragraphInfosCompTitre.add("\n INFORMATIONS COMPLEMENTAIRES : \n");
+        document.add(paragraphInfosCompTitre);
+
+        strText = "Cotation : " + cotation + "\n \n";
+        Paragraph paragraphInfosComp = new Paragraph();
+        paragraphInfosComp.add(strText);
+        document.add(paragraphInfosComp);
+
+        // COMMENTAIRES KINE
+        Paragraph paragraphCommKineTitre = new Paragraph();
+        paragraphCommKineTitre.setFont(myFontTitre);
+        paragraphCommKineTitre.add("\n COMMENTAIRES : \n");
+        document.add(paragraphCommKineTitre);
+
+        strText = listeComm + "\n" + commentaire + "\n \n";
+        Paragraph paragraphCommKine = new Paragraph();
+        paragraphCommKine.add(strText);
+        document.add(paragraphCommKine);
+
+        // CARTOGRAPHIE
+        // on change de page
+        document.newPage();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        Image trueImage = null;
+        try {
+            trueImage = Image.getInstance(stream.toByteArray());
+            // on redimensionne l'image pour qu'elle rentre dans la page
+            float leftMargin = document.leftMargin();
+            float rightMargin = document.rightMargin();
+            float pageSize = document.getPageSize().getWidth();
+            float usablePageSize = pageSize - (rightMargin + leftMargin);
+            float imageWidth = trueImage.getPlainWidth();
+            if (imageWidth > usablePageSize) {
+                float reduceWidth = imageWidth - usablePageSize;
+                float reducePercent = 100f - ((reduceWidth * 100f) / imageWidth);
+                trueImage.scalePercent(reducePercent);
+            }
+            trueImage.setAlignment(Image.MIDDLE);
+            Log.i("TAG", "Try image succeeded");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Paragraph paragraphCarto = new Paragraph();
+//        paragraphCarto.setFont(myFontTitre);
+//        paragraphCarto.add("Cartographie : \n");
+        paragraphCarto.add(trueImage);
+        document.add(paragraphCarto);
+
+        //Step 5: Close the document
+        document.close();
+
+//        promptForNextAction();
+    }
+
 }
