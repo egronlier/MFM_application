@@ -70,7 +70,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     String path = "";
     Bitmap cartoBitmap;
     File myFile;
-    List<String> listeComm ;
+    List<String> listeComm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +181,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                                             e.printStackTrace();
                                             Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
                                         }
-                                   }
+                                    }
                                 })
                                 .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -222,7 +222,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
             myIntent.putExtra("main", main);
-            myIntent.putExtra("path",path);
+            myIntent.putExtra("path", path);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();
@@ -250,7 +250,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -285,7 +285,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
 
         //Step 4 : Add content
         // choix des polices
-        Font myFontTitre = new Font(Font.FontFamily.HELVETICA,24,Font.BOLD);
+        Font myFontTitre = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD);
         // TITRE
         Paragraph paragraphTitre = new Paragraph();
         paragraphTitre.setAlignment(Element.ALIGN_CENTER);
@@ -348,16 +348,28 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         Image trueImage = null;
         try {
             trueImage = Image.getInstance(stream.toByteArray());
+            // on redimensionne l'image pour qu'elle rentre dans la page
+            float leftMargin = document.leftMargin();
+            float rightMargin = document.rightMargin();
+            float pageSize = document.getPageSize().getWidth();
+            float usablePageSize = pageSize - (rightMargin + leftMargin);
+            float imageWidth = trueImage.getPlainWidth();
+            if (imageWidth > usablePageSize) {
+                float reduceWidth = imageWidth - usablePageSize;
+                float reducePercent = 100f - ((reduceWidth * 100f) / imageWidth);
+                trueImage.scalePercent(reducePercent);
+            }
+            trueImage.setAlignment(Image.MIDDLE);
             Log.i("TAG", "Try image succeeded");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         Paragraph paragraphCarto = new Paragraph();
-        paragraphCarto.setFont(myFontTitre);
-        paragraphCarto.setAlignment(Element.ALIGN_CENTER);
-        paragraphCarto.add("Cartographie : \n");
+//        paragraphCarto.setFont(myFontTitre);
+//        paragraphCarto.add("Cartographie : \n");
+        paragraphCarto.add(trueImage);
         document.add(paragraphCarto);
-        document.add(trueImage);
 
         //Step 5: Close the document
         document.close();
