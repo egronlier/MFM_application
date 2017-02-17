@@ -27,7 +27,7 @@ public class ouverture_appli extends Activity {
     Button boutonEffacer;
     EditText nomEntre;
     EditText prenomEntre;
-    DatePicker datePicker;
+    DatePicker monDatePicker;
     java.util.Date birthdate = null;
     RadioButton boutonDroitier;
     RadioButton boutonGaucher;
@@ -53,7 +53,7 @@ public class ouverture_appli extends Activity {
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
-        datePicker = (DatePicker) findViewById(R.id.datePicker);
+        monDatePicker = (DatePicker) findViewById(R.id.datePicker);
         boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
         boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
 
@@ -63,7 +63,7 @@ public class ouverture_appli extends Activity {
         dateTodayDa = dateTodayCal.getTime();
         // attention les mois commencent à 0
         dateTodayCal.set(yearToday, monthToday + 1, dayToday);
-        datePicker.init(yearToday, monthToday, dayToday, new DatePicker.OnDateChangedListener() {
+        monDatePicker.init(yearToday, monthToday, dayToday, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 birthdate = getDateFromDatePicker(datePicker);
@@ -85,7 +85,6 @@ public class ouverture_appli extends Activity {
             name = name.toUpperCase();
             surname = prenomEntre.getText().toString();
             int length_surname = surname.length();
-            surname = surname.replaceFirst(".",(surname.charAt(0)+"").toUpperCase());
 
             // On vérifie que tous les champs ont été remplis
             // on vérifie que le nom et le prénom ont été remplis
@@ -95,6 +94,7 @@ public class ouverture_appli extends Activity {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
                     if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)
                             && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
+                        surname = surname.replaceFirst(".",(surname.charAt(0)+"").toUpperCase());
                         // on vérifie qu'une date a bien été sélectionnée
                         if (birthdate != null) {
                             try {
@@ -149,15 +149,26 @@ public class ouverture_appli extends Activity {
                             }
                         } else { // aucune date n'a été choisie
                             Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
+                            monDatePicker.requestFocus();
                         }
                     } else { // Un des champs de nom ou prénom n'est pas au bon format
                         Toast.makeText(getApplicationContext(), R.string.errorNames, Toast.LENGTH_LONG).show();
                     }
                 } else { // Droitier ou gaucher n'a pas été choisi
                     Toast.makeText(getApplicationContext(), R.string.errorRadioButton, Toast.LENGTH_LONG).show();
+                    boutonGaucher.setError("Veuillez sélectionner !");
+                    boutonGaucher.requestFocus();
                 }
             } else { // Un des champs de nom ou prénom n'est pas rempli
                 Toast.makeText(getApplicationContext(), R.string.errorVoid, Toast.LENGTH_LONG).show();
+                if(length_name <= 0){
+                    nomEntre.setError("Champ nom vide !");
+                    nomEntre.requestFocus();
+                }
+                if(length_surname <= 0){
+                    prenomEntre.setError("Champ prénom vide !");
+                    prenomEntre.requestFocus();
+                }
             }
 
         }
@@ -169,7 +180,7 @@ public class ouverture_appli extends Activity {
         public void onClick(View v) {
             nomEntre.getText().clear();
             prenomEntre.getText().clear();
-            datePicker.setSelected(false);
+            monDatePicker.setSelected(false);
             boutonDroitier.setChecked(false);
             boutonGaucher.setChecked(false);
         }
