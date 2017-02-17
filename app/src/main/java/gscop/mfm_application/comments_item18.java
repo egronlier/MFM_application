@@ -121,7 +121,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         });
 
         infosPatient = (TextView) findViewById(R.id.PatientName);
-        infosPatient.setText("Patient : " + name.toUpperCase() + " " + surname.toLowerCase() + " \nné(e) le : " + birthdate + "\n" + main);
+        infosPatient.setText("Patient : " + name + " " + surname + " \nné(e) le : " + birthdate + "\n" + main);
 
         boutonEnregistrer = (Button) findViewById(R.id.buttonSave);
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
@@ -258,7 +258,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
 
         // on crée un dossier NOM_prenom du patient s'il n'existe pas déjà
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                , "patient_" + name.toUpperCase() + "_" + surname.toLowerCase());
+                , "patient_" + name + "_" + surname);
         if (!pdfFolder.exists()) {
             pdfFolder.mkdir();
             Log.i("TAG", "Pdf Directory created");
@@ -268,7 +268,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
 
         // on crée le nom du fichier pdf à enregistrer
-        String filePath = pdfFolder.toString() + "/" + name.toLowerCase() + "_" + surname.toLowerCase() + "_" + timeStamp + "_" + "item18.pdf";
+        String filePath = pdfFolder.toString() + "/" + name + "_" + surname + "_" + timeStamp + "_" + "item18.pdf";
         myFile = new File(filePath);
         OutputStream output = new FileOutputStream(myFile);
 
