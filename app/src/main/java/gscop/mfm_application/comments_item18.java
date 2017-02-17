@@ -341,6 +341,8 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         document.add(paragraphCommKine);
 
         // CARTOGRAPHIE
+        // on change de page
+        document.newPage();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         Image trueImage = null;
