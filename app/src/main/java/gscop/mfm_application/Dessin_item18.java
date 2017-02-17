@@ -28,6 +28,11 @@ public class Dessin_item18 extends View {
 
     private final RectF dirtyRect = new RectF();
 
+    private float xDown;
+    private float yDown;
+    private ArrayList<Float> xDownList = new ArrayList<>();
+    private ArrayList<Float> yDownList = new ArrayList<>();
+
     public Dessin_item18(Context context) {
         super(context);
     }
@@ -64,16 +69,22 @@ public class Dessin_item18 extends View {
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
 
-
-        super.onDraw(canvas);
-        for (Path completedPath : completedPaths) {
-            canvas.drawPath(completedPath, paint);
-        }
-        for (Path fingerPath : paths.values()) {
+        for (Path fingerPath : paths.values()) {            //dessine ce que l'utilisateur est en train de toucher
             if (fingerPath != null) {
+                canvas.drawPoint(xDown,yDown,paint);
                 canvas.drawPath(fingerPath, paint);
             }
         }
+
+        for (int i = 0; i < xDownList.size(); i++){                                   //permet de garder le dessin des points de départ à l'écran(pointer_down)
+            canvas.drawPoint(xDownList.get(i),yDownList.get(i),paint);
+        }
+
+
+        for (Path completedPath : completedPaths) {                                     //permet de garder le dessin à l'écran
+            canvas.drawPath(completedPath, paint);
+        }
+
 
         this.cartographie = image;
     }
@@ -94,28 +105,24 @@ public class Dessin_item18 extends View {
                     paths.put(id, p);
                     mX.put(id, event.getX(id));
                     mY.put(id, event.getY(id));
+                    xDown = event.getX(id);
+                    yDown = event.getY(id);
                     invalidate();
                 }catch (IllegalArgumentException ex){
                     ex.printStackTrace();
                 }
-
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
                 for (int size = event.getPointerCount(), i = 0; i < size; i++) {  //pour chaque doigt qui touche l'écran
-                    Path p = paths.get(event.getPointerId(i));                    //création d'un path pour le pointeur i
+                    Path p = paths.get(event.getPointerId(i));
                     if (p != null) {
-                        for (int j = 0; j < historySize; j++) {                       //pour chaque point de l'historique (qui contient les points non pris en compte)
+                        for (int j = 0; j < historySize; j++) {                       //pour chaque point de l'historique (qui contient les points non pris en compte de ba)
                             float historicalX = event.getHistoricalX(i,j);
                             float historicalY = event.getHistoricalY(i,j);
                             expandDirtyRect(historicalX, historicalY);
-                            p.lineTo(historicalX, historicalY);                       //trace un trait du dernier point x/y jusqu'au point historicalX/historicalY
+                            p.lineTo(historicalX, historicalY);
                         }
-
-                        float x = event.getX(i);
-                        float y = event.getY(i);
-                        // p.quadTo(mX.get(event.getPointerId(i)), mY.get(event.getPointerId(i)), (x + mX.get(event.getPointerId(i))) / 2,
-                        //         (y + mY.get(event.getPointerId(i))) / 2);
                         mX.put(event.getPointerId(i), event.getX(i));
                         mY.put(event.getPointerId(i), event.getY(i));
                         invalidate();
@@ -132,7 +139,8 @@ public class Dessin_item18 extends View {
                 Path p = paths.get(id);
                 if (p != null) {
                     completedPaths.add(p);
-                    //p.lineTo(event.getX(id), event.getY(id));
+                    xDownList.add(xDown);
+                    yDownList.add(yDown);
                     invalidate();
                     paths.remove(id);
                     mX.remove(id);

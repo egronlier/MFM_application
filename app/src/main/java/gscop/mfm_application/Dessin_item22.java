@@ -28,6 +28,11 @@ public class Dessin_item22 extends View {
 
     private final RectF dirtyRect = new RectF();
 
+    private float xDown;
+    private float yDown;
+    private ArrayList<Float> xDownList = new ArrayList<>();
+    private ArrayList<Float> yDownList = new ArrayList<>();
+
     public Dessin_item22(Context context) {
         super(context);
     }
@@ -62,15 +67,22 @@ public class Dessin_item22 extends View {
         canvas = new Canvas(image);
 
 
-        super.onDraw(canvas);
-        for (Path completedPath : completedPaths) {
-            canvas.drawPath(completedPath, paint);
-        }
-        for (Path fingerPath : paths.values()) {
+        for (Path fingerPath : paths.values()) {            //dessine ce que l'utilisateur est en train de toucher
             if (fingerPath != null) {
+                canvas.drawPoint(xDown,yDown,paint);
                 canvas.drawPath(fingerPath, paint);
             }
         }
+
+        for (int i = 0; i < xDownList.size(); i++){                                   //permet de garder le dessin des points de départ à l'écran(pointer_down)
+            canvas.drawPoint(xDownList.get(i),yDownList.get(i),paint);
+        }
+
+
+        for (Path completedPath : completedPaths) {                                     //permet de garder le dessin à l'écran
+            canvas.drawPath(completedPath, paint);
+        }
+
 
         this.cartographie = image;
     }
@@ -92,6 +104,8 @@ public class Dessin_item22 extends View {
                     paths.put(id, p);
                     mX.put(id, event.getX(id));
                     mY.put(id, event.getY(id));
+                    xDown = event.getX(id);
+                    yDown = event.getY(id);
                     invalidate();
                 }catch (IllegalArgumentException ex){
                     ex.printStackTrace();
@@ -124,6 +138,8 @@ public class Dessin_item22 extends View {
                 Path p = paths.get(id);
                 if (p != null) {
                     completedPaths.add(p);
+                    xDownList.add(xDown);
+                    yDownList.add(yDown);
                     invalidate();
                     paths.remove(id);
                     mX.remove(id);
