@@ -46,7 +46,7 @@ public class Dessin_item22 extends View {
         paint.setAntiAlias(true);
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(20);
+        paint.setStrokeWidth(15);
         paint.setStrokeCap(Paint.Cap.ROUND);
     }
 
@@ -85,10 +85,20 @@ public class Dessin_item22 extends View {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
                 Path p = new Path();
-                p.moveTo(event.getX(id), event.getY(id));
-                paths.put(id, p);
-                mX.put(id, event.getX(id));
-                mY.put(id, event.getY(id));
+
+                try {
+                    p.moveTo(event.getX(id), event.getY(id));
+                    System.out.println("\n \n \n \n \n" + id);
+                    paths.put(id, p);
+                    mX.put(id, event.getX(id));
+                    mY.put(id, event.getY(id));
+
+                    invalidate();
+
+
+                } catch (IllegalArgumentException ex) {
+                    ex.printStackTrace();
+                }
 
                 invalidate();
 
@@ -100,7 +110,6 @@ public class Dessin_item22 extends View {
                     if (p != null) {
                         float x = event.getX(i);
                         float y = event.getY(i);
-                        System.out.println("\n \n \n \n \n" + x);
                         p.quadTo(mX.get(event.getPointerId(i)), mY.get(event.getPointerId(i)), (x + mX.get(event.getPointerId(i))) / 2,
                                 (y + mY.get(event.getPointerId(i))) / 2);
                         mX.put(event.getPointerId(i), event.getX(i));

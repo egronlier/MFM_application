@@ -25,6 +25,7 @@ public class Dessin_item18 extends View {
     private HashMap<Integer, Float> mY = new HashMap<Integer, Float>();
     private HashMap<Integer, Path> paths = new HashMap<Integer, Path>();
     private ArrayList<Path> completedPaths = new ArrayList<>();
+
     public Dessin_item18(Context context) {
         super(context);
     }
@@ -48,7 +49,7 @@ public class Dessin_item18 extends View {
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
-        }
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -86,12 +87,22 @@ public class Dessin_item18 extends View {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
                 Path p = new Path();
-                p.moveTo(event.getX(id), event.getY(id));
-                paths.put(id, p);
-                mX.put(id, event.getX(id));
-                mY.put(id, event.getY(id));
 
-                invalidate();
+
+                try {
+                    p.moveTo(event.getX(id), event.getY(id));
+                    System.out.println("\n \n \n \n \n" + id);
+                    paths.put(id, p);
+                    mX.put(id, event.getX(id));
+                    mY.put(id, event.getY(id));
+
+                    invalidate();
+
+
+                } catch (IllegalArgumentException ex) {
+                    ex.printStackTrace();
+                }
+
 
                 break;
             }
@@ -101,7 +112,6 @@ public class Dessin_item18 extends View {
                     if (p != null) {
                         float x = event.getX(i);
                         float y = event.getY(i);
-                        System.out.println("\n \n \n \n \n" + x);
                         p.quadTo(mX.get(event.getPointerId(i)), mY.get(event.getPointerId(i)), (x + mX.get(event.getPointerId(i))) / 2,
                                 (y + mY.get(event.getPointerId(i))) / 2);
                         mX.put(event.getPointerId(i), event.getX(i));
@@ -141,9 +151,9 @@ public class Dessin_item18 extends View {
             int finalWidth = maxWidth;
             int finalHeight = maxHeight;
             if (ratioMax > 1) {
-                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+                finalWidth = (int) ((float) maxHeight * ratioBitmap);
             } else {
-                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+                finalHeight = (int) ((float) maxWidth / ratioBitmap);
             }
             image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
             return image;
@@ -153,6 +163,7 @@ public class Dessin_item18 extends View {
     }
 
 
-
-    public Bitmap getCartographie(){return cartographie;}
+    public Bitmap getCartographie() {
+        return cartographie;
+    }
 }
