@@ -124,66 +124,66 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
 
         boutonEnregistrer = (Button) findViewById(R.id.buttonSave);
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
-                 boutonEnregistrer.setClickable(false);
+                                                 @Override
+                                                 public void onClick(View v) {
+                                                     // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
+                                                     boutonEnregistrer.setClickable(false);
 
-                 // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
-                 if (boutonCotation0.isChecked() || boutonCotation1.isChecked() || boutonCotation2.isChecked() || boutonCotation3.isChecked() || boutonCotationNSP.isChecked()) {
-                     textCotation.setError(null);
-                     // --------------------- on récupère les commentaires du kiné -------------------
-                     // ------- COTATION
-                     int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
-                     View radioButtonSelected = radioGroupCotation.findViewById(radioButtonSelectedID);
-                     int index = radioGroupCotation.indexOfChild(radioButtonSelected);
-                     RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
-                     cotation = r.getText().toString();
-                     // ------- COMMENTAIRES
-                     listeComm = listeComment.getSelectedStrings();
-                     commentaire = comments.getText().toString();
-                     // ------------------------------------------------------------------------------
+                                                     // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
+                                                     if (boutonCotation0.isChecked() || boutonCotation1.isChecked() || boutonCotation2.isChecked() || boutonCotation3.isChecked() || boutonCotationNSP.isChecked()) {
+                                                         textCotation.setError(null);
+                                                         // --------------------- on récupère les commentaires du kiné -------------------
+                                                         // ------- COTATION
+                                                         int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
+                                                         View radioButtonSelected = radioGroupCotation.findViewById(radioButtonSelectedID);
+                                                         int index = radioGroupCotation.indexOfChild(radioButtonSelected);
+                                                         RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
+                                                         cotation = r.getText().toString();
+                                                         // ------- COMMENTAIRES
+                                                         listeComm = listeComment.getSelectedStrings();
+                                                         commentaire = comments.getText().toString();
+                                                         // ------------------------------------------------------------------------------
 
-                     // ouvrir une boite de dialogue permettant de valider
-                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                     alertDialogBuilder
-                             .setTitle("Confirmation de validation")
-                             .setMessage("Etes-vous certain de vouloir créer un fichier pour ce patient ?")
-                             .setCancelable(false)
-                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                                 public void onClick(DialogInterface dialog, int id) {
-                                     // if this button is clicked, on fait l'enregistrement et on affiche le résultat
-                                     Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
-                                     dialog.cancel();
-                                     try {
-                                         // ----------- CREATION DU PDF -------------
-                                         createPdf();
-                                         Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
-                                     } catch (FileNotFoundException | DocumentException e) {
-                                         e.printStackTrace();
-                                         Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
-                                     }
-                                 }
-                             })
-                             .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                                 public void onClick(DialogInterface dialog, int id) {
-                                     // if this button is clicked, close the dialog box
-                                     dialog.cancel();
-                                     boutonEnregistrer.setClickable(true);
-                                 }
-                             });
-                     // create alert dialog
-                     AlertDialog alertDialog = alertDialogBuilder.create();
-                     // show it
-                     alertDialog.show();
-                 } else {
-                     boutonEnregistrer.setClickable(true);
-                     Toast.makeText(getApplicationContext(), R.string.errorCotation, Toast.LENGTH_LONG).show();
-                     textCotation.setError("Choisir cotation !");
-                     textCotation.requestFocus();
-                 }
-             }
-         }
+                                                         // ouvrir une boite de dialogue permettant de valider
+                                                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                                                         alertDialogBuilder
+                                                                 .setTitle("Confirmation de validation")
+                                                                 .setMessage("Etes-vous certain de vouloir créer un fichier pour ce patient ?")
+                                                                 .setCancelable(false)
+                                                                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                                                                     public void onClick(DialogInterface dialog, int id) {
+                                                                         // if this button is clicked, on fait l'enregistrement et on affiche le résultat
+                                                                         Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
+                                                                         dialog.cancel();
+                                                                         try {
+                                                                             // ----------- CREATION DU PDF -------------
+                                                                             createPdf();
+                                                                             Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
+                                                                         } catch (FileNotFoundException | DocumentException e) {
+                                                                             e.printStackTrace();
+                                                                             Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
+                                                                         }
+                                                                     }
+                                                                 })
+                                                                 .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                                                                     public void onClick(DialogInterface dialog, int id) {
+                                                                         // if this button is clicked, close the dialog box
+                                                                         dialog.cancel();
+                                                                         boutonEnregistrer.setClickable(true);
+                                                                     }
+                                                                 });
+                                                         // create alert dialog
+                                                         AlertDialog alertDialog = alertDialogBuilder.create();
+                                                         // show it
+                                                         alertDialog.show();
+                                                     } else {
+                                                         boutonEnregistrer.setClickable(true);
+                                                         Toast.makeText(getApplicationContext(), R.string.errorCotation, Toast.LENGTH_LONG).show();
+                                                         textCotation.setError("Choisir cotation !");
+                                                         textCotation.requestFocus();
+                                                     }
+                                                 }
+                                             }
         );
     }
 
@@ -205,7 +205,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
             myIntent.putExtra("main", main);
-            myIntent.putExtra("path",path);
+            myIntent.putExtra("path", path);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();
@@ -233,7 +233,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -386,19 +386,20 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                     finish();
                 } else if (options[which].equals(getString(R.string.label_preview))) {
                     try {
+                        // on renvoie alors vers l'interface de choix d'item
+                        Intent myIntent = new Intent(comments_item22.this, choix_item.class);
+                        myIntent.putExtra("name", name);
+                        myIntent.putExtra("surname", surname);
+                        myIntent.putExtra("birthdate", birthdate);
+                        myIntent.putExtra("main", main);
+                        startActivity(myIntent);
+                        // on ferme l'activité en cours
+                        finish();
+                        // on ouvre le pdf
                         viewPdf();
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), R.string.viewPB, Toast.LENGTH_LONG).show();
                     }
-//                    // on renvoie alors vers l'interface de choix d'item
-//                    Intent myIntent = new Intent(comments_item22.this, choix_item.class);
-//                    myIntent.putExtra("name", name);
-//                    myIntent.putExtra("surname", surname);
-//                    myIntent.putExtra("birthdate", birthdate);
-//                    myIntent.putExtra("main", main);
-//                    startActivity(myIntent);
-//                    // on ferme l'activité en cours
-//                    finish();
                 } else if (options[which].equals(getString(R.string.label_quit))) {
                     comments_item22.this.finish();
                     System.exit(0);
