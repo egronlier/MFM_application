@@ -65,4 +65,5 @@
     <string name="select">Veuillez sélectionner : </string>
     <string name="errorCarto">ERREUR : problème d\'enregistrement de la cartographie</string>
     <string name="pbPDF">ERREUR : Problème de création du pdf !</string>
+    <string name="imageboutonquitter">imageBoutonQuitter</string>
 </resources>

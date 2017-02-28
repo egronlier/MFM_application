@@ -2,6 +2,7 @@ package gscop.mfm_application;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -24,12 +25,14 @@ public class carto_item22 extends Activity {
     String surname = "";
     String birthdate = "";
     String main = "";
+    Button buttonExit;
     Button boutonRecommencer;
     Button boutonValider;
     TextView infosPatient;
     String path = "";
     Bitmap cartoBitmap;
     ImageView carto;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +51,40 @@ public class carto_item22 extends Activity {
             main = intent.getStringExtra("main");
             path = intent.getStringExtra("path");
             try {
-                File f=new File(path, "cartographie.png");
-                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-                carto.setImageBitmap(b);
-            }
-            catch (FileNotFoundException e) {
+                File f = new File(path, "cartographie.png");
+                cartoBitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+                carto.setImageBitmap(cartoBitmap);
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
         infosPatient = (TextView) findViewById(R.id.infosPatient);
-        infosPatient.setText(" Patient : " + name + " " + surname + " \n Né(e) le : " + birthdate +"\n"+ " " + main );
+        infosPatient.setText(" Patient : " + name + " " + surname + " \n Né(e) le : " + birthdate + "\n" + " " + main);
+
+        buttonExit = (Button) findViewById(R.id.buttonExit);
+        buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Êtes-vous certain de vouloir quitter l'application ?")
+                        .setCancelable(true)
+                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // on quitte l'application courante
+                                carto_item22.this.finish();
+                                System.exit(0);
+                            }
+                        })
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
 
         // pour le bouton Recommencer
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -130,6 +156,7 @@ public class carto_item22 extends Activity {
 
     // quand on appuie sur la touche retour de la tablette -> comme pour le bouton recommencer
     private boolean back_answer = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
