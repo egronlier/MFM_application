@@ -39,6 +39,7 @@
     <string name="confirmBackAccueil">"Voulez-vous vraiment changer de patient ? \n </string>
     <string name="enCours"> En cours… </string>
     <string name="saving"> ENREGISTREMENT EN COURS… </string>
+    <string name="pdfsaving"> PDF en cours d\'enregistrement…</string>
     <string name="cotation">"Cotation : "</string>
     <string name="zero">" 0 "</string>
     <string name="one">" 1 "</string>
@@ -67,4 +68,5 @@
     <string name="errorCarto">ERREUR : problème d\'enregistrement de la cartographie</string>
     <string name="pbPDF">ERREUR : Problème de création du pdf !</string>
     <string name="imageboutonquitter">imageBoutonQuitter</string>
+    <string name="compl_info">Informations complémentaires :</string>
 </resources>

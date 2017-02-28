@@ -53,6 +53,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     Button boutonEnregistrer;
     final Context context = this;
     RadioGroup radioGroupCotation;
+    TextView textCotation;
     RadioButton boutonCotation0;
     RadioButton boutonCotation1;
     RadioButton boutonCotation2;
@@ -100,6 +101,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         }
 
         radioGroupCotation = (RadioGroup) findViewById(R.id.radioGroupCotation);
+        textCotation = (TextView) findViewById(R.id.textCotation);
         boutonCotation0 = (RadioButton) findViewById(R.id.radioButton0);
         boutonCotation1 = (RadioButton) findViewById(R.id.radioButton1);
         boutonCotation2 = (RadioButton) findViewById(R.id.radioButton2);
@@ -128,6 +130,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
 
                  // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
                  if (boutonCotation0.isChecked() || boutonCotation1.isChecked() || boutonCotation2.isChecked() || boutonCotation3.isChecked() || boutonCotationNSP.isChecked()) {
+                     textCotation.setError(null);
                      // --------------------- on récupère les commentaires du kiné -------------------
                      // ------- COTATION
                      int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
@@ -149,6 +152,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                              .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                  public void onClick(DialogInterface dialog, int id) {
                                      // if this button is clicked, on fait l'enregistrement et on affiche le résultat
+                                     Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
                                      dialog.cancel();
                                      try {
                                          // ----------- CREATION DU PDF -------------
@@ -181,7 +185,10 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                      // show it
                      alertDialog.show();
                  } else {
+                     boutonEnregistrer.setClickable(true);
                      Toast.makeText(getApplicationContext(), R.string.errorCotation, Toast.LENGTH_LONG).show();
+                     textCotation.setError("Choisir cotation !");
+                     textCotation.requestFocus();
                  }
              }
          }

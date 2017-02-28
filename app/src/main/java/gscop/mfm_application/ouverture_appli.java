@@ -94,12 +94,14 @@ public class ouverture_appli extends Activity {
             if (length_name > 0 && length_surname > 0) {
                 // on vérifie qu'au moins un radioButton a été sélectionné
                 if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
+                    boutonGaucher.setError(null);
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
                     if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)) {
                         if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
                             surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
                             // on vérifie qu'une date a bien été sélectionnée
                             if (birthdate != null) {
+                                texteDate.setError(null);
                                 try {
                                     // on vérifie que la date choisie est antérieure à la date du jour
                                     if (birthdate.before(dateTodayDa)) {

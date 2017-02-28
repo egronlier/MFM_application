@@ -209,7 +209,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/textView"
@@ -224,8 +225,9 @@
 
         <tutoandroid.libmultispinner.MultiSelectionSpinner
             android:id="@+id/mySpinner"
-            android:layout_width="500dp"
+            android:layout_width="450dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
             android:layout_gravity="center" />
     </LinearLayout>
 
@@ -233,13 +235,23 @@
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 
+    <TextView
+        android:text="@string/compl_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:id="@+id/textViewInfoCompl"
+        android:textColor="#0d8dc9"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
     <EditText
         android:id="@+id/editTextComments"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
-        android:background="@color/common_google_signin_btn_text_light_disabled"
+        android:background="#c2d6ed"
         android:gravity="start"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine"
