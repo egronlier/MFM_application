@@ -411,15 +411,15 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), R.string.viewPB, Toast.LENGTH_LONG).show();
                     }
-                    // on renvoie alors vers l'interface de choix d'item
-                    Intent myIntent = new Intent(comments_item18.this, choix_item.class);
-                    myIntent.putExtra("name", name);
-                    myIntent.putExtra("surname", surname);
-                    myIntent.putExtra("birthdate", birthdate);
-                    myIntent.putExtra("main", main);
-                    startActivity(myIntent);
-                    // on ferme l'activité en cours
-                    finish();
+//                    // on renvoie alors vers l'interface de choix d'item
+//                    Intent myIntent = new Intent(comments_item18.this, choix_item.class);
+//                    myIntent.putExtra("name", name);
+//                    myIntent.putExtra("surname", surname);
+//                    myIntent.putExtra("birthdate", birthdate);
+//                    myIntent.putExtra("main", main);
+//                    startActivity(myIntent);
+//                    // on ferme l'activité en cours
+//                    finish();
                 } else if (options[which].equals(getString(R.string.label_quit))) {
                     comments_item18.this.finish();
                     System.exit(0);
