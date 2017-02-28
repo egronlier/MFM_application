@@ -4,32 +4,32 @@
     android:id="@+id/activity_ouverture_appli"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="5dp"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="16dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="gscop.mfm_application.ouverture_appli"
-    android:orientation="vertical"
-    android:layout_marginStart="5dp"
     tools:ignore="RtlHardcoded">
 
     <TextView
+        android:id="@+id/texteAccueil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/veuillez"
         android:textColor="#0d8dc9"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:id="@+id/texteAccueil" />
+        android:textStyle="bold" />
 
     <TextView
-        android:text="@string/textMandatory"
+        android:id="@+id/textMandatory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/textMandatory"
         android:textAlignment="center"
-        android:textSize="25sp"
-        android:id="@+id/textMandatory" />
+        android:textSize="25sp" />
 
     <Space
         android:layout_width="match_parent"
@@ -41,68 +41,32 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/mandatory"
+            android:id="@+id/mandatoryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mandatoryName"
+            android:text="@string/mandatory"
+            android:textColor="#f2053c"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#f2053c" />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/name"
-            android:textSize="25sp"
-            android:textStyle="bold"
             android:textColor="#0d8dc9"
-            android:gravity="center"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/nom"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/name2"
             android:inputType="textPersonName"
             android:lines="2"
-            android:layout_weight="1"
             tools:ignore="InefficientWeight" />
-    </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20sp"/>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/mandatory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/mandatorySurname"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#f2053c" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/surname"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#0d8dc9"
-            android:gravity="center"/>
-
-        <EditText
-            android:id="@+id/prenom"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/surname2"
-            android:inputType="textPersonName"
-            android:lines="2"
-            android:layout_weight="1"/>
     </LinearLayout>
 
     <Space
@@ -115,32 +79,69 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/mandatory"
+            android:id="@+id/mandatorySurname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mandatoryDate"
+            android:text="@string/mandatory"
+            android:textColor="#f2053c"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#f2053c" />
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/surname"
+            android:textColor="#0d8dc9"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/prenom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/surname2"
+            android:inputType="textPersonName"
+            android:lines="2" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/mandatoryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mandatory"
+            android:textColor="#f2053c"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/texteBirthdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/birthdate"
-            android:textSize="25sp"
-            android:textStyle="bold"
             android:textColor="#0d8dc9"
-            android:gravity="center"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <DatePicker
+            android:id="@+id/datePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/datePicker"
-            android:endYear="2010"
-            android:firstDayOfWeek="2"
+            android:layout_gravity="center"
             android:layout_marginLeft="40sp"
-            android:layout_gravity="center"/>
+            android:endYear="2010"
+            android:firstDayOfWeek="2" />
     </LinearLayout>
 
     <Space
@@ -148,77 +149,85 @@
         android:layout_height="20sp" />
 
     <RadioGroup
-        android:orientation="horizontal"
         android:id="@+id/radioGroupMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <RadioButton
-            android:text="@string/gaucher"
+            android:id="@+id/boutonGaucher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30sp"
-            android:id="@+id/boutonGaucher"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="@string/gaucher"
             android:textColor="#0d8dc9"
-            android:layout_weight="1" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:text="@string/mandatory"
+            android:id="@+id/mandatoryLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mandatoryLeft"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="@string/mandatory"
             android:textColor="#f2053c"
-            android:layout_weight="1" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <RadioButton
-            android:text="@string/droitier"
+            android:id="@+id/boutonDroitier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/boutonDroitier"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="@string/droitier"
             android:textColor="#0d8dc9"
-            android:layout_weight="1" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:text="@string/mandatory"
+            android:id="@+id/madatoryRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/madatoryRight"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:layout_weight="1"
+            android:text="@string/mandatory"
             android:textColor="#f2053c"
-            android:layout_weight="1" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
     </RadioGroup>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="100dp" />
 
-    <Button
-        android:text="@string/erase"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonerase"
-        android:textSize="30sp"
-        android:background="#9bc3f1"
-        android:layout_gravity="center" />
 
-    <Space
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/boutonvalider"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/valid"
-        android:textSize="30sp"
-        android:background="#9bc3f1"
-        android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/buttonerase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#9bc3f1"
+            android:text="@string/erase"
+            android:textSize="30sp" />
+
+        <Space
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/boutonvalider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#9bc3f1"
+            android:text="@string/valid"
+            android:textSize="30sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
