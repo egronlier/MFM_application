@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -158,15 +159,6 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                                          // ----------- CREATION DU PDF -------------
                                          createPdf();
                                          Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
-                                         // on renvoie alors vers l'interface de choix d'item
-                                         Intent myIntent = new Intent(comments_item22.this, choix_item.class);
-                                         myIntent.putExtra("name", name);
-                                         myIntent.putExtra("surname", surname);
-                                         myIntent.putExtra("birthdate", birthdate);
-                                         myIntent.putExtra("main", main);
-                                         startActivity(myIntent);
-                                         // on ferme l'activité en cours
-                                         finish();
                                      } catch (FileNotFoundException | DocumentException e) {
                                          e.printStackTrace();
                                          Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
@@ -365,7 +357,54 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         //Step 5: Close the document
         document.close();
 
-//        promptForNextAction();
+        promptForNextAction();
     }
 
+    private void viewPdf() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(myFile), "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
+
+    private void promptForNextAction() {
+        final String[] options = {getString(R.string.label_continue), getString(R.string.label_preview), getString(R.string.label_quit)};
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setTitle("PDF enregistré, que voulez-vous faire ?");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (options[which].equals(getString(R.string.label_continue))) {
+                    // on renvoie alors vers l'interface de choix d'item
+                    Intent myIntent = new Intent(comments_item22.this, choix_item.class);
+                    myIntent.putExtra("name", name);
+                    myIntent.putExtra("surname", surname);
+                    myIntent.putExtra("birthdate", birthdate);
+                    myIntent.putExtra("main", main);
+                    startActivity(myIntent);
+                    // on ferme l'activité en cours
+                    finish();
+                } else if (options[which].equals(getString(R.string.label_preview))) {
+                    try {
+                        viewPdf();
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), R.string.viewPB, Toast.LENGTH_LONG).show();
+                    }
+                    // on renvoie alors vers l'interface de choix d'item
+                    Intent myIntent = new Intent(comments_item22.this, choix_item.class);
+                    myIntent.putExtra("name", name);
+                    myIntent.putExtra("surname", surname);
+                    myIntent.putExtra("birthdate", birthdate);
+                    myIntent.putExtra("main", main);
+                    startActivity(myIntent);
+                    // on ferme l'activité en cours
+                    finish();
+                } else if (options[which].equals(getString(R.string.label_quit))) {
+                    comments_item22.this.finish();
+                    System.exit(0);
+                }
+            }
+        });
+        builder.show();
+    }
 }
