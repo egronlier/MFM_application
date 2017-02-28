@@ -66,6 +66,7 @@
             android:hint="@string/name2"
             android:inputType="textPersonName"
             android:lines="2"
+            android:maxLength="30"
             tools:ignore="InefficientWeight" />
     </LinearLayout>
 
@@ -102,6 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/surname2"
+            android:maxLength="30"
             android:inputType="textPersonName"
             android:lines="2" />
     </LinearLayout>

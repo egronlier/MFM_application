@@ -2,6 +2,7 @@ package gscop.mfm_application;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -16,10 +17,12 @@ public class choix_item extends Activity {
     TextView textNomPrenomPatient;
     Button buttonItem18;
     Button buttonItem22;
+    Button buttonExit;
     String name = "";
     String surname = "";
     String birthdate = "";
     String main = "";
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,32 @@ public class choix_item extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
-            textNomPrenomPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate +"\n"+ main );
+            textNomPrenomPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate + "\n" + main);
         }
+
+        buttonExit = (Button) findViewById(R.id.buttonExit);
+        buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Êtes-vous certain de vouloir quitter l'application ?")
+                        .setCancelable(true)
+                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // on quitte l'application courante
+                                choix_item.this.finish();
+                                System.exit(0);
+                            }
+                        })
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
 
         buttonItem18 = (Button) findViewById(R.id.buttonitem18);
         buttonItem18.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +75,7 @@ public class choix_item extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("main",main);
+                myIntent.putExtra("main", main);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
@@ -64,7 +91,7 @@ public class choix_item extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("main",main);
+                myIntent.putExtra("main", main);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
