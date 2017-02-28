@@ -26,6 +26,7 @@ public class ouverture_appli extends Activity {
 
     Button boutonValider;
     Button boutonEffacer;
+    Button buttonExit;
     EditText nomEntre;
     EditText prenomEntre;
     TextView texteDate;
@@ -76,7 +77,31 @@ public class ouverture_appli extends Activity {
         // on met un listener qui regarde quand on clique sur le bouton
         boutonValider.setOnClickListener(validerListener);
         boutonEffacer.setOnClickListener(effacerListener);
+        buttonExit = (Button) findViewById(R.id.buttonExit);
+        buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Êtes-vous certain de vouloir quitter l'application ?")
+                        .setCancelable(true)
+                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // on quitte l'application courante
+                                ouverture_appli.this.finish();
+                                System.exit(0);
+                            }
+                        })
+                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
     }
+
 
     // Pour le bouton valider
     private View.OnClickListener validerListener = new View.OnClickListener() {

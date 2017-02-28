@@ -103,9 +103,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/surname2"
-            android:maxLength="30"
             android:inputType="textPersonName"
-            android:lines="2" />
+            android:lines="2"
+            android:maxLength="30" />
     </LinearLayout>
 
     <Space
@@ -205,7 +205,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -231,5 +231,13 @@
             android:textSize="30sp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonExit"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/exit_button_2" />
 
 </LinearLayout>
