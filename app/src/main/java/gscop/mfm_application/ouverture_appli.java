@@ -95,68 +95,75 @@ public class ouverture_appli extends Activity {
                 // on vérifie qu'au moins un radioButton a été sélectionné
                 if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
-                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)
-                            && Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
-                        surname = surname.replaceFirst(".",(surname.charAt(0)+"").toUpperCase());
-                        // on vérifie qu'une date a bien été sélectionnée
-                        if (birthdate != null) {
-                            try {
-                                // on vérifie que la date choisie est antérieure à la date du jour
-                                if (birthdate.before(dateTodayDa)) {
-                                    // on récupère la main du patient
-                                    if (boutonDroitier.isChecked())
-                                        varDG = "Droitier";
-                                    else varDG = "Gaucher";
-                                    // ouvrir une boite de dialogue permettant de valider les infos entrées
-                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                                    // set titre
-                                    alertDialogBuilder.setTitle("Confirmation des données");
-                                    // on met la date choisie au bon format : DD/MM/AAAA
-                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-                                    final String birthdateFormated = sdf.format(birthdate);
-                                    // set dialog message
-                                    alertDialogBuilder
-                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
-                                                    + " " + name + " " + surname + "\n Né(e) le : " + birthdateFormated + "\n " + varDG)
-                                            .setCancelable(false)
-                                            .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    // if this button is clicked, go to next activity
-                                                    dialog.cancel();
-                                                    // On lance une nouvelle activité : l'interface du choix d'item
-                                                    Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
-                                                    myIntent.putExtra("name", name);
-                                                    myIntent.putExtra("surname", surname);
-                                                    myIntent.putExtra("birthdate", birthdateFormated);
-                                                    myIntent.putExtra("main", varDG);
-                                                    startActivity(myIntent);
-                                                    // on ferme l'activité en cours
-                                                    finish();
-                                                }
-                                            })
-                                            .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    // if this button is clicked, close the dialog box
-                                                    dialog.cancel();
-                                                }
-                                            });
-                                    // create alert dialog
-                                    AlertDialog alertDialog = alertDialogBuilder.create();
-                                    // show it
-                                    alertDialog.show();
-                                } else { // Date entrée non antérieure à la date du jour
-                                    Toast.makeText(getApplicationContext(), R.string.errorDateAfter, Toast.LENGTH_LONG).show();
+                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)) {
+                        if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
+                            surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
+                            // on vérifie qu'une date a bien été sélectionnée
+                            if (birthdate != null) {
+                                try {
+                                    // on vérifie que la date choisie est antérieure à la date du jour
+                                    if (birthdate.before(dateTodayDa)) {
+                                        // on récupère la main du patient
+                                        if (boutonDroitier.isChecked())
+                                            varDG = "Droitier";
+                                        else varDG = "Gaucher";
+                                        // ouvrir une boite de dialogue permettant de valider les infos entrées
+                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                                        // set titre
+                                        alertDialogBuilder.setTitle("Confirmation des données");
+                                        // on met la date choisie au bon format : DD/MM/AAAA
+                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+                                        final String birthdateFormated = sdf.format(birthdate);
+                                        // set dialog message
+                                        alertDialogBuilder
+                                                .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
+                                                        + " " + name + " " + surname + "\n Né(e) le : " + birthdateFormated + "\n " + varDG)
+                                                .setCancelable(false)
+                                                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        // if this button is clicked, go to next activity
+                                                        dialog.cancel();
+                                                        // On lance une nouvelle activité : l'interface du choix d'item
+                                                        Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
+                                                        myIntent.putExtra("name", name);
+                                                        myIntent.putExtra("surname", surname);
+                                                        myIntent.putExtra("birthdate", birthdateFormated);
+                                                        myIntent.putExtra("main", varDG);
+                                                        startActivity(myIntent);
+                                                        // on ferme l'activité en cours
+                                                        finish();
+                                                    }
+                                                })
+                                                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        // if this button is clicked, close the dialog box
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                        // create alert dialog
+                                        AlertDialog alertDialog = alertDialogBuilder.create();
+                                        // show it
+                                        alertDialog.show();
+                                    } else { // Date entrée non antérieure à la date du jour
+                                        Toast.makeText(getApplicationContext(), R.string.errorDateAfter, Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (Exception e) { // Problème inconnu avec la date choisie
+                                    Toast.makeText(getApplicationContext(), R.string.internalError, Toast.LENGTH_LONG).show();
                                 }
-                            } catch (Exception e) { // Problème inconnu avec la date choisie
-                                Toast.makeText(getApplicationContext(), R.string.internalError, Toast.LENGTH_LONG).show();
+                            } else { // aucune date n'a été choisie
+                                Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
+                                texteDate.setError("Veuillez sélectionner une date !");
+                                monDatePicker.requestFocus();
                             }
-                        } else { // aucune date n'a été choisie
-                            Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
-                            texteDate.setError("Veuillez sélectionner une date !");
-                            monDatePicker.requestFocus();
+                        } else { // Champs prénom pas au bon format
+                            Toast.makeText(getApplicationContext(), R.string.errorSurname, Toast.LENGTH_LONG).show();
+                            prenomEntre.setError("Que des lettres !");
+                            prenomEntre.requestFocus();
                         }
-                    } else { // Un des champs de nom ou prénom n'est pas au bon format
-                        Toast.makeText(getApplicationContext(), R.string.errorNames, Toast.LENGTH_LONG).show();
+                    } else { // Champs nom pas au bon format
+                        Toast.makeText(getApplicationContext(), R.string.errorName, Toast.LENGTH_LONG).show();
+                        nomEntre.setError("Que des lettres !");
+                        nomEntre.requestFocus();
                     }
                 } else { // Droitier ou gaucher n'a pas été choisi
                     Toast.makeText(getApplicationContext(), R.string.errorRadioButton, Toast.LENGTH_LONG).show();
@@ -165,16 +172,14 @@ public class ouverture_appli extends Activity {
                 }
             } else { // Un des champs de nom ou prénom n'est pas rempli
                 Toast.makeText(getApplicationContext(), R.string.errorVoid, Toast.LENGTH_LONG).show();
-                if(length_name <= 0){
+                if (length_name <= 0) {
                     nomEntre.setError("Champ nom vide !");
                     nomEntre.requestFocus();
-                }
-                if(length_surname <= 0){
+                } else if (length_surname <= 0) {
                     prenomEntre.setError("Champ prénom vide !");
                     prenomEntre.requestFocus();
                 }
             }
-
         }
     };
 
