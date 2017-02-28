@@ -64,9 +64,13 @@
     <string name="item22carto">Item 22 : Cartographie</string>
     <string name="savedOK">Le fichier a bien été enregistré dans le dossier "Download" </string>
     <string name="savedPB">ERREUR : Le fichier n\'a pas pu être enregistré ! </string>
+    <string name="viewPB">ERREUR : Le fichier pdf n\'a pas pu être ouvert ! Veuillez installer une application compatible</string>
     <string name="select">Veuillez sélectionner : </string>
     <string name="errorCarto">ERREUR : problème d\'enregistrement de la cartographie</string>
     <string name="pbPDF">ERREUR : Problème de création du pdf !</string>
     <string name="imageboutonquitter">imageBoutonQuitter</string>
     <string name="compl_info">Informations complémentaires :</string>
+    <string name="label_continue">Continuer MFM</string>
+    <string name="label_preview">Prévisualiser</string>
+    <string name="label_quit">Quitter</string>
 </resources>
