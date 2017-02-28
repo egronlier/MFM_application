@@ -1,57 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:text="@string/item18"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#0d8dc9"
-        android:textSize="60sp"
-        android:background="#caddf4"
-        android:layout_marginTop="258dp"
-        android:id="@+id/buttonitem18"
-        android:layout_below="@+id/texteChoixItem"
-        android:layout_centerHorizontal="true" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/PatientName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="60dp"
+            android:layout_weight="1"
+            android:textColor="#767879"
+            android:textSize="30sp"
+            tools:text="Nom et prénom du patient" />
+
+        <Button
+            android:id="@+id/buttonExit"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/exit_button" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
 
     <TextView
+        android:id="@+id/texteChoixItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="104dp"
         android:text="@string/choiceExercise"
+        android:textAlignment="center"
         android:textColor="#0d8dc9"
         android:textSize="40sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:id="@+id/texteChoixItem"
-        android:textAlignment="center"
-        android:layout_marginTop="104dp"
-        android:layout_below="@+id/PatientName"
-        android:layout_alignParentStart="true" />
+        android:textStyle="bold" />
 
-    <Button
-        android:text="@string/item22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#0d8dc9"
-        android:textSize="60sp"
-        android:background="#caddf4"
-        android:id="@+id/buttonitem22"
-        android:layout_below="@+id/buttonitem18"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        tools:text="Nom et prénom du patient"
-        android:textColor="#767879"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:id="@+id/PatientName"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp" />
+        <Button
+            android:id="@+id/buttonitem18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:background="#caddf4"
+            android:text="@string/item18"
+            android:textColor="#0d8dc9"
+            android:textSize="60sp" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/buttonitem22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:background="#caddf4"
+            android:text="@string/item22"
+            android:textColor="#0d8dc9"
+            android:textSize="60sp" />
+    </LinearLayout>
+
+</LinearLayout>
