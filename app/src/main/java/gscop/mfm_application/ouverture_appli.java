@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -50,14 +51,42 @@ public class ouverture_appli extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.ouverture_appli);
 
-        // on utilise la méthode findViewById pour récupérer le bouton quand on clique dessus
+        // on utilise la méthode findViewById pour récupérer les éléments de la vue
         // R est la classe qui contient les ressources
         boutonValider = (Button) findViewById(R.id.boutonvalider);
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
+
         nomEntre = (EditText) findViewById(R.id.nom);
+        nomEntre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         prenomEntre = (EditText) findViewById(R.id.prenom);
+        prenomEntre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         texteDate = (TextView) findViewById(R.id.texteBirthdate);
         monDatePicker = (DatePicker) findViewById(R.id.datePicker);
+        monDatePicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
         boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
 
@@ -256,5 +285,10 @@ public class ouverture_appli extends Activity {
             alert.show();
         }
         return back_answer;
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
