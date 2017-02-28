@@ -407,7 +407,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                     finish();
                 } else if (options[which].equals(getString(R.string.label_preview))) {
                     try {
-                        viewPdf();
                         // on renvoie alors vers l'interface de choix d'item
                         Intent myIntent = new Intent(comments_item18.this, choix_item.class);
                         myIntent.putExtra("name", name);
@@ -417,6 +416,8 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         startActivity(myIntent);
                         // on ferme l'activité en cours
                         finish();
+                        // on ouvre le pdf
+                        viewPdf();
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), R.string.viewPB, Toast.LENGTH_LONG).show();
                     }
