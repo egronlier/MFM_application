@@ -100,12 +100,12 @@ public class do_item18 extends Activity {
     }
 
     // Cette méthode enregistre un bitmap dans la mémoire interne de l'appareil
-    private String saveToInternalStorage(Bitmap bitmapImage){
+    private String saveToInternalStorage(Bitmap bitmapImage) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
-        File mypath=new File(directory,"cartographie.png");
+        File mypath = new File(directory, "cartographie.png");
 
         FileOutputStream fos = null;
         try {

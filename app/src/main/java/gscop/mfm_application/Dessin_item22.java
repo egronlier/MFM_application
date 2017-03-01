@@ -21,9 +21,9 @@ public class Dessin_item22 extends View {
     private Bitmap cartographie;
     private final Paint paint = new Paint();
 
-    private HashMap<Integer, Float> mX = new HashMap<Integer, Float>();
-    private HashMap<Integer, Float> mY = new HashMap<Integer, Float>();
-    private HashMap<Integer, Path> paths = new HashMap<Integer, Path>();
+    private HashMap<Integer, Float> mX = new HashMap<>();
+    private HashMap<Integer, Float> mY = new HashMap<>();
+    private HashMap<Integer, Path> paths = new HashMap<>();
     private ArrayList<Path> completedPaths = new ArrayList<>();
 
     private final RectF dirtyRect = new RectF();
@@ -61,7 +61,7 @@ public class Dessin_item22 extends View {
     protected void onDraw(Canvas canvas) {
         // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
-        image = resize(image, 1250,1250);
+        image = resize(image, 1250, 1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner l'image dans le canvas
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
@@ -69,13 +69,13 @@ public class Dessin_item22 extends View {
 
         for (Path fingerPath : paths.values()) {            //dessine ce que l'utilisateur est en train de toucher
             if (fingerPath != null) {
-                canvas.drawPoint(xDown,yDown,paint);
+                canvas.drawPoint(xDown, yDown, paint);
                 canvas.drawPath(fingerPath, paint);
             }
         }
 
-        for (int i = 0; i < xDownList.size(); i++){                                   //permet de garder le dessin des points de départ à l'écran(pointer_down)
-            canvas.drawPoint(xDownList.get(i),yDownList.get(i),paint);
+        for (int i = 0; i < xDownList.size(); i++) {                                   //permet de garder le dessin des points de départ à l'écran(pointer_down)
+            canvas.drawPoint(xDownList.get(i), yDownList.get(i), paint);
         }
 
 
@@ -107,7 +107,7 @@ public class Dessin_item22 extends View {
                     xDown = event.getX(id);
                     yDown = event.getY(id);
                     invalidate();
-                }catch (IllegalArgumentException ex){
+                } catch (IllegalArgumentException ex) {
                     ex.printStackTrace();
                 }
                 break;
@@ -117,8 +117,8 @@ public class Dessin_item22 extends View {
                     Path p = paths.get(event.getPointerId(i));
                     if (p != null) {
                         for (int j = 0; j < historySize; j++) {                       //pour chaque point de l'historique (qui contient les points non pris en compte de ba)
-                            float historicalX = event.getHistoricalX(i,j);
-                            float historicalY = event.getHistoricalY(i,j);
+                            float historicalX = event.getHistoricalX(i, j);
+                            float historicalY = event.getHistoricalY(i, j);
                             expandDirtyRect(historicalX, historicalY);
                             p.lineTo(historicalX, historicalY);
                         }
@@ -127,7 +127,6 @@ public class Dessin_item22 extends View {
                         invalidate();
                     }
                 }
-
 
 
                 invalidate();
@@ -155,9 +154,6 @@ public class Dessin_item22 extends View {
     }
 
 
-
-
-
     // Cette méthode permet de redimensionner un bitmap
     private static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
         if (maxHeight > 0 && maxWidth > 0) {
@@ -169,9 +165,9 @@ public class Dessin_item22 extends View {
             int finalWidth = maxWidth;
             int finalHeight = maxHeight;
             if (ratioMax > 1) {
-                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+                finalWidth = (int) ((float) maxHeight * ratioBitmap);
             } else {
-                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+                finalHeight = (int) ((float) maxWidth / ratioBitmap);
             }
             image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
             return image;
@@ -181,9 +177,9 @@ public class Dessin_item22 extends View {
     }
 
 
-
-    public Bitmap getCartographie(){return cartographie;}
-
+    public Bitmap getCartographie() {
+        return cartographie;
+    }
 
 
     /**
@@ -202,7 +198,6 @@ public class Dessin_item22 extends View {
             dirtyRect.bottom = historicalY;
         }
     }
-
 
 
 }

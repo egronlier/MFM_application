@@ -21,9 +21,9 @@ public class Dessin_item18 extends View {
     private Bitmap cartographie;
     private final Paint paint = new Paint();
 
-    private HashMap<Integer, Float> mX = new HashMap<Integer, Float>();
-    private HashMap<Integer, Float> mY = new HashMap<Integer, Float>();
-    private HashMap<Integer, Path> paths = new HashMap<Integer, Path>();
+    private HashMap<Integer, Float> mX = new HashMap<>();
+    private HashMap<Integer, Float> mY = new HashMap<>();
+    private HashMap<Integer, Path> paths = new HashMap<>();
     private ArrayList<Path> completedPaths = new ArrayList<>();
 
     private final RectF dirtyRect = new RectF();
@@ -36,7 +36,6 @@ public class Dessin_item18 extends View {
     public Dessin_item18(Context context) {
         super(context);
     }
-
 
     public Dessin_item18(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -65,19 +64,18 @@ public class Dessin_item18 extends View {
         //Bitmap cd = Bitmap.createScaledBitmap(image, 1080,1080, true);
         image = resize(image, 1250, 1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner le CD dans le canvas
-
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
 
         for (Path fingerPath : paths.values()) {            //dessine ce que l'utilisateur est en train de toucher
             if (fingerPath != null) {
-                canvas.drawPoint(xDown,yDown,paint);
+                canvas.drawPoint(xDown, yDown, paint);
                 canvas.drawPath(fingerPath, paint);
             }
         }
 
-        for (int i = 0; i < xDownList.size(); i++){                                   //permet de garder le dessin des points de départ à l'écran(pointer_down)
-            canvas.drawPoint(xDownList.get(i),yDownList.get(i),paint);
+        for (int i = 0; i < xDownList.size(); i++) {                                   //permet de garder le dessin des points de départ à l'écran(pointer_down)
+            canvas.drawPoint(xDownList.get(i), yDownList.get(i), paint);
         }
 
 
@@ -108,7 +106,7 @@ public class Dessin_item18 extends View {
                     xDown = event.getX(id);
                     yDown = event.getY(id);
                     invalidate();
-                }catch (IllegalArgumentException ex){
+                } catch (IllegalArgumentException ex) {
                     ex.printStackTrace();
                 }
                 break;
@@ -118,8 +116,8 @@ public class Dessin_item18 extends View {
                     Path p = paths.get(event.getPointerId(i));
                     if (p != null) {
                         for (int j = 0; j < historySize; j++) {                       //pour chaque point de l'historique (qui contient les points non pris en compte de ba)
-                            float historicalX = event.getHistoricalX(i,j);
-                            float historicalY = event.getHistoricalY(i,j);
+                            float historicalX = event.getHistoricalX(i, j);
+                            float historicalY = event.getHistoricalY(i, j);
                             expandDirtyRect(historicalX, historicalY);
                             p.lineTo(historicalX, historicalY);
                         }
@@ -128,7 +126,6 @@ public class Dessin_item18 extends View {
                         invalidate();
                     }
                 }
-
 
 
                 invalidate();
@@ -183,8 +180,6 @@ public class Dessin_item18 extends View {
     }
 
 
-
-
     /**
      * Called when replaying history to ensure the dirty region includes all
      * points.
@@ -201,9 +196,6 @@ public class Dessin_item18 extends View {
             dirtyRect.bottom = historicalY;
         }
     }
-
-
-
 
 
 }

@@ -11,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -193,11 +192,6 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setMessage("Êtes-vous certain de vouloir quitter l'exercice ? (le tracé sera perdu)")
-//                    .setCancelable(true)
-//                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
             back_answer = true;
             // on revient à l'écran de réalisation de l'item 18
             Intent myIntent = new Intent(comments_item22.this, carto_item22.class);
@@ -210,15 +204,6 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             // on ferme l'activité en cours
             finish();
         }
-//                    })
-//                    .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            back_answer = false;
-//                        }
-//                    });
-//            AlertDialog alert = builder.create();
-//            alert.show();
-//        }
         return back_answer;
     }
 
@@ -243,10 +228,10 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 , "patient_" + name + "_" + surname);
         boolean isDirectoryCreated = pdfFolder.exists();
-        if(!isDirectoryCreated){
+        if (!isDirectoryCreated) {
             isDirectoryCreated = pdfFolder.mkdir();
         }
-        if(isDirectoryCreated){
+        if (isDirectoryCreated) {
             Toast.makeText(getApplicationContext(), R.string.directoryExist, Toast.LENGTH_SHORT).show();
         }
 
@@ -322,7 +307,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         document.add(paragraphCommKineTitre);
 
         String maListe = "";
-        for (String elem: listeComm){
+        for (String elem : listeComm) {
             maListe = maListe + elem + " , ";
         }
         strText = maListe + "\n" + commentaire + "\n \n";
@@ -350,7 +335,6 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                 trueImage.scalePercent(reducePercent);
             }
             trueImage.setAlignment(Image.MIDDLE);
-            Log.i("TAG", "Try image succeeded");
         } catch (IOException e) {
             e.printStackTrace();
         }
