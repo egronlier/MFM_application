@@ -238,6 +238,6 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:background="@drawable/exit_button_2" />
+        android:background="@drawable/exit_button" />
 
 </LinearLayout>
