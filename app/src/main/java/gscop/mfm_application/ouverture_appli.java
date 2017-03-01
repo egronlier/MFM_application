@@ -87,6 +87,18 @@ public class ouverture_appli extends Activity {
             }
         });
 
+        // date max = aujourd'hui, date min = il y a 100 ans
+        String myYear = new SimpleDateFormat("yyyy", Locale.FRANCE).format(new Date());
+        String myMonth = new SimpleDateFormat("MM", Locale.FRANCE).format(new Date());
+        String myDay = new SimpleDateFormat("dd", Locale.FRANCE).format(new Date());
+        Calendar c = Calendar.getInstance();
+//        c.set(Integer.parseInt(myYear),Integer.parseInt(myMonth),Integer.parseInt(myDay));
+        long now = System.currentTimeMillis() - 1000;
+        monDatePicker.setMaxDate(now);
+//        monDatePicker.setMaxDate(c.getTimeInMillis());
+        c.set(Integer.parseInt(myYear)-100,Integer.parseInt(myMonth),Integer.parseInt(myDay));
+        monDatePicker.setMinDate(c.getTimeInMillis());
+
         boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
         boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
 

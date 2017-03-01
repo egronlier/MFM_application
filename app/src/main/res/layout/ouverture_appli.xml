@@ -145,7 +145,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="40sp"
-            android:endYear="2010"
             android:firstDayOfWeek="2" />
     </LinearLayout>
 
