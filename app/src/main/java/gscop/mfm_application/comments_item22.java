@@ -242,10 +242,18 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         // on crée un dossier NOM_prenom du patient s'il n'existe pas déjà
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 , "patient_" + name + "_" + surname);
-        if (!pdfFolder.exists()) {
-            pdfFolder.mkdir();
-            Log.i("TAG", "Pdf Directory created");
+        boolean isDirectoryCreated = pdfFolder.exists();
+        if(!isDirectoryCreated){
+            isDirectoryCreated = pdfFolder.mkdir();
         }
+        if(isDirectoryCreated){
+            Toast.makeText(getApplicationContext(), R.string.directoryExist, Toast.LENGTH_SHORT).show();
+        }
+
+//        if (!pdfFolder.exists()) {
+//            pdfFolder.mkdir();
+//            Log.i("TAG", "Pdf Directory created");
+//        }
 
         //Create time stamp
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
