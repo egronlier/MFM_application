@@ -318,7 +318,11 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         paragraphCommKineTitre.add("\n COMMENTAIRES : \n");
         document.add(paragraphCommKineTitre);
 
-        strText = listeComm + "\n" + commentaire + "\n \n";
+        String maListe = "";
+        for (String elem: listeComm){
+            maListe = maListe + elem + " , ";
+        }
+        strText = maListe + "\n" + commentaire + "\n \n";
         Paragraph paragraphCommKine = new Paragraph();
         paragraphCommKine.add(strText);
         document.add(paragraphCommKine);
