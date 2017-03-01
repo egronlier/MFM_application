@@ -191,6 +191,9 @@ public class Dessin_item18 extends View {
         return cartographie;
     }
 
+    public ArrayList getTableauX() { return tableauX; }
+
+    public ArrayList getTableauY() { return tableauY; }
 
     /**
      * Called when replaying history to ensure the dirty region includes all

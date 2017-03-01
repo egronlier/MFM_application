@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class do_item22 extends Activity {
 
@@ -28,6 +29,8 @@ public class do_item22 extends Activity {
     Dessin_item22 dessin;
     Bitmap cartoBitmap;
     TextView state;
+    ArrayList tableauX;
+    ArrayList tableauY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,8 @@ public class do_item22 extends Activity {
                 myIntent.putExtra("birthdate", birthdate);
                 myIntent.putExtra("main", main);
                 cartoBitmap = dessin.getCartographie();
+                tableauX = dessin.getTableauX();
+                tableauY = dessin.getTableauY();
                 myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
                 startActivity(myIntent);
                 // on ferme l'activité en cours
