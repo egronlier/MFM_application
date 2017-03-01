@@ -52,6 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:gravity="center"
             android:text="@string/name"
             android:textColor="#0d8dc9"
@@ -91,6 +92,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:gravity="center"
             android:text="@string/surname"
             android:textColor="#0d8dc9"
@@ -130,6 +132,7 @@
             android:id="@+id/texteBirthdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:gravity="center"
             android:text="@string/birthdate"
             android:textColor="#0d8dc9"
