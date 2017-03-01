@@ -74,4 +74,5 @@
     <string name="label_preview">Prévisualiser</string>
     <string name="label_quit">Quitter</string>
     <string name="directoryExist">Un dossier existe déjà pour ce patient</string>
+    <string name="jj_mm_aaaa">JJ/MM/AAAA</string>
 </resources>

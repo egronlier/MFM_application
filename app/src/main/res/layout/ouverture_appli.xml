@@ -139,13 +139,21 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <DatePicker
-            android:id="@+id/datePicker"
+        <TextView
+            android:id="@+id/tvDate"
+            android:hint="@string/jj_mm_aaaa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="40sp"
-            android:firstDayOfWeek="2" />
+            android:layout_marginStart="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/btnChangeDate"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="50dp"
+            android:background="@drawable/calendar" />
+
     </LinearLayout>
 
     <Space
