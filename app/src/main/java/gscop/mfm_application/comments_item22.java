@@ -250,13 +250,9 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             Toast.makeText(getApplicationContext(), R.string.directoryExist, Toast.LENGTH_SHORT).show();
         }
 
-//        if (!pdfFolder.exists()) {
-//            pdfFolder.mkdir();
-//            Log.i("TAG", "Pdf Directory created");
-//        }
-
         //Create time stamp
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.FRANCE).format(new Date());
+        String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss", Locale.FRANCE).format(new Date());
+        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
 
         // on crée le nom du fichier pdf à enregistrer
         String filePath = pdfFolder.toString() + "/" + name + "_" + surname + "_" + timeStamp + "_" + "item22.pdf";
@@ -303,7 +299,6 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         paragraphInfosItemTitre.add("\n ITEM 22 :");
         document.add(paragraphInfosItemTitre);
 
-        String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
         strText = "réalisé le : " + timeStampSimple + "\n \n";
         Paragraph paragraphInfosItem = new Paragraph();
         paragraphInfosItem.add(strText);
