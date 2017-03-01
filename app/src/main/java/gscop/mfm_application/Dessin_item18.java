@@ -26,6 +26,10 @@ public class Dessin_item18 extends View {
     private HashMap<Integer, Path> paths = new HashMap<>();
     private ArrayList<Path> completedPaths = new ArrayList<>();
 
+    //tableaux qui contiendront les coordonnées des points
+    private ArrayList<Float> tableauX = new ArrayList<>();
+    private ArrayList<Float> tableauY = new ArrayList<>();
+
     private final RectF dirtyRect = new RectF();
 
     private float xDown;
@@ -105,6 +109,10 @@ public class Dessin_item18 extends View {
                     mY.put(id, event.getY(id));
                     xDown = event.getX(id);
                     yDown = event.getY(id);
+
+                    tableauX.add(event.getX(id));
+                    tableauY.add(event.getY(id));
+
                     invalidate();
                 } catch (IllegalArgumentException ex) {
                     ex.printStackTrace();
@@ -120,9 +128,13 @@ public class Dessin_item18 extends View {
                             float historicalY = event.getHistoricalY(i, j);
                             expandDirtyRect(historicalX, historicalY);
                             p.lineTo(historicalX, historicalY);
+                            tableauX.add(historicalX);
+                            tableauY.add(historicalY);
                         }
                         mX.put(event.getPointerId(i), event.getX(i));
                         mY.put(event.getPointerId(i), event.getY(i));
+                        tableauX.add(event.getX(i));
+                        tableauY.add(event.getY(i));
                         invalidate();
                     }
                 }
