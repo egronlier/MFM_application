@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gscop.mfm_application">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,10 +14,20 @@
         <activity android:name=".ouverture_appli">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".choix_item"/>
+        <activity android:name=".consignes_item18"/>
+        <activity android:name=".consignes_item22"/>
+        <activity android:name="do_item18"/>
+        <activity android:name="do_item22"/>
+        <activity android:name=".carto_item18"/>
+        <activity android:name=".carto_item22"/>
+        <activity android:name=".comments_item18"/>
+        <activity android:name=".comments_item22"/>
+
     </application>
 
 </manifest>
