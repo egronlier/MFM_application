@@ -21,6 +21,9 @@ public class Dessin_item22 extends View {
     private Bitmap cartographie;
     private final Paint paint = new Paint();
 
+    private String main;
+    private Bitmap image;
+
     private HashMap<Integer, Float> mX = new HashMap<>();
     private HashMap<Integer, Float> mY = new HashMap<>();
     private HashMap<Integer, Path> paths = new HashMap<>();
@@ -63,8 +66,16 @@ public class Dessin_item22 extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // On transforme le drawable du CD en bitmap
-        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
+        // On transforme le drawable du CD en bitmap, en prenant l'image du CD selon le caractère droitier/gaucher du patient
+        //Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
+
+        if(main.equals("Droitier")){
+            image = BitmapFactory.decodeResource(getResources(), R.drawable.item22_droitier);
+        }
+        else{
+            image = BitmapFactory.decodeResource(getResources(), R.drawable.item22_gaucher);
+        }
+
         image = resize(image, 1250, 1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner l'image dans le canvas
         canvas.drawBitmap(image, 0, 0, null);
@@ -210,6 +221,11 @@ public class Dessin_item22 extends View {
         } else if (historicalY > dirtyRect.bottom) {
             dirtyRect.bottom = historicalY;
         }
+    }
+
+
+    public void setMain(String main){
+        this.main = main;
     }
 
 

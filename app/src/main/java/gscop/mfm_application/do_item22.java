@@ -37,6 +37,8 @@ public class do_item22 extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.do_item22);
+        dessin = (Dessin_item22) findViewById(R.id.drawingItem22);
+
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -45,9 +47,11 @@ public class do_item22 extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
+            //on donne l'info de la main droite/gauche à la partie dessin
+            dessin.setMain(main);
         }
 
-        dessin = (Dessin_item22) findViewById(R.id.drawingItem22);
+
         state = (TextView) findViewById(R.id.enCours);
 
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
