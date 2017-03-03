@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class carto_item18 extends Activity {
 
@@ -33,6 +34,8 @@ public class carto_item18 extends Activity {
     Bitmap cartoBitmap;
     ImageView carto;
     final Context context = this;
+    ArrayList tableauX;
+    ArrayList tableauY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class carto_item18 extends Activity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            tableauX = intent.getIntegerArrayListExtra("tableauX");
+            tableauY = intent.getIntegerArrayListExtra("tableauY");
         }
 
         infosPatient = (TextView) findViewById(R.id.infosPatient);
@@ -142,6 +147,8 @@ public class carto_item18 extends Activity {
                                 myIntent.putExtra("birthdate", birthdate);
                                 myIntent.putExtra("main", main);
                                 myIntent.putExtra("path", path);
+                                myIntent.putExtra("tableauX",tableauX);
+                                myIntent.putExtra("tableauY",tableauY);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
                                 finish();

@@ -65,6 +65,8 @@ public class do_item18 extends Activity {
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();
                 myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
+                myIntent.putExtra("tableauX",tableauX);
+                myIntent.putExtra("tableauY",tableauY);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
@@ -111,7 +113,6 @@ public class do_item18 extends Activity {
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
         File mypath = new File(directory, "cartographie.png");
-
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);
