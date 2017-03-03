@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MFM Application</string>
     <string name="veuillez">Veuillez entrer les données du patient :</string>
-    <string name="textMandatory">Tous les champs munis d\'une astérisque rouge doivent être remplis.</string>
+    <string name="textMandatory">Tous les champs munis d\'un astérisque rouge doivent être remplis.</string>
     <string name="quit">QUITTER</string>
     <string name="valid">VALIDER</string>
     <string name="mandatory"> *  </string>
@@ -71,7 +71,7 @@
     <string name="imageboutonquitter">imageBoutonQuitter</string>
     <string name="compl_info">Informations complémentaires :</string>
     <string name="label_continue">Continuer MFM</string>
-    <string name="label_preview">Prévisualiser</string>
+    <string name="label_preview">Visualiser le pdf</string>
     <string name="label_quit">Quitter</string>
     <string name="directoryExist">Un dossier existe déjà pour ce patient</string>
     <string name="jj_mm_aaaa">JJ/MM/AAAA</string>

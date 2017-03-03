@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class carto_item22 extends Activity {
 
@@ -33,6 +34,8 @@ public class carto_item22 extends Activity {
     Bitmap cartoBitmap;
     ImageView carto;
     final Context context = this;
+    ArrayList tableauX;
+    ArrayList tableauY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class carto_item22 extends Activity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            tableauX = intent.getIntegerArrayListExtra("tableauX");
+            tableauY = intent.getIntegerArrayListExtra("tableauY");
         }
 
         infosPatient = (TextView) findViewById(R.id.infosPatient);
@@ -92,7 +97,7 @@ public class carto_item22 extends Activity {
         boutonRecommencer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item18
+                // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item22
                 builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? (le tracé sera perdu)")
                         .setCancelable(true)
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -103,7 +108,7 @@ public class carto_item22 extends Activity {
                         })
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // on revient à l'écran de réalisation de l'item 18
+                                // on revient à l'écran de réalisation de l'item 22
                                 Intent myIntent = new Intent(carto_item22.this, do_item22.class);
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
@@ -142,6 +147,8 @@ public class carto_item22 extends Activity {
                                 myIntent.putExtra("birthdate", birthdate);
                                 myIntent.putExtra("main", main);
                                 myIntent.putExtra("path", path);
+                                myIntent.putExtra("tableauX",tableauX);
+                                myIntent.putExtra("tableauY",tableauY);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
                                 finish();

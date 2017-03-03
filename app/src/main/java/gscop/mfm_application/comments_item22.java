@@ -21,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -28,6 +29,8 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
@@ -38,6 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -65,6 +69,8 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     EditText comments;
     TextView infosPatient;
     String path = "";
+    ArrayList tableauX;
+    ArrayList tableauY;
     Bitmap cartoBitmap;
     File myFile;
     List<String> listeComm;
@@ -83,6 +89,8 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             birthdate = intent.getStringExtra("birthdate");
             main = intent.getStringExtra("main");
             path = intent.getStringExtra("path");
+            tableauX = intent.getIntegerArrayListExtra("tableauX");
+            tableauY = intent.getIntegerArrayListExtra("tableauY");
             try {
                 File f = new File(path, "cartographie.png");
                 cartoBitmap = BitmapFactory.decodeStream(new FileInputStream(f));
@@ -200,6 +208,8 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             myIntent.putExtra("birthdate", birthdate);
             myIntent.putExtra("main", main);
             myIntent.putExtra("path", path);
+            myIntent.putExtra("tableauX",tableauX);
+            myIntent.putExtra("tableauY",tableauY);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();
@@ -344,6 +354,30 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
 //        paragraphCarto.add("Cartographie : \n");
         paragraphCarto.add(trueImage);
         document.add(paragraphCarto);
+
+        // TABLEAU DES COORDONNEES
+        // on change de page
+        document.newPage();
+        // 2 colonnes, une pour chaque tableau
+        PdfPTable table = new PdfPTable(2);
+        table.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+        // titres : colonne 1 = coordonnées en X , colonne 2 = coordonnées en Y
+        table.addCell("Coordonnées en X");
+        table.addCell("Coordonnées en Y");
+        table.setHeaderRows(1);
+        // on met les cellules titre en gris
+        PdfPCell[] cells = table.getRow(0).getCells();
+        for (PdfPCell cell : cells) {
+            cell.setBackgroundColor(BaseColor.GRAY);
+        }
+        // on parcourt les coordonnées en X et on les ajoute en colonne 1
+        for (int i = 1; i <= tableauX.size()-1; i++) {
+            table.addCell(tableauX.get(i).toString());
+            table.addCell(tableauY.get(i).toString());
+        }
+        // on ajoute le tableau au document
+        document.add(table);
 
         //Step 5: Close the document
         document.close();

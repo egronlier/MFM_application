@@ -38,7 +38,7 @@ public class do_item22 extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.do_item22);
         dessin = (Dessin_item22) findViewById(R.id.drawingItem22);
-
+        state = (TextView) findViewById(R.id.enCours);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -51,15 +51,12 @@ public class do_item22 extends Activity {
             dessin.setMain(main);
         }
 
-
-        state = (TextView) findViewById(R.id.enCours);
-
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boutonTerminer.setClickable(false);
-                // action quand on appuie sur terminer -> affiche la cartographie ou la fenêtre de commentaires du kiné ?
+                // action quand on appuie sur terminer -> affiche la cartographie
                 state.setText(R.string.saving);
                 Intent myIntent = new Intent(do_item22.this, carto_item22.class);
                 myIntent.putExtra("name", name);
@@ -70,6 +67,8 @@ public class do_item22 extends Activity {
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();
                 myIntent.putExtra("path", saveToInternalStorage(cartoBitmap));
+                myIntent.putExtra("tableauX",tableauX);
+                myIntent.putExtra("tableauY",tableauY);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
@@ -126,6 +125,7 @@ public class do_item22 extends Activity {
             e.printStackTrace();
         } finally {
             try {
+                assert fos != null;
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();

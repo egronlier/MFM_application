@@ -37,6 +37,8 @@ public class do_item18 extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.do_item18);
+        dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
+        state = (TextView) findViewById(R.id.enCours);
 
         // on récupère les infos de l'intent
         Intent intent = getIntent();
@@ -47,14 +49,12 @@ public class do_item18 extends Activity {
             main = intent.getStringExtra("main");
         }
 
-        dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
-        state = (TextView) findViewById(R.id.enCours);
-
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boutonTerminer.setClickable(false);
+                // action quand on appuie sur terminer -> affiche la cartographie
                 state.setText(R.string.saving);
                 Intent myIntent = new Intent(do_item18.this, carto_item18.class);
                 myIntent.putExtra("name", name);
@@ -122,6 +122,7 @@ public class do_item18 extends Activity {
             e.printStackTrace();
         } finally {
             try {
+                assert fos != null;
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
