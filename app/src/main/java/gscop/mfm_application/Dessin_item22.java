@@ -22,7 +22,6 @@ public class Dessin_item22 extends View {
     private final Paint paint = new Paint();
 
     private String main;
-    private Bitmap image;
 
     private HashMap<Integer, Float> mX = new HashMap<>();
     private HashMap<Integer, Float> mY = new HashMap<>();
@@ -69,10 +68,10 @@ public class Dessin_item22 extends View {
         // On transforme le drawable du CD en bitmap, en prenant l'image du CD selon le caractère droitier/gaucher du patient
         //Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
 
-        if(main.equals("Droitier")){
+        Bitmap image;
+        if (main.equals("Droitier")) {
             image = BitmapFactory.decodeResource(getResources(), R.drawable.item22_droitier);
-        }
-        else{
+        } else {
             image = BitmapFactory.decodeResource(getResources(), R.drawable.item22_gaucher);
         }
 
@@ -202,9 +201,13 @@ public class Dessin_item22 extends View {
         return cartographie;
     }
 
-    public ArrayList getTableauX() { return tableauX; }
+    public ArrayList getTableauX() {
+        return tableauX;
+    }
 
-    public ArrayList getTableauY() { return tableauY; }
+    public ArrayList getTableauY() {
+        return tableauY;
+    }
 
     /**
      * Called when replaying history to ensure the dirty region includes all
@@ -224,7 +227,7 @@ public class Dessin_item22 extends View {
     }
 
 
-    public void setMain(String main){
+    public void setMain(String main) {
         this.main = main;
     }
 
