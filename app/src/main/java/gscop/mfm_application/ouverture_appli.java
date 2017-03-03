@@ -77,14 +77,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
 
         nomEntre = (EditText) findViewById(R.id.nom);
-        nomEntre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    hideKeyboard(v);
-                }
-            }
-        });
         prenomEntre = (EditText) findViewById(R.id.prenom);
         prenomEntre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -205,6 +197,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                 nomEntre.getText().clear();
                 prenomEntre.getText().clear();
                 tvDisplayDate.setText("");
+                birthdate = null;
                 boutonDroitier.setChecked(false);
                 boutonGaucher.setChecked(false);
             }
