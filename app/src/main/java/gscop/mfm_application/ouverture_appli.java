@@ -69,7 +69,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         year = cal.get(Calendar.YEAR);
         tvDisplayDate = (TextView) findViewById(R.id.tvDate);
         // set current date into textview, month is 0 based, just add 1
-        tvDisplayDate.setText(new StringBuilder().append(day).append("/").append(month + 1).append("/").append(year - 10).append(" "));
+        tvDisplayDate.setText("");
 
         // on utilise la méthode findViewById pour récupérer les éléments de la vue
         // R est la classe qui contient les ressources
