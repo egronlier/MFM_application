@@ -98,29 +98,17 @@ public class carto_item18 extends Activity {
             @Override
             public void onClick(View v) {
                 // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item18
-                builder.setMessage("Avant de recommencer l'item, voulez-vous sauvegarder cet essai ?")
+                builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? \n (le tracé sera perdu)")
                         .setCancelable(true)
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // if this button is clicked, close the dialog box
-                                // on revient à l'écran de réalisation de l'item 18
-                                Intent myIntent = new Intent(carto_item18.this, do_item18.class);
-                                myIntent.putExtra("name", name);
-                                myIntent.putExtra("surname", surname);
-                                myIntent.putExtra("birthdate", birthdate);
-                                myIntent.putExtra("varRandom", varRandom);
-                                startActivity(myIntent);
-                                // on ferme l'activité en cours
-                                finish();
+                                dialog.cancel();
                             }
                         })
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // on enregistre cette cartographie qqpart
-
-                                // --------------- A FAIRE ------------------
-
-                                // puis on revient à l'écran de réalisation de l'item 18
+                                //  on revient à l'écran de réalisation de l'item 18
                                 Intent myIntent = new Intent(carto_item18.this, do_item18.class);
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
