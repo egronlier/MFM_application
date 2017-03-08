@@ -1,7 +1,6 @@
 package gscop.mfm_application;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -144,6 +143,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
                 // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
                 boutonEnregistrer.setClickable(false);
 
@@ -171,39 +171,14 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         listeComm = listeComment.getSelectedStrings();
                         commentaire = comments.getText().toString();
                         // ------------------------------------------------------------------------------
-
-                        // ouvrir une boite de dialogue permettant de valider la création du pdf
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                        alertDialogBuilder
-                                .setTitle("Confirmation de validation")
-                                .setMessage("Etes-vous certain de vouloir créer un fichier pour ce patient ?")
-                                .setCancelable(false)
-                                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // if this button is clicked, on fait l'enregistrement
-                                        Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
-                                        dialog.cancel();
-                                        try {
-                                            // ----------- CREATION DU PDF -------------
-                                            createPdf();
-                                            Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
-                                        } catch (FileNotFoundException | DocumentException e) {
-                                            e.printStackTrace();
-                                            Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                })
-                                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        // if this button is clicked, close the dialog box
-                                        dialog.cancel();
-                                        boutonEnregistrer.setClickable(true);
-                                    }
-                                });
-                        // create alert dialog
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        // show it
-                        alertDialog.show();
+                        try {
+                            // ----------- CREATION DU PDF -------------
+                            createPdf();
+                            Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
+                        } catch (FileNotFoundException | DocumentException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         boutonEnregistrer.setClickable(true);
                         Toast.makeText(getApplicationContext(), R.string.errorCotationTablet, Toast.LENGTH_LONG).show();

@@ -1,7 +1,6 @@
 package gscop.mfm_application;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -145,87 +144,61 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
 
         boutonEnregistrer = (Button) findViewById(R.id.buttonSave);
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
-                                                 @Override
-                                                 public void onClick(View v) {
-                                                     // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
-                                                     boutonEnregistrer.setClickable(false);
-
-                                                     // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
-                                                     // radioGroup : cotation papier
-                                                     if (boutonCotation0Paper.isChecked() || boutonCotation1Paper.isChecked() || boutonCotation2Paper.isChecked() || boutonCotation3Paper.isChecked() || boutonCotationNSPPaper.isChecked()) {
-                                                         textCotationPaper.setError(null);
-                                                         // radioGroup : cotation tablette
-                                                         if (boutonCotation0Tablet.isChecked() || boutonCotation1Tablet.isChecked() || boutonCotation2Tablet.isChecked() || boutonCotation3Tablet.isChecked() || boutonCotationNSPTablet.isChecked()) {
-                                                             textCotationTablet.setError(null);
-                                                             // --------------------- on récupère les commentaires du kiné -------------------
-                                                             // ------- COTATION PAPIER
-                                                             int radioButtonSelectedID = radioGroupCotationPaper.getCheckedRadioButtonId();
-                                                             View radioButtonSelected = radioGroupCotationPaper.findViewById(radioButtonSelectedID);
-                                                             int index = radioGroupCotationPaper.indexOfChild(radioButtonSelected);
-                                                             RadioButton r = (RadioButton) radioGroupCotationPaper.getChildAt(index);
-                                                             cotationPaper = r.getText().toString();
-                                                             // ------- COTATION TABLETTE
-                                                             radioButtonSelectedID = radioGroupCotationTablet.getCheckedRadioButtonId();
-                                                             radioButtonSelected = radioGroupCotationTablet.findViewById(radioButtonSelectedID);
-                                                             index = radioGroupCotationTablet.indexOfChild(radioButtonSelected);
-                                                             r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
-                                                             cotationTablet = r.getText().toString();
-                                                             // ------- COMMENTAIRES
-                                                             listeComm = listeComment.getSelectedStrings();
-                                                             commentaire = comments.getText().toString();
-                                                             // ------------------------------------------------------------------------------
-
-                                                             // ouvrir une boite de dialogue permettant de valider
-                                                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                                                             alertDialogBuilder
-                                                                     .setTitle("Confirmation de validation")
-                                                                     .setMessage("Etes-vous certain de vouloir créer un fichier pour ce patient ?")
-                                                                     .setCancelable(false)
-                                                                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                                                                         public void onClick(DialogInterface dialog, int id) {
-                                                                             // if this button is clicked, on fait l'enregistrement et on affiche le résultat
-                                                                             Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
-                                                                             dialog.cancel();
-                                                                             try {
-                                                                                 // ----------- CREATION DU PDF -------------
-                                                                                 createPdf();
-                                                                                 Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
-                                                                             } catch (FileNotFoundException | DocumentException e) {
-                                                                                 e.printStackTrace();
-                                                                                 Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
-                                                                             }
-                                                                         }
-                                                                     })
-                                                                     .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                                                                         public void onClick(DialogInterface dialog, int id) {
-                                                                             // if this button is clicked, close the dialog box
-                                                                             dialog.cancel();
-                                                                             boutonEnregistrer.setClickable(true);
-                                                                         }
-                                                                     });
-                                                             // create alert dialog
-                                                             AlertDialog alertDialog = alertDialogBuilder.create();
-                                                             // show it
-                                                             alertDialog.show();
-                                                         } else {
-                                                             boutonEnregistrer.setClickable(true);
-                                                             Toast.makeText(getApplicationContext(), R.string.errorCotationTablet, Toast.LENGTH_LONG).show();
-                                                             textCotationTablet.setError("Choisir cotation !");
-                                                             textCotationTablet.requestFocus();
-                                                         }
-                                                     } else {
-                                                         boutonEnregistrer.setClickable(true);
-                                                         Toast.makeText(getApplicationContext(), R.string.errorCotationPaper, Toast.LENGTH_LONG).show();
-                                                         textCotationPaper.setError("Choisir cotation !");
-                                                         textCotationPaper.requestFocus();
-                                                     }
-                                                 }
-                                             });
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
+                // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
+                boutonEnregistrer.setClickable(false);
+                // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
+                // radioGroup : cotation papier
+                if (boutonCotation0Paper.isChecked() || boutonCotation1Paper.isChecked() || boutonCotation2Paper.isChecked() || boutonCotation3Paper.isChecked() || boutonCotationNSPPaper.isChecked()) {
+                    textCotationPaper.setError(null);
+                    // radioGroup : cotation tablette
+                    if (boutonCotation0Tablet.isChecked() || boutonCotation1Tablet.isChecked() || boutonCotation2Tablet.isChecked() || boutonCotation3Tablet.isChecked() || boutonCotationNSPTablet.isChecked()) {
+                        textCotationTablet.setError(null);
+                        // --------------------- on récupère les commentaires du kiné -------------------
+                        // ------- COTATION PAPIER
+                        int radioButtonSelectedID = radioGroupCotationPaper.getCheckedRadioButtonId();
+                        View radioButtonSelected = radioGroupCotationPaper.findViewById(radioButtonSelectedID);
+                        int index = radioGroupCotationPaper.indexOfChild(radioButtonSelected);
+                        RadioButton r = (RadioButton) radioGroupCotationPaper.getChildAt(index);
+                        cotationPaper = r.getText().toString();
+                        // ------- COTATION TABLETTE
+                        radioButtonSelectedID = radioGroupCotationTablet.getCheckedRadioButtonId();
+                        radioButtonSelected = radioGroupCotationTablet.findViewById(radioButtonSelectedID);
+                        index = radioGroupCotationTablet.indexOfChild(radioButtonSelected);
+                        r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
+                        cotationTablet = r.getText().toString();
+                        // ------- COMMENTAIRES
+                        listeComm = listeComment.getSelectedStrings();
+                        commentaire = comments.getText().toString();
+                        // ------------------------------------------------------------------------------
+                        try {
+                            // ----------- CREATION DU PDF -------------
+                            createPdf();
+                            Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
+                        } catch (FileNotFoundException | DocumentException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        boutonEnregistrer.setClickable(true);
+                        Toast.makeText(getApplicationContext(), R.string.errorCotationTablet, Toast.LENGTH_LONG).show();
+                        textCotationTablet.setError("Choisir cotation !");
+                        textCotationTablet.requestFocus();
+                    }
+                } else {
+                    boutonEnregistrer.setClickable(true);
+                    Toast.makeText(getApplicationContext(), R.string.errorCotationPaper, Toast.LENGTH_LONG).show();
+                    textCotationPaper.setError("Choisir cotation !");
+                    textCotationPaper.requestFocus();
+                }
+            }
+        });
     }
 
     // quand on appuie sur la touche retour de la tablette
     private boolean back_answer = false;
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
