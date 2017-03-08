@@ -292,10 +292,9 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         paragraphInfosItemTitre.add("\n ITEM 18 :");
         document.add(paragraphInfosItemTitre);
 
-        strText = "réalisé le : " + timeStampSimple +
-                "cotation sur papier : " + cotationPaper +
-                "cotation sur tablette : " + cotationTablet +
-                "\n \n";
+        strText = "réalisé le : " + timeStampSimple + "\n" +
+                "cotation sur papier : " + cotationPaper + "\n" +
+                "cotation sur tablette : " + cotationTablet +"\n \n";
         Paragraph paragraphInfosItem = new Paragraph();
         paragraphInfosItem.add(strText);
         document.add(paragraphInfosItem);
