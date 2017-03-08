@@ -34,8 +34,8 @@
     <ImageView
         android:id="@+id/item22"
         android:contentDescription="@string/item22image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="68mm"
+        android:layout_height="68mm"
         android:layout_centerInParent="true"
         android:src="@drawable/item22_demo" />
 
