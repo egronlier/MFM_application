@@ -68,14 +68,43 @@ public class choice_item extends Activity {
         buttonItem18.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // on lance les consignes de l'item 18
-                Intent myIntent = new Intent(choice_item.this, consignes_item18.class);
-                myIntent.putExtra("name", name);
-                myIntent.putExtra("surname", surname);
-                myIntent.putExtra("birthdate", birthdate);
-                startActivity(myIntent);
-                // on ferme l'activité en cours
-                finish();
+                // aléatoirement lance la version papier ou la version tablette
+                int mini = 0;
+                int max = 1;
+                // génère aléatoirement 0 ou 1
+                int varRandom = (int)( Math.random()*( max - mini + 1 ) ) + mini;
+                if(varRandom == 0){
+                    // on demande de réaliser l'item 18 version papier en premier
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage(R.string.paper18)
+                            .setTitle("MFM Papier")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // on lance les consignes de l'item 18
+                                    Intent myIntent = new Intent(choice_item.this, consignes_item18.class);
+                                    myIntent.putExtra("name", name);
+                                    myIntent.putExtra("surname", surname);
+                                    myIntent.putExtra("birthdate", birthdate);
+                                    myIntent.putExtra("varRandom",0);
+                                    startActivity(myIntent);
+                                    // on ferme l'activité en cours
+                                    finish();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                } else {
+                    // on demande la version tablette en premier
+                    Intent myIntent = new Intent(choice_item.this, consignes_item18.class);
+                    myIntent.putExtra("name", name);
+                    myIntent.putExtra("surname", surname);
+                    myIntent.putExtra("birthdate", birthdate);
+                    myIntent.putExtra("varRandom",1);
+                    startActivity(myIntent);
+                    // on ferme l'activité en cours
+                    finish();
+                }
             }
         });
 
@@ -83,17 +112,45 @@ public class choice_item extends Activity {
         buttonItem22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // on lance les consignes de l'item 22
-                Intent myIntent = new Intent(choice_item.this, consignes_item22.class);
-                myIntent.putExtra("name", name);
-                myIntent.putExtra("surname", surname);
-                myIntent.putExtra("birthdate", birthdate);
-                startActivity(myIntent);
-                // on ferme l'activité en cours
-                finish();
+                // aléatoirement lance la version papier ou la version tablette
+                int mini = 0;
+                int max = 1;
+                // génère aléatoirement 0 ou 1
+                int varRandom = (int)( Math.random()*( max - mini + 1 ) ) + mini;
+                if(varRandom == 0){
+                    // on demande de réaliser l'item 18 version papier en premier
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage(R.string.paper22)
+                            .setTitle("MFM Papier")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // on lance les consignes de l'item 22
+                                    Intent myIntent = new Intent(choice_item.this, consignes_item22.class);
+                                    myIntent.putExtra("name", name);
+                                    myIntent.putExtra("surname", surname);
+                                    myIntent.putExtra("birthdate", birthdate);
+                                    myIntent.putExtra("varRandom",0);
+                                    startActivity(myIntent);
+                                    // on ferme l'activité en cours
+                                    finish();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                } else {
+                    // on demande la version tablette en premier
+                    Intent myIntent = new Intent(choice_item.this, consignes_item22.class);
+                    myIntent.putExtra("name", name);
+                    myIntent.putExtra("surname", surname);
+                    myIntent.putExtra("birthdate", birthdate);
+                    myIntent.putExtra("varRandom",1);
+                    startActivity(myIntent);
+                    // on ferme l'activité en cours
+                    finish();
+                }
             }
         });
-
     }
 
     private boolean back_answer = false;

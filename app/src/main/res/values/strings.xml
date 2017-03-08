@@ -18,8 +18,8 @@
     <string name="retour">Retour</string>
     <string name="choiceExercise">Veuillez sélectionner un item :</string>
     <string name="item18">Item 18</string>
-    <string name="instructionsItem18">CONSIGNES : Item 18</string>
-    <string name="instructionsItem22">CONSIGNES : Item 22</string>
+    <string name="instructionsItem18">CONSIGNES : \n Item 18</string>
+    <string name="instructionsItem22">CONSIGNES : \n Item 22</string>
     <string name="item22">Item 22</string>
     <string name="changePatient">Changer de patient</string>
     <string name="consignesItem18">Faire le tour du CD avec un doigt</string>
@@ -77,4 +77,6 @@
     <string name="label_quit">Quitter l\'application</string>
     <string name="directoryExist">Un dossier existe déjà pour ce patient</string>
     <string name="jj_mm_aaaa">JJ/MM/AAAA</string>
+    <string name="paper18">Veuillez réaliser l\'item 18 en version papier et cliquer sur OK quand vous aurez terminer.</string>
+    <string name="paper22">Veuillez réaliser l\'item 22 en version papier et cliquer sur OK quand vous aurez terminer.</string>
 </resources>

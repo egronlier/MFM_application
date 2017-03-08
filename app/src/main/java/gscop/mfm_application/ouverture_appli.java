@@ -41,6 +41,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
     int day;
     static final int DATE_DIALOG_ID = 999;
     Button btnChangeDate;
+    boolean chosenDate = false;
 
     @Override
     /*
@@ -63,8 +64,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         month = cal.get(Calendar.MONTH);
         year = cal.get(Calendar.YEAR);
         tvDisplayDate = (TextView) findViewById(R.id.tvDate);
-        // set current date into textview, month is 0 based, just add 1
-        tvDisplayDate.setText("");
 
         // on utilise la méthode findViewById pour récupérer les éléments de la vue
         // R est la classe qui contient les ressources
@@ -104,7 +103,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                                 surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
                                 // on vérifie qu'une date a bien été sélectionnée
                                 birthdate = tvDisplayDate.getText().toString();
-                                if (birthdate != null) {
+                                if (birthdate != null && chosenDate) {
                                     texteDate.setError(null);
                                     try {
                                         // ouvrir une boite de dialogue permettant de valider les infos entrées
@@ -179,6 +178,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                 prenomEntre.getText().clear();
                 tvDisplayDate.setText("");
                 birthdate = null;
+                chosenDate = false;
             }
         });
 
@@ -258,6 +258,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
             tvDisplayDate.setText(selectedDay + " / " + (selectedMonth + 1) + " / " + selectedYear);
+            chosenDate = true;
         }
     };
 

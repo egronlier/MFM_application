@@ -27,6 +27,7 @@
         android:id="@+id/textMandatory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="@string/textMandatory"
         android:textAlignment="center"
         android:textSize="25sp" />

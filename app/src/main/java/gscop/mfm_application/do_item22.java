@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,12 +32,17 @@ public class do_item22 extends Activity {
     TextView state;
     ArrayList tableauX;
     ArrayList tableauY;
+    int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.do_item22);
+        // permet de cacher la barre de notifications
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         dessin = (Dessin_item22) findViewById(R.id.drawingItem22);
         state = (TextView) findViewById(R.id.enCours);
@@ -46,6 +53,7 @@ public class do_item22 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
+            varRandom = intent.getIntExtra("varRandom",-1); // -1 par défaut
         }
 
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
@@ -59,6 +67,7 @@ public class do_item22 extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
+                myIntent.putExtra("varRandom",varRandom);
                 cartoBitmap = dessin.getCartographie();
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();
@@ -78,7 +87,7 @@ public class do_item22 extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Êtes-vous certain de vouloir quitter l'exercice ? (le tracé sera perdu)")
+            builder.setMessage("Êtes-vous certain de vouloir quitter l'exercice ? \n (le tracé sera perdu)")
                     .setCancelable(false)
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -88,6 +97,7 @@ public class do_item22 extends Activity {
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
+                            myIntent.putExtra("varRandom",varRandom);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();
