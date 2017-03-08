@@ -57,19 +57,14 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     final Context context = this;
     RadioGroup radioGroupCotation;
     TextView textCotation;
-    TextView textCircle;
     RadioButton boutonCotation0;
     RadioButton boutonCotation1;
     RadioButton boutonCotation2;
     RadioButton boutonCotation3;
     RadioButton boutonCotationNSP;
-    RadioGroup radioGroupCercle;
-    RadioButton boutonCerclePetit;
-    RadioButton boutonCercleGrand;
     MultiSelectionSpinner listeComment;
     EditText comments;
     String cotation = "cotation inconnue";
-    String cercle = "cercle inconnu";
     String commentaire = "aucun commentaire";
     TextView infosPatient;
     String path = "";
@@ -110,15 +105,11 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
 
         radioGroupCotation = (RadioGroup) findViewById(R.id.radioGroupCotation);
         textCotation = (TextView) findViewById(R.id.textCotation);
-        textCircle = (TextView) findViewById(R.id.textCircle);
         boutonCotation0 = (RadioButton) findViewById(R.id.radioButton0);
         boutonCotation1 = (RadioButton) findViewById(R.id.radioButton1);
         boutonCotation2 = (RadioButton) findViewById(R.id.radioButton2);
         boutonCotation3 = (RadioButton) findViewById(R.id.radioButton3);
         boutonCotationNSP = (RadioButton) findViewById(R.id.radioButtonNSP);
-        radioGroupCercle = (RadioGroup) findViewById(R.id.radioGroupCercle);
-        boutonCerclePetit = (RadioButton) findViewById(R.id.radioButtonSmall);
-        boutonCercleGrand = (RadioButton) findViewById(R.id.radioButtonBig);
 
         comments = (EditText) findViewById(R.id.editTextComments);
         comments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -145,8 +136,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                 if (boutonCotation0.isChecked() || boutonCotation1.isChecked() || boutonCotation2.isChecked() || boutonCotation3.isChecked() || boutonCotationNSP.isChecked()) {
                     // radioGroup : cercle
                     textCotation.setError(null);
-                    if (boutonCercleGrand.isChecked() || boutonCerclePetit.isChecked()) {
-                        textCircle.setError(null);
                         // --------------------- on récupère les commentaires du kiné -------------------
                         // ------- COTATION
                         int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
@@ -154,12 +143,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         int index = radioGroupCotation.indexOfChild(radioButtonSelected);
                         RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
                         cotation = r.getText().toString();
-                        // ------- CERCLE
-                        radioButtonSelectedID = radioGroupCercle.getCheckedRadioButtonId();
-                        radioButtonSelected = radioGroupCercle.findViewById(radioButtonSelectedID);
-                        index = radioGroupCercle.indexOfChild(radioButtonSelected);
-                        r = (RadioButton) radioGroupCercle.getChildAt(index);
-                        cercle = r.getText().toString();
                         // ------- COMMENTAIRES
                         listeComm = listeComment.getSelectedStrings();
                         commentaire = comments.getText().toString();
@@ -197,12 +180,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         // show it
                         alertDialog.show();
-                    } else {
-                        boutonEnregistrer.setClickable(true);
-                        Toast.makeText(getApplicationContext(), R.string.errorCircle, Toast.LENGTH_LONG).show();
-                        textCircle.setError("Choisir cercle !");
-                        textCircle.requestFocus();
-                    }
                 } else {
                     boutonEnregistrer.setClickable(true);
                     Toast.makeText(getApplicationContext(), R.string.errorCotation, Toast.LENGTH_LONG).show();
@@ -308,21 +285,10 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         paragraphInfosItemTitre.add("\n ITEM 18 :");
         document.add(paragraphInfosItemTitre);
 
-        strText = "réalisé le : " + timeStampSimple + "\n \n";
+        strText = "réalisé le : " + timeStampSimple + "cotation : " + cotation + "\n \n";
         Paragraph paragraphInfosItem = new Paragraph();
         paragraphInfosItem.add(strText);
         document.add(paragraphInfosItem);
-
-        // INFOS COMPLEMENTAIRES
-        Paragraph paragraphInfosCompTitre = new Paragraph();
-        paragraphInfosCompTitre.setFont(myFontTitre);
-        paragraphInfosCompTitre.add("\n INFORMATIONS COMPLEMENTAIRES : \n");
-        document.add(paragraphInfosCompTitre);
-
-        strText = "Cotation : " + cotation + "\nCercle : " + cercle + "\n \n";
-        Paragraph paragraphInfosComp = new Paragraph();
-        paragraphInfosComp.add(strText);
-        document.add(paragraphInfosComp);
 
         // COMMENTAIRES KINE
         Paragraph paragraphCommKineTitre = new Paragraph();
