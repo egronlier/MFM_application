@@ -14,6 +14,7 @@ public class consignes_item18 extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
+    int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class consignes_item18 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
+            varRandom = intent.getIntExtra("varRandom",-1); // -1 par défaut
         }
 
         boutonDemarrer = (Button) findViewById(R.id.boutonDemarrer);
@@ -36,6 +38,7 @@ public class consignes_item18 extends Activity {
                 myIntent2.putExtra("name", name);
                 myIntent2.putExtra("surname", surname);
                 myIntent2.putExtra("birthdate", birthdate);
+                myIntent2.putExtra("varRandom",varRandom);
                 startActivity(myIntent2);
                 // on ferme l'activité en cours
                 finish();

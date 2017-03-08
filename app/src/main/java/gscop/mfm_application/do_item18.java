@@ -30,6 +30,7 @@ public class do_item18 extends Activity {
     TextView state;
     ArrayList tableauX;
     ArrayList tableauY;
+    int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class do_item18 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
+            varRandom = intent.getIntExtra("varRandom",-1); // -1 par défaut
         }
 
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
@@ -58,6 +60,7 @@ public class do_item18 extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
+                myIntent.putExtra("varRandom",varRandom);
                 cartoBitmap = dessin.getCartographie();
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();
@@ -86,6 +89,7 @@ public class do_item18 extends Activity {
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
+                            myIntent.putExtra("varRandom",varRandom);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();
