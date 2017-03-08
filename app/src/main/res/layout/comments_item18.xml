@@ -11,7 +11,7 @@
         android:id="@+id/PatientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="60dp"
         android:textColor="#767879"
         android:textSize="30sp"
@@ -21,7 +21,7 @@
         android:id="@+id/champNumeroItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:text="@string/item18"
         android:textAlignment="center"
         android:textColor="#0d8dc9"
@@ -40,11 +40,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/mandatoryCotation"
+            android:id="@+id/mandatoryCotationPaper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -54,26 +54,26 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textCotation"
+            android:id="@+id/textCotationPaper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:ems="12"
-            android:text="@string/cotation"
+            android:text="@string/cotationPaper"
             android:textColor="#0d8dc9"
             android:textSize="30sp"
             android:textStyle="bold" />
 
         <RadioGroup
-            android:id="@+id/radioGroupCotation"
+            android:id="@+id/radioGroupCotationPaper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton0"
+                android:id="@+id/radioButton0Paper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -83,7 +83,7 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/radioButton1"
+                android:id="@+id/radioButton1Paper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,7 +93,7 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButton2Paper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -103,7 +103,7 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/radioButton3Paper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -113,7 +113,95 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/radioButtonNSP"
+                android:id="@+id/radioButtonNSPPaper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/donotknow"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/mandatoryCotationTablet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/mandatory"
+            android:textColor="#f2053c"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textCotationTablet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:ems="12"
+            android:text="@string/cotationTablet"
+            android:textColor="#0d8dc9"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupCotationTablet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton0Tablet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/zero"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton1Tablet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/one"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton2Tablet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/two"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton3Tablet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/three"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButtonNSPTablet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -167,9 +255,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:labelFor="@+id/editTextComments"
         android:text="@string/compl_info"
         android:textColor="#0d8dc9"
-        android:labelFor="@+id/editTextComments"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -186,15 +274,12 @@
         android:lines="5"
         android:scrollbars="vertical" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
-
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="100dp"
         android:background="#9bc3f1"
         android:text="@string/save"
         android:textSize="30sp" />

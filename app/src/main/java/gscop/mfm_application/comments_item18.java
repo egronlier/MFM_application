@@ -55,17 +55,25 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     String birthdate = "";
     Button boutonEnregistrer;
     final Context context = this;
-    RadioGroup radioGroupCotation;
-    TextView textCotation;
-    RadioButton boutonCotation0;
-    RadioButton boutonCotation1;
-    RadioButton boutonCotation2;
-    RadioButton boutonCotation3;
-    RadioButton boutonCotationNSP;
+    RadioGroup radioGroupCotationPaper;
+    TextView textCotationPaper;
+    RadioButton boutonCotation0Paper;
+    RadioButton boutonCotation1Paper;
+    RadioButton boutonCotation2Paper;
+    RadioButton boutonCotation3Paper;
+    RadioButton boutonCotationNSPPaper;
+    RadioGroup radioGroupCotationTablet;
+    TextView textCotationTablet;
+    RadioButton boutonCotation0Tablet;
+    RadioButton boutonCotation1Tablet;
+    RadioButton boutonCotation2Tablet;
+    RadioButton boutonCotation3Tablet;
+    RadioButton boutonCotationNSPTablet;
     MultiSelectionSpinner listeComment;
-    EditText comments;
-    String cotation = "cotation inconnue";
+    String cotationPaper = "cotation papier inconnue";
+    String cotationTablet = "cotation tablette inconnue";
     String commentaire = "aucun commentaire";
+    EditText comments;
     TextView infosPatient;
     String path = "";
     ArrayList tableauX;
@@ -103,13 +111,21 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             listeComment.setListener(this);
         }
 
-        radioGroupCotation = (RadioGroup) findViewById(R.id.radioGroupCotation);
-        textCotation = (TextView) findViewById(R.id.textCotation);
-        boutonCotation0 = (RadioButton) findViewById(R.id.radioButton0);
-        boutonCotation1 = (RadioButton) findViewById(R.id.radioButton1);
-        boutonCotation2 = (RadioButton) findViewById(R.id.radioButton2);
-        boutonCotation3 = (RadioButton) findViewById(R.id.radioButton3);
-        boutonCotationNSP = (RadioButton) findViewById(R.id.radioButtonNSP);
+        radioGroupCotationTablet = (RadioGroup) findViewById(R.id.radioGroupCotationTablet);
+        textCotationTablet = (TextView) findViewById(R.id.textCotationTablet);
+        boutonCotation0Tablet = (RadioButton) findViewById(R.id.radioButton0Tablet);
+        boutonCotation1Tablet = (RadioButton) findViewById(R.id.radioButton1Tablet);
+        boutonCotation2Tablet = (RadioButton) findViewById(R.id.radioButton2Tablet);
+        boutonCotation3Tablet = (RadioButton) findViewById(R.id.radioButton3Tablet);
+        boutonCotationNSPTablet = (RadioButton) findViewById(R.id.radioButtonNSPTablet);
+
+        radioGroupCotationPaper = (RadioGroup) findViewById(R.id.radioGroupCotationPaper);
+        textCotationPaper = (TextView) findViewById(R.id.textCotationPaper);
+        boutonCotation0Paper = (RadioButton) findViewById(R.id.radioButton0Paper);
+        boutonCotation1Paper = (RadioButton) findViewById(R.id.radioButton1Paper);
+        boutonCotation2Paper = (RadioButton) findViewById(R.id.radioButton2Paper);
+        boutonCotation3Paper = (RadioButton) findViewById(R.id.radioButton3Paper);
+        boutonCotationNSPPaper = (RadioButton) findViewById(R.id.radioButtonNSPPaper);
 
         comments = (EditText) findViewById(R.id.editTextComments);
         comments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -132,17 +148,25 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                 boutonEnregistrer.setClickable(false);
 
                 // on vérifie qu'au moins un radioButton a été sélectionné dans chaque radioGroup
-                // radioGroup : cotation
-                if (boutonCotation0.isChecked() || boutonCotation1.isChecked() || boutonCotation2.isChecked() || boutonCotation3.isChecked() || boutonCotationNSP.isChecked()) {
-                    // radioGroup : cercle
-                    textCotation.setError(null);
+                // radioGroup : cotation papier
+                if (boutonCotation0Paper.isChecked() || boutonCotation1Paper.isChecked() || boutonCotation2Paper.isChecked() || boutonCotation3Paper.isChecked() || boutonCotationNSPPaper.isChecked()) {
+                    textCotationPaper.setError(null);
+                    // radioGroup : cotation tablette
+                    if (boutonCotation0Tablet.isChecked() || boutonCotation1Tablet.isChecked() || boutonCotation2Tablet.isChecked() || boutonCotation3Tablet.isChecked() || boutonCotationNSPTablet.isChecked()) {
+                        textCotationTablet.setError(null);
                         // --------------------- on récupère les commentaires du kiné -------------------
-                        // ------- COTATION
-                        int radioButtonSelectedID = radioGroupCotation.getCheckedRadioButtonId();
-                        View radioButtonSelected = radioGroupCotation.findViewById(radioButtonSelectedID);
-                        int index = radioGroupCotation.indexOfChild(radioButtonSelected);
-                        RadioButton r = (RadioButton) radioGroupCotation.getChildAt(index);
-                        cotation = r.getText().toString();
+                        // ------- COTATION PAPIER
+                        int radioButtonSelectedID = radioGroupCotationPaper.getCheckedRadioButtonId();
+                        View radioButtonSelected = radioGroupCotationPaper.findViewById(radioButtonSelectedID);
+                        int index = radioGroupCotationPaper.indexOfChild(radioButtonSelected);
+                        RadioButton r = (RadioButton) radioGroupCotationPaper.getChildAt(index);
+                        cotationPaper = r.getText().toString();
+                        // ------- COTATION TABLETTE
+                        radioButtonSelectedID = radioGroupCotationTablet.getCheckedRadioButtonId();
+                        radioButtonSelected = radioGroupCotationTablet.findViewById(radioButtonSelectedID);
+                        index = radioGroupCotationTablet.indexOfChild(radioButtonSelected);
+                        r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
+                        cotationTablet = r.getText().toString();
                         // ------- COMMENTAIRES
                         listeComm = listeComment.getSelectedStrings();
                         commentaire = comments.getText().toString();
@@ -180,11 +204,17 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         // show it
                         alertDialog.show();
+                    } else {
+                        boutonEnregistrer.setClickable(true);
+                        Toast.makeText(getApplicationContext(), R.string.errorCotationTablet, Toast.LENGTH_LONG).show();
+                        textCotationTablet.setError("Choisir cotation !");
+                        textCotationTablet.requestFocus();
+                    }
                 } else {
                     boutonEnregistrer.setClickable(true);
-                    Toast.makeText(getApplicationContext(), R.string.errorCotation, Toast.LENGTH_LONG).show();
-                    textCotation.setError("Choisir cotation !");
-                    textCotation.requestFocus();
+                    Toast.makeText(getApplicationContext(), R.string.errorCotationPaper, Toast.LENGTH_LONG).show();
+                    textCotationPaper.setError("Choisir cotation !");
+                    textCotationPaper.requestFocus();
                 }
             }
         });
@@ -203,8 +233,8 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
             myIntent.putExtra("path", path);
-            myIntent.putExtra("tableauX",tableauX);
-            myIntent.putExtra("tableauY",tableauY);
+            myIntent.putExtra("tableauX", tableauX);
+            myIntent.putExtra("tableauY", tableauY);
             startActivity(myIntent);
             // on ferme l'activité en cours
             finish();
@@ -230,10 +260,10 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 , "patient_" + name + "_" + surname);
         boolean isDirectoryCreated = pdfFolder.exists();
-        if(!isDirectoryCreated){
+        if (!isDirectoryCreated) {
             isDirectoryCreated = pdfFolder.mkdir();
         }
-        if(isDirectoryCreated){
+        if (isDirectoryCreated) {
             Toast.makeText(getApplicationContext(), R.string.directoryExist, Toast.LENGTH_SHORT).show();
         }
 
@@ -285,7 +315,10 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         paragraphInfosItemTitre.add("\n ITEM 18 :");
         document.add(paragraphInfosItemTitre);
 
-        strText = "réalisé le : " + timeStampSimple + "cotation : " + cotation + "\n \n";
+        strText = "réalisé le : " + timeStampSimple +
+                "cotation sur papier : " + cotationPaper +
+                "cotation sur tablette : " + cotationTablet +
+                "\n \n";
         Paragraph paragraphInfosItem = new Paragraph();
         paragraphInfosItem.add(strText);
         document.add(paragraphInfosItem);
@@ -297,7 +330,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         document.add(paragraphCommKineTitre);
 
         String maListe = "";
-        for (String elem: listeComm){
+        for (String elem : listeComm) {
             maListe = maListe + elem + " , ";
         }
         strText = maListe + "\n" + commentaire + "\n \n";
@@ -350,7 +383,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             cell.setBackgroundColor(BaseColor.GRAY);
         }
         // on parcourt les coordonnées en X et on les ajoute en colonne 1
-        for (int i = 1; i <= tableauX.size()-1; i++) {
+        for (int i = 1; i <= tableauX.size() - 1; i++) {
             table.addCell(tableauX.get(i).toString());
             table.addCell(tableauY.get(i).toString());
         }
