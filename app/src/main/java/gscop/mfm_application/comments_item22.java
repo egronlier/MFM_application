@@ -1,12 +1,14 @@
 package gscop.mfm_application;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -151,6 +153,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                 Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
                 // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
                 boutonEnregistrer.setClickable(false);
+                boutonEnregistrer.setBackgroundColor(Color.GRAY);
                 // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
                 // radioGroup : cotation papier
                 if (boutonCotation0Paper.isChecked() || boutonCotation1Paper.isChecked() || boutonCotation2Paper.isChecked() || boutonCotation3Paper.isChecked() || boutonCotationNSPPaper.isChecked()) {
@@ -201,6 +204,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
 
     // quand on appuie sur la touche retour de la tablette
     private boolean back_answer = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -387,41 +391,42 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
 
     private void promptForNextAction() {
         final String[] options = {getString(R.string.label_continue), getString(R.string.label_preview), getString(R.string.label_quit)};
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
-        builder.setTitle("PDF enregistré, que voulez-vous faire ?");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (options[which].equals(getString(R.string.label_continue))) {
-                    // on renvoie alors vers l'interface de choix d'item
-                    Intent myIntent = new Intent(comments_item22.this, choice_item.class);
-                    myIntent.putExtra("name", name);
-                    myIntent.putExtra("surname", surname);
-                    myIntent.putExtra("birthdate", birthdate);
-                    startActivity(myIntent);
-                    // on ferme l'activité en cours
-                    finish();
-                } else if (options[which].equals(getString(R.string.label_preview))) {
-                    try {
-                        // on renvoie alors vers l'interface de choix d'item
-                        Intent myIntent = new Intent(comments_item22.this, choice_item.class);
-                        myIntent.putExtra("name", name);
-                        myIntent.putExtra("surname", surname);
-                        myIntent.putExtra("birthdate", birthdate);
-                        startActivity(myIntent);
-                        // on ferme l'activité en cours
-                        finish();
-                        // on ouvre le pdf
-                        viewPdf();
-                    } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), R.string.viewPB, Toast.LENGTH_LONG).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("PDF enregistré, que voulez-vous faire ?")
+                .setCancelable(false)
+                .setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (options[which].equals(getString(R.string.label_continue))) {
+                            // on renvoie alors vers l'interface de choix d'item
+                            Intent myIntent = new Intent(comments_item22.this, choice_item.class);
+                            myIntent.putExtra("name", name);
+                            myIntent.putExtra("surname", surname);
+                            myIntent.putExtra("birthdate", birthdate);
+                            startActivity(myIntent);
+                            // on ferme l'activité en cours
+                            finish();
+                        } else if (options[which].equals(getString(R.string.label_preview))) {
+                            try {
+                                // on renvoie alors vers l'interface de choix d'item
+                                Intent myIntent = new Intent(comments_item22.this, choice_item.class);
+                                myIntent.putExtra("name", name);
+                                myIntent.putExtra("surname", surname);
+                                myIntent.putExtra("birthdate", birthdate);
+                                startActivity(myIntent);
+                                // on ferme l'activité en cours
+                                finish();
+                                // on ouvre le pdf
+                                viewPdf();
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), R.string.viewPB, Toast.LENGTH_LONG).show();
+                            }
+                        } else if (options[which].equals(getString(R.string.label_quit))) {
+                            comments_item22.this.finish();
+                            System.exit(0);
+                        }
                     }
-                } else if (options[which].equals(getString(R.string.label_quit))) {
-                    comments_item22.this.finish();
-                    System.exit(0);
-                }
-            }
-        });
+                });
         builder.show();
     }
 }
