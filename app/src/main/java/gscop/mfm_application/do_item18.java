@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -54,6 +55,8 @@ public class do_item18 extends Activity {
                 boutonTerminer.setClickable(false);
                 // action quand on appuie sur terminer -> affiche la cartographie
                 state.setText(R.string.saving);
+                dessin.getPaint().setColor(Color.BLUE);
+                dessin.draw(dessin.getCanvas());
                 Intent myIntent = new Intent(do_item18.this, carto_item18.class);
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
