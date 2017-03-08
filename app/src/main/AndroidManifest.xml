@@ -21,8 +21,10 @@
         <activity android:name=".choice_item"/>
         <activity android:name=".consignes_item18"/>
         <activity android:name=".consignes_item22"/>
-        <activity android:name="do_item18"/>
-        <activity android:name="do_item22"/>
+        <activity android:name="do_item18"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name="do_item22"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".carto_item18"/>
         <activity android:name=".carto_item22"/>
         <activity android:name=".comments_item18"/>

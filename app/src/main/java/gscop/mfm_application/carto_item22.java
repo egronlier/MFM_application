@@ -98,7 +98,7 @@ public class carto_item22 extends Activity {
             @Override
             public void onClick(View v) {
                 // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item22
-                builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? (le tracé sera perdu)")
+                builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? \n (le tracé sera perdu)")
                         .setCancelable(true)
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -175,7 +175,7 @@ public class carto_item22 extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? (le tracé sera perdu)")
+            builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? \n (le tracé sera perdu)")
                     .setCancelable(true)
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
