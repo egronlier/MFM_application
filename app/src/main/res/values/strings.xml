@@ -40,7 +40,8 @@
     <string name="enCours"> En cours… </string>
     <string name="saving"> ENREGISTREMENT EN COURS… </string>
     <string name="pdfsaving"> PDF en cours d\'enregistrement…</string>
-    <string name="cotation">"Cotation : "</string>
+    <string name="cotationTablet">"Cotation sur tablette : "</string>
+    <string name="cotationPaper">"Cotation sur papier : "</string>
     <string name="zero">" 0 "</string>
     <string name="one">" 1 "</string>
     <string name="two">" 2 "</string>
@@ -55,7 +56,8 @@
     <string name="comments">"Commentaires : "</string>
     <string name="save">"Enregistrer"</string>
     <string name="info">Infos : </string>
-    <string name="errorCotation">"Veuillez choisir une cotation."</string>
+    <string name="errorCotationPaper">"Veuillez choisir une cotation sur papier."</string>
+    <string name="errorCotationTablet">"Veuillez choisir une cotation sur tablette."</string>
     <string name="errorCompensation">"Veuillez choisir une compensation."</string>
     <string name="errorCircle">"Veuillez sélectionner une taille de cercle."</string>
     <string name="errorDG">"Une erreur est survenue concernant la lecture de la condition : gaucher/droitier."</string>
@@ -72,7 +74,7 @@
     <string name="compl_info">Informations complémentaires :</string>
     <string name="label_continue">Continuer MFM</string>
     <string name="label_preview">Visualiser le pdf</string>
-    <string name="label_quit">Quitter</string>
+    <string name="label_quit">Quitter l\'application</string>
     <string name="directoryExist">Un dossier existe déjà pour ce patient</string>
     <string name="jj_mm_aaaa">JJ/MM/AAAA</string>
 </resources>
