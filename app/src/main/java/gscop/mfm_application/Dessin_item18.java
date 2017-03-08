@@ -18,6 +18,7 @@ import java.util.HashMap;
 //Cette classe permet de dessiner
 public class Dessin_item18 extends View {
 
+    private Canvas canvas;
     private Bitmap cartographie;
     private final Paint paint = new Paint();
 
@@ -56,8 +57,7 @@ public class Dessin_item18 extends View {
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
-//        paint.setColor(Color.TRANSPARENT);
+        paint.setColor(Color.TRANSPARENT);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(20);
     }
@@ -90,6 +90,7 @@ public class Dessin_item18 extends View {
 
 
         this.cartographie = image;
+        this.canvas = canvas;
     }
 
     @Override
@@ -187,6 +188,7 @@ public class Dessin_item18 extends View {
         }
     }
 
+
     public Bitmap getCartographie() {
         return cartographie;
     }
@@ -198,6 +200,10 @@ public class Dessin_item18 extends View {
     public ArrayList getTableauY() {
         return tableauY;
     }
+
+    public Paint getPaint() { return paint; }
+
+    public Canvas getCanvas() { return canvas; }
 
     /**
      * Called when replaying history to ensure the dirty region includes all
@@ -216,8 +222,8 @@ public class Dessin_item18 extends View {
         }
     }
 
-//    public void setColor(int color){
-//        paint.setColor(color);
-//    }
+
+
+
 
 }
