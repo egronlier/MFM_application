@@ -62,6 +62,7 @@ public class do_item18 extends Activity {
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
                 myIntent.putExtra("varRandom",varRandom);
+//                dessin.setColor(Color.BLUE);
                 cartoBitmap = dessin.getCartographie();
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();

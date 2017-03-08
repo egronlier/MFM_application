@@ -57,8 +57,9 @@ public class Dessin_item18 extends View {
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setAntiAlias(true);
         paint.setColor(Color.BLUE);
+//        paint.setColor(Color.TRANSPARENT);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
+        paint.setStrokeWidth(20);
     }
 
     @Override
@@ -186,7 +187,6 @@ public class Dessin_item18 extends View {
         }
     }
 
-
     public Bitmap getCartographie() {
         return cartographie;
     }
@@ -216,5 +216,8 @@ public class Dessin_item18 extends View {
         }
     }
 
+//    public void setColor(int color){
+//        paint.setColor(color);
+//    }
 
 }

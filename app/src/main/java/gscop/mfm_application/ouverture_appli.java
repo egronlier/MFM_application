@@ -103,7 +103,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                                 surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
                                 // on vérifie qu'une date a bien été sélectionnée
                                 birthdate = tvDisplayDate.getText().toString();
-                                System.out.println("MA DATE : \n \n " + birthdate);
                                 if (birthdate != null && chosenDate) {
                                     texteDate.setError(null);
                                     try {
