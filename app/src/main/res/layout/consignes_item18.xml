@@ -10,14 +10,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-
         <TextView
             android:id="@+id/champNumeroItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
             android:text="@string/instructionsItem18"
             android:textAlignment="center"
             android:textColor="#0d8dc9"

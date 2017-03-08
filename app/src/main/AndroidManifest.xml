@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".choix_item"/>
+        <activity android:name=".choice_item"/>
         <activity android:name=".consignes_item18"/>
         <activity android:name=".consignes_item22"/>
         <activity android:name="do_item18"/>

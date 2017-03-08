@@ -25,7 +25,6 @@ public class do_item18 extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
-    String main = "";
     Dessin_item18 dessin;
     Bitmap cartoBitmap;
     TextView state;
@@ -46,7 +45,6 @@ public class do_item18 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
-            main = intent.getStringExtra("main");
         }
 
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
@@ -60,7 +58,6 @@ public class do_item18 extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("main", main);
                 cartoBitmap = dessin.getCartographie();
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();
@@ -89,7 +86,6 @@ public class do_item18 extends Activity {
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
-                            myIntent.putExtra("main", main);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();

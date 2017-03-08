@@ -25,7 +25,6 @@ public class carto_item22 extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
-    String main = "";
     Button buttonExit;
     Button boutonRecommencer;
     Button boutonValider;
@@ -51,7 +50,6 @@ public class carto_item22 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
-            main = intent.getStringExtra("main");
             path = intent.getStringExtra("path");
             try {
                 File f = new File(path, "cartographie.png");
@@ -65,7 +63,7 @@ public class carto_item22 extends Activity {
         }
 
         infosPatient = (TextView) findViewById(R.id.infosPatient);
-        infosPatient.setText(" Patient : " + name + " " + surname + " \n Né(e) le : " + birthdate + "\n" + " " + main);
+        infosPatient.setText(" Patient : " + name + " " + surname + " \n Né(e) le : " + birthdate);
 
         buttonExit = (Button) findViewById(R.id.buttonExit);
         buttonExit.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +111,6 @@ public class carto_item22 extends Activity {
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
-                                myIntent.putExtra("main", main);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
                                 finish();
@@ -145,7 +142,6 @@ public class carto_item22 extends Activity {
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
-                                myIntent.putExtra("main", main);
                                 myIntent.putExtra("path", path);
                                 myIntent.putExtra("tableauX",tableauX);
                                 myIntent.putExtra("tableauY",tableauY);
@@ -178,7 +174,6 @@ public class carto_item22 extends Activity {
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
-                            myIntent.putExtra("main", main);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();

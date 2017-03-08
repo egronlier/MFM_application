@@ -31,13 +31,10 @@
         android:textAlignment="center"
         android:textSize="25sp" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40sp" />
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
         android:orientation="horizontal">
 
         <TextView
@@ -71,13 +68,10 @@
             tools:ignore="InefficientWeight" />
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20sp" />
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
         android:orientation="horizontal">
 
         <TextView
@@ -110,13 +104,10 @@
             android:maxLength="30" />
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20sp" />
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
         android:orientation="horizontal">
 
         <TextView
@@ -156,66 +147,10 @@
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20sp" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/boutonGaucher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30sp"
-            android:layout_weight="1"
-            android:text="@string/gaucher"
-            android:textColor="#0d8dc9"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/mandatoryLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/mandatory"
-            android:textColor="#f2053c"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/boutonDroitier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/droitier"
-            android:textColor="#0d8dc9"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/madatoryRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/mandatory"
-            android:textColor="#f2053c"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-    </RadioGroup>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
         <Button
@@ -227,14 +162,11 @@
             android:text="@string/erase"
             android:textSize="30sp" />
 
-        <Space
-            android:layout_width="100dp"
-            android:layout_height="match_parent" />
-
         <Button
             android:id="@+id/boutonvalider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
             android:layout_weight="1"
             android:background="#9bc3f1"
             android:text="@string/valid"

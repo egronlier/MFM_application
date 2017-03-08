@@ -53,7 +53,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     String name = "";
     String surname = "";
     String birthdate = "";
-    String main = "";
     Button boutonEnregistrer;
     final Context context = this;
     RadioGroup radioGroupCotation;
@@ -92,7 +91,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
-            main = intent.getStringExtra("main");
             path = intent.getStringExtra("path");
             tableauX = intent.getIntegerArrayListExtra("tableauX");
             tableauY = intent.getIntegerArrayListExtra("tableauY");
@@ -133,7 +131,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         });
 
         infosPatient = (TextView) findViewById(R.id.PatientName);
-        infosPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate + "\n" + main);
+        infosPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate);
 
         boutonEnregistrer = (Button) findViewById(R.id.buttonSave);
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
@@ -227,7 +225,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             myIntent.putExtra("name", name);
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
-            myIntent.putExtra("main", main);
             myIntent.putExtra("path", path);
             myIntent.putExtra("tableauX",tableauX);
             myIntent.putExtra("tableauY",tableauY);
@@ -300,8 +297,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         document.add(paragraphInfosTitre);
 
         String strText = " Patient : " + name + " " + surname +
-                "\n Date de naissance : " + birthdate +
-                "\n " + main + "\n \n";
+                "\n Date de naissance : " + birthdate + "\n \n";
         Paragraph paragraphInfos = new Paragraph();
         paragraphInfos.add(strText);
         document.add(paragraphInfos);
@@ -417,22 +413,20 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             public void onClick(DialogInterface dialog, int which) {
                 if (options[which].equals(getString(R.string.label_continue))) {
                     // on renvoie alors vers l'interface de choix d'item
-                    Intent myIntent = new Intent(comments_item18.this, choix_item.class);
+                    Intent myIntent = new Intent(comments_item18.this, choice_item.class);
                     myIntent.putExtra("name", name);
                     myIntent.putExtra("surname", surname);
                     myIntent.putExtra("birthdate", birthdate);
-                    myIntent.putExtra("main", main);
                     startActivity(myIntent);
                     // on ferme l'activité en cours
                     finish();
                 } else if (options[which].equals(getString(R.string.label_preview))) {
                     try {
                         // on renvoie alors vers l'interface de choix d'item
-                        Intent myIntent = new Intent(comments_item18.this, choix_item.class);
+                        Intent myIntent = new Intent(comments_item18.this, choice_item.class);
                         myIntent.putExtra("name", name);
                         myIntent.putExtra("surname", surname);
                         myIntent.putExtra("birthdate", birthdate);
-                        myIntent.putExtra("main", main);
                         startActivity(myIntent);
                         // on ferme l'activité en cours
                         finish();

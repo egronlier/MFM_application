@@ -68,13 +68,7 @@ public class Dessin_item22 extends View {
         // On transforme le drawable du CD en bitmap, en prenant l'image du CD selon le caractère droitier/gaucher du patient
         //Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
 
-        Bitmap image;
-        if (main.equals("Droitier")) {
-            image = BitmapFactory.decodeResource(getResources(), R.drawable.item22_droitier);
-        } else {
-            image = BitmapFactory.decodeResource(getResources(), R.drawable.item22_gaucher);
-        }
-
+        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
         image = resize(image, 1250, 1250);
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner l'image dans le canvas
         canvas.drawBitmap(image, 0, 0, null);
@@ -225,11 +219,5 @@ public class Dessin_item22 extends View {
             dirtyRect.bottom = historicalY;
         }
     }
-
-
-    public void setMain(String main) {
-        this.main = main;
-    }
-
 
 }

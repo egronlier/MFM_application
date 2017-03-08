@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class choix_item extends Activity {
+public class choice_item extends Activity {
 
     TextView textNomPrenomPatient;
     Button buttonItem18;
@@ -21,13 +21,12 @@ public class choix_item extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
-    String main = "";
     final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choice_exercise);
+        setContentView(R.layout.choice_item);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         textNomPrenomPatient = (TextView) findViewById(R.id.PatientName);
@@ -38,8 +37,7 @@ public class choix_item extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
-            main = intent.getStringExtra("main");
-            textNomPrenomPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate + "\n" + main);
+            textNomPrenomPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate);
         }
 
         buttonExit = (Button) findViewById(R.id.buttonExit);
@@ -52,7 +50,7 @@ public class choix_item extends Activity {
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // on quitte l'application courante
-                                choix_item.this.finish();
+                                choice_item.this.finish();
                                 System.exit(0);
                             }
                         })
@@ -71,11 +69,10 @@ public class choix_item extends Activity {
             @Override
             public void onClick(View v) {
                 // on lance les consignes de l'item 18
-                Intent myIntent = new Intent(choix_item.this, consignes_item18.class);
+                Intent myIntent = new Intent(choice_item.this, consignes_item18.class);
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("main", main);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
@@ -87,11 +84,10 @@ public class choix_item extends Activity {
             @Override
             public void onClick(View v) {
                 // on lance les consignes de l'item 22
-                Intent myIntent = new Intent(choix_item.this, consignes_item22.class);
+                Intent myIntent = new Intent(choice_item.this, consignes_item22.class);
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("main", main);
                 startActivity(myIntent);
                 // on ferme l'activité en cours
                 finish();
@@ -113,7 +109,7 @@ public class choix_item extends Activity {
                         public void onClick(DialogInterface dialog, int id) {
                             back_answer = true;
                             // on revient à l'écran d'accueil d'entrée des infos patient
-                            Intent myIntent = new Intent(choix_item.this, ouverture_appli.class);
+                            Intent myIntent = new Intent(choice_item.this, ouverture_appli.class);
                             // pas besoin des extra car pas d'infos à faire transiter
                             startActivity(myIntent);
                             // on ferme l'activité en cours

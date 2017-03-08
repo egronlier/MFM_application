@@ -25,7 +25,6 @@ public class do_item22 extends Activity {
     String name = "";
     String surname = "";
     String birthdate = "";
-    String main = "";
     Dessin_item22 dessin;
     Bitmap cartoBitmap;
     TextView state;
@@ -37,6 +36,7 @@ public class do_item22 extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.do_item22);
+
         dessin = (Dessin_item22) findViewById(R.id.drawingItem22);
         state = (TextView) findViewById(R.id.enCours);
 
@@ -46,9 +46,6 @@ public class do_item22 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
-            main = intent.getStringExtra("main");
-            //on donne l'info de la main droite/gauche à la partie dessin
-            dessin.setMain(main);
         }
 
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
@@ -62,7 +59,6 @@ public class do_item22 extends Activity {
                 myIntent.putExtra("name", name);
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("main", main);
                 cartoBitmap = dessin.getCartographie();
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();
@@ -92,7 +88,6 @@ public class do_item22 extends Activity {
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
-                            myIntent.putExtra("main",main);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();

@@ -16,7 +16,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,20 +24,16 @@ import java.util.regex.Pattern;
 
 public class ouverture_appli extends Activity implements View.OnClickListener {
 
-    Button boutonValider;
-    Button boutonEffacer;
-    Button buttonExit;
     EditText nomEntre;
     EditText prenomEntre;
     TextView texteDate;
     String birthdate = null;
-    RadioButton boutonDroitier;
-    RadioButton boutonGaucher;
-    String varDG = "";
+    Button boutonValider;
+    Button boutonEffacer;
+    Button buttonExit;
     final Context context = this;
     String name;
     String surname;
-
     TextView tvDisplayDate;
     Calendar cal;
     int year;
@@ -87,8 +82,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
             }
         });
         texteDate = (TextView) findViewById(R.id.texteBirthdate);
-        boutonDroitier = (RadioButton) findViewById(R.id.boutonDroitier);
-        boutonGaucher = (RadioButton) findViewById(R.id.boutonGaucher);
 
         // on met un listener qui regarde quand on clique sur le bouton
         // Pour le bouton valider
@@ -105,9 +98,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                 // On vérifie que tous les champs ont été remplis
                 // on vérifie que le nom et le prénom ont été remplis
                 if (length_name > 0 && length_surname > 0) {
-                    // on vérifie qu'au moins un radioButton a été sélectionné
-                    if (boutonDroitier.isChecked() || boutonGaucher.isChecked()) {
-                        boutonGaucher.setError(null);
                         // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
                         if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)) {
                             if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
@@ -117,9 +107,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                                 if (birthdate != null) {
                                     texteDate.setError(null);
                                     try {
-                                        // on récupère la main du patient
-                                        if (boutonDroitier.isChecked()) varDG = "Droitier";
-                                        else varDG = "Gaucher";
                                         // ouvrir une boite de dialogue permettant de valider les infos entrées
                                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                                         // set titre
@@ -127,18 +114,17 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                                         // set dialog message
                                         alertDialogBuilder
                                                 .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
-                                                        + " " + name + " " + surname + "\n Né(e) le : " + birthdate + "\n " + varDG)
+                                                        + " " + name + " " + surname + "\n Né(e) le : " + birthdate)
                                                 .setCancelable(false)
                                                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int id) {
                                                         // if this button is clicked, go to next activity
                                                         dialog.cancel();
                                                         // On lance une nouvelle activité : l'interface du choix d'item
-                                                        Intent myIntent = new Intent(ouverture_appli.this, choix_item.class);
+                                                        Intent myIntent = new Intent(ouverture_appli.this, choice_item.class);
                                                         myIntent.putExtra("name", name);
                                                         myIntent.putExtra("surname", surname);
                                                         myIntent.putExtra("birthdate", birthdate);
-                                                        myIntent.putExtra("main", varDG);
                                                         startActivity(myIntent);
                                                         // on ferme l'activité en cours
                                                         finish();
@@ -172,11 +158,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                             nomEntre.setError("Que des lettres !");
                             nomEntre.requestFocus();
                         }
-                    } else { // Droitier ou gaucher n'a pas été choisi
-                        Toast.makeText(getApplicationContext(), R.string.errorRadioButton, Toast.LENGTH_LONG).show();
-                        boutonGaucher.setError("Veuillez sélectionner !");
-                        boutonGaucher.requestFocus();
-                    }
                 } else { // Un des champs de nom ou prénom n'est pas rempli
                     Toast.makeText(getApplicationContext(), R.string.errorVoid, Toast.LENGTH_LONG).show();
                     if (length_name <= 0) {
@@ -198,8 +179,6 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                 prenomEntre.getText().clear();
                 tvDisplayDate.setText("");
                 birthdate = null;
-                boutonDroitier.setChecked(false);
-                boutonGaucher.setChecked(false);
             }
         });
 
