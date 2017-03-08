@@ -127,31 +127,16 @@ public class carto_item18 extends Activity {
             @Override
             public void onClick(View v) {
                 // quand on clique sur le bouton valider, ça ouvre l'interface des commentaires du kiné
-                builder.setMessage("Êtes-vous certain de vouloir valider cette cartographie ?")
-                        .setCancelable(true)
-                        .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // if this button is clicked, close the dialog box
-                                dialog.cancel();
-                            }
-                        })
-                        .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // on revient à l'écran de réalisation de l'item 18
-                                Intent myIntent = new Intent(carto_item18.this, comments_item18.class);
-                                myIntent.putExtra("name", name);
-                                myIntent.putExtra("surname", surname);
-                                myIntent.putExtra("birthdate", birthdate);
-                                myIntent.putExtra("path", path);
-                                myIntent.putExtra("tableauX",tableauX);
-                                myIntent.putExtra("tableauY",tableauY);
-                                startActivity(myIntent);
-                                // on ferme l'activité en cours
-                                finish();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                Intent myIntent = new Intent(carto_item18.this, comments_item18.class);
+                myIntent.putExtra("name", name);
+                myIntent.putExtra("surname", surname);
+                myIntent.putExtra("birthdate", birthdate);
+                myIntent.putExtra("path", path);
+                myIntent.putExtra("tableauX", tableauX);
+                myIntent.putExtra("tableauY", tableauY);
+                startActivity(myIntent);
+                // on ferme l'activité en cours
+                finish();
             }
         });
 
