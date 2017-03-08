@@ -146,6 +146,7 @@ public class carto_item18 extends Activity {
                                     myIntent.putExtra("path", path);
                                     myIntent.putExtra("tableauX", tableauX);
                                     myIntent.putExtra("tableauY", tableauY);
+                                    myIntent.putExtra("varRandom", varRandom);
                                     startActivity(myIntent);
                                 }
                             });
@@ -160,11 +161,11 @@ public class carto_item18 extends Activity {
                     myIntent.putExtra("path", path);
                     myIntent.putExtra("tableauX", tableauX);
                     myIntent.putExtra("tableauY", tableauY);
+                    myIntent.putExtra("varRandom", varRandom);
                     startActivity(myIntent);
                 }
             }
         });
-
     }
 
     // quand on appuie sur la touche retour de la tablette -> comme pour le bouton recommencer

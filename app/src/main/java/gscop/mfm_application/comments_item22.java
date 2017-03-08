@@ -80,6 +80,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     Bitmap cartoBitmap;
     File myFile;
     List<String> listeComm;
+    int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             path = intent.getStringExtra("path");
             tableauX = intent.getIntegerArrayListExtra("tableauX");
             tableauY = intent.getIntegerArrayListExtra("tableauY");
+            varRandom = intent.getIntExtra("varRandom", -1); // -1 par défaut
             try {
                 File f = new File(path, "cartographie.png");
                 cartoBitmap = BitmapFactory.decodeStream(new FileInputStream(f));

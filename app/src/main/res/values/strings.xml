@@ -78,4 +78,5 @@
     <string name="directoryExist">Un dossier existe déjà pour ce patient</string>
     <string name="jj_mm_aaaa">JJ/MM/AAAA</string>
     <string name="paper18">Veuillez réaliser l\'item 18 en version papier et cliquer sur OK quand vous aurez terminer.</string>
+    <string name="paper22">Veuillez réaliser l\'item 22 en version papier et cliquer sur OK quand vous aurez terminer.</string>
 </resources>

@@ -35,6 +35,7 @@ public class carto_item22 extends Activity {
     final Context context = this;
     ArrayList tableauX;
     ArrayList tableauY;
+    int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class carto_item22 extends Activity {
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
             path = intent.getStringExtra("path");
+            varRandom = intent.getIntExtra("varRandom", -1); // -1 par défaut
             try {
                 File f = new File(path, "cartographie.png");
                 cartoBitmap = BitmapFactory.decodeStream(new FileInputStream(f));
@@ -111,6 +113,7 @@ public class carto_item22 extends Activity {
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
+                                myIntent.putExtra("varRandom", varRandom);
                                 startActivity(myIntent);
                                 // on ferme l'activité en cours
                                 finish();
@@ -127,16 +130,40 @@ public class carto_item22 extends Activity {
             @Override
             public void onClick(View v) {
                 // quand on clique sur le bouton valider, ça ouvre l'interface des commentaires du kiné
-                Intent myIntent = new Intent(carto_item22.this, comments_item22.class);
-                myIntent.putExtra("name", name);
-                myIntent.putExtra("surname", surname);
-                myIntent.putExtra("birthdate", birthdate);
-                myIntent.putExtra("path", path);
-                myIntent.putExtra("tableauX", tableauX);
-                myIntent.putExtra("tableauY", tableauY);
-                startActivity(myIntent);
-                // on ferme l'activité en cours
-                finish();
+                // si varRandom = 1, on doit faire la version papier avant
+                if (varRandom == 1) {
+                    // on demande de réaliser l'item 22 version papier
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage(R.string.paper22)
+                            .setTitle("MFM Papier")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent myIntent = new Intent(carto_item22.this, comments_item22.class);
+                                    myIntent.putExtra("name", name);
+                                    myIntent.putExtra("surname", surname);
+                                    myIntent.putExtra("birthdate", birthdate);
+                                    myIntent.putExtra("path", path);
+                                    myIntent.putExtra("tableauX", tableauX);
+                                    myIntent.putExtra("tableauY", tableauY);
+                                    myIntent.putExtra("varRandom", varRandom);
+                                    startActivity(myIntent);
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                } else {
+                    // varRandom = 0 -> on lance simplement l'interface des commentaires
+                    Intent myIntent = new Intent(carto_item22.this, comments_item22.class);
+                    myIntent.putExtra("name", name);
+                    myIntent.putExtra("surname", surname);
+                    myIntent.putExtra("birthdate", birthdate);
+                    myIntent.putExtra("path", path);
+                    myIntent.putExtra("tableauX", tableauX);
+                    myIntent.putExtra("tableauY", tableauY);
+                    myIntent.putExtra("varRandom", varRandom);
+                    startActivity(myIntent);
+                }
             }
         });
     }
@@ -158,6 +185,7 @@ public class carto_item22 extends Activity {
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
+                            myIntent.putExtra("varRandom", varRandom);
                             startActivity(myIntent);
                             // on ferme l'activité en cours
                             finish();
