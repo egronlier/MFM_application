@@ -81,7 +81,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     ArrayList tableauY;
     Bitmap cartoBitmap;
     File myFile;
-    List<String> listeComm;
+    String listeComm;
     int varRandom;
 
     @Override
@@ -175,7 +175,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                         r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
                         cotationTablet = r.getText().toString();
                         // ------- COMMENTAIRES
-                        listeComm = listeComment.getSelectedStrings();
+                        listeComm = listeComment.getSelectedItemsAsString();
                         commentaire = comments.getText().toString();
                         // ------------------------------------------------------------------------------
                         try {
@@ -312,12 +312,7 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         paragraphCommKineTitre.setFont(myFontTitre);
         paragraphCommKineTitre.add("\n COMMENTAIRES : \n");
         document.add(paragraphCommKineTitre);
-
-        String maListe = "";
-        for (String elem : listeComm) {
-            maListe = maListe + elem + " , ";
-        }
-        strText = maListe + "\n" + commentaire + "\n \n";
+        strText = listeComm + "\n" + commentaire + "\n \n";
         Paragraph paragraphCommKine = new Paragraph();
         paragraphCommKine.add(strText);
         document.add(paragraphCommKine);
