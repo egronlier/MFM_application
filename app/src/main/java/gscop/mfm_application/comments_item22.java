@@ -150,10 +150,8 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
                 // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
                 boutonEnregistrer.setClickable(false);
-                boutonEnregistrer.setBackgroundColor(Color.GRAY);
                 // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
                 // radioGroup : cotation papier
                 if (boutonCotation0Paper.isChecked() || boutonCotation1Paper.isChecked() || boutonCotation2Paper.isChecked() || boutonCotation3Paper.isChecked() || boutonCotationNSPPaper.isChecked()) {
@@ -161,6 +159,8 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                     // radioGroup : cotation tablette
                     if (boutonCotation0Tablet.isChecked() || boutonCotation1Tablet.isChecked() || boutonCotation2Tablet.isChecked() || boutonCotation3Tablet.isChecked() || boutonCotationNSPTablet.isChecked()) {
                         textCotationTablet.setError(null);
+                        boutonEnregistrer.setBackgroundColor(Color.GRAY);
+                        Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
                         // --------------------- on récupère les commentaires du kiné -------------------
                         // ------- COTATION PAPIER
                         int radioButtonSelectedID = radioGroupCotationPaper.getCheckedRadioButtonId();

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -129,6 +130,7 @@ public class carto_item22 extends Activity {
         boutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonValider.setBackgroundColor(Color.GRAY);
                 // quand on clique sur le bouton valider, ça ouvre l'interface des commentaires du kiné
                 // si varRandom = 1, on doit faire la version papier avant
                 if (varRandom == 1) {
