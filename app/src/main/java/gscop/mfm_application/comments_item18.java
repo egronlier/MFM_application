@@ -70,7 +70,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     RadioButton boutonCotation2Tablet;
     RadioButton boutonCotation3Tablet;
     RadioButton boutonCotationNSPTablet;
-    MultiSelectionSpinner listeComment;
+    MultiSelectionSpinner monSpinner;
     String cotationPaper = "cotation papier inconnue";
     String cotationTablet = "cotation tablette inconnue";
     String commentaire = "aucun commentaire";
@@ -81,7 +81,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     ArrayList tableauY;
     Bitmap cartoBitmap;
     File myFile;
-    List<String> listeComm;
+    String listeComm;
     int varRandom;
 
     @Override
@@ -108,10 +108,10 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                 Toast.makeText(getApplicationContext(), R.string.errorCarto, Toast.LENGTH_LONG).show();
             }
             // on remplit la liste déroulante
-            String[] array = {"-", "difficulté", "sans appui de la main", "avec appui de la main", "arrêt", "change de doigt", "avec compensation"};
-            listeComment = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
-            listeComment.setItems(array);
-            listeComment.setListener(this);
+            String[] array = {"-", "avec appui de la main", "avec pause", "change de doigt", "avec compensation du tronc"};
+            monSpinner = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
+            monSpinner.setItems(array);
+            monSpinner.setListener(this);
         }
 
         radioGroupCotationTablet = (RadioGroup) findViewById(R.id.radioGroupCotationTablet);
@@ -172,7 +172,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
                         cotationTablet = r.getText().toString();
                         // ------- COMMENTAIRES
-                        listeComm = listeComment.getSelectedStrings();
+                        listeComm = monSpinner.getSelectedItemsAsString();
                         commentaire = comments.getText().toString();
                         // ------------------------------------------------------------------------------
                         try {
@@ -306,12 +306,7 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
         paragraphCommKineTitre.setFont(myFontTitre);
         paragraphCommKineTitre.add("\n COMMENTAIRES : \n");
         document.add(paragraphCommKineTitre);
-
-        String maListe = "";
-        for (String elem : listeComm) {
-            maListe = maListe + elem + " , ";
-        }
-        strText = maListe + "\n" + commentaire + "\n \n";
+        strText = listeComm + "\n" + commentaire + "\n \n";
         Paragraph paragraphCommKine = new Paragraph();
         paragraphCommKine.add(strText);
         document.add(paragraphCommKine);
