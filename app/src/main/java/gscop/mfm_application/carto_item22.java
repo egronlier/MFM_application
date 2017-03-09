@@ -148,6 +148,8 @@ public class carto_item22 extends Activity {
                                     myIntent.putExtra("tableauY", tableauY);
                                     myIntent.putExtra("varRandom", varRandom);
                                     startActivity(myIntent);
+                                    // on ferme l'activité en cours
+                                    finish();
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -163,6 +165,8 @@ public class carto_item22 extends Activity {
                     myIntent.putExtra("tableauY", tableauY);
                     myIntent.putExtra("varRandom", varRandom);
                     startActivity(myIntent);
+                    // on ferme l'activité en cours
+                    finish();
                 }
             }
         });
