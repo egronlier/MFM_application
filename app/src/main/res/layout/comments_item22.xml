@@ -293,6 +293,7 @@
                 android:layout_marginStart="10dp"
                 android:background="#c2d6ed"
                 android:lines="4"
+                android:maxLength="200"
                 android:scrollbars="vertical"
                 tools:ignore="LabelFor,TextFields" />
 

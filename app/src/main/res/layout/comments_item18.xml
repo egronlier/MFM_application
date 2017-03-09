@@ -293,6 +293,7 @@
                 android:background="#c2d6ed"
                 android:lines="4"
                 android:scrollbars="vertical"
+                android:maxLength="200"
                 tools:ignore="LabelFor,TextFields" />
 
         </LinearLayout>
