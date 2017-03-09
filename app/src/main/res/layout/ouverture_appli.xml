@@ -162,7 +162,8 @@
             android:layout_weight="1"
             android:background="#9bc3f1"
             android:text="@string/erase"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/boutonvalider"
@@ -172,7 +173,8 @@
             android:layout_weight="1"
             android:background="#9bc3f1"
             android:text="@string/valid"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 

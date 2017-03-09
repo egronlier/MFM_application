@@ -246,7 +246,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Avec appui de la paume" />
+                android:text="@string/appui" />
 
             <CheckBox
                 android:id="@+id/checkBoxPause"
@@ -255,7 +255,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Avec pause" />
+                android:text="@string/pause" />
 
             <CheckBox
                 android:id="@+id/checkBoxChange"
@@ -264,7 +264,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Change de doigt" />
+                android:text="@string/change" />
 
             <CheckBox
                 android:id="@+id/checkBoxCompens"
@@ -273,7 +273,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Avec compensation du tronc" />
+                android:text="@string/compensationTronc" />
 
         </LinearLayout>
 

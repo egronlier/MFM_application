@@ -247,7 +247,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Avec appui de la paume" />
+                android:text="@string/appui" />
 
             <CheckBox
                 android:id="@+id/checkBoxPoseSans"
@@ -256,7 +256,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Pose le doigt sans précision" />
+                android:text="@string/pose" />
 
             <CheckBox
                 android:id="@+id/checkBoxGlisse"
@@ -265,7 +265,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Glisse le doigt" />
+                android:text="@string/glisse" />
 
             <CheckBox
                 android:id="@+id/checkBoxChange"
@@ -274,7 +274,7 @@
                 android:textColor="#7e8183"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="Change de doigt" />
+                android:text="@string/change" />
 
         </LinearLayout>
 
@@ -292,6 +292,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:background="#c2d6ed"
+                android:inputType="textMultiLine"
                 android:lines="4"
                 android:maxLength="200"
                 android:scrollbars="vertical"

@@ -79,4 +79,10 @@
     <string name="jj_mm_aaaa">JJ/MM/AAAA</string>
     <string name="paper18">Veuillez réaliser l\'item 18 en version papier et cliquer sur OK quand vous aurez terminé.</string>
     <string name="paper22">Veuillez réaliser l\'item 22 en version papier et cliquer sur OK quand vous aurez terminé.</string>
+    <string name="pose">Pose le doigt sans précision</string>
+    <string name="appui">Avec appui de la paume</string>
+    <string name="glisse">Glisse le doigt</string>
+    <string name="change">Change de doigt</string>
+    <string name="compensationTronc">Avec compensation du tronc</string>
+    <string name="pause">Avec pause</string>
 </resources>

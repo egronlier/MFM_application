@@ -54,7 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:background="#FFFFFFFF" />
+            android:background="#FFFFFFFF"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
@@ -71,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#9bc3f1"
-            android:text="@string/restart" />
+            android:text="@string/restart"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/boutonValider"
@@ -79,7 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="400dp"
             android:background="#9bc3f1"
-            android:text="@string/valid" />
+            android:text="@string/valid"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 </RelativeLayout>
