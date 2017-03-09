@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -44,12 +45,9 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import tutoandroid.libmultispinner.MultiSelectionSpinner;
-
-public class comments_item18 extends Activity implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
+public class comments_item18 extends Activity {
 
     String name = "";
     String surname = "";
@@ -70,18 +68,21 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
     RadioButton boutonCotation2Tablet;
     RadioButton boutonCotation3Tablet;
     RadioButton boutonCotationNSPTablet;
-    MultiSelectionSpinner monSpinner;
     String cotationPaper = "cotation papier inconnue";
     String cotationTablet = "cotation tablette inconnue";
     String commentaire = "aucun commentaire";
     EditText comments;
+    CheckBox checkBoxAppuiPaume;
+    CheckBox checkBoxPause;
+    CheckBox checkBoxChange;
+    CheckBox checkBoxCompens;
     TextView infosPatient;
     String path = "";
     ArrayList tableauX;
     ArrayList tableauY;
     Bitmap cartoBitmap;
     File myFile;
-    String listeComm;
+    String listeComm = " ";
     int varRandom;
 
     @Override
@@ -107,11 +108,10 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), R.string.errorCarto, Toast.LENGTH_LONG).show();
             }
-            // on remplit la liste déroulante
-            String[] array = {"-", "avec appui de la main", "avec pause", "change de doigt", "avec compensation du tronc"};
-            monSpinner = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
-            monSpinner.setItems(array);
-            monSpinner.setListener(this);
+            checkBoxAppuiPaume = (CheckBox) findViewById(R.id.checkBoxAppuiPaume);
+            checkBoxPause = (CheckBox) findViewById(R.id.checkBoxPause);
+            checkBoxChange = (CheckBox) findViewById(R.id.checkBoxChange);
+            checkBoxCompens = (CheckBox) findViewById(R.id.checkBoxCompens);
         }
 
         radioGroupCotationTablet = (RadioGroup) findViewById(R.id.radioGroupCotationTablet);
@@ -172,7 +172,14 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
                         r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
                         cotationTablet = r.getText().toString();
                         // ------- COMMENTAIRES
-                        listeComm = monSpinner.getSelectedItemsAsString();
+                        if (checkBoxCompens.isChecked())
+                            listeComm = listeComm + checkBoxCompens.getText() + " \n ";
+                        if (checkBoxChange.isChecked())
+                            listeComm = listeComm + checkBoxChange.getText() + " \n ";
+                        if (checkBoxPause.isChecked())
+                            listeComm = listeComm + checkBoxChange.getText() + " \n ";
+                        if (checkBoxAppuiPaume.isChecked())
+                            listeComm = listeComm + checkBoxAppuiPaume.getText() + " \n ";
                         commentaire = comments.getText().toString();
                         // ------------------------------------------------------------------------------
                         try {
@@ -219,14 +226,6 @@ public class comments_item18 extends Activity implements MultiSelectionSpinner.O
             finish();
         }
         return back_answer;
-    }
-
-    @Override
-    public void selectedIndices(List<Integer> indices) {
-    }
-
-    @Override
-    public void selectedStrings(List<String> strings) {
     }
 
     public void hideKeyboard(View view) {

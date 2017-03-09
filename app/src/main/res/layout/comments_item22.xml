@@ -230,51 +230,75 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_weight="1"
-            android:text="@string/select"
-            android:textColor="#0d8dc9"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <tutoandroid.libmultispinner.MultiSelectionSpinner
-            android:id="@+id/mySpinner"
-            android:layout_width="450dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp" />
+            <CheckBox
+                android:id="@+id/checkBoxAppuiPaume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:text="Avec appui de la paume" />
+
+            <CheckBox
+                android:id="@+id/checkBoxPoseSans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:text="Pose le doigt sans précision" />
+
+            <CheckBox
+                android:id="@+id/checkBoxGlisse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:text="Glisse le doigt" />
+
+            <CheckBox
+                android:id="@+id/checkBoxChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#7e8183"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:text="Change de doigt" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextComments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:background="#c2d6ed"
+                android:lines="4"
+                android:scrollbars="vertical"
+                tools:ignore="LabelFor,TextFields" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewInfoCompl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:labelFor="@+id/editTextComments"
-        android:text="@string/compl_info"
-        android:textColor="#0d8dc9"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@id/editTextComments"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#c2d6ed"
-        android:gravity="start"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        android:scrollbars="vertical" />
 
     <Button
         android:id="@+id/buttonSave"

@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -44,12 +45,9 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import tutoandroid.libmultispinner.MultiSelectionSpinner;
-
-public class comments_item22 extends Activity implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
+public class comments_item22 extends Activity {
 
     String name = "";
     String surname = "";
@@ -70,18 +68,21 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
     RadioButton boutonCotation2Tablet;
     RadioButton boutonCotation3Tablet;
     RadioButton boutonCotationNSPTablet;
-    MultiSelectionSpinner listeComment;
     String cotationPaper = "cotation papier inconnue";
     String cotationTablet = "cotation tablette inconnue";
     String commentaire = "aucun commentaire";
     EditText comments;
+    CheckBox checkBoxAppuiPaume;
+    CheckBox checkBoxPoseSans;
+    CheckBox checkBoxGlisse;
+    CheckBox checkBoxChange;
     TextView infosPatient;
     String path = "";
     ArrayList tableauX;
     ArrayList tableauY;
     Bitmap cartoBitmap;
     File myFile;
-    String listeComm;
+    String listeComm = " ";
     int varRandom;
 
     @Override
@@ -107,14 +108,10 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(), R.string.errorCarto, Toast.LENGTH_LONG).show();
             }
-            // on remplit la liste déroulante
-            String[] array = {"-", "difficulté", "arrêt", "change de doigt",
-                    "soulève le doigt", "ne soulève pas le doigt", "glisse le doigt", "ne glisse pas le doigt",
-                    "touche le quadrillage", "ne touche pas le quadrillage", "pose le doigt sans précision",
-                    "avec compensation", "sans appui de la main", "avec appui de la main"};
-            listeComment = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
-            listeComment.setItems(array);
-            listeComment.setListener(this);
+            checkBoxAppuiPaume = (CheckBox) findViewById(R.id.checkBoxAppuiPaume);
+            checkBoxPoseSans = (CheckBox) findViewById(R.id.checkBoxPoseSans);
+            checkBoxChange = (CheckBox) findViewById(R.id.checkBoxChange);
+            checkBoxGlisse = (CheckBox) findViewById(R.id.checkBoxGlisse);
         }
 
         radioGroupCotationTablet = (RadioGroup) findViewById(R.id.radioGroupCotationTablet);
@@ -175,7 +172,14 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
                         r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
                         cotationTablet = r.getText().toString();
                         // ------- COMMENTAIRES
-                        listeComm = listeComment.getSelectedItemsAsString();
+                        if (checkBoxGlisse.isChecked())
+                            listeComm = listeComm + checkBoxGlisse.getText() + " \n ";
+                        if (checkBoxChange.isChecked())
+                            listeComm = listeComm + checkBoxChange.getText() + " \n ";
+                        if (checkBoxPoseSans.isChecked())
+                            listeComm = listeComm + checkBoxPoseSans.getText() + " \n ";
+                        if (checkBoxAppuiPaume.isChecked())
+                            listeComm = listeComm + checkBoxAppuiPaume.getText() + " \n ";
                         commentaire = comments.getText().toString();
                         // ------------------------------------------------------------------------------
                         try {
@@ -222,16 +226,6 @@ public class comments_item22 extends Activity implements MultiSelectionSpinner.O
             finish();
         }
         return back_answer;
-    }
-
-    @Override
-    public void selectedIndices(List<Integer> indices) {
-
-    }
-
-    @Override
-    public void selectedStrings(List<String> strings) {
-
     }
 
     public void hideKeyboard(View view) {
