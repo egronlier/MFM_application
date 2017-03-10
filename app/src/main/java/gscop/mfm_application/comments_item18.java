@@ -172,7 +172,6 @@ public class comments_item18 extends Activity {
             if (boutonCotation0Tablet.isChecked() || boutonCotation1Tablet.isChecked() || boutonCotation2Tablet.isChecked() || boutonCotation3Tablet.isChecked() || boutonCotationNSPTablet.isChecked()) {
                 textCotationTablet.setError(null);
                 textStateSaving.setText(R.string.pdfsaving);
-                Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
                 // --------------------- on récupère les commentaires du kiné -------------------
                 // ------- COTATION PAPIER
                 int radioButtonSelectedID = radioGroupCotationPaper.getCheckedRadioButtonId();
@@ -187,31 +186,24 @@ public class comments_item18 extends Activity {
                 r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
                 cotationTablet = r.getText().toString();
                 // ------- COMMENTAIRES
-                if (checkBoxCompens.isChecked())
-                    listeComm = listeComm + checkBoxCompens.getText() + " \n ";
-                if (checkBoxChange.isChecked())
-                    listeComm = listeComm + checkBoxChange.getText() + " \n ";
-                if (checkBoxPause.isChecked())
-                    listeComm = listeComm + checkBoxChange.getText() + " \n ";
-                if (checkBoxAppuiPaume.isChecked())
-                    listeComm = listeComm + checkBoxAppuiPaume.getText() + " \n ";
+                if (checkBoxCompens.isChecked()) listeComm = listeComm + checkBoxCompens.getText() + " \n ";
+                if (checkBoxChange.isChecked()) listeComm = listeComm + checkBoxChange.getText() + " \n ";
+                if (checkBoxPause.isChecked()) listeComm = listeComm + checkBoxChange.getText() + " \n ";
+                if (checkBoxAppuiPaume.isChecked()) listeComm = listeComm + checkBoxAppuiPaume.getText() + " \n ";
                 commentaire = comments.getText().toString();
                 // ------------------------------------------------------------------------------
                 try {
                     // ----------- CREATION DU PDF -------------
                     createPdf();
-                    Toast.makeText(getApplicationContext(), R.string.savedOK, Toast.LENGTH_LONG).show();
                     textStateSaving.setText(R.string.savedOK);
                 } catch (FileNotFoundException | DocumentException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
                     textStateSaving.setText(R.string.pbPDF);
                 }
             } else {
                 boutonEnregistrer.setBackgroundColor(getResources().getColor(R.color.myBlue));
                 boutonEnregistrer.setClickable(true);
-                textStateSaving.setText("");
-                Toast.makeText(getApplicationContext(), R.string.errorCotationTablet, Toast.LENGTH_LONG).show();
+                textStateSaving.setText(R.string.errorCotationTablet);
                 textCotationTablet.setError("Choisir cotation !");
                 textCotationTablet.requestFocus();
                 handledClick = false;
@@ -219,8 +211,7 @@ public class comments_item18 extends Activity {
         } else {
             boutonEnregistrer.setBackgroundColor(getResources().getColor(R.color.myBlue));
             boutonEnregistrer.setClickable(true);
-            textStateSaving.setText("");
-            Toast.makeText(getApplicationContext(), R.string.errorCotationPaper, Toast.LENGTH_LONG).show();
+            textStateSaving.setText(R.string.errorCotationPaper);
             textCotationPaper.setError("Choisir cotation !");
             textCotationPaper.requestFocus();
             handledClick = false;
