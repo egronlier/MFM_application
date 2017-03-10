@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -66,8 +67,15 @@ public class Dessin_item18 extends View {
     protected void onDraw(Canvas canvas) {
         // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item18);
-        //Bitmap cd = Bitmap.createScaledBitmap(image, 1080,1080, true);
-        image = resize(image, 1250, 1250);
+
+        // On fait en sorte que l'image du CD soit toujours de la même taille quelle que soit la tablette utilisée
+        DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+        float totalDIP_X = metrics.xdpi;
+        float totalDIP_Y = metrics.ydpi;
+        image = Bitmap.createScaledBitmap (image, (int)(6.9*totalDIP_X), (int)(7.7*totalDIP_Y), false);
+
+        image = image.copy(Bitmap.Config.ARGB_8888, true);
+
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner le CD dans le canvas
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
@@ -166,27 +174,6 @@ public class Dessin_item18 extends View {
         return true;
     }
 
-    // Cette méthode permet de redimensionner un bitmap
-    private static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
-        if (maxHeight > 0 && maxWidth > 0) {
-            int width = image.getWidth();
-            int height = image.getHeight();
-            float ratioBitmap = (float) width / (float) height;
-            float ratioMax = (float) maxWidth / (float) maxHeight;
-
-            int finalWidth = maxWidth;
-            int finalHeight = maxHeight;
-            if (ratioMax > 1) {
-                finalWidth = (int) ((float) maxHeight * ratioBitmap);
-            } else {
-                finalHeight = (int) ((float) maxWidth / ratioBitmap);
-            }
-            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
-            return image;
-        } else {
-            return image;
-        }
-    }
 
 
     public Bitmap getCartographie() {
