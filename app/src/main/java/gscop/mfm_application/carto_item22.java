@@ -98,12 +98,15 @@ public class carto_item22 extends Activity {
         boutonRecommencer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonRecommencer.setBackgroundColor(Color.GRAY);
                 // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item22
                 builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? \n (le tracé sera perdu)")
                         .setCancelable(true)
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // if this button is clicked, close the dialog box
+                                // on remet le bouton recommencer en bleu
+                                boutonRecommencer.setBackgroundColor(getResources().getColor(R.color.myBlue));
                                 dialog.cancel();
                             }
                         })
