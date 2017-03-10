@@ -60,7 +60,6 @@ public class do_item18 extends Activity {
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boutonTerminer.setBackgroundColor(Color.GRAY);
                 boutonTerminer.setClickable(false);
                 // action quand on appuie sur terminer -> affiche la cartographie
                 state.setText(R.string.saving);
