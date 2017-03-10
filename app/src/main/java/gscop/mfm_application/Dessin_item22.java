@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -57,19 +58,26 @@ public class Dessin_item22 extends View {
         completedPaths = new ArrayList<>();
         // initialise les caractéristiques du trait (forme, couleur...)
         paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
+        paint.setColor(Color.GREEN);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(15);
+        paint.setStrokeWidth(26);
         paint.setStrokeCap(Paint.Cap.ROUND);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // On transforme le drawable du CD en bitmap, en prenant l'image du CD selon le caractère droitier/gaucher du patient
-        //Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
 
+        // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item22);
-        image = resize(image, 1250, 1250);
+
+        // On fait en sorte que l'image du CD soit toujours de la même taille quelle que soit la tablette utilisée : l'image est redimensionnée pour être à la bonne taille en fonction de la densité de l'écran
+        DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+        float totalDIP_X = metrics.xdpi;
+        float totalDIP_Y = metrics.ydpi;
+        image = Bitmap.createScaledBitmap (image, (int)(6.6*totalDIP_X), (int)(7.2*totalDIP_Y), false);
+
+        image = image.copy(Bitmap.Config.ARGB_8888, true);
+
         // On ajoute ce bitmap au canvas pour pouvoir dessiner dessus : les deux nombres en paramètres servent à positionner l'image dans le canvas
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
