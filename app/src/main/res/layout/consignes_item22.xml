@@ -25,10 +25,10 @@
 
     <ImageView
         android:contentDescription="@string/item22image"
-        android:layout_width="68mm"
-        android:layout_height="68mm"
+        android:layout_width="42.6mm"
+        android:layout_height="57.9mm"
         android:layout_centerInParent="true"
-        android:src="@drawable/item22_demo" />
+        android:src="@drawable/demo_item22" />
 
         <Button
             android:id="@+id/boutonDemarrer"
