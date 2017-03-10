@@ -39,7 +39,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/champNumeroItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/item22carto"

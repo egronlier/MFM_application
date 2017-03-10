@@ -11,7 +11,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/champNumeroItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
@@ -25,7 +24,6 @@
 
 
     <ImageView
-        android:id="@+id/item22"
         android:contentDescription="@string/item22image"
         android:layout_width="68mm"
         android:layout_height="68mm"

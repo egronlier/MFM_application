@@ -8,15 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="texte_bleu">
-        <item name="android:textColor">#0d8dc9</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="texte_bleu_gras" parent="texte_bleu">
-        <item name="android:textStyle">bold</item>
-    </style>
-
     <style name="CustomDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog" tools:targetApi="lollipop">
         <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
     </style>
