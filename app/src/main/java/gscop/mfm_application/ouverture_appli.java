@@ -72,6 +72,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
 
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
+        // on range le clavier quand le champ prénom n'est plus sélectionné
         prenomEntre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

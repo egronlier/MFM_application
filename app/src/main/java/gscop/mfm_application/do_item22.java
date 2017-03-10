@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -60,6 +61,7 @@ public class do_item22 extends Activity {
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonTerminer.setBackgroundColor(Color.GRAY);
                 boutonTerminer.setClickable(false);
                 // action quand on appuie sur terminer -> affiche la cartographie
                 state.setText(R.string.saving);

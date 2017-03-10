@@ -147,6 +147,7 @@ public class comments_item22 extends Activity {
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boutonEnregistrer.setBackgroundColor(Color.GRAY);
                 // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
                 boutonEnregistrer.setClickable(false);
                 // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
@@ -156,7 +157,6 @@ public class comments_item22 extends Activity {
                     // radioGroup : cotation tablette
                     if (boutonCotation0Tablet.isChecked() || boutonCotation1Tablet.isChecked() || boutonCotation2Tablet.isChecked() || boutonCotation3Tablet.isChecked() || boutonCotationNSPTablet.isChecked()) {
                         textCotationTablet.setError(null);
-                        boutonEnregistrer.setBackgroundColor(Color.GRAY);
                         Toast.makeText(getApplicationContext(), R.string.pdfsaving, Toast.LENGTH_LONG).show();
                         // --------------------- on récupère les commentaires du kiné -------------------
                         // ------- COTATION PAPIER
@@ -191,12 +191,14 @@ public class comments_item22 extends Activity {
                             Toast.makeText(getApplicationContext(), R.string.pbPDF, Toast.LENGTH_LONG).show();
                         }
                     } else {
+                        boutonEnregistrer.setBackgroundColor(getResources().getColor(R.color.myBlue));
                         boutonEnregistrer.setClickable(true);
                         Toast.makeText(getApplicationContext(), R.string.errorCotationTablet, Toast.LENGTH_LONG).show();
                         textCotationTablet.setError("Choisir cotation !");
                         textCotationTablet.requestFocus();
                     }
                 } else {
+                    boutonEnregistrer.setBackgroundColor(getResources().getColor(R.color.myBlue));
                     boutonEnregistrer.setClickable(true);
                     Toast.makeText(getApplicationContext(), R.string.errorCotationPaper, Toast.LENGTH_LONG).show();
                     textCotationPaper.setError("Choisir cotation !");
