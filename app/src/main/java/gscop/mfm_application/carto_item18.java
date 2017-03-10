@@ -105,6 +105,8 @@ public class carto_item18 extends Activity {
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // if this button is clicked, close the dialog box
+                                // on remet le bouton recommencer en bleu
+                                boutonRecommencer.setBackgroundColor(getResources().getColor(R.color.myBlue));
                                 dialog.cancel();
                             }
                         })
