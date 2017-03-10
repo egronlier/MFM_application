@@ -152,11 +152,11 @@ public class comments_item18 extends Activity {
             public void onClick(View v) {
                 // on s'assure de ne pouvoir cliquer qu'une seule fois le bouton
                 if (!handledClick) {
+                    boutonEnregistrer.setBackgroundColor(Color.GRAY);
                     handledClick = true;
                     // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
                     boutonEnregistrer.setClickable(false);
-                    textStateSaving.setText(R.string.checkData);
-                    boutonEnregistrer.setBackgroundColor(Color.GRAY);
+//                    textStateSaving.setText(R.string.checkData);
                     actionEnregistrer();
                 }
             }
@@ -164,6 +164,7 @@ public class comments_item18 extends Activity {
     }
 
     private void actionEnregistrer() {
+        textStateSaving.setText("");
         // on vérifie qu'au moins un radioButton a été sélectionné dans chaque radioGroup
         // radioGroup : cotation papier
         if (boutonCotation0Paper.isChecked() || boutonCotation1Paper.isChecked() || boutonCotation2Paper.isChecked() || boutonCotation3Paper.isChecked() || boutonCotationNSPPaper.isChecked()) {
