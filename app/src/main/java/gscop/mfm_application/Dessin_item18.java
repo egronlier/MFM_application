@@ -16,10 +16,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * The type Dessin item 18.
- */
-//Cette classe permet de dessiner
 public class Dessin_item18 extends View {
 
     private Canvas canvas;
@@ -31,7 +27,6 @@ public class Dessin_item18 extends View {
     private HashMap<Integer, Path> paths = new HashMap<>();
     private ArrayList<Path> completedPaths = new ArrayList<>();
 
-    //tableaux qui contiendront les coordonnées des points
     private ArrayList<Float> tableauX = new ArrayList<>();
     private ArrayList<Float> tableauY = new ArrayList<>();
 
@@ -43,7 +38,7 @@ public class Dessin_item18 extends View {
     private ArrayList<Float> yDownList = new ArrayList<>();
 
     /**
-     * Créé une nouvelle instance de Dessin_item18
+     * Créé une nouvelle instance de Dessin_item18.
      *
      * @param context
      */
@@ -52,21 +47,21 @@ public class Dessin_item18 extends View {
     }
 
     /**
-     * Créé une nouvelle instance de Dessin_item18
+     * Créé une nouvelle instance de Dessin_item18.
      *
-     * @param context the context
-     * @param attrs   the attrs
+     * @param context
+     * @param attrs
      */
     public Dessin_item18(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     /**
-     * Créé une nouvelle instance de Dessin_item18
+     * Créé une nouvelle instance de Dessin_item18.
      *
-     * @param context  the context
-     * @param attrs    the attrs
-     * @param defStyle the def style
+     * @param context
+     * @param attrs
+     * @param defStyle
      */
     public Dessin_item18(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -91,7 +86,7 @@ public class Dessin_item18 extends View {
         // On transforme le drawable du CD en bitmap
         Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.item18);
 
-        // On fait en sorte que l'image du CD soit toujours de la même taille quelle que soit la tablette utilisée
+        // On fait en sorte que l'image du CD soit toujours de la même taille quelle que soit la tablette utilisée : l'image est redimensionnée pour être à la bonne taille en fonction de la densité de l'écran
         DisplayMetrics metrics = this.getResources().getDisplayMetrics();
         float totalDIP_X = metrics.xdpi;
         float totalDIP_Y = metrics.ydpi;
@@ -111,16 +106,15 @@ public class Dessin_item18 extends View {
             }
         }
 
-        // Permet de garder le dessin des points de départ à l'écran
+        // Permet de garder le dessin des points de départ à l'écran (sinon il arrive qu'il n'y ait aucun dessin lorsqu'on touche rapidement l'écran avec un doigt sans le bouger)
         for (int i = 0; i < xDownList.size(); i++) {
             canvas.drawPoint(xDownList.get(i), yDownList.get(i), paint);
         }
 
-        // On affiche les traits terminés (sans ça, seul le trait en train d'être dessiné est affiché)
+        // On affiche les traits terminés (sinon seul le trait en train d'être dessiné est affiché)
         for (Path completedPath : completedPaths) {
             canvas.drawPath(completedPath, paint);
         }
-
 
         this.cartographie = image;
         this.canvas = canvas;
@@ -137,10 +131,9 @@ public class Dessin_item18 extends View {
             // Actions à réaliser quand l'utilisateur touche l'écran
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
-                // p contiendra les traits en train d'être dessinés
                 Path p = new Path();
+                // On récupère l'identifiant du contact tactile et ses coordonnées
                 try {
-                    // On récupère l'identifiant du contact tactile et ses coordonnées
                     p.moveTo(event.getX(id), event.getY(id));
                     paths.put(id, p);
 
@@ -152,7 +145,7 @@ public class Dessin_item18 extends View {
                     xDown = event.getX(id);
                     yDown = event.getY(id);
 
-                    // Ces tableaux contiendront toutes les coordonnées brutes
+                    // Contiennent toutes les coordonnées brutes
                     tableauX.add(event.getX(id));
                     tableauY.add(event.getY(id));
 

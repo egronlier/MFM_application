@@ -16,10 +16,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * The type Dessin item 22.
- */
-//Cette classe permet de dessiner
 public class Dessin_item22 extends View {
 
     private Bitmap cartographie;
@@ -32,7 +28,6 @@ public class Dessin_item22 extends View {
     private HashMap<Integer, Path> paths = new HashMap<>();
     private ArrayList<Path> completedPaths = new ArrayList<>();
 
-    //tableaux qui contiendront les coordonnées des points
     private ArrayList<Float> tableauX = new ArrayList<>();
     private ArrayList<Float> tableauY = new ArrayList<>();
 
@@ -44,30 +39,30 @@ public class Dessin_item22 extends View {
     private ArrayList<Float> yDownList = new ArrayList<>();
 
     /**
-     * Instantiates a new Dessin item 22.
+     * Créé une nouvelle instance de Dessin_item22.
      *
-     * @param context the context
+     * @param context
      */
     public Dessin_item22(Context context) {
         super(context);
     }
 
     /**
-     * Instantiates a new Dessin item 22.
+     * Créé une nouvelle instance de Dessin_item222.
      *
-     * @param context the context
-     * @param attrs   the attrs
+     * @param context
+     * @param attrs
      */
     public Dessin_item22(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     /**
-     * Instantiates a new Dessin item 22.
+     * Créé une nouvelle instance de Dessin_item22.
      *
-     * @param context  the context
-     * @param attrs    the attrs
-     * @param defStyle the def style
+     * @param context
+     * @param attrs
+     * @param defStyle
      */
     public Dessin_item22(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -77,7 +72,8 @@ public class Dessin_item22 extends View {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         completedPaths = new ArrayList<>();
-        // initialise les caractéristiques du trait (forme, couleur...)
+
+        // Initialise les caractéristiques du trait (forme, couleur...)
         paint.setAntiAlias(true);
         paint.setColor(Color.GREEN);
         paint.setStyle(Paint.Style.STROKE);
@@ -103,23 +99,23 @@ public class Dessin_item22 extends View {
         canvas.drawBitmap(image, 0, 0, null);
         canvas = new Canvas(image);
 
-
-        for (Path fingerPath : paths.values()) {            //dessine ce que l'utilisateur est en train de toucher
+        // On dessine le trait que l'utilisateur est en train de faire (les points de départ et le mouvement)
+        for (Path fingerPath : paths.values()) {
             if (fingerPath != null) {
                 canvas.drawPoint(xDown, yDown, paint);
                 canvas.drawPath(fingerPath, paint);
             }
         }
 
-        for (int i = 0; i < xDownList.size(); i++) {                                   //permet de garder le dessin des points de départ à l'écran(pointer_down)
+        // Permet de garder le dessin des points de départ à l'écran (sinon il arrive qu'il n'y ait aucun dessin lorsqu'on touche rapidement l'écran avec un doigt sans le bouger)
+        for (int i = 0; i < xDownList.size(); i++) {
             canvas.drawPoint(xDownList.get(i), yDownList.get(i), paint);
         }
 
-
-        for (Path completedPath : completedPaths) {                                     //permet de garder le dessin à l'écran
+        // On affiche les traits terminés (sinon seul le trait en train d'être dessiné est affiché)
+        for (Path completedPath : completedPaths) {
             canvas.drawPath(completedPath, paint);
         }
-
 
         this.cartographie = image;
     }
@@ -133,29 +129,43 @@ public class Dessin_item22 extends View {
         int historySize = event.getHistorySize();
 
         switch (maskedAction) {
+            // Actions à réaliser quand l'utilisateur touche l'écran
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
                 Path p = new Path();
+                // On récupère l'identifiant du contact tactile et ses coordonnées
                 try {
                     p.moveTo(event.getX(id), event.getY(id));
                     paths.put(id, p);
+
+                    // Contiennent les coordonnées rangées par identifiant
                     mX.put(id, event.getX(id));
                     mY.put(id, event.getY(id));
+
+                    // Contiennent les coordonnées du premier point touché
                     xDown = event.getX(id);
                     yDown = event.getY(id);
+
+                    // Contiennent toutes les coordonnées brutes
                     tableauX.add(event.getX(id));
                     tableauY.add(event.getY(id));
+
                     invalidate();
+
                 } catch (IllegalArgumentException ex) {
                     ex.printStackTrace();
                 }
                 break;
             }
+
+            // Actions à réaliser quand l'utilisateur bouge son doigt
             case MotionEvent.ACTION_MOVE: {
-                for (int size = event.getPointerCount(), i = 0; i < size; i++) {  //pour chaque doigt qui touche l'écran
+                // Pour chaque identifiant de contact, on récupère ses coordonnés et on créé une ligne entre chacun des points
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
                     Path p = paths.get(event.getPointerId(i));
                     if (p != null) {
-                        for (int j = 0; j < historySize; j++) {                       //pour chaque point de l'historique (qui contient les points non pris en compte de ba)
+                        // Permet d'avoir un tracé plus fluide (on prend plus de points en compte)
+                        for (int j = 0; j < historySize; j++) {
                             float historicalX = event.getHistoricalX(i, j);
                             float historicalY = event.getHistoricalY(i, j);
                             expandDirtyRect(historicalX, historicalY);
@@ -170,13 +180,14 @@ public class Dessin_item22 extends View {
                         invalidate();
                     }
                 }
-
-
                 invalidate();
                 break;
             }
+
+            // Actions à réaliser quand l'utilisateur arrête le contact tactile
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP: {
+                // On ajoute le trait tracé dans la liste des traits terminés, et on le retire de mX et mY
                 Path p = paths.get(id);
                 if (p != null) {
                     completedPaths.add(p);
@@ -197,52 +208,14 @@ public class Dessin_item22 extends View {
     }
 
 
-    // Cette méthode permet de redimensionner un bitmap
-    private static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
-        if (maxHeight > 0 && maxWidth > 0) {
-            int width = image.getWidth();
-            int height = image.getHeight();
-            float ratioBitmap = (float) width / (float) height;
-            float ratioMax = (float) maxWidth / (float) maxHeight;
-
-            int finalWidth = maxWidth;
-            int finalHeight = maxHeight;
-            if (ratioMax > 1) {
-                finalWidth = (int) ((float) maxHeight * ratioBitmap);
-            } else {
-                finalHeight = (int) ((float) maxWidth / ratioBitmap);
-            }
-            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
-            return image;
-        } else {
-            return image;
-        }
-    }
-
-
-    /**
-     * Gets cartographie.
-     *
-     * @return the cartographie
-     */
     public Bitmap getCartographie() {
         return cartographie;
     }
 
-    /**
-     * Gets tableau x.
-     *
-     * @return the tableau x
-     */
     public ArrayList getTableauX() {
         return tableauX;
     }
 
-    /**
-     * Gets tableau y.
-     *
-     * @return the tableau y
-     */
     public ArrayList getTableauY() {
         return tableauY;
     }
@@ -250,6 +223,9 @@ public class Dessin_item22 extends View {
     /**
      * Called when replaying history to ensure the dirty region includes all
      * points.
+     *
+     * @param historicalX l'historique des coordonnées X entre deux touch events
+     * @param historicalY l'historique des coordonnées Y entre deux touch events
      */
     private void expandDirtyRect(float historicalX, float historicalY) {
         if (historicalX < dirtyRect.left) {
