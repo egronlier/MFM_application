@@ -13,26 +13,11 @@ import android.widget.Button;
  */
 public class consignes_item22 extends Activity {
 
-    /**
-     * The Bouton demarrer.
-     */
-    Button boutonDemarrer;
-    /**
-     * The Name.
-     */
-    String name = "";
-    /**
-     * The Surname.
-     */
-    String surname = "";
-    /**
-     * The Birthdate.
-     */
-    String birthdate = "";
-    /**
-     * The Var random.
-     */
-    int varRandom;
+    private Button boutonDemarrer;
+    private String name = "";
+    private String surname = "";
+    private String birthdate = "";
+    private int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +30,7 @@ public class consignes_item22 extends Activity {
             name = intent.getStringExtra("name");
             surname = intent.getStringExtra("surname");
             birthdate = intent.getStringExtra("birthdate");
-            varRandom = intent.getIntExtra("varRandom",-1); // -1 par défaut
+            varRandom = intent.getIntExtra("varRandom", -1); // -1 par défaut
         }
 
         boutonDemarrer = (Button) findViewById(R.id.boutonDemarrer);
@@ -56,14 +41,16 @@ public class consignes_item22 extends Activity {
                 myIntent2.putExtra("name", name);
                 myIntent2.putExtra("surname", surname);
                 myIntent2.putExtra("birthdate", birthdate);
-                myIntent2.putExtra("varRandom",varRandom);
+                myIntent2.putExtra("varRandom", varRandom);
                 startActivity(myIntent2);
                 // on ferme l'activité en cours
                 finish();
             }
         });
     }
+
     private boolean back_answer = false;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

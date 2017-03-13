@@ -27,46 +27,16 @@ import java.util.ArrayList;
  */
 public class do_item18 extends Activity {
 
-    /**
-     * The Bouton terminer.
-     */
-    Button boutonTerminer;
-    /**
-     * The Name.
-     */
-    String name = "";
-    /**
-     * The Surname.
-     */
-    String surname = "";
-    /**
-     * The Birthdate.
-     */
-    String birthdate = "";
-    /**
-     * The Dessin.
-     */
-    Dessin_item18 dessin;
-    /**
-     * The Carto bitmap.
-     */
-    Bitmap cartoBitmap;
-    /**
-     * The State.
-     */
-    TextView state;
-    /**
-     * The Tableau x.
-     */
-    ArrayList tableauX;
-    /**
-     * The Tableau y.
-     */
-    ArrayList tableauY;
-    /**
-     * The Var random.
-     */
-    int varRandom;
+    private Button boutonTerminer;
+    private String name = "";
+    private String surname = "";
+    private String birthdate = "";
+    private Dessin_item18 dessin;
+    private Bitmap cartoBitmap;
+    private TextView state;
+    private ArrayList tableauX;
+    private ArrayList tableauY;
+    private int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

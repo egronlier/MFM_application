@@ -52,150 +52,42 @@ import java.util.Locale;
  */
 public class comments_item18 extends Activity {
 
-    /**
-     * The Name.
-     */
-    String name = "";
-    /**
-     * The Surname.
-     */
-    String surname = "";
-    /**
-     * The Birthdate.
-     */
-    String birthdate = "";
-    /**
-     * The Bouton enregistrer.
-     */
-    Button boutonEnregistrer;
-    /**
-     * The Context.
-     */
-    final Context context = this;
-    /**
-     * The Radio group cotation paper.
-     */
-    RadioGroup radioGroupCotationPaper;
-    /**
-     * The Text cotation paper.
-     */
-    TextView textCotationPaper;
-    /**
-     * The Bouton cotation 0 paper.
-     */
-    RadioButton boutonCotation0Paper;
-    /**
-     * The Bouton cotation 1 paper.
-     */
-    RadioButton boutonCotation1Paper;
-    /**
-     * The Bouton cotation 2 paper.
-     */
-    RadioButton boutonCotation2Paper;
-    /**
-     * The Bouton cotation 3 paper.
-     */
-    RadioButton boutonCotation3Paper;
-    /**
-     * The Bouton cotation nsp paper.
-     */
-    RadioButton boutonCotationNSPPaper;
-    /**
-     * The Radio group cotation tablet.
-     */
-    RadioGroup radioGroupCotationTablet;
-    /**
-     * The Text cotation tablet.
-     */
-    TextView textCotationTablet;
-    /**
-     * The Bouton cotation 0 tablet.
-     */
-    RadioButton boutonCotation0Tablet;
-    /**
-     * The Bouton cotation 1 tablet.
-     */
-    RadioButton boutonCotation1Tablet;
-    /**
-     * The Bouton cotation 2 tablet.
-     */
-    RadioButton boutonCotation2Tablet;
-    /**
-     * The Bouton cotation 3 tablet.
-     */
-    RadioButton boutonCotation3Tablet;
-    /**
-     * The Bouton cotation nsp tablet.
-     */
-    RadioButton boutonCotationNSPTablet;
-    /**
-     * The Cotation paper.
-     */
-    String cotationPaper = "cotation papier inconnue";
-    /**
-     * The Cotation tablet.
-     */
-    String cotationTablet = "cotation tablette inconnue";
-    /**
-     * The Commentaire.
-     */
-    String commentaire = "aucun commentaire";
-    /**
-     * The Comments.
-     */
-    EditText comments;
-    /**
-     * The Check box appui paume.
-     */
-    CheckBox checkBoxAppuiPaume;
-    /**
-     * The Check box pause.
-     */
-    CheckBox checkBoxPause;
-    /**
-     * The Check box change.
-     */
-    CheckBox checkBoxChange;
-    /**
-     * The Check box compens.
-     */
-    CheckBox checkBoxCompens;
-    /**
-     * The Infos patient.
-     */
-    TextView infosPatient;
-    /**
-     * The Path.
-     */
-    String path = "";
-    /**
-     * The Tableau x.
-     */
-    ArrayList tableauX;
-    /**
-     * The Tableau y.
-     */
-    ArrayList tableauY;
-    /**
-     * The Carto bitmap.
-     */
-    Bitmap cartoBitmap;
-    /**
-     * The My file.
-     */
-    File myFile;
-    /**
-     * The Liste comm.
-     */
-    String listeComm = " ";
-    /**
-     * The Var random.
-     */
-    int varRandom;
-    /**
-     * The Text state saving.
-     */
-    TextView textStateSaving;
+    private String name = "";
+    private String surname = "";
+    private String birthdate = "";
+    private Button boutonEnregistrer;
+    private final Context context = this;
+    private RadioGroup radioGroupCotationPaper;
+    private TextView textCotationPaper;
+    private RadioButton boutonCotation0Paper;
+    private RadioButton boutonCotation1Paper;
+    private RadioButton boutonCotation2Paper;
+    private RadioButton boutonCotation3Paper;
+    private RadioButton boutonCotationNSPPaper;
+    private RadioGroup radioGroupCotationTablet;
+    private TextView textCotationTablet;
+    private RadioButton boutonCotation0Tablet;
+    private RadioButton boutonCotation1Tablet;
+    private RadioButton boutonCotation2Tablet;
+    private RadioButton boutonCotation3Tablet;
+    private RadioButton boutonCotationNSPTablet;
+    private String cotationPaper = "cotation papier inconnue";
+    private String cotationTablet = "cotation tablette inconnue";
+    private String commentaire = "aucun commentaire";
+    private EditText comments;
+    private CheckBox checkBoxAppuiPaume;
+    private CheckBox checkBoxPause;
+    private CheckBox checkBoxChange;
+    private CheckBox checkBoxCompens;
+    private TextView infosPatient;
+    private String path = "";
+    private ArrayList tableauX;
+    private ArrayList tableauY;
+    private Bitmap cartoBitmap;
+    private File myFile;
+    private String listeComm = " ";
+    private int varRandom;
+    private TextView textStateSaving;
     private boolean handledClick = false;
 
     @Override
@@ -298,10 +190,14 @@ public class comments_item18 extends Activity {
                 r = (RadioButton) radioGroupCotationTablet.getChildAt(index);
                 cotationTablet = r.getText().toString();
                 // ------- COMMENTAIRES
-                if (checkBoxCompens.isChecked()) listeComm = listeComm + checkBoxCompens.getText() + " \n ";
-                if (checkBoxChange.isChecked()) listeComm = listeComm + checkBoxChange.getText() + " \n ";
-                if (checkBoxPause.isChecked()) listeComm = listeComm + checkBoxChange.getText() + " \n ";
-                if (checkBoxAppuiPaume.isChecked()) listeComm = listeComm + checkBoxAppuiPaume.getText() + " \n ";
+                if (checkBoxCompens.isChecked())
+                    listeComm = listeComm + checkBoxCompens.getText() + " \n ";
+                if (checkBoxChange.isChecked())
+                    listeComm = listeComm + checkBoxChange.getText() + " \n ";
+                if (checkBoxPause.isChecked())
+                    listeComm = listeComm + checkBoxChange.getText() + " \n ";
+                if (checkBoxAppuiPaume.isChecked())
+                    listeComm = listeComm + checkBoxAppuiPaume.getText() + " \n ";
                 commentaire = comments.getText().toString();
                 // ------------------------------------------------------------------------------
                 try {

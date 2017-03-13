@@ -26,62 +26,20 @@ import java.util.ArrayList;
  */
 public class carto_item18 extends Activity {
 
-    /**
-     * The Name.
-     */
-    String name = "";
-    /**
-     * The Surname.
-     */
-    String surname = "";
-    /**
-     * The Birthdate.
-     */
-    String birthdate = "";
-    /**
-     * The Button exit.
-     */
-    Button buttonExit;
-    /**
-     * The Bouton recommencer.
-     */
-    Button boutonRecommencer;
-    /**
-     * The Bouton valider.
-     */
-    Button boutonValider;
-    /**
-     * The Infos patient.
-     */
-    TextView infosPatient;
-    /**
-     * The Path.
-     */
-    String path = "";
-    /**
-     * The Carto bitmap.
-     */
-    Bitmap cartoBitmap;
-    /**
-     * The Carto.
-     */
-    ImageView carto;
-    /**
-     * The Context.
-     */
-    final Context context = this;
-    /**
-     * The Tableau x.
-     */
-    ArrayList tableauX;
-    /**
-     * The Tableau y.
-     */
-    ArrayList tableauY;
-    /**
-     * The Var random.
-     */
-    int varRandom;
+    private String name = "";
+    private String surname = "";
+    private String birthdate = "";
+    private Button buttonExit;
+    private Button boutonRecommencer;
+    private Button boutonValider;
+    private TextView infosPatient;
+    private String path = "";
+    private Bitmap cartoBitmap;
+    private ImageView carto;
+    private final Context context = this;
+    private ArrayList tableauX;
+    private ArrayList tableauY;
+    private int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -27,78 +27,24 @@ import java.util.regex.Pattern;
  */
 public class ouverture_appli extends Activity implements View.OnClickListener {
 
-    /**
-     * The Nom entre.
-     */
-    EditText nomEntre;
-    /**
-     * The Prenom entre.
-     */
-    EditText prenomEntre;
-    /**
-     * The Texte date.
-     */
-    TextView texteDate;
-    /**
-     * The Birthdate.
-     */
-    String birthdate = null;
-    /**
-     * The Bouton valider.
-     */
-    Button boutonValider;
-    /**
-     * The Bouton effacer.
-     */
-    Button boutonEffacer;
-    /**
-     * The Button exit.
-     */
-    Button buttonExit;
-    /**
-     * The Context.
-     */
-    final Context context = this;
-    /**
-     * The Name.
-     */
-    String name;
-    /**
-     * The Surname.
-     */
-    String surname;
-    /**
-     * The Tv display date.
-     */
-    TextView tvDisplayDate;
-    /**
-     * The Cal.
-     */
-    Calendar cal;
-    /**
-     * The Year.
-     */
-    int year;
-    /**
-     * The Month.
-     */
-    int month;
-    /**
-     * The Day.
-     */
-    int day;
-    /**
-     * The Date dialog id.
-     */
-    static final int DATE_DIALOG_ID = 999;
-    /**
-     * The Btn change date.
-     */
-    Button btnChangeDate;
-    /**
-     * The Chosen date.
-     */
-    boolean chosenDate = false;
+    private EditText nomEntre;
+    private EditText prenomEntre;
+    private TextView texteDate;
+    private String birthdate = null;
+    private Button boutonValider;
+    private Button boutonEffacer;
+    private Button buttonExit;
+    private final Context context = this;
+    private String name;
+    private String surname;
+    private TextView tvDisplayDate;
+    private Calendar cal;
+    private int year;
+    private int month;
+    private int day;
+    private static final int DATE_DIALOG_ID = 999;
+    private Button btnChangeDate;
+    private boolean chosenDate = false;
 
     @Override
     /*
@@ -155,66 +101,66 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                 // On vérifie que tous les champs ont été remplis
                 // on vérifie que le nom et le prénom ont été remplis
                 if (length_name > 0 && length_surname > 0) {
-                        // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
-                        if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)) {
-                            if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
-                                surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
-                                // on vérifie qu'une date a bien été sélectionnée
-                                birthdate = tvDisplayDate.getText().toString();
-                                if (birthdate != null && chosenDate) {
-                                    texteDate.setError(null);
-                                    try {
-                                        // ouvrir une boite de dialogue permettant de valider les infos entrées
-                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                                        // set titre
-                                        alertDialogBuilder.setTitle("Confirmation des données");
-                                        // set dialog message
-                                        alertDialogBuilder
-                                                .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
-                                                        + " " + name + " " + surname + "\n Né(e) le : " + birthdate)
-                                                .setCancelable(false)
-                                                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog, int id) {
-                                                        // if this button is clicked, go to next activity
-                                                        dialog.cancel();
-                                                        // On lance une nouvelle activité : l'interface du choix d'item
-                                                        Intent myIntent = new Intent(ouverture_appli.this, choice_item.class);
-                                                        myIntent.putExtra("name", name);
-                                                        myIntent.putExtra("surname", surname);
-                                                        myIntent.putExtra("birthdate", birthdate);
-                                                        startActivity(myIntent);
-                                                        // on ferme l'activité en cours
-                                                        finish();
-                                                    }
-                                                })
-                                                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog, int id) {
-                                                        // if this button is clicked, close the dialog box
-                                                        dialog.cancel();
-                                                    }
-                                                });
-                                        // create alert dialog
-                                        AlertDialog alertDialog = alertDialogBuilder.create();
-                                        // show it
-                                        alertDialog.show();
-                                    } catch (Exception e) { // Problème inconnu avec la date choisie
-                                        Toast.makeText(getApplicationContext(), R.string.internalError, Toast.LENGTH_LONG).show();
-                                    }
-                                } else { // aucune date n'a été choisie
-                                    Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
-                                    texteDate.setError("Veuillez sélectionner une date !");
-                                    texteDate.requestFocus();
+                    // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
+                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)) {
+                        if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
+                            surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
+                            // on vérifie qu'une date a bien été sélectionnée
+                            birthdate = tvDisplayDate.getText().toString();
+                            if (birthdate != null && chosenDate) {
+                                texteDate.setError(null);
+                                try {
+                                    // ouvrir une boite de dialogue permettant de valider les infos entrées
+                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                                    // set titre
+                                    alertDialogBuilder.setTitle("Confirmation des données");
+                                    // set dialog message
+                                    alertDialogBuilder
+                                            .setMessage("Etes-vous certain de vouloir créer un fichier pour le patient suivant : \n\n"
+                                                    + " " + name + " " + surname + "\n Né(e) le : " + birthdate)
+                                            .setCancelable(false)
+                                            .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    // if this button is clicked, go to next activity
+                                                    dialog.cancel();
+                                                    // On lance une nouvelle activité : l'interface du choix d'item
+                                                    Intent myIntent = new Intent(ouverture_appli.this, choice_item.class);
+                                                    myIntent.putExtra("name", name);
+                                                    myIntent.putExtra("surname", surname);
+                                                    myIntent.putExtra("birthdate", birthdate);
+                                                    startActivity(myIntent);
+                                                    // on ferme l'activité en cours
+                                                    finish();
+                                                }
+                                            })
+                                            .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    // if this button is clicked, close the dialog box
+                                                    dialog.cancel();
+                                                }
+                                            });
+                                    // create alert dialog
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+                                    // show it
+                                    alertDialog.show();
+                                } catch (Exception e) { // Problème inconnu avec la date choisie
+                                    Toast.makeText(getApplicationContext(), R.string.internalError, Toast.LENGTH_LONG).show();
                                 }
-                            } else { // Champs prénom pas au bon format
-                                Toast.makeText(getApplicationContext(), R.string.errorSurname, Toast.LENGTH_LONG).show();
-                                prenomEntre.setError("Que des lettres !");
-                                prenomEntre.requestFocus();
+                            } else { // aucune date n'a été choisie
+                                Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
+                                texteDate.setError("Veuillez sélectionner une date !");
+                                texteDate.requestFocus();
                             }
-                        } else { // Champs nom pas au bon format
-                            Toast.makeText(getApplicationContext(), R.string.errorName, Toast.LENGTH_LONG).show();
-                            nomEntre.setError("Que des lettres !");
-                            nomEntre.requestFocus();
+                        } else { // Champs prénom pas au bon format
+                            Toast.makeText(getApplicationContext(), R.string.errorSurname, Toast.LENGTH_LONG).show();
+                            prenomEntre.setError("Que des lettres !");
+                            prenomEntre.requestFocus();
                         }
+                    } else { // Champs nom pas au bon format
+                        Toast.makeText(getApplicationContext(), R.string.errorName, Toast.LENGTH_LONG).show();
+                        nomEntre.setError("Que des lettres !");
+                        nomEntre.requestFocus();
+                    }
                 } else { // Un des champs de nom ou prénom n'est pas rempli
                     Toast.makeText(getApplicationContext(), R.string.errorVoid, Toast.LENGTH_LONG).show();
                     if (length_name <= 0) {

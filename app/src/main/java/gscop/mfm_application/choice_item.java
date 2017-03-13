@@ -17,38 +17,14 @@ import android.widget.TextView;
  */
 public class choice_item extends Activity {
 
-    /**
-     * The Text nom prenom patient.
-     */
-    TextView textNomPrenomPatient;
-    /**
-     * The Button item 18.
-     */
-    Button buttonItem18;
-    /**
-     * The Button item 22.
-     */
-    Button buttonItem22;
-    /**
-     * The Button exit.
-     */
-    Button buttonExit;
-    /**
-     * The Name.
-     */
-    String name = "";
-    /**
-     * The Surname.
-     */
-    String surname = "";
-    /**
-     * The Birthdate.
-     */
-    String birthdate = "";
-    /**
-     * The Context.
-     */
-    final Context context = this;
+    private TextView textNomPrenomPatient;
+    private Button buttonItem18;
+    private Button buttonItem22;
+    private Button buttonExit;
+    private String name = "";
+    private String surname = "";
+    private String birthdate = "";
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +75,8 @@ public class choice_item extends Activity {
                 int mini = 0;
                 int max = 1;
                 // génère aléatoirement 0 ou 1
-                int varRandom = (int)( Math.random()*( max - mini + 1 ) ) + mini;
-                if(varRandom == 0){
+                int varRandom = (int) (Math.random() * (max - mini + 1)) + mini;
+                if (varRandom == 0) {
                     // on demande de réaliser l'item 18 version papier en premier
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(R.string.paper18)
@@ -113,7 +89,7 @@ public class choice_item extends Activity {
                                     myIntent.putExtra("name", name);
                                     myIntent.putExtra("surname", surname);
                                     myIntent.putExtra("birthdate", birthdate);
-                                    myIntent.putExtra("varRandom",0);
+                                    myIntent.putExtra("varRandom", 0);
                                     startActivity(myIntent);
                                     // on ferme l'activité en cours
                                     finish();
@@ -127,7 +103,7 @@ public class choice_item extends Activity {
                     myIntent.putExtra("name", name);
                     myIntent.putExtra("surname", surname);
                     myIntent.putExtra("birthdate", birthdate);
-                    myIntent.putExtra("varRandom",1);
+                    myIntent.putExtra("varRandom", 1);
                     startActivity(myIntent);
                     // on ferme l'activité en cours
                     finish();
@@ -143,8 +119,8 @@ public class choice_item extends Activity {
                 int mini = 0;
                 int max = 1;
                 // génère aléatoirement 0 ou 1
-                int varRandom = (int)( Math.random()*( max - mini + 1 ) ) + mini;
-                if(varRandom == 0){
+                int varRandom = (int) (Math.random() * (max - mini + 1)) + mini;
+                if (varRandom == 0) {
                     // on demande de réaliser l'item 18 version papier en premier
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(R.string.paper22)
@@ -157,7 +133,7 @@ public class choice_item extends Activity {
                                     myIntent.putExtra("name", name);
                                     myIntent.putExtra("surname", surname);
                                     myIntent.putExtra("birthdate", birthdate);
-                                    myIntent.putExtra("varRandom",0);
+                                    myIntent.putExtra("varRandom", 0);
                                     startActivity(myIntent);
                                     // on ferme l'activité en cours
                                     finish();
@@ -171,7 +147,7 @@ public class choice_item extends Activity {
                     myIntent.putExtra("name", name);
                     myIntent.putExtra("surname", surname);
                     myIntent.putExtra("birthdate", birthdate);
-                    myIntent.putExtra("varRandom",1);
+                    myIntent.putExtra("varRandom", 1);
                     startActivity(myIntent);
                     // on ferme l'activité en cours
                     finish();
