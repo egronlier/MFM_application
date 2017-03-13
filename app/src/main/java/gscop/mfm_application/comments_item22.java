@@ -96,7 +96,7 @@ public class comments_item22 extends Activity {
         setContentView(R.layout.comments_item22);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // on récupère les infos de l'intent
+        // On récupère les infos de l'intent de l'activité précédente
         Intent intent = getIntent();
         if (intent != null) {
             name = intent.getStringExtra("name");
@@ -149,15 +149,16 @@ public class comments_item22 extends Activity {
         infosPatient = (TextView) findViewById(R.id.PatientName);
         infosPatient.setText("Patient : " + name + " " + surname + " \nNé(e) le : " + birthdate);
 
+        // Pour le bouton "Enregistrer"
         boutonEnregistrer = (Button) findViewById(R.id.buttonSave);
         boutonEnregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // on s'assure de ne pouvoir cliquer qu'une seule fois le bouton
+                // On s'assure de ne pouvoir cliquer qu'une seule fois sur le bouton
                 if (!handledClick) {
                     boutonEnregistrer.setBackgroundColor(Color.GRAY);
                     handledClick = true;
-                    // on évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
+                    // On évite que la personne clique 2 fois sur le bouton en le rendant non cliquable
                     boutonEnregistrer.setClickable(false);
 //                    textStateSaving.setText(R.string.checkData);
                     actionEnregistrer();
@@ -166,9 +167,12 @@ public class comments_item22 extends Activity {
         });
     }
 
+    /**
+     * Donne les actions à réaliser lorsque l'utilisateur clique sur le bouton "Enregistrer"
+     */
     private void actionEnregistrer() {
         textStateSaving.setText("");
-        // on vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
+        // On vérifie qu'au moins un radioButton a été sélectionné dans le radioGroup de cotation
         // radioGroup : cotation papier
         if (boutonCotation0Paper.isChecked() || boutonCotation1Paper.isChecked() || boutonCotation2Paper.isChecked() || boutonCotation3Paper.isChecked() || boutonCotationNSPPaper.isChecked()) {
             textCotationPaper.setError(null);
@@ -176,7 +180,7 @@ public class comments_item22 extends Activity {
             if (boutonCotation0Tablet.isChecked() || boutonCotation1Tablet.isChecked() || boutonCotation2Tablet.isChecked() || boutonCotation3Tablet.isChecked() || boutonCotationNSPTablet.isChecked()) {
                 textCotationTablet.setError(null);
                 textStateSaving.setText(R.string.pdfsaving);
-                // --------------------- on récupère les commentaires du kiné -------------------
+                // --------------------- On récupère les commentaires du kiné -------------------
                 // ------- COTATION PAPIER
                 int radioButtonSelectedID = radioGroupCotationPaper.getCheckedRadioButtonId();
                 View radioButtonSelected = radioGroupCotationPaper.findViewById(radioButtonSelectedID);
@@ -228,14 +232,14 @@ public class comments_item22 extends Activity {
         }
     }
 
-    // quand on appuie sur la touche retour de la tablette
+    // Quand on appuie sur la touche retour de la tablette
     private boolean back_answer = false;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             back_answer = true;
-            // on revient à l'écran de réalisation de l'item 18
+            // On revient à l'écran de réalisation de l'item 18
             Intent myIntent = new Intent(comments_item22.this, carto_item22.class);
             myIntent.putExtra("name", name);
             myIntent.putExtra("surname", surname);
@@ -244,24 +248,29 @@ public class comments_item22 extends Activity {
             myIntent.putExtra("tableauX", tableauX);
             myIntent.putExtra("tableauY", tableauY);
             startActivity(myIntent);
-            // on ferme l'activité en cours
+            // On ferme l'activité en cours
             finish();
         }
         return back_answer;
     }
 
     /**
-     * Hide keyboard.
+     * Rétractation du clavier lorsque l'utilisateur touche l'écran hors du clavier.
      *
-     * @param view the view
+     * @param view la vue associée
      */
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /**
+     * Création du fichier PDF contenant la cartographie et les commentaires.
+     *
+     * @throws FileNotFoundException
+     * @throws DocumentException
+     */
     private void createPdf() throws FileNotFoundException, DocumentException {
-
         // on crée un dossier NOM_prenom du patient s'il n'existe pas déjà
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 , "patient_" + name + "_" + surname);
@@ -277,24 +286,24 @@ public class comments_item22 extends Activity {
         String timeStamp = new SimpleDateFormat("dd_MM_yyyy__HH_mm_ss", Locale.FRANCE).format(new Date());
         String timeStampSimple = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
 
-        // on crée le nom du fichier pdf à enregistrer
+        // On crée le nom du fichier pdf à enregistrer
         String filePath = pdfFolder.toString() + "/" + name + "_" + surname + "_" + timeStamp + "_" + "item22.pdf";
         myFile = new File(filePath);
         OutputStream output = new FileOutputStream(myFile);
 
-        //Step 1 : on crée le document
+        // Step 1 : on crée le document
         Document document = new Document(PageSize.LETTER);
         document.setMarginMirroring(true);
         document.setMarginMirroringTopBottom(true);
 
-        //Step 2 : on instantie le PdfWriter
+        // Step 2 : on instantie le PdfWriter
         PdfWriter.getInstance(document, output);
 
-        //Step 3 : ouverture du document
+        // Step 3 : ouverture du document
         document.open();
 
-        //Step 4 : Add content
-        // choix des polices
+        // Step 4 : Add content
+        // Choix des polices
         Font myFontTitre = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD);
         // TITRE
         Paragraph paragraphTitre = new Paragraph();
@@ -339,14 +348,14 @@ public class comments_item22 extends Activity {
         document.add(paragraphCommKine);
 
         // CARTOGRAPHIE
-        // on change de page
+        // On change de page
         document.newPage();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         cartoBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         Image trueImage = null;
         try {
             trueImage = Image.getInstance(stream.toByteArray());
-            // on redimensionne l'image pour qu'elle rentre dans la page
+            // On redimensionne l'image pour qu'elle rentre dans la page
             float leftMargin = document.leftMargin();
             float rightMargin = document.rightMargin();
             float pageSize = document.getPageSize().getWidth();
@@ -369,35 +378,39 @@ public class comments_item22 extends Activity {
         document.add(paragraphCarto);
 
         // TABLEAU DES COORDONNEES
-        // on change de page
+        // On change de page
         document.newPage();
         // 2 colonnes, une pour chaque tableau
         PdfPTable table = new PdfPTable(2);
         table.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-        // titres : colonne 1 = coordonnées en X , colonne 2 = coordonnées en Y
+        // Titres : colonne 1 = coordonnées en X , colonne 2 = coordonnées en Y
         table.addCell("Coordonnées en X");
         table.addCell("Coordonnées en Y");
         table.setHeaderRows(1);
-        // on met les cellules titre en gris
+        // On met les cellules titre en gris
         PdfPCell[] cells = table.getRow(0).getCells();
         for (PdfPCell cell : cells) {
             cell.setBackgroundColor(BaseColor.GRAY);
         }
-        // on parcourt les coordonnées en X et on les ajoute en colonne 1
+        // On parcourt les coordonnées en X et on les ajoute en colonne 1
         for (int i = 1; i <= tableauX.size() - 1; i++) {
             table.addCell(tableauX.get(i).toString());
             table.addCell(tableauY.get(i).toString());
         }
-        // on ajoute le tableau au document
+        // On ajoute le tableau au document
         document.add(table);
 
-        //Step 5: Close the document
+        // Step 5: Close the document
         document.close();
 
         promptForNextAction();
     }
 
+
+    /**
+     *  Permet la prévisualisation du PDF.
+     */
     private void viewPdf() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(myFile), "application/pdf");
@@ -405,6 +418,9 @@ public class comments_item22 extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * Demande à l'utilisateur ce qu'il veut faire après avoir enregistré la cartographie, en lui donnant trois choix : continuer la MFM, prévisualiser le PDF ou quitter l'application.
+     */
     private void promptForNextAction() {
         final String[] options = {getString(R.string.label_continue), getString(R.string.label_preview), getString(R.string.label_quit)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -414,25 +430,25 @@ public class comments_item22 extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (options[which].equals(getString(R.string.label_continue))) {
-                            // on renvoie alors vers l'interface de choix d'item
+                            // On renvoie alors vers l'interface de choix d'item
                             Intent myIntent = new Intent(comments_item22.this, choice_item.class);
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
                             startActivity(myIntent);
-                            // on ferme l'activité en cours
+                            // On ferme l'activité en cours
                             finish();
                         } else if (options[which].equals(getString(R.string.label_preview))) {
                             try {
-                                // on renvoie alors vers l'interface de choix d'item
+                                // On renvoie alors vers l'interface de choix d'item
                                 Intent myIntent = new Intent(comments_item22.this, choice_item.class);
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
                                 startActivity(myIntent);
-                                // on ferme l'activité en cours
+                                // On ferme l'activité en cours
                                 finish();
-                                // on ouvre le pdf
+                                // On ouvre le pdf
                                 viewPdf();
                             } catch (Exception e) {
                                 Toast.makeText(getApplicationContext(), R.string.viewPB, Toast.LENGTH_LONG).show();

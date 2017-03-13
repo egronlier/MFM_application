@@ -164,6 +164,9 @@ public class comments_item18 extends Activity {
         });
     }
 
+    /**
+     * Donne les actions à réaliser lorsque l'utilisateur clique sur le bouton "Enregistrer"
+     */
     private void actionEnregistrer() {
         textStateSaving.setText("");
         // On vérifie qu'au moins un radioButton a été sélectionné dans chaque radioGroup
@@ -256,6 +259,12 @@ public class comments_item18 extends Activity {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /**
+     * Création du fichier PDF contenant la cartographie et les commentaires.
+     *
+     * @throws FileNotFoundException
+     * @throws DocumentException
+     */
     private void createPdf() throws FileNotFoundException, DocumentException {
         // On crée un dossier NOM_prenom du patient s'il n'existe pas déjà
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
