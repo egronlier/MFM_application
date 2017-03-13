@@ -22,9 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * The type Do item 18.
- */
 public class do_item18 extends Activity {
 
     private Button boutonTerminer;
@@ -44,13 +41,13 @@ public class do_item18 extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.do_item18);
-        // permet de cacher la barre de notifications
+        // Permet de cacher la barre de notifications
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         dessin = (Dessin_item18) findViewById(R.id.drawingItem18);
         state = (TextView) findViewById(R.id.enCours);
 
-        // on récupère les infos de l'intent
+        // On récupère les infos de l'intent de l'activité précédente
         Intent intent = getIntent();
         if (intent != null) {
             name = intent.getStringExtra("name");
@@ -59,6 +56,7 @@ public class do_item18 extends Activity {
             varRandom = intent.getIntExtra("varRandom",-1); // -1 par défaut
         }
 
+        // Pour le bouton "Stop"
         boutonTerminer = (Button) findViewById(R.id.buttonStop);
         boutonTerminer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +78,7 @@ public class do_item18 extends Activity {
                 myIntent.putExtra("tableauX",tableauX);
                 myIntent.putExtra("tableauY",tableauY);
                 startActivity(myIntent);
-                // on ferme l'activité en cours
+                // On ferme l'activité en cours
                 finish();
             }
         });
@@ -96,14 +94,14 @@ public class do_item18 extends Activity {
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             back_answer = true;
-                            // on revient à l'écran des consignes de l'item 18
+                            // On revient à l'écran des consignes de l'item 18
                             Intent myIntent = new Intent(do_item18.this, consignes_item18.class);
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
                             myIntent.putExtra("varRandom",varRandom);
                             startActivity(myIntent);
-                            // on ferme l'activité en cours
+                            // On ferme l'activité en cours
                             finish();
                         }
                     })
@@ -118,7 +116,12 @@ public class do_item18 extends Activity {
         return back_answer;
     }
 
-    // Cette méthode enregistre un bitmap dans la mémoire interne de l'appareil
+    /**
+     * Enregistre un bitmap dans la mémoire interne de l'appareil
+     *
+     * @param bitmapImage l'image à enregistrer
+     * @return le chemin de l'image enregistrée
+     */
     private String saveToInternalStorage(Bitmap bitmapImage) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
