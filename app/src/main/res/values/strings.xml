@@ -18,8 +18,8 @@
     <string name="CDimage">Image du CD</string>
     <string name="item22image">Image de l\'item 22</string>
     <string name="errorDate">Veuillez choisir une date.</string>
-    <string name="errorName">"Le champs nom ne doit contenir que des lettres.</string>
-    <string name="errorSurname">"Le champs prénom ne doit contenir que des lettres.</string>
+    <string name="errorName">"Le champ nom ne doit contenir que des lettres.</string>
+    <string name="errorSurname">"Le champ prénom ne doit contenir que des lettres.</string>
     <string name="errorVoid">"Veuillez remplir tous les champs."</string>
     <string name="internalError">"Une erreur interne en rapport avec le format de la date est survenue."</string>
     <string name="confirmBackAccueil">"Voulez-vous vraiment changer de patient ? \n </string>

@@ -22,9 +22,6 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
-/**
- * The type Ouverture appli.
- */
 public class ouverture_appli extends Activity implements View.OnClickListener {
 
     private EditText nomEntre;
@@ -46,10 +43,8 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
     private Button btnChangeDate;
     private boolean chosenDate = false;
 
+
     @Override
-    /*
-     méthode appelée à l'initialisation
-    */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -68,14 +63,14 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         year = cal.get(Calendar.YEAR);
         tvDisplayDate = (TextView) findViewById(R.id.tvDate);
 
-        // on utilise la méthode findViewById pour récupérer les éléments de la vue
+        // On utilise la méthode findViewById pour récupérer les éléments de la vue
         // R est la classe qui contient les ressources
         boutonValider = (Button) findViewById(R.id.boutonvalider);
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
 
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
-        // on range le clavier quand le champ prénom n'est plus sélectionné
+        // On range le clavier quand le champ prénom n'est plus sélectionné
         prenomEntre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -86,7 +81,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         });
         texteDate = (TextView) findViewById(R.id.texteBirthdate);
 
-        // on met un listener qui regarde quand on clique sur le bouton
+        // On met un listener qui regarde quand on clique sur le bouton
         // Pour le bouton valider
         boutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,18 +94,18 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                 int length_surname = surname.length();
 
                 // On vérifie que tous les champs ont été remplis
-                // on vérifie que le nom et le prénom ont été remplis
+                // On vérifie que le nom et le prénom ont été remplis
                 if (length_name > 0 && length_surname > 0) {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
                     if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)) {
                         if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
                             surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
-                            // on vérifie qu'une date a bien été sélectionnée
+                            // On vérifie qu'une date a bien été sélectionnée
                             birthdate = tvDisplayDate.getText().toString();
                             if (birthdate != null && chosenDate) {
                                 texteDate.setError(null);
                                 try {
-                                    // ouvrir une boite de dialogue permettant de valider les infos entrées
+                                    // Ouvrir une boite de dialogue permettant de valider les infos entrées
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                                     // set titre
                                     alertDialogBuilder.setTitle("Confirmation des données");
@@ -129,7 +124,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                                                     myIntent.putExtra("surname", surname);
                                                     myIntent.putExtra("birthdate", birthdate);
                                                     startActivity(myIntent);
-                                                    // on ferme l'activité en cours
+                                                    // On ferme l'activité en cours
                                                     finish();
                                                 }
                                             })
@@ -151,12 +146,12 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                                 texteDate.setError("Veuillez sélectionner une date !");
                                 texteDate.requestFocus();
                             }
-                        } else { // Champs prénom pas au bon format
+                        } else { // Champ prénom pas au bon format
                             Toast.makeText(getApplicationContext(), R.string.errorSurname, Toast.LENGTH_LONG).show();
                             prenomEntre.setError("Que des lettres !");
                             prenomEntre.requestFocus();
                         }
-                    } else { // Champs nom pas au bon format
+                    } else { // Champ nom pas au bon format
                         Toast.makeText(getApplicationContext(), R.string.errorName, Toast.LENGTH_LONG).show();
                         nomEntre.setError("Que des lettres !");
                         nomEntre.requestFocus();
@@ -186,6 +181,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
             }
         });
 
+        // Pour le bouton "Quitter"
         buttonExit = (Button) findViewById(R.id.buttonExit);
         buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,7 +191,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                         .setCancelable(true)
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // on quitte l'application courante
+                                // On quitte l'application courante
                                 ouverture_appli.this.finish();
                                 System.exit(0);
                             }
@@ -222,7 +218,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             back_answer = true;
-                            // on quitte l'application courante
+                            // On quitte l'application courante
                             ouverture_appli.this.finish();
                             System.exit(0);
                         }
@@ -239,9 +235,9 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
     }
 
     /**
-     * Hide keyboard.
+     * Rétractation du clavier lorsque l'utilisateur touche l'écran hors du clavier.
      *
-     * @param view the view
+     * @param view la vue associée
      */
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
