@@ -22,17 +22,50 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The type Do item 18.
+ */
 public class do_item18 extends Activity {
 
+    /**
+     * The Bouton terminer.
+     */
     Button boutonTerminer;
+    /**
+     * The Name.
+     */
     String name = "";
+    /**
+     * The Surname.
+     */
     String surname = "";
+    /**
+     * The Birthdate.
+     */
     String birthdate = "";
+    /**
+     * The Dessin.
+     */
     Dessin_item18 dessin;
+    /**
+     * The Carto bitmap.
+     */
     Bitmap cartoBitmap;
+    /**
+     * The State.
+     */
     TextView state;
+    /**
+     * The Tableau x.
+     */
     ArrayList tableauX;
+    /**
+     * The Tableau y.
+     */
     ArrayList tableauY;
+    /**
+     * The Var random.
+     */
     int varRandom;
 
     @Override

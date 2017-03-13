@@ -21,21 +21,66 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * The type Carto item 22.
+ */
 public class carto_item22 extends Activity {
 
+    /**
+     * The Name.
+     */
     String name = "";
+    /**
+     * The Surname.
+     */
     String surname = "";
+    /**
+     * The Birthdate.
+     */
     String birthdate = "";
+    /**
+     * The Button exit.
+     */
     Button buttonExit;
+    /**
+     * The Bouton recommencer.
+     */
     Button boutonRecommencer;
+    /**
+     * The Bouton valider.
+     */
     Button boutonValider;
+    /**
+     * The Infos patient.
+     */
     TextView infosPatient;
+    /**
+     * The Path.
+     */
     String path = "";
+    /**
+     * The Carto bitmap.
+     */
     Bitmap cartoBitmap;
+    /**
+     * The Carto.
+     */
     ImageView carto;
+    /**
+     * The Context.
+     */
     final Context context = this;
+    /**
+     * The Tableau x.
+     */
     ArrayList tableauX;
+    /**
+     * The Tableau y.
+     */
     ArrayList tableauY;
+    /**
+     * The Var random.
+     */
     int varRandom;
 
     @Override

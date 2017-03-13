@@ -21,18 +21,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The type Do item 22.
+ */
 public class do_item22 extends Activity {
 
-    Button boutonTerminer;
-    String name = "";
-    String surname = "";
-    String birthdate = "";
-    Dessin_item22 dessin;
-    Bitmap cartoBitmap;
-    TextView state;
-    ArrayList tableauX;
-    ArrayList tableauY;
-    int varRandom;
+    private Button boutonTerminer;
+    private String name = "";
+    private String surname = "";
+    private String birthdate = "";
+    private Dessin_item22 dessin;
+    private Bitmap cartoBitmap;
+    private TextView state;
+    private ArrayList tableauX;
+    private ArrayList tableauY;
+    private int varRandom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

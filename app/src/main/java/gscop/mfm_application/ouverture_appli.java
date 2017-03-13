@@ -22,25 +22,82 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
+/**
+ * The type Ouverture appli.
+ */
 public class ouverture_appli extends Activity implements View.OnClickListener {
 
+    /**
+     * The Nom entre.
+     */
     EditText nomEntre;
+    /**
+     * The Prenom entre.
+     */
     EditText prenomEntre;
+    /**
+     * The Texte date.
+     */
     TextView texteDate;
+    /**
+     * The Birthdate.
+     */
     String birthdate = null;
+    /**
+     * The Bouton valider.
+     */
     Button boutonValider;
+    /**
+     * The Bouton effacer.
+     */
     Button boutonEffacer;
+    /**
+     * The Button exit.
+     */
     Button buttonExit;
+    /**
+     * The Context.
+     */
     final Context context = this;
+    /**
+     * The Name.
+     */
     String name;
+    /**
+     * The Surname.
+     */
     String surname;
+    /**
+     * The Tv display date.
+     */
     TextView tvDisplayDate;
+    /**
+     * The Cal.
+     */
     Calendar cal;
+    /**
+     * The Year.
+     */
     int year;
+    /**
+     * The Month.
+     */
     int month;
+    /**
+     * The Day.
+     */
     int day;
+    /**
+     * The Date dialog id.
+     */
     static final int DATE_DIALOG_ID = 999;
+    /**
+     * The Btn change date.
+     */
     Button btnChangeDate;
+    /**
+     * The Chosen date.
+     */
     boolean chosenDate = false;
 
     @Override
@@ -235,6 +292,11 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         return back_answer;
     }
 
+    /**
+     * Hide keyboard.
+     *
+     * @param view the view
+     */
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);

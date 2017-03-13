@@ -12,15 +12,42 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * The type Choice item.
+ */
 public class choice_item extends Activity {
 
+    /**
+     * The Text nom prenom patient.
+     */
     TextView textNomPrenomPatient;
+    /**
+     * The Button item 18.
+     */
     Button buttonItem18;
+    /**
+     * The Button item 22.
+     */
     Button buttonItem22;
+    /**
+     * The Button exit.
+     */
     Button buttonExit;
+    /**
+     * The Name.
+     */
     String name = "";
+    /**
+     * The Surname.
+     */
     String surname = "";
+    /**
+     * The Birthdate.
+     */
     String birthdate = "";
+    /**
+     * The Context.
+     */
     final Context context = this;
 
     @Override

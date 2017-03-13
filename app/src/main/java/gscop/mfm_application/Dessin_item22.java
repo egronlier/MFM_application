@@ -16,6 +16,9 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The type Dessin item 22.
+ */
 //Cette classe permet de dessiner
 public class Dessin_item22 extends View {
 
@@ -40,14 +43,32 @@ public class Dessin_item22 extends View {
     private ArrayList<Float> xDownList = new ArrayList<>();
     private ArrayList<Float> yDownList = new ArrayList<>();
 
+    /**
+     * Instantiates a new Dessin item 22.
+     *
+     * @param context the context
+     */
     public Dessin_item22(Context context) {
         super(context);
     }
 
+    /**
+     * Instantiates a new Dessin item 22.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public Dessin_item22(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+    /**
+     * Instantiates a new Dessin item 22.
+     *
+     * @param context  the context
+     * @param attrs    the attrs
+     * @param defStyle the def style
+     */
     public Dessin_item22(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
@@ -199,14 +220,29 @@ public class Dessin_item22 extends View {
     }
 
 
+    /**
+     * Gets cartographie.
+     *
+     * @return the cartographie
+     */
     public Bitmap getCartographie() {
         return cartographie;
     }
 
+    /**
+     * Gets tableau x.
+     *
+     * @return the tableau x
+     */
     public ArrayList getTableauX() {
         return tableauX;
     }
 
+    /**
+     * Gets tableau y.
+     *
+     * @return the tableau y
+     */
     public ArrayList getTableauY() {
         return tableauY;
     }

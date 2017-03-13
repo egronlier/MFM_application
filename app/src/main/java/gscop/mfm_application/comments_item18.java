@@ -47,43 +47,154 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * The type Comments item 18.
+ */
 public class comments_item18 extends Activity {
 
+    /**
+     * The Name.
+     */
     String name = "";
+    /**
+     * The Surname.
+     */
     String surname = "";
+    /**
+     * The Birthdate.
+     */
     String birthdate = "";
+    /**
+     * The Bouton enregistrer.
+     */
     Button boutonEnregistrer;
+    /**
+     * The Context.
+     */
     final Context context = this;
+    /**
+     * The Radio group cotation paper.
+     */
     RadioGroup radioGroupCotationPaper;
+    /**
+     * The Text cotation paper.
+     */
     TextView textCotationPaper;
+    /**
+     * The Bouton cotation 0 paper.
+     */
     RadioButton boutonCotation0Paper;
+    /**
+     * The Bouton cotation 1 paper.
+     */
     RadioButton boutonCotation1Paper;
+    /**
+     * The Bouton cotation 2 paper.
+     */
     RadioButton boutonCotation2Paper;
+    /**
+     * The Bouton cotation 3 paper.
+     */
     RadioButton boutonCotation3Paper;
+    /**
+     * The Bouton cotation nsp paper.
+     */
     RadioButton boutonCotationNSPPaper;
+    /**
+     * The Radio group cotation tablet.
+     */
     RadioGroup radioGroupCotationTablet;
+    /**
+     * The Text cotation tablet.
+     */
     TextView textCotationTablet;
+    /**
+     * The Bouton cotation 0 tablet.
+     */
     RadioButton boutonCotation0Tablet;
+    /**
+     * The Bouton cotation 1 tablet.
+     */
     RadioButton boutonCotation1Tablet;
+    /**
+     * The Bouton cotation 2 tablet.
+     */
     RadioButton boutonCotation2Tablet;
+    /**
+     * The Bouton cotation 3 tablet.
+     */
     RadioButton boutonCotation3Tablet;
+    /**
+     * The Bouton cotation nsp tablet.
+     */
     RadioButton boutonCotationNSPTablet;
+    /**
+     * The Cotation paper.
+     */
     String cotationPaper = "cotation papier inconnue";
+    /**
+     * The Cotation tablet.
+     */
     String cotationTablet = "cotation tablette inconnue";
+    /**
+     * The Commentaire.
+     */
     String commentaire = "aucun commentaire";
+    /**
+     * The Comments.
+     */
     EditText comments;
+    /**
+     * The Check box appui paume.
+     */
     CheckBox checkBoxAppuiPaume;
+    /**
+     * The Check box pause.
+     */
     CheckBox checkBoxPause;
+    /**
+     * The Check box change.
+     */
     CheckBox checkBoxChange;
+    /**
+     * The Check box compens.
+     */
     CheckBox checkBoxCompens;
+    /**
+     * The Infos patient.
+     */
     TextView infosPatient;
+    /**
+     * The Path.
+     */
     String path = "";
+    /**
+     * The Tableau x.
+     */
     ArrayList tableauX;
+    /**
+     * The Tableau y.
+     */
     ArrayList tableauY;
+    /**
+     * The Carto bitmap.
+     */
     Bitmap cartoBitmap;
+    /**
+     * The My file.
+     */
     File myFile;
+    /**
+     * The Liste comm.
+     */
     String listeComm = " ";
+    /**
+     * The Var random.
+     */
     int varRandom;
+    /**
+     * The Text state saving.
+     */
     TextView textStateSaving;
     private boolean handledClick = false;
 
@@ -241,6 +352,11 @@ public class comments_item18 extends Activity {
         return back_answer;
     }
 
+    /**
+     * Hide keyboard.
+     *
+     * @param view the view
+     */
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);

@@ -8,12 +8,30 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * The type Consignes item 18.
+ */
 public class consignes_item18 extends Activity {
 
+    /**
+     * The Bouton demarrer.
+     */
     Button boutonDemarrer;
+    /**
+     * The Name.
+     */
     String name = "";
+    /**
+     * The Surname.
+     */
     String surname = "";
+    /**
+     * The Birthdate.
+     */
     String birthdate = "";
+    /**
+     * The Var random.
+     */
     int varRandom;
 
     @Override
