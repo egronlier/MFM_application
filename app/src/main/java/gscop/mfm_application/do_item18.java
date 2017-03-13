@@ -64,7 +64,7 @@ public class do_item18 extends Activity {
             @Override
             public void onClick(View v) {
                 boutonTerminer.setClickable(false);
-                // action quand on appuie sur terminer -> affiche la cartographie
+                // Action quand on appuie sur terminer -> affiche la cartographie
                 state.setText(R.string.saving);
                 dessin.getPaint().setColor(Color.BLUE);
                 dessin.draw(dessin.getCanvas());
@@ -73,7 +73,6 @@ public class do_item18 extends Activity {
                 myIntent.putExtra("surname", surname);
                 myIntent.putExtra("birthdate", birthdate);
                 myIntent.putExtra("varRandom",varRandom);
-//                dessin.setColor(Color.BLUE);
                 cartoBitmap = dessin.getCartographie();
                 tableauX = dessin.getTableauX();
                 tableauY = dessin.getTableauY();

@@ -21,8 +21,6 @@ public class Dessin_item22 extends View {
     private Bitmap cartographie;
     private final Paint paint = new Paint();
 
-    private String main;
-
     private HashMap<Integer, Float> mX = new HashMap<>();
     private HashMap<Integer, Float> mY = new HashMap<>();
     private HashMap<Integer, Path> paths = new HashMap<>();
