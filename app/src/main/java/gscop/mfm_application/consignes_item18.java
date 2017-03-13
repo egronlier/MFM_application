@@ -8,9 +8,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * The type Consignes item 18.
- */
 public class consignes_item18 extends Activity {
 
     private Button boutonDemarrer;
@@ -33,6 +30,7 @@ public class consignes_item18 extends Activity {
             varRandom = intent.getIntExtra("varRandom", -1); // -1 par défaut
         }
 
+        // Pour le bouton "Démarrer"
         boutonDemarrer = (Button) findViewById(R.id.boutonDemarrer);
         boutonDemarrer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +41,7 @@ public class consignes_item18 extends Activity {
                 myIntent2.putExtra("birthdate", birthdate);
                 myIntent2.putExtra("varRandom", varRandom);
                 startActivity(myIntent2);
-                // on ferme l'activité en cours
+                // On ferme l'activité en cours
                 finish();
             }
         });
@@ -55,13 +53,13 @@ public class consignes_item18 extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             back_answer = true;
-            // on revient à l'écran de choix d'item
+            // On revient à l'écran de choix d'item
             Intent myIntent = new Intent(consignes_item18.this, choice_item.class);
             myIntent.putExtra("name", name);
             myIntent.putExtra("surname", surname);
             myIntent.putExtra("birthdate", birthdate);
             startActivity(myIntent);
-            // on ferme l'activité en cours
+            // On ferme l'activité en cours
             finish();
         }
         return back_answer;
