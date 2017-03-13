@@ -49,7 +49,7 @@ public class carto_item22 extends Activity {
 
         carto = (ImageView) findViewById(R.id.cartographieItem22);
 
-        // on récupère les infos de l'intent
+        // On récupère les infos de l'intent de l'activité précédente
         Intent intent = getIntent();
         if (intent != null) {
             name = intent.getStringExtra("name");
@@ -71,6 +71,7 @@ public class carto_item22 extends Activity {
         infosPatient = (TextView) findViewById(R.id.infosPatient);
         infosPatient.setText(" Patient : " + name + " " + surname + " \n Né(e) le : " + birthdate);
 
+        // Pour le bouton "Quitter"
         buttonExit = (Button) findViewById(R.id.buttonExit);
         buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +81,7 @@ public class carto_item22 extends Activity {
                         .setCancelable(true)
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // on quitte l'application courante
+                                // On quitte l'application courante
                                 carto_item22.this.finish();
                                 System.exit(0);
                             }
@@ -95,34 +96,33 @@ public class carto_item22 extends Activity {
             }
         });
 
-        // pour le bouton Recommencer
+        // Pour le bouton "Recommencer"
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         boutonRecommencer = (Button) findViewById(R.id.boutonRecommencer);
         boutonRecommencer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boutonRecommencer.setBackgroundColor(Color.GRAY);
-                // quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item22
+                // Quand on clique sur le bouton recommencer, ça retourne sur l'interface do_item22
                 builder.setMessage("Êtes-vous certain de vouloir recommencer l'exercice ? \n (le tracé sera perdu)")
                         .setCancelable(true)
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // if this button is clicked, close the dialog box
-                                // on remet le bouton recommencer en bleu
+                                // On remet le bouton recommencer en bleu
                                 boutonRecommencer.setBackgroundColor(getResources().getColor(R.color.myBlue));
                                 dialog.cancel();
                             }
                         })
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // on revient à l'écran de réalisation de l'item 22
+                                // On revient à l'écran de réalisation de l'item 22
                                 Intent myIntent = new Intent(carto_item22.this, do_item22.class);
                                 myIntent.putExtra("name", name);
                                 myIntent.putExtra("surname", surname);
                                 myIntent.putExtra("birthdate", birthdate);
                                 myIntent.putExtra("varRandom", varRandom);
                                 startActivity(myIntent);
-                                // on ferme l'activité en cours
+                                // On ferme l'activité en cours
                                 finish();
                             }
                         });
@@ -131,16 +131,16 @@ public class carto_item22 extends Activity {
             }
         });
 
-        // pour le bouton Valider
+        // Pour le bouton "Valider"
         boutonValider = (Button) findViewById(R.id.boutonValider);
         boutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boutonValider.setBackgroundColor(Color.GRAY);
-                // quand on clique sur le bouton valider, ça ouvre l'interface des commentaires du kiné
-                // si varRandom = 1, on doit faire la version papier avant
+                // Quand on clique sur le bouton valider, ça ouvre l'interface des commentaires du kiné
+                // Si varRandom = 1, on doit faire la version papier avant d'accéder aux commentaires
                 if (varRandom == 1) {
-                    // on demande de réaliser l'item 22 version papier
+                    // On demande de réaliser l'item 22 version papier
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(R.string.paper22)
                             .setTitle("MFM Papier")
@@ -156,7 +156,7 @@ public class carto_item22 extends Activity {
                                     myIntent.putExtra("tableauY", tableauY);
                                     myIntent.putExtra("varRandom", varRandom);
                                     startActivity(myIntent);
-                                    // on ferme l'activité en cours
+                                    // On ferme l'activité en cours
                                     finish();
                                 }
                             });
@@ -173,14 +173,14 @@ public class carto_item22 extends Activity {
                     myIntent.putExtra("tableauY", tableauY);
                     myIntent.putExtra("varRandom", varRandom);
                     startActivity(myIntent);
-                    // on ferme l'activité en cours
+                    // On ferme l'activité en cours
                     finish();
                 }
             }
         });
     }
 
-    // quand on appuie sur la touche retour de la tablette -> comme pour le bouton recommencer
+    // Quand on appuie sur la touche retour de la tablette -> comme pour le bouton recommencer
     private boolean back_answer = false;
 
     @Override
@@ -192,14 +192,14 @@ public class carto_item22 extends Activity {
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             back_answer = true;
-                            // on revient à l'écran de réalisation de l'item 22
+                            // On revient à l'écran de réalisation de l'item 22
                             Intent myIntent = new Intent(carto_item22.this, do_item22.class);
                             myIntent.putExtra("name", name);
                             myIntent.putExtra("surname", surname);
                             myIntent.putExtra("birthdate", birthdate);
                             myIntent.putExtra("varRandom", varRandom);
                             startActivity(myIntent);
-                            // on ferme l'activité en cours
+                            // On ferme l'activité en cours
                             finish();
                         }
                     })
