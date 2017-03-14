@@ -294,6 +294,7 @@
         android:lines="4"
         android:maxLength="200"
         android:scrollbars="horizontal"
+        android:hint="@string/commentaire_libre"
         tools:ignore="LabelFor,TextFields" />
 
 

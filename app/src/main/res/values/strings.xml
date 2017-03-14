@@ -59,4 +59,5 @@
     <string name="compensationTronc">Avec compensation du tronc</string>
     <string name="pause">Avec pause</string>
     <string name="checkData">Vérification en cours…</string>
+    <string name="commentaire_libre">Commentaire libre</string>
 </resources>
