@@ -21,9 +21,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-/**
- * The type Carto item 22.
- */
 public class carto_item22 extends Activity {
 
     private String name = "";

@@ -47,9 +47,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * The type Comments item 22.
- */
 public class comments_item22 extends Activity {
 
     private String name = "";

@@ -8,9 +8,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * The type Consignes item 22.
- */
 public class consignes_item22 extends Activity {
 
     private Button boutonDemarrer;

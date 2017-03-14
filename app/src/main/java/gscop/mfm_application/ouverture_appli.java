@@ -63,14 +63,14 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         year = cal.get(Calendar.YEAR);
         tvDisplayDate = (TextView) findViewById(R.id.tvDate);
 
-        // On utilise la m√©thode findViewById pour r√©cup√©rer les √©l√©ments de la vue
+        // On utilise la mÈthode findViewById pour rÈcupÈrer les ÈlÈments de la vue
         // R est la classe qui contient les ressources
         boutonValider = (Button) findViewById(R.id.boutonvalider);
         boutonEffacer = (Button) findViewById(R.id.buttonerase);
 
         nomEntre = (EditText) findViewById(R.id.nom);
         prenomEntre = (EditText) findViewById(R.id.prenom);
-        // On range le clavier quand le champ pr√©nom n'est plus s√©lectionn√©
+        // On range le clavier quand le champ prÈnom n'est plus sÈlectionnÈ
         prenomEntre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -86,45 +86,45 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
         boutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // On r√©cup√®re le nom, le pr√©nom et la date de naissance
+                // On rÈcupËre le nom, le prÈnom et la date de naissance
                 name = nomEntre.getText().toString();
                 int length_name = name.length();
                 name = name.toUpperCase();
                 surname = prenomEntre.getText().toString();
                 int length_surname = surname.length();
 
-                // On v√©rifie que tous les champs ont √©t√© remplis
-                // On v√©rifie que le nom et le pr√©nom ont √©t√© remplis
+                // On vÈrifie que tous les champs ont ÈtÈ remplis
+                // On vÈrifie que le nom et le prÈnom ont ÈtÈ remplis
                 if (length_name > 0 && length_surname > 0) {
-                    // On v√©rifie que le nom et le pr√©nom entr√©s contiennent bien que des lettres, tirets et espaces possibles
-                    if (Pattern.matches("[a-zA-Z√°√†√¢√§√£√•√ß√©√®√™√´√≠√¨√Æ√Ø√±√≥√≤√¥√∂√µ√∫√π√ª√º√Ω√ø√¶≈ì√Å√Ä√Ç√Ñ√É√Ö√á√â√à√ä√ã√ç√å√é√è√ë√ì√í√î√ñ√ï√ö√ô√õ√ú√ù≈∏√Ü≈í-]*", name)) {
-                        if (Pattern.matches("[a-zA-Z√°√†√¢√§√£√•√ß√©√®√™√´√≠√¨√Æ√Ø√±√≥√≤√¥√∂√µ√∫√π√ª√º√Ω√ø√¶≈ì√Å√Ä√Ç√Ñ√É√Ö√á√â√à√ä√ã√ç√å√é√è√ë√ì√í√î√ñ√ï√ö√ô√õ√ú√ù≈∏√Ü≈í-]*", surname)) {
+                    // On vÈrifie que le nom et le prÈnom entrÈs contiennent bien que des lettres, tirets et espaces possibles
+                    if (Pattern.matches("[a-zA-Z·‡‚‰„ÂÁÈËÍÎÌÏÓÔÒÛÚÙˆı˙˘˚¸˝ˇÊú¡¿¬ƒ√≈«…» ÀÕÃŒœ—”“‘÷’⁄Ÿ€‹›ü∆å-]*", name)) {
+                        if (Pattern.matches("[a-zA-Z·‡‚‰„ÂÁÈËÍÎÌÏÓÔÒÛÚÙˆı˙˘˚¸˝ˇÊú¡¿¬ƒ√≈«…» ÀÕÃŒœ—”“‘÷’⁄Ÿ€‹›ü∆å-]*", surname)) {
                             surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
-                            // On v√©rifie qu'une date a bien √©t√© s√©lectionn√©e
+                            // On vÈrifie qu'une date a bien ÈtÈ sÈlectionnÈe
                             birthdate = tvDisplayDate.getText().toString();
                             if (birthdate != null && chosenDate) {
                                 texteDate.setError(null);
                                 try {
-                                    // Ouvrir une boite de dialogue permettant de valider les infos entr√©es
+                                    // Ouvrir une boite de dialogue permettant de valider les infos entrÈes
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                                     // set titre
-                                    alertDialogBuilder.setTitle("Confirmation des donn√©es");
+                                    alertDialogBuilder.setTitle("Confirmation des donnÈes");
                                     // set dialog message
                                     alertDialogBuilder
-                                            .setMessage("Etes-vous certain de vouloir cr√©er un fichier pour le patient suivant : \n\n"
-                                                    + " " + name + " " + surname + "\n N√©(e) le : " + birthdate)
+                                            .setMessage("Etes-vous certain de vouloir crÈer un fichier pour le patient suivant : \n\n"
+                                                    + " " + name + " " + surname + "\n NÈ(e) le : " + birthdate)
                                             .setCancelable(false)
                                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     // if this button is clicked, go to next activity
                                                     dialog.cancel();
-                                                    // On lance une nouvelle activit√© : l'interface du choix d'item
+                                                    // On lance une nouvelle activitÈ : l'interface du choix d'item
                                                     Intent myIntent = new Intent(ouverture_appli.this, choice_item.class);
                                                     myIntent.putExtra("name", name);
                                                     myIntent.putExtra("surname", surname);
                                                     myIntent.putExtra("birthdate", birthdate);
                                                     startActivity(myIntent);
-                                                    // On ferme l'activit√© en cours
+                                                    // On ferme l'activitÈ en cours
                                                     finish();
                                                 }
                                             })
@@ -138,15 +138,15 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                                     AlertDialog alertDialog = alertDialogBuilder.create();
                                     // show it
                                     alertDialog.show();
-                                } catch (Exception e) { // Probl√®me inconnu avec la date choisie
+                                } catch (Exception e) { // ProblËme inconnu avec la date choisie
                                     Toast.makeText(getApplicationContext(), R.string.internalError, Toast.LENGTH_LONG).show();
                                 }
-                            } else { // aucune date n'a √©t√© choisie
+                            } else { // aucune date n'a ÈtÈ choisie
                                 Toast.makeText(getApplicationContext(), R.string.errorDate, Toast.LENGTH_LONG).show();
-                                texteDate.setError("Veuillez s√©lectionner une date !");
+                                texteDate.setError("Veuillez sÈlectionner une date !");
                                 texteDate.requestFocus();
                             }
-                        } else { // Champ pr√©nom pas au bon format
+                        } else { // Champ prÈnom pas au bon format
                             Toast.makeText(getApplicationContext(), R.string.errorSurname, Toast.LENGTH_LONG).show();
                             prenomEntre.setError("Que des lettres !");
                             prenomEntre.requestFocus();
@@ -156,13 +156,13 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                         nomEntre.setError("Que des lettres !");
                         nomEntre.requestFocus();
                     }
-                } else { // Un des champs de nom ou pr√©nom n'est pas rempli
+                } else { // Un des champs de nom ou prÈnom n'est pas rempli
                     Toast.makeText(getApplicationContext(), R.string.errorVoid, Toast.LENGTH_LONG).show();
                     if (length_name <= 0) {
                         nomEntre.setError("Champ nom vide !");
                         nomEntre.requestFocus();
                     } else if (length_surname <= 0) {
-                        prenomEntre.setError("Champ pr√©nom vide !");
+                        prenomEntre.setError("Champ prÈnom vide !");
                         prenomEntre.requestFocus();
                     }
                 }
@@ -187,7 +187,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("√ätes-vous certain de vouloir quitter l'application ?")
+                builder.setMessage(" tes-vous certain de vouloir quitter l'application ?")
                         .setCancelable(true)
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -213,7 +213,7 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("√ätes-vous certain de vouloir quitter l'application ?")
+            builder.setMessage(" tes-vous certain de vouloir quitter l'application ?")
                     .setCancelable(false)
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -235,9 +235,9 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
     }
 
     /**
-     * R√©tractation du clavier lorsque l'utilisateur touche l'√©cran hors du clavier.
+     * RÈtractation du clavier lorsque l'utilisateur touche l'Ècran hors du clavier.
      *
-     * @param view la vue associ√©e
+     * @param view la vue associÈe
      */
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
