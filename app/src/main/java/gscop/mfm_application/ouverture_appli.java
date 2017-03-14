@@ -97,8 +97,8 @@ public class ouverture_appli extends Activity implements View.OnClickListener {
                 // On vérifie que le nom et le prénom ont été remplis
                 if (length_name > 0 && length_surname > 0) {
                     // On vérifie que le nom et le prénom entrés contiennent bien que des lettres, tirets et espaces possibles
-                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", name)) {
-                        if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ-]*", surname)) {
+                    if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'-]*", name)) {
+                        if (Pattern.matches("[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'-]*", surname)) {
                             surname = surname.replaceFirst(".", (surname.charAt(0) + "").toUpperCase());
                             // On vérifie qu'une date a bien été sélectionnée
                             birthdate = tvDisplayDate.getText().toString();
